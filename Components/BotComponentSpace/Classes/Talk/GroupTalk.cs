@@ -141,19 +141,19 @@ namespace SAIN.SAINComponent.Classes.Talk
             _leaderCommandTime = Time.time + Bot.Info.FileSettings.Mind.SquadLeadTalkFreq;
             var commandTrigger = EPhraseTrigger.PhraseNone;
             var memberTrigger = EPhraseTrigger.PhraseNone;
-            var gesture = EGesture.None;
+            var gesture = EInteraction.None;
 
             switch (solo) {
                 case ECombatDecision.Retreat:
                 case ECombatDecision.RunAway:
                 case ECombatDecision.RunToCover:
-                    gesture = EGesture.ComeToMe;
+                    gesture = EInteraction.ComeWithMeGesture;
                     commandTrigger = EFTMath.RandomBool() ? EPhraseTrigger.GetInCover : EPhraseTrigger.GetBack;
                     memberTrigger = EPhraseTrigger.Roger;
                     break;
 
                 case ECombatDecision.RushEnemy:
-                    gesture = EGesture.ThatDirection;
+                    gesture = EInteraction.ThereGesture;
                     commandTrigger = EPhraseTrigger.Gogogo;
                     memberTrigger = EPhraseTrigger.OnFight;
                     break;
@@ -164,19 +164,19 @@ namespace SAIN.SAINComponent.Classes.Talk
             if (commandTrigger == EPhraseTrigger.PhraseNone) {
                 switch (squad) {
                     case ESquadDecision.Suppress:
-                        gesture = EGesture.ThatDirection;
+                        gesture = EInteraction.ThereGesture;
                         commandTrigger = EPhraseTrigger.Suppress;
                         memberTrigger = EPhraseTrigger.Covering;
                         break;
 
                     case ESquadDecision.PushSuppressedEnemy:
-                        gesture = EGesture.ThatDirection;
+                        gesture = EInteraction.ThereGesture;
                         commandTrigger = EPhraseTrigger.Gogogo;
                         memberTrigger = EPhraseTrigger.Going;
                         break;
 
                     case ESquadDecision.Regroup:
-                        gesture = EGesture.ComeToMe;
+                        gesture = EInteraction.ComeWithMeGesture;
                         commandTrigger = EPhraseTrigger.Regroup;
                         memberTrigger = EPhraseTrigger.Roger;
                         break;
@@ -188,7 +188,7 @@ namespace SAIN.SAINComponent.Classes.Talk
 
             if (commandTrigger != EPhraseTrigger.PhraseNone &&
                 Bot.Talk.GroupSay(commandTrigger, ETagStatus.Combat, false, 66f)) {
-                bool shallGesture = gesture != EGesture.None && Bot.Squad.VisibleMembers.Count > 0 && Bot.Enemy?.IsVisible == false;
+                bool shallGesture = gesture != EInteraction.None && Bot.Squad.VisibleMembers.Count > 0 && Bot.Enemy?.IsVisible == false;
                 if (shallGesture)
                     Player.HandsController.ShowGesture(gesture);
 
@@ -244,25 +244,25 @@ namespace SAIN.SAINComponent.Classes.Talk
         {
             var commandTrigger = EPhraseTrigger.PhraseNone;
             var trigger = EPhraseTrigger.PhraseNone;
-            var gesture = EGesture.None;
+            var gesture = EInteraction.None;
 
             switch (squad) {
                 case ESquadDecision.Search:
                 case ESquadDecision.GroupSearch:
-                    gesture = EGesture.ThatDirection;
+                    gesture = EInteraction.ThereGesture;
                     commandTrigger = EPhraseTrigger.FollowMe;
                     trigger = EPhraseTrigger.Going;
                     break;
 
                 case ESquadDecision.Help:
-                    gesture = EGesture.ThatDirection;
+                    gesture = EInteraction.ThereGesture;
                     commandTrigger = EPhraseTrigger.Gogogo;
                     trigger = EPhraseTrigger.Going;
                     break;
 
                 case ESquadDecision.Suppress:
                 case ESquadDecision.PushSuppressedEnemy:
-                    gesture = EGesture.ThatDirection;
+                    gesture = EInteraction.ThereGesture;
                     commandTrigger = EPhraseTrigger.Suppress;
                     trigger = EPhraseTrigger.Covering;
                     break;
@@ -272,7 +272,7 @@ namespace SAIN.SAINComponent.Classes.Talk
 
             switch (solo) {
                 case ECombatDecision.HoldInCover:
-                    gesture = EGesture.Stop;
+                    gesture = EInteraction.HoldGesture;
                     commandTrigger = EPhraseTrigger.HoldPosition;
                     trigger = EPhraseTrigger.Roger;
                     break;
@@ -283,7 +283,7 @@ namespace SAIN.SAINComponent.Classes.Talk
                     break;
 
                 case ECombatDecision.RushEnemy:
-                    gesture = EGesture.ThatDirection;
+                    gesture = EInteraction.ThereGesture;
                     commandTrigger = EPhraseTrigger.Gogogo;
                     trigger = EPhraseTrigger.OnFight;
                     break;
@@ -451,7 +451,7 @@ namespace SAIN.SAINComponent.Classes.Talk
             }
             if (!_reportEnemyKilledToxicSquadLeader) {
                 var settings = player?.Profile?.Info?.Settings;
-                if (settings == null || !BotOwner.BotsGroup.IsPlayerEnemyByRole(settings.Role)) {
+                if (settings == null || !BotOwner.BotsGroup.IsPlayerEnemy(player)) {
                     return;
                 }
             }
@@ -501,7 +501,7 @@ namespace SAIN.SAINComponent.Classes.Talk
             }
         }
 
-        private void friendlyDown(IPlayer player, DamageInfo damage, float time)
+        private void friendlyDown(IPlayer player, DamageInfoStruct damage, float time)
         {
             if (!Bot.Talk.CanTalk) {
                 return;
@@ -749,7 +749,7 @@ namespace SAIN.SAINComponent.Classes.Talk
             if (_leaderCommandTime < Time.time) {
                 if (BotOwner.DoorOpener.Interacting &&
                     EFTMath.RandomBool(33f) &&
-                    checkLeaderTalk(EGesture.None, EPhraseTrigger.OpenDoor, EPhraseTrigger.Roger)) {
+                    checkLeaderTalk(EInteraction.None, EPhraseTrigger.OpenDoor, EPhraseTrigger.Roger)) {
                     _leaderCommandTime = Time.time + Bot.Info.FileSettings.Mind.SquadLeadTalkFreq;
                     return true;
                 }
@@ -768,10 +768,10 @@ namespace SAIN.SAINComponent.Classes.Talk
         private float _needSniperFreq = 60f;
         private float _needSniperChance = 50f;
 
-        private bool checkLeaderTalk(EGesture gesture, EPhraseTrigger commandTrigger, EPhraseTrigger memberTrigger)
+        private bool checkLeaderTalk(EInteraction gesture, EPhraseTrigger commandTrigger, EPhraseTrigger memberTrigger)
         {
             int visibleCount = Bot.Squad.VisibleMembers.Count;
-            bool shallGesture = gesture != EGesture.None && visibleCount > 0 && Bot.Enemy?.IsVisible == false;
+            bool shallGesture = gesture != EInteraction.None && visibleCount > 0 && Bot.Enemy?.IsVisible == false;
             bool mostMembersNotVisible = (float)visibleCount / (float)Bot.Squad.Members.Count < 0.5f;
             if (mostMembersNotVisible &&
                 Bot.Talk.GroupSay(commandTrigger, null, false, 100)) {

@@ -29,7 +29,7 @@ namespace SAIN.SAINComponent.Classes
             EquipmentSlot[] equipmentSlots = _slots;
             this._medsList.Clear();
             _bandages.Clear();
-            getPlayer.InventoryControllerClass.GetAcceptableItemsNonAlloc<MedsClass>(equipmentSlots, this._medsList, null);
+            getPlayer.InventoryController.GetAcceptableItemsNonAlloc<MedsItemClass>(equipmentSlots, this._medsList, null);
             foreach (var med in _medsList) {
                 if (med.TryGetItemComponent(out HealthEffectsComponent healthEffectsComponent)) {
                     var damageEffects = healthEffectsComponent.DamageEffects;
@@ -54,13 +54,13 @@ namespace SAIN.SAINComponent.Classes
             return _bandages.Count > 0;
         }
 
-        public bool IsAlreadyBandage(MedsClass med)
+        public bool IsAlreadyBandage(MedsItemClass med)
         {
             if (med == null) return false;
             return _bandages.Contains(med);
         }
 
-        public MedsClass GetBandage()
+        public MedsItemClass GetBandage()
         {
             if (_bandages.Count == 0) {
                 return null;
@@ -74,14 +74,14 @@ namespace SAIN.SAINComponent.Classes
         EquipmentSlot.TacticalVest,
         };
 
-        private readonly List<MedsClass> _bandages = new List<MedsClass>();
+        private readonly List<MedsItemClass> _bandages = new List<MedsItemClass>();
 
-        public bool hasEffectOfType(MedsClass med, EDamageEffectType damageEffectType)
+        public bool hasEffectOfType(MedsItemClass med, EDamageEffectType damageEffectType)
         {
             HealthEffectsComponent healthEffectsComponent;
             return med != null && (med.TryGetItemComponent<HealthEffectsComponent>(out healthEffectsComponent) && healthEffectsComponent.DamageEffects.ContainsKey(damageEffectType));
         }
 
-        private readonly List<MedsClass> _medsList = new List<MedsClass>();
+        private readonly List<MedsItemClass> _medsList = new List<MedsItemClass>();
     }
 }

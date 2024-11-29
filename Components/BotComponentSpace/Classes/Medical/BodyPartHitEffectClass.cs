@@ -36,7 +36,7 @@ namespace SAIN.SAINComponent.Classes
 
         }
 
-        public void GetHit(DamageInfo damageInfo, EBodyPart bodyPart, float floatVal)
+        public void GetHit(DamageInfoStruct damageInfo, EBodyPart bodyPart, float floatVal)
         {
             switch (bodyPart)
             {
@@ -60,23 +60,23 @@ namespace SAIN.SAINComponent.Classes
             }
         }
 
-        private void GetHitInLegs(DamageInfo damageInfo)
+        private void GetHitInLegs(DamageInfoStruct damageInfo)
         {
             HitReaction = EHitReaction.Legs;
         }
 
-        private void GetHitInArms(DamageInfo damageInfo)
+        private void GetHitInArms(DamageInfoStruct damageInfo)
         {
             HitReaction = EHitReaction.Arms;
             checkArmInjuries();
         }
 
-        private void GetHitInCenter(DamageInfo damageInfo)
+        private void GetHitInCenter(DamageInfoStruct damageInfo)
         {
             HitReaction = EHitReaction.Center;
         }
 
-        private void GetHitInHead(DamageInfo damageInfo)
+        private void GetHitInHead(DamageInfoStruct damageInfo)
         {
             HitReaction = EHitReaction.Head;
         }

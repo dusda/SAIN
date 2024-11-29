@@ -171,7 +171,7 @@ namespace SAIN.SAINComponent.Classes
             }
         }
 
-        public void GetHit(DamageInfo damageInfo, EBodyPart bodyPart, float floatVal)
+        public void GetHit(DamageInfoStruct damageInfo, EBodyPart bodyPart, float floatVal)
         {
             if (InCover) {
                 bool wasSpotted = CoverInUse.Spotted;

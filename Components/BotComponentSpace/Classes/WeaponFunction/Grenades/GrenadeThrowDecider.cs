@@ -2,7 +2,7 @@
 using SAIN.Preset;
 using SAIN.SAINComponent.Classes.EnemyClasses;
 using UnityEngine;
-using GrenadeThrowChecker = GClass493;
+using GrenadeThrowChecker = GClass541;
 
 namespace SAIN.SAINComponent.Classes.WeaponFunction
 {
@@ -97,7 +97,7 @@ namespace SAIN.SAINComponent.Classes.WeaponFunction
             return false;
         }
 
-        //private GrenadeClass _currentGrenade;
+        //private ThrowWeapItemClass _currentGrenade;
 
         private bool checkCanThrow(out string reason)
         {

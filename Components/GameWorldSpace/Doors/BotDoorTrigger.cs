@@ -1,4 +1,5 @@
-﻿using EFT.Interactive;
+﻿using EFT;
+using EFT.Interactive;
 using UnityEngine;
 
 namespace SAIN.Components
@@ -71,7 +72,7 @@ namespace SAIN.Components
         private bool shallInvertDoorAngle(Door door, Vector3 colliderPosition)
         {
             var interactionParameters = door.GetInteractionParameters(colliderPosition);
-            if (interactionParameters.AnimationId == door.PushID) {
+            if (interactionParameters.AnimationId == (door.DoorState is EDoorState.Locked ? (int)door.DoorKeyOpenInteraction : door.CalculateInteractionIndex(colliderPosition))) {
                 return false;
             }
             return true;

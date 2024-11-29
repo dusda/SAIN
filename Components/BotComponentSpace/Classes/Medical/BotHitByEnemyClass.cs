@@ -15,7 +15,7 @@ namespace SAIN.SAINComponent.Classes
             Bot.EnemyController.Events.OnEnemyRemoved += clearEnemy;
         }
 
-        public void GetHit(DamageInfo damageInfo, EBodyPart bodyPart, float floatVal)
+        public void GetHit(DamageInfoStruct damageInfo, EBodyPart bodyPart, float floatVal)
         {
             var player = damageInfo.Player?.iPlayer;
             if (player == null) {

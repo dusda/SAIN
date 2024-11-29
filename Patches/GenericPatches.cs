@@ -44,7 +44,7 @@ namespace SAIN.Patches.Generic
                 bandageClass.IsAlreadyBandage(__instance.CurUsingMeds) == true) {
                 return;
             }
-            MedsClass bandage = bandageClass.GetBandage();
+            MedsItemClass bandage = bandageClass.GetBandage();
             if (bandage == null) {
                 return;
             }
@@ -70,11 +70,11 @@ namespace SAIN.Patches.Generic
     {
         protected override MethodBase GetTargetMethod()
         {
-            return AccessTools.Method(typeof(AIData), "SetEnvironment");
+            return AccessTools.Method(typeof(GClass551), "SetEnvironment");
         }
 
         [PatchPostfix]
-        public static void Patch(AIData __instance, IndoorTrigger trigger)
+        public static void Patch(GClass551 __instance, IndoorTrigger trigger)
         {
             SAINBotController.Instance?.PlayerEnviromentChanged(__instance?.Player?.ProfileId, trigger);
         }

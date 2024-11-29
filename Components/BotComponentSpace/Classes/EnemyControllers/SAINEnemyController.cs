@@ -5,105 +5,113 @@ using UnityEngine;
 
 namespace SAIN.SAINComponent.Classes.EnemyClasses
 {
-    public class SAINEnemyController : BotBase, IBotClass
-    {
-        public Dictionary<string, Enemy> Enemies => _listController.Enemies;
-        public EnemyControllerEvents Events { get; }
-        public EnemyListsClass EnemyLists { get; }
-        public EnemyUpdater EnemyUpdater { get; }
+	public class SAINEnemyController : BotBase, IBotClass
+	{
+		public Dictionary<string, Enemy> Enemies => _listController.Enemies;
+		public EnemyControllerEvents Events { get; }
+		public EnemyListsClass EnemyLists { get; }
+		public EnemyUpdater EnemyUpdater { get; }
 
-        public Enemy ActiveEnemy => _enemyChooser.ActiveEnemy;
-        public Enemy LastEnemy => _enemyChooser.LastEnemy;
-        public bool AtPeace => Events.OnPeaceChanged.Value && Events.OnPeaceChanged.TimeSinceTrue > 1f;
-        public bool ActiveHumanEnemy => Events.ActiveHumanEnemyEvent.Value;
-        public bool HumanEnemyInLineofSight => Events.HumanInLineOfSightEvent.Value;
+		public Enemy ActiveEnemy => _enemyChooser.ActiveEnemy;
+		public Enemy LastEnemy => _enemyChooser.LastEnemy;
+		public bool AtPeace => Events.OnPeaceChanged.Value && Events.OnPeaceChanged.TimeSinceTrue > 1f;
+		public bool ActiveHumanEnemy => Events.ActiveHumanEnemyEvent.Value;
+		public bool HumanEnemyInLineofSight => Events.HumanInLineOfSightEvent.Value;
 
-        private readonly EnemyListController _listController;
-        private readonly EnemyChooserClass _enemyChooser;
+		private readonly EnemyListController _listController;
+		private readonly EnemyChooserClass _enemyChooser;
 
-        private GameObject debugLastSeenPosition;
-        private GameObject debugLastHeardPosition;
+		private GameObject debugLastSeenPosition;
+		private GameObject debugLastHeardPosition;
 
-        public SAINEnemyController(BotComponent sain) : base(sain)
-        {
-            Events = new EnemyControllerEvents(this);
-            EnemyLists = new EnemyListsClass(this);
-            _listController = new EnemyListController(this);
-            _enemyChooser = new EnemyChooserClass(this);
-            EnemyUpdater = new EnemyUpdater(sain);
-        }
+		public SAINEnemyController(BotComponent sain) : base(sain)
+		{
+			Events = new EnemyControllerEvents(this);
+			EnemyLists = new EnemyListsClass(this);
+			_listController = new EnemyListController(this);
+			_enemyChooser = new EnemyChooserClass(this);
+			EnemyUpdater = new EnemyUpdater(sain);
+		}
 
-        public void Init()
-        {
-            EnemyUpdater.Init();
-            _listController.Init();
-            Events.Init();
-            EnemyLists.Init();
-            _enemyChooser.Init();
-        }
+		public void Init()
+		{
+			EnemyUpdater.Init();
+			_listController.Init();
+			Events.Init();
+			EnemyLists.Init();
+			_enemyChooser.Init();
+		}
 
-        public void Update()
-        {
-            EnemyUpdater.Update();
-            Events.Update();
-            _listController.Update();
-            _enemyChooser.Update();
-            EnemyLists.Update();
-            updateDebug();
-        }
+		public void Update()
+		{
+			EnemyUpdater.Update();
+			Events.Update();
+			_listController.Update();
+			_enemyChooser.Update();
+			EnemyLists.Update();
+			updateDebug();
+		}
 
-        public void Dispose()
-        {
-            // must be first, so all enemies are removed properly and their events are triggered!
-            _listController.Dispose();
+		public void Dispose()
+		{
+			// must be first, so all enemies are removed properly and their events are triggered!
+			_listController.Dispose();
 
-            EnemyUpdater.Dispose();
-            Events.Dispose();
-            EnemyLists.Dispose();
-            _enemyChooser.Dispose();
-        }
+			EnemyUpdater.Dispose();
+			Events.Dispose();
+			EnemyLists.Dispose();
+			_enemyChooser.Dispose();
+		}
 
-        private void updateDebug()
-        {
-            var enemy = ActiveEnemy;
-            if (enemy != null) {
-                if (SAINPlugin.DebugMode && SAINPlugin.DrawDebugGizmos) {
-                    if (enemy.KnownPlaces.LastHeardPosition != null) {
-                        if (debugLastHeardPosition == null) {
-                            debugLastHeardPosition = DebugGizmos.Line(enemy.KnownPlaces.LastHeardPosition.Value, Bot.Position, Color.yellow, 0.01f, false, Time.deltaTime, true);
-                        }
-                        DebugGizmos.UpdatePositionLine(enemy.KnownPlaces.LastHeardPosition.Value, Bot.Position, debugLastHeardPosition);
-                    }
-                    if (enemy.KnownPlaces.LastSeenPosition != null) {
-                        if (debugLastSeenPosition == null) {
-                            debugLastSeenPosition = DebugGizmos.Line(enemy.KnownPlaces.LastSeenPosition.Value, Bot.Position, Color.red, 0.01f, false, Time.deltaTime, true);
-                        }
-                        DebugGizmos.UpdatePositionLine(enemy.KnownPlaces.LastSeenPosition.Value, Bot.Position, debugLastSeenPosition);
-                    }
-                }
-                else if (debugLastHeardPosition != null || debugLastSeenPosition != null) {
-                    GameObject.Destroy(debugLastHeardPosition);
-                    GameObject.Destroy(debugLastSeenPosition);
-                }
-            }
-            else if (debugLastHeardPosition != null || debugLastSeenPosition != null) {
-                GameObject.Destroy(debugLastHeardPosition);
-                GameObject.Destroy(debugLastSeenPosition);
-            }
-        }
+		private void updateDebug()
+		{
+			var enemy = ActiveEnemy;
+			if (enemy != null)
+			{
+				if (SAINPlugin.DebugMode && SAINPlugin.DrawDebugGizmos)
+				{
+					if (enemy.KnownPlaces.LastHeardPosition != null)
+					{
+						if (debugLastHeardPosition == null)
+						{
+							debugLastHeardPosition = DebugGizmos.Line(enemy.KnownPlaces.LastHeardPosition.Value, Bot.Position, Color.yellow, 0.01f, false, Time.deltaTime, true);
+						}
+						DebugGizmos.UpdatePositionLine(enemy.KnownPlaces.LastHeardPosition.Value, Bot.Position, debugLastHeardPosition);
+					}
+					if (enemy.KnownPlaces.LastSeenPosition != null)
+					{
+						if (debugLastSeenPosition == null)
+						{
+							debugLastSeenPosition = DebugGizmos.Line(enemy.KnownPlaces.LastSeenPosition.Value, Bot.Position, Color.red, 0.01f, false, Time.deltaTime, true);
+						}
+						DebugGizmos.UpdatePositionLine(enemy.KnownPlaces.LastSeenPosition.Value, Bot.Position, debugLastSeenPosition);
+					}
+				}
+				else if (debugLastHeardPosition != null || debugLastSeenPosition != null)
+				{
+					GameObject.Destroy(debugLastHeardPosition);
+					GameObject.Destroy(debugLastSeenPosition);
+				}
+			}
+			else if (debugLastHeardPosition != null || debugLastSeenPosition != null)
+			{
+				GameObject.Destroy(debugLastHeardPosition);
+				GameObject.Destroy(debugLastSeenPosition);
+			}
+		}
 
-        public void ClearEnemy() => _enemyChooser.ClearEnemy();
+		public void ClearEnemy() => _enemyChooser.ClearEnemy();
 
-        public Enemy GetEnemy(string profileID, bool mustBeActive) => _listController.GetEnemy(profileID, mustBeActive);
+		public Enemy GetEnemy(string profileID, bool mustBeActive) => _listController.GetEnemy(profileID, mustBeActive);
 
-        public Enemy CheckAddEnemy(IPlayer IPlayer) => _listController.CheckAddEnemy(IPlayer);
+		public Enemy CheckAddEnemy(IPlayer IPlayer) => _listController.CheckAddEnemy(IPlayer);
 
-        public void RemoveEnemy(string profileID) => _listController.RemoveEnemy(profileID);
+		public void RemoveEnemy(string profileID) => _listController.RemoveEnemy(profileID);
 
-        public bool IsPlayerAnEnemy(string profileID) => _listController.IsPlayerAnEnemy(profileID);
+		public bool IsPlayerAnEnemy(string profileID) => _listController.IsPlayerAnEnemy(profileID);
 
-        public bool IsPlayerFriendly(IPlayer iPlayer) => _listController.IsPlayerFriendly(iPlayer);
+		public bool IsPlayerFriendly(IPlayer iPlayer) => _listController.IsPlayerFriendly(iPlayer);
 
-        public bool IsBotInBotsGroup(BotOwner botOwner) => _listController.IsBotInBotsGroup(botOwner);
-    }
+		public bool IsBotInBotsGroup(BotOwner botOwner) => _listController.IsBotInBotsGroup(botOwner);
+	}
 }

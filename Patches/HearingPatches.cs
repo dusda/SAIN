@@ -150,7 +150,7 @@ namespace SAIN.Patches.Hearing
 
         private static float calcVolume(Player player)
         {
-            return player.MovementContext.CovertMovementVolumeBySpeed * player.method_49();
+            return player.MovementContext.CovertMovementVolumeBySpeed * player.method_54();
         }
     }
 
@@ -174,7 +174,7 @@ namespace SAIN.Patches.Hearing
                     return false;
                 }
 
-                float volume = ____player.MovementContext.CovertMovementVolumeBySpeed * ____player.method_49();
+                float volume = ____player.MovementContext.CovertMovementVolumeBySpeed * ____player.method_54();
                 float baseRange = 60f;
                 SAINBotController.Instance?.BotHearing.PlayAISound(____player.ProfileId, SAINSoundType.Sprint, ____player.Position, baseRange, volume);
             }
@@ -261,12 +261,12 @@ namespace SAIN.Patches.Hearing
 
         protected override MethodBase GetTargetMethod()
         {
-            AIFlareEnabled = AccessTools.Property(typeof(AIData), "Boolean_0");
-            return AccessTools.Method(typeof(AIData), "TryPlayShootSound");
+            AIFlareEnabled = AccessTools.Property(typeof(GClass540), "Boolean_0");
+            return AccessTools.Method(typeof(GClass540), "TryPlayShootSound");
         }
 
         [PatchPrefix]
-        public static bool PatchPrefix(AIData __instance)
+        public static bool PatchPrefix(GClass540 __instance)
         {
             //if (__instance.IsAI &&
             //    SAINPlugin.IsBotExluded(__instance.BotOwner))
@@ -378,7 +378,7 @@ namespace SAIN.Patches.Hearing
     {
         protected override MethodBase GetTargetMethod()
         {
-            return AccessTools.Method(typeof(Player), "PlaySwitchHeadlightSound");
+            return AccessTools.Method(typeof(Player), "PlayTacticalSound");
         }
 
         [PatchPostfix]
@@ -414,11 +414,11 @@ namespace SAIN.Patches.Hearing
         }
 
         [PatchPrefix]
-        public static void PatchPrefix(Player __instance, ref string soundBank)
+        public static void PatchPrefix(Player __instance, ref string soundBank, float ____runSurfaceCheck)
         {
             if (soundBank == "Prone"
                 && __instance.SinceLastStep >= 0.5f
-                && __instance.CheckSurface()) {
+                && __instance.CheckSurface(____runSurfaceCheck)) {
                 float range = SAINPlugin.LoadedPreset.GlobalSettings.Hearing.BaseSoundRange_Prone;
                 SAINBotController.Instance?.BotHearing.PlayAISound(__instance.ProfileId, SAINSoundType.Prone, __instance.Position, range, 1f);
             }
@@ -429,7 +429,7 @@ namespace SAIN.Patches.Hearing
     {
         protected override MethodBase GetTargetMethod()
         {
-            return AccessTools.Method(typeof(Player), "method_50");
+            return AccessTools.Method(typeof(Player), "method_55");
         }
 
         [PatchPrefix]
@@ -445,7 +445,7 @@ namespace SAIN.Patches.Hearing
         protected override MethodBase GetTargetMethod()
         {
             return AccessTools.Method(typeof(Player), "SetInHands",
-                new[] { typeof(GrenadeClass), typeof(Callback<IHandsThrowController>) });
+                new[] { typeof(Grenade), typeof(Callback<IHandsThrowController>) });
         }
 
         [PatchPrefix]
@@ -461,7 +461,7 @@ namespace SAIN.Patches.Hearing
         protected override MethodBase GetTargetMethod()
         {
             return AccessTools.Method(typeof(Player), "SetInHands",
-                new[] { typeof(FoodClass), typeof(float), typeof(int), typeof(Callback<GInterface142>) });
+                new[] { typeof(FoodDrinkItemClass), typeof(float), typeof(int), typeof(Callback<GInterface165>) });
         }
 
         [PatchPrefix]
@@ -477,11 +477,11 @@ namespace SAIN.Patches.Hearing
         protected override MethodBase GetTargetMethod()
         {
             return AccessTools.Method(typeof(Player), "SetInHands",
-                new[] { typeof(MedsClass), typeof(EBodyPart), typeof(int), typeof(Callback<GInterface142>) });
+                new[] { typeof(MedsItemClass), typeof(EBodyPart), typeof(int), typeof(Callback<GInterface165>) });
         }
 
         [PatchPrefix]
-        public static void PatchPrefix(MedsClass meds, Player __instance)
+        public static void PatchPrefix(MedsItemClass meds, Player __instance)
         {
             SAINSoundType soundType;
             float range;

@@ -52,7 +52,7 @@ namespace SAIN.SAINComponent.Classes
             return dir;
         }
 
-        private float calcDamageMod(DamageInfo damageInfo)
+        private float calcDamageMod(DamageInfoStruct damageInfo)
         {
             float mod = damageInfo.Damage / DAMAGE_BASELINE;
             mod = Mathf.Clamp(mod, DAMAGE_MIN_MOD, DAMAGE_MAX_MOD) * DAMAGE_MANUAL_MODIFIER;
@@ -62,7 +62,7 @@ namespace SAIN.SAINComponent.Classes
             return mod;
         }
 
-        private Vector3 getHitReactionDir(DamageInfo damageInfo)
+        private Vector3 getHitReactionDir(DamageInfoStruct damageInfo)
         {
             Vector3 hitPoint = damageInfo.HitPoint;
             //DebugGizmos.Sphere(hitPoint, 0.25f, Color.red, true, 0.25f);
@@ -76,7 +76,7 @@ namespace SAIN.SAINComponent.Classes
             return result;
         }
 
-        public void GetHit(DamageInfo damageInfo)
+        public void GetHit(DamageInfoStruct damageInfo)
         {
             float mod = calcDamageMod(damageInfo);
             Vector3 hitReactionDir;

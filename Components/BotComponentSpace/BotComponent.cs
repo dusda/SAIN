@@ -307,7 +307,10 @@ namespace SAIN.SAINComponent
 
                 try {
                     BotOwner.LookSensor.MaxShootDist = float.MaxValue;
-                    BotOwner.AIData.IsNoOffsetShooting = false;
+					if (BotOwner.AIData is GClass551 aiData)
+					{
+						aiData.IsNoOffsetShooting = false; 
+					}
                 }
                 catch (Exception ex) {
                     Logger.LogError($"Error setting MaxShootDist during init, but continuing with initialization...: {ex}");

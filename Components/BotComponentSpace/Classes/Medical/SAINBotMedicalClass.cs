@@ -56,7 +56,7 @@ namespace SAIN.SAINComponent.Classes
             Bandage?.Dispose();
         }
 
-        public void GetHit(DamageInfo damageInfo, EBodyPart bodyPart, float floatVal)
+        public void GetHit(DamageInfoStruct damageInfo, EBodyPart bodyPart, float floatVal)
         {
             TimeLastShot = Time.time;
             HitByEnemy.GetHit(damageInfo, bodyPart, floatVal);

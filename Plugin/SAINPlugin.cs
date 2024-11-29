@@ -34,7 +34,7 @@ namespace SAIN
     [BepInPlugin(SAINGUID, SAINName, SAINVersion)]
     [BepInDependency(BigBrainGUID, BigBrainVersion)]
     [BepInDependency(WaypointsGUID, WaypointsVersion)]
-    [BepInDependency(SPTGUID, SPTVersion)]
+    //[BepInDependency(SPTGUID, SPTVersion)]
     [BepInProcess(EscapeFromTarkov)]
     [BepInIncompatibility("com.dvize.BushNoESP")]
     [BepInIncompatibility("com.dvize.NoGrenadeESP")]
@@ -53,9 +53,6 @@ namespace SAIN
 
         private void Awake()
         {
-            if (!VersionChecker.CheckEftVersion(Logger, Info, Config)) {
-                throw new Exception("Invalid EFT Version");
-            }
 
             PresetHandler.Init();
             BindConfigs();

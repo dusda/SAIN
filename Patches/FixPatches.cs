@@ -14,7 +14,7 @@ namespace SAIN.Patches.Generic.Fixes
     {
         protected override MethodBase GetTargetMethod()
         {
-            return AccessTools.Method(typeof(Player), "method_74");
+            return AccessTools.Method(typeof(Player), "InitVaultingComponent");
         }
 
         [PatchPrefix]
@@ -110,7 +110,7 @@ namespace SAIN.Patches.Generic.Fixes
     {
         protected override MethodBase GetTargetMethod()
         {
-            return AccessTools.Method(typeof(GClass410), "CancelCurrent");
+            return AccessTools.Method(typeof(GClass455), "CancelCurrent");
         }
 
         [PatchPrefix]

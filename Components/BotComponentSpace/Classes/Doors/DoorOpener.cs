@@ -487,7 +487,7 @@ namespace SAIN.SAINComponent.Classes.Mover
                 return false;
             }
             var interactionParameters = door.GetInteractionParameters(BotOwner.Position);
-            if (interactionParameters.AnimationId == door.PushID) {
+            if (interactionParameters.AnimationId == (door.DoorState is EDoorState.Locked ? (int)door.DoorKeyOpenInteraction : door.CalculateInteractionIndex(BotOwner.Position))) {
                 return false;
             }
             return true;
@@ -517,7 +517,7 @@ namespace SAIN.SAINComponent.Classes.Mover
         private bool checkCrossPoint(Vector3 goTo, Vector3 botPosition, DoorData data)
         {
             NavMeshDoorLink link = data.Link;
-            GClass297 gclass;
+			GClass340 gclass;
             switch (link.Door.DoorState) {
                 case EDoorState.Open:
                     //if ((link.MidClose - vector).sqrMagnitude > 4)
