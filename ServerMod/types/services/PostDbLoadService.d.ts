@@ -33,6 +33,7 @@ export declare class PostDbLoadService {
     protected botConfig: IBotConfig;
     constructor(logger: ILogger, databaseService: DatabaseService, localisationService: LocalisationService, customLocationWaveService: CustomLocationWaveService, openZoneService: OpenZoneService, seasonalEventService: SeasonalEventService, itemBaseClassService: ItemBaseClassService, configServer: ConfigServer, cloner: ICloner);
     performPostDbLoadActions(): void;
+    protected adjustMinReserveRaiderSpawnChance(): void;
     protected addCustomLooseLootPositions(): void;
     /**
      * BSG have two values for shotgun dispersion, we make sure both have the same value
