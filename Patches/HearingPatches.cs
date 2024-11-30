@@ -261,12 +261,12 @@ namespace SAIN.Patches.Hearing
 
         protected override MethodBase GetTargetMethod()
         {
-            AIFlareEnabled = AccessTools.Property(typeof(GClass540), "Boolean_0");
-            return AccessTools.Method(typeof(GClass540), "TryPlayShootSound");
+            AIFlareEnabled = AccessTools.Property(typeof(GClass551), "Boolean_0");
+            return AccessTools.Method(typeof(GClass551), "TryPlayShootSound");
         }
 
         [PatchPrefix]
-        public static bool PatchPrefix(GClass540 __instance)
+        public static bool PatchPrefix(GClass551 __instance)
         {
             //if (__instance.IsAI &&
             //    SAINPlugin.IsBotExluded(__instance.BotOwner))
@@ -445,7 +445,7 @@ namespace SAIN.Patches.Hearing
         protected override MethodBase GetTargetMethod()
         {
             return AccessTools.Method(typeof(Player), "SetInHands",
-                new[] { typeof(Grenade), typeof(Callback<IHandsThrowController>) });
+                new[] { typeof(ThrowWeapItemClass), typeof(Callback<IHandsThrowController>) });
         }
 
         [PatchPrefix]

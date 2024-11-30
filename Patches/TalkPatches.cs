@@ -40,7 +40,7 @@ namespace SAIN.Patches.Talk
     {
         protected override MethodBase GetTargetMethod()
         {
-            return AccessTools.Method(typeof(Player), "method_113");
+            return AccessTools.Method(typeof(Player), "method_117");
         }
 
         [PatchPrefix]

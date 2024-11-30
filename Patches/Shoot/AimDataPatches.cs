@@ -15,7 +15,7 @@ using SPT.Reflection.Patching;
 using System.Reflection;
 using System.Text;
 using UnityEngine;
-using HitAffectClass = GClass557;
+using HitAffectClass = GClass568;
 
 namespace SAIN.Patches.Shoot.Aim
 {
