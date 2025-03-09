@@ -3,6 +3,7 @@ using EFT;
 using SAIN.SAINComponent.Classes.EnemyClasses;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Profiling;
 
 namespace SAIN.Layers.Combat.Solo
 {
@@ -21,9 +22,11 @@ namespace SAIN.Layers.Combat.Solo
 
         public override void Update(CustomLayer.ActionData data)
         {
+            this.StartProfilingSample("Update");
             Enemy enemy = Bot.Enemy;
             if (enemy == null) {
                 Bot.Steering.SteerByPriority();
+                this.EndProfilingSample();
                 return;
             }
 
@@ -33,6 +36,7 @@ namespace SAIN.Layers.Combat.Solo
             if (CheckShoot(enemy)) {
                 Bot.Steering.SteerByPriority();
                 Shoot.CheckAimAndFire();
+                this.EndProfilingSample();
                 return;
             }
 
@@ -52,6 +56,7 @@ namespace SAIN.Layers.Combat.Solo
             else {
                 Bot.Steering.SteerByPriority();
                 Shoot.CheckAimAndFire();
+                this.EndProfilingSample();
                 return;
             }
 
@@ -67,6 +72,7 @@ namespace SAIN.Layers.Combat.Solo
                     BotOwner.BotRun.Run(movePos, false, SAINPlugin.LoadedPreset.GlobalSettings.General.SprintReachDistance);
                     Bot.Steering.LookToMovingDirection(500f, true);
                 }
+                this.EndProfilingSample();
                 return;
             }
 
@@ -81,6 +87,7 @@ namespace SAIN.Layers.Combat.Solo
                 Bot.Steering.LookToMovingDirection();
                 //SAIN.Steering.LookToPoint(movePos + Vector3.up * 1f);
             }
+            this.EndProfilingSample();
         }
 
         private bool CheckShoot(Enemy enemy)

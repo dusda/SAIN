@@ -6,6 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
+using UnityEngine.Profiling;
 
 namespace SAIN.Layers.Combat.Solo.Cover
 {
@@ -22,28 +23,26 @@ namespace SAIN.Layers.Combat.Solo.Cover
 
         public override void Update(CustomLayer.ActionData data)
         {
+            this.StartProfilingSample("Update");
             Bot.Steering.SteerByPriority();
             Shoot.CheckAimAndFire();
             if (NewPoint == null
-                && FindPointToGo())
-            {
+                && FindPointToGo()) {
                 Bot.Mover.SetTargetMoveSpeed(GetSpeed());
                 Bot.Mover.SetTargetPose(GetPose());
             }
-            else if (NewPoint != null && NewPoint.StraightDistanceStatus == CoverStatus.InCover)
-            {
+            else if (NewPoint != null && NewPoint.StraightDistanceStatus == CoverStatus.InCover) {
                 Bot.Decision.EnemyDecisions.ShiftCoverComplete = true;
             }
-            else if (NewPoint != null)
-            {
+            else if (NewPoint != null) {
                 Bot.Mover.SetTargetMoveSpeed(GetSpeed());
                 Bot.Mover.SetTargetPose(GetPose());
                 Bot.Mover.GoToPoint(NewPoint.Position, out _);
             }
-            else
-            {
+            else {
                 Bot.Decision.EnemyDecisions.ShiftCoverComplete = true;
             }
+            this.EndProfilingSample();
         }
 
         private float GetSpeed()
@@ -60,35 +59,27 @@ namespace SAIN.Layers.Combat.Solo.Cover
 
         private bool FindPointToGo()
         {
-            if (NewPoint != null)
-            {
+            if (NewPoint != null) {
                 return true;
             }
 
             var coverInUse = Bot.Cover.CoverInUse;
-            if (coverInUse != null)
-            {
-                if (NewPoint == null)
-                {
-                    if (!UsedPoints.Contains(coverInUse))
-                    {
+            if (coverInUse != null) {
+                if (NewPoint == null) {
+                    if (!UsedPoints.Contains(coverInUse)) {
                         UsedPoints.Add(coverInUse);
                     }
 
                     List<CoverPoint> coverPoints = Bot.Cover.CoverFinder.CoverPoints;
 
-                    for (int i = 0; i < coverPoints.Count; i++)
-                    {
+                    for (int i = 0; i < coverPoints.Count; i++) {
                         CoverPoint shiftCoverTarget = coverPoints[i];
 
                         if (shiftCoverTarget.CoverHeight > coverInUse.CoverHeight
-                            && !UsedPoints.Contains(shiftCoverTarget))
-                        {
-                            for (int j = 0; j < UsedPoints.Count; j++)
-                            {
+                            && !UsedPoints.Contains(shiftCoverTarget)) {
+                            for (int j = 0; j < UsedPoints.Count; j++) {
                                 if ((UsedPoints[j].Position - shiftCoverTarget.Position).sqrMagnitude > 5f
-                                    && Bot.Mover.GoToPoint(shiftCoverTarget.Position, out _))
-                                {
+                                    && Bot.Mover.GoToPoint(shiftCoverTarget.Position, out _)) {
                                     Bot.Cover.CoverInUse = shiftCoverTarget;
                                     NewPoint = shiftCoverTarget;
                                     return true;
@@ -97,8 +88,7 @@ namespace SAIN.Layers.Combat.Solo.Cover
                         }
                     }
                 }
-                if (NewPoint == null)
-                {
+                if (NewPoint == null) {
                     Bot.Decision.EnemyDecisions.ShiftCoverComplete = true;
                 }
             }
@@ -128,17 +118,14 @@ namespace SAIN.Layers.Combat.Solo.Cover
             var cover = Bot.Cover;
             stringBuilder.AppendLabeledValue("CoverFinder State", $"{cover.CurrentCoverFinderState}", Color.white, Color.yellow, true);
             stringBuilder.AppendLabeledValue("Cover Count", $"{cover.CoverPoints.Count}", Color.white, Color.yellow, true);
-            if (Bot.CurrentTargetPosition != null)
-            {
+            if (Bot.CurrentTargetPosition != null) {
                 stringBuilder.AppendLabeledValue("Current Target Position", $"{Bot.CurrentTargetPosition.Value}", Color.white, Color.yellow, true);
             }
-            else
-            {
+            else {
                 stringBuilder.AppendLabeledValue("Current Target Position", null, Color.white, Color.yellow, true);
             }
 
-            if (NewPoint != null)
-            {
+            if (NewPoint != null) {
                 stringBuilder.AppendLine("Cover In Use");
                 stringBuilder.AppendLabeledValue("Status", $"{NewPoint.StraightDistanceStatus}", Color.white, Color.yellow, true);
                 stringBuilder.AppendLabeledValue("Height / Value", $"{NewPoint.CoverHeight} {NewPoint.HardData.Value}", Color.white, Color.yellow, true);

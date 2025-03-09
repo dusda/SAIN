@@ -23,6 +23,8 @@ namespace SAIN.Layers.Peace
 
         public override void Update(CustomLayer.ActionData data)
         {
+            this.StartProfilingSample("Update");
+            this.EndProfilingSample();
         }
 
         public void Toggle(bool value)

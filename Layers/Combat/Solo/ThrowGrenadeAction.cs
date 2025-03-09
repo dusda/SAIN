@@ -2,6 +2,7 @@
 using EFT;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Profiling;
 
 namespace SAIN.Layers.Combat.Solo
 {
@@ -18,10 +19,12 @@ namespace SAIN.Layers.Combat.Solo
 
         public override void Update(CustomLayer.ActionData data)
         {
+            this.StartProfilingSample("Update");
             if (!Stopped && Time.time - StartTime > 1f || Bot.Cover.CheckLimbsForCover()) {
                 Stopped = true;
                 BotOwner.StopMove();
             }
+            this.EndProfilingSample();
         }
 
         private float StartTime = 0f;

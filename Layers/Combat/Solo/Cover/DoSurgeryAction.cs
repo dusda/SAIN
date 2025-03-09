@@ -3,6 +3,7 @@ using EFT;
 using System.Collections;
 using System.Text;
 using UnityEngine;
+using UnityEngine.Profiling;
 
 namespace SAIN.Layers.Combat.Solo.Cover
 {
@@ -19,8 +20,15 @@ namespace SAIN.Layers.Combat.Solo.Cover
 
         public override void Update(CustomLayer.ActionData data)
         {
-            if (Bot.Medical.Surgery.AreaClearForSurgery)
-            {
+            this.StartProfilingSample("Update");
+            checkDoSurgery();
+            handleSteering();
+            this.EndProfilingSample();
+        }
+
+        private void checkDoSurgery()
+        {
+            if (Bot.Medical.Surgery.AreaClearForSurgery) {
                 Bot.Mover.PauseMovement(30);
                 Bot.Mover.SprintController.CancelRun();
                 Bot.Mover.SetTargetMoveSpeed(0f);
@@ -37,7 +45,10 @@ namespace SAIN.Layers.Combat.Solo.Cover
                 Bot.Medical.TryCancelHeal();
                 Bot.Mover.DogFight.DogFightMove(false);
             }
+        }
 
+        private void handleSteering()
+        {
             if (!Bot.Steering.SteerByPriority(null, false) &&
                 !Bot.Steering.LookToLastKnownEnemyPosition(Bot.Enemy))
             {
