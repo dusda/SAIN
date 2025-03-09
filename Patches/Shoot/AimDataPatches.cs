@@ -15,7 +15,7 @@ using SPT.Reflection.Patching;
 using System.Reflection;
 using System.Text;
 using UnityEngine;
-using HitAffectClass = GClass568;
+using HitAffectClass = GClass583;
 
 namespace SAIN.Patches.Shoot.Aim
 {
@@ -23,7 +23,7 @@ namespace SAIN.Patches.Shoot.Aim
     {
         protected override MethodBase GetTargetMethod()
         {
-            return AccessTools.Method(typeof(HitReaction), "Hit");
+            return AccessTools.Method(typeof(HitReaction), nameof(HitReaction.Hit));
         }
 
         [PatchPrefix]
@@ -40,7 +40,7 @@ namespace SAIN.Patches.Shoot.Aim
     {
         protected override MethodBase GetTargetMethod()
         {
-            return AccessTools.Method(typeof(HitAffectClass), "Affect");
+            return AccessTools.Method(typeof(HitAffectClass), nameof(HitAffectClass.Affect));
         }
 
         [PatchPrefix]
@@ -61,7 +61,7 @@ namespace SAIN.Patches.Shoot.Aim
     {
         protected override MethodBase GetTargetMethod()
         {
-            return AccessTools.Method(typeof(HitAffectClass), "DoAffection");
+            return AccessTools.Method(typeof(HitAffectClass), nameof(HitAffectClass.DoAffection));
         }
 
         [PatchPrefix]
@@ -81,7 +81,7 @@ namespace SAIN.Patches.Shoot.Aim
     {
         protected override MethodBase GetTargetMethod()
         {
-            return AccessTools.PropertySetter(typeof(BotAimingClass), "Status");
+            return AccessTools.PropertySetter(typeof(BotAimingClass), nameof(BotAimingClass.Status));
         }
 
         [PatchPrefix]
@@ -113,7 +113,6 @@ namespace SAIN.Patches.Shoot.Aim
         {
             _endTargetPointProp = AccessTools.Property(HelpersGClass.AimDataType, "EndTargetPoint");
             return AccessTools.Method(typeof(BotAimingClass), "method_13");
-            //return AccessTools.Method(HelpersGClass.AimDataType, "method_13");
         }
 
         private static PropertyInfo _endTargetPointProp;
@@ -437,7 +436,7 @@ namespace SAIN.Patches.Shoot.Aim
     {
         protected override MethodBase GetTargetMethod()
         {
-            return AccessTools.Method(typeof(EnemyInfo), "method_7");
+            return AccessTools.Method(typeof(EnemyInfo), nameof(EnemyInfo.method_13));
         }
 
         [PatchPrefix]

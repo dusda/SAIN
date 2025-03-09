@@ -184,7 +184,7 @@ namespace SAIN.Patches.Generic
     {
         protected override MethodBase GetTargetMethod()
         {
-            return AccessTools.Method(typeof(BotsController), "method_4");
+            return AccessTools.Method(typeof(BotsController), "method_5");
         }
 
         [PatchPrefix]

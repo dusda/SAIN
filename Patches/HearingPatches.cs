@@ -436,7 +436,7 @@ namespace SAIN.Patches.Hearing
     {
         protected override MethodBase GetTargetMethod()
         {
-            return AccessTools.Method(typeof(Player), nameof(Player.method_55));
+            return AccessTools.Method(typeof(Player), nameof(Player.method_58));
         }
 
         [PatchPrefix]
@@ -468,7 +468,7 @@ namespace SAIN.Patches.Hearing
         protected override MethodBase GetTargetMethod()
         {
             return AccessTools.Method(typeof(Player), "SetInHands",
-                new[] { typeof(FoodDrinkItemClass), typeof(float), typeof(int), typeof(Callback<GInterface165>) });
+                new[] { typeof(FoodDrinkItemClass), typeof(float), typeof(int), typeof(Callback<GInterface176>) });
         }
 
         [PatchPrefix]
@@ -484,7 +484,7 @@ namespace SAIN.Patches.Hearing
         protected override MethodBase GetTargetMethod()
         {
             return AccessTools.Method(typeof(Player), "SetInHands",
-                new[] { typeof(MedsItemClass), typeof(EBodyPart), typeof(int), typeof(Callback<GInterface165>) });
+                new[] { typeof(MedsItemClass), typeof(EBodyPart), typeof(int), typeof(Callback<GInterface176>) });
         }
 
         [PatchPrefix]

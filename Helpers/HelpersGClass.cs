@@ -14,7 +14,7 @@ namespace SAIN.Helpers
     {
         static HelpersGClass()
         {
-            AimDataType = PatchConstants.EftTypes.Single(x => x.GetProperty("LastSpreadCount") != null && x.GetProperty("LastAimTime") != null);
+            AimDataType = typeof(BotAimingClass);
         }
 
         public static readonly Type AimDataType;
