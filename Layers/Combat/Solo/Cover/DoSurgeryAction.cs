@@ -1,4 +1,5 @@
-﻿using EFT;
+﻿using DrakiaXYZ.BigBrain.Brains;
+using EFT;
 using System.Collections;
 using System.Text;
 using UnityEngine;
@@ -16,16 +17,18 @@ namespace SAIN.Layers.Combat.Solo.Cover
             ToggleAction(value);
         }
 
-        public override void Update()
+        public override void Update(CustomLayer.ActionData data)
         {
-            if (Bot.Medical.Surgery.AreaClearForSurgery) {
+            if (Bot.Medical.Surgery.AreaClearForSurgery)
+            {
                 Bot.Mover.PauseMovement(30);
                 Bot.Mover.SprintController.CancelRun();
                 Bot.Mover.SetTargetMoveSpeed(0f);
                 Bot.Cover.DuckInCover();
                 tryStartSurgery();
             }
-            else {
+            else
+            {
                 BotOwner.Mover.MovementResume();
                 Bot.Mover.SetTargetMoveSpeed(1);
                 Bot.Mover.SetTargetPose(1);
@@ -36,7 +39,8 @@ namespace SAIN.Layers.Combat.Solo.Cover
             }
 
             if (!Bot.Steering.SteerByPriority(null, false) &&
-                !Bot.Steering.LookToLastKnownEnemyPosition(Bot.Enemy)) {
+                !Bot.Steering.LookToLastKnownEnemyPosition(Bot.Enemy))
+            {
                 Bot.Steering.LookToRandomPosition();
             }
         }
@@ -119,6 +123,6 @@ namespace SAIN.Layers.Combat.Solo.Cover
             stringBuilder.AppendLine($"Area Clear? {Bot.Medical.Surgery.AreaClearForSurgery}");
             stringBuilder.AppendLine($"ShallStartUse Surgery? {BotOwner.Medecine.SurgicalKit.ShallStartUse()}");
             stringBuilder.AppendLine($"IsBleeding? {BotOwner.Medecine.FirstAid.IsBleeding}");
-        }
+        }        
     }
 }

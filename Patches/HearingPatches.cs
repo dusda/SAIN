@@ -1,5 +1,6 @@
 ﻿using Audio.Data;
 using Comfort.Common;
+using CommonAssets.Scripts.Audio;
 using EFT;
 using EFT.Interactive;
 using EFT.InventoryLogic;
@@ -148,9 +149,11 @@ namespace SAIN.Patches.Hearing
             SAINBotController.Instance?.BotHearing.PlayAISound(__instance.ProfileId, SAINSoundType.FootStep, __instance.Position, range, volume);
         }
 
-		private static float calcVolume(Player player)
+		public static float calcVolume(Player player)
 		{
-			return player.MovementContext.CovertMovementVolumeBySpeed * player.method_54();
+            var maxAllowedSpeed = player.MovementContext.MaxSpeed;
+            var charMovementSpeed = player.MovementContext.CharacterMovementSpeed;
+            return Mathf.Clamp(Mathf.InverseLerp(0f, maxAllowedSpeed, charMovementSpeed), player.MINStepSoundSpeedFactor, 1f);
 		}
 	}
 
@@ -177,7 +180,7 @@ namespace SAIN.Patches.Hearing
 					return false;
 				}
 
-				float volume = ____player.MovementContext.CovertMovementVolumeBySpeed * ____player.method_54();
+                float volume = ____player.MovementContext.CovertMovementVolumeBySpeed * FootstepSoundPatch.calcVolume(____player);
 				float baseRange = 60f;
 				SAINBotController.Instance?.BotHearing.PlayAISound(____player.ProfileId, SAINSoundType.Sprint, ____player.Position, baseRange, volume);
 			}
@@ -264,12 +267,12 @@ namespace SAIN.Patches.Hearing
 
 		protected override MethodBase GetTargetMethod()
 		{
-			AIFlareEnabled = AccessTools.Property(typeof(GClass551), "Boolean_0");
-			return AccessTools.Method(typeof(GClass551), "TryPlayShootSound");
+			AIFlareEnabled = AccessTools.Property(typeof(GClass567), "Boolean_0");
+			return AccessTools.Method(typeof(GClass567), "TryPlayShootSound");
 		}
 
 		[PatchPrefix]
-		public static bool PatchPrefix(GClass551 __instance)
+		public static bool PatchPrefix(GClass567 __instance)
 		{
 			//if (__instance.IsAI &&
 			//    SAINPlugin.IsBotExluded(__instance.BotOwner))
