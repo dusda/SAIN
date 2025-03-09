@@ -153,7 +153,7 @@ namespace SAIN.Patches.Hearing
 		{
             var maxAllowedSpeed = player.MovementContext.MaxSpeed;
             var charMovementSpeed = player.MovementContext.CharacterMovementSpeed;
-            return Mathf.Clamp(Mathf.InverseLerp(0f, maxAllowedSpeed, charMovementSpeed), player.MINStepSoundSpeedFactor, 1f);
+            return player.MovementContext.CovertMovementVolumeBySpeed * Mathf.Clamp(Mathf.InverseLerp(0f, maxAllowedSpeed, charMovementSpeed), player.MINStepSoundSpeedFactor, 1f);
 		}
 	}
 
