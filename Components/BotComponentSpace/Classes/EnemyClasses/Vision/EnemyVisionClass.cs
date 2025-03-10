@@ -63,7 +63,7 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
         {
             VisionChecker.Update();
             Angles.Update();
-            updateVision();
+            UpdateVision();
         }
 
         public void Dispose()
@@ -83,7 +83,7 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
             UpdateCanShootState(true);
         }
 
-        private void updateVision()
+        private void UpdateVision()
         {
             UpdateVisibleState(false);
             UpdateCanShootState(false);

@@ -17,7 +17,7 @@ namespace SAIN.Patches.Vision
     {
         protected override MethodBase GetTargetMethod()
         {
-            return AccessTools.Method(typeof(BotLight), "UpdateLightEnable");
+            return AccessTools.Method(typeof(BotLight), nameof(BotLight.UpdateLightEnable));
         }
 
         [PatchPrefix]
@@ -110,7 +110,7 @@ namespace SAIN.Patches.Vision
     {
         protected override MethodBase GetTargetMethod()
         {
-            return AccessTools.Method(typeof(BotLight), "method_0");
+            return AccessTools.Method(typeof(BotLight), nameof(BotLight.method_0));
         }
 
         [PatchPrefix]
@@ -135,7 +135,7 @@ namespace SAIN.Patches.Vision
     {
         protected override MethodBase GetTargetMethod()
         {
-            return AccessTools.Method(typeof(BotNightVisionData), "method_0");
+            return AccessTools.Method(typeof(BotNightVisionData), nameof(BotNightVisionData.method_0));
         }
 
         [PatchPrefix]
@@ -178,7 +178,7 @@ namespace SAIN.Patches.Vision
     {
         protected override MethodBase GetTargetMethod()
         {
-            return AccessTools.Method(typeof(EnemyInfo), nameof(EnemyInfo.method_1));
+            return AccessTools.Method(typeof(EnemyInfo), nameof(EnemyInfo.method_3));
         }
 
         [PatchPrefix]
@@ -228,7 +228,7 @@ namespace SAIN.Patches.Vision
     {
         protected override MethodBase GetTargetMethod()
         {
-            return AccessTools.Method(typeof(LookSensor), "CheckAllEnemies");
+            return AccessTools.Method(typeof(LookSensor), nameof(LookSensor.CheckAllEnemies));
         }
 
         [PatchPrefix]
@@ -242,7 +242,7 @@ namespace SAIN.Patches.Vision
     {
         protected override MethodBase GetTargetMethod()
         {
-            return AccessTools.Method(typeof(BotGlobalLookData), "Update");
+            return AccessTools.Method(typeof(BotGlobalLookData), nameof(BotGlobalLookData.Update));
         }
 
         [PatchPostfix]
@@ -258,7 +258,7 @@ namespace SAIN.Patches.Vision
     {
         protected override MethodBase GetTargetMethod()
         {
-            return AccessTools.Method(typeof(LookSensor), "method_2");
+            return AccessTools.Method(typeof(LookSensor), nameof(LookSensor.method_2));
         }
 
         [PatchPrefix]
@@ -281,7 +281,7 @@ namespace SAIN.Patches.Vision
     {
         protected override MethodBase GetTargetMethod()
         {
-            return typeof(BotOwner).GetMethod("IsEnemyLookingAtMe", BindingFlags.Instance | BindingFlags.Public, null, [typeof(IPlayer)], null);
+            return typeof(BotOwner).GetMethod(nameof(BotOwner.IsEnemyLookingAtMe), BindingFlags.Instance | BindingFlags.Public, null, [typeof(IPlayer)], null);
         }
 
         [PatchPrefix]
@@ -296,7 +296,7 @@ namespace SAIN.Patches.Vision
     {
         protected override MethodBase GetTargetMethod()
         {
-            return AccessTools.Method(typeof(BotLight), "TurnOn");
+            return AccessTools.Method(typeof(BotLight), nameof(BotLight.TurnOn));
         }
 
         [PatchPrefix]
@@ -350,7 +350,7 @@ namespace SAIN.Patches.Vision
     {
         protected override MethodBase GetTargetMethod()
         {
-            return AccessTools.Method(typeof(BotFlashGrenade), "AddBlindEffect");
+            return AccessTools.Method(typeof(BotFlashGrenade), nameof(BotFlashGrenade.AddBlindEffect));
         }
 
         [PatchPrefix]
@@ -375,7 +375,7 @@ namespace SAIN.Patches.Vision
         [PatchPostfix]
         public static void PatchPostfix(ref float __result, EnemyInfo __instance)
         {
-            if (SAINEnableClass.GetSAIN(__instance?.Owner, out var sain))
+            if (SAINEnableClass.GetSAIN(__instance.Owner, out var sain))
             {
                 Enemy enemy = sain.EnemyController.GetEnemy(__instance.Person.ProfileId, true);
                 if (enemy != null)
@@ -407,7 +407,7 @@ namespace SAIN.Patches.Vision
         [PatchPrefix]
         public static void PatchPrefix(ref float addSensorDistance, EnemyInfo __instance)
         {
-            if (SAINEnableClass.GetSAIN(__instance?.Owner, out var sain))
+            if (SAINEnableClass.GetSAIN(__instance.Owner, out var sain))
             {
                 Enemy enemy = sain.EnemyController.GetEnemy(__instance.ProfileId, true);
                 if (enemy != null)
