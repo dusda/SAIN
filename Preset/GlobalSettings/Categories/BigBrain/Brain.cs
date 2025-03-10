@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using static CC_Vintage;
-using static EFT.UI.CharacterSelectionStartScreen;
 
 namespace SAIN.Preset.GlobalSettings.Categories
 {
@@ -39,25 +37,25 @@ namespace SAIN.Preset.GlobalSettings.Categories
 
     public static class AIBrains
     {
-        public static readonly List<Brain> Scavs = new List<Brain>
+        public static readonly List<Brain> Scavs = new()
         {
             Brain.CursAssault,
             Brain.Assault,
         };
 
-        public static readonly List<Brain> Goons = new List<Brain>
+        public static readonly List<Brain> Goons = new()
         {
             Brain.Knight,
             Brain.BirdEye,
             Brain.BigPipe,
         };
 
-        public static readonly List<Brain> Others = new List<Brain>
+        public static readonly List<Brain> Others = new()
         {
             Brain.Obdolbs,
         };
 
-        public static readonly List<Brain> Bosses = new List<Brain>
+        public static readonly List<Brain> Bosses = new()
         {
             Brain.BossBully,
             Brain.BossGluhar,
@@ -71,7 +69,7 @@ namespace SAIN.Preset.GlobalSettings.Categories
             Brain.SectantPriest,
         };
 
-        public static readonly List<Brain> Followers = new List<Brain>
+        public static readonly List<Brain> Followers = new()
         {
             Brain.BossBully,
             Brain.FollowerBully,

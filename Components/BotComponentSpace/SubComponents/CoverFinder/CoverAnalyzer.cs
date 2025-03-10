@@ -2,10 +2,8 @@
 using EFT;
 using SAIN.Helpers;
 using SAIN.SAINComponent.Classes;
-using System.Drawing.Drawing2D;
 using UnityEngine;
 using UnityEngine.AI;
-using static SAIN.SAINComponent.SubComponents.CoverFinder.CoverAnalyzer;
 
 namespace SAIN.SAINComponent.SubComponents.CoverFinder
 {
@@ -21,8 +19,8 @@ namespace SAIN.SAINComponent.SubComponents.CoverFinder
         public bool CheckCollider(Collider collider, TargetData targetData, out CoverPoint coverPoint, out string reason)
         {
             coverPoint = null;
-            HardColliderData hardData = new HardColliderData(collider);
-            ColliderData colliderData = new ColliderData(hardData, targetData);
+            HardColliderData hardData = new(collider);
+            ColliderData colliderData = new(hardData, targetData);
 
             if (!GetPlaceToMove(colliderData, hardData, targetData, out Vector3 coverPosition))
             {
@@ -30,27 +28,31 @@ namespace SAIN.SAINComponent.SubComponents.CoverFinder
                 return false;
             }
 
-            if (!checkPositionVsOtherBots(coverPosition)) {
+            if (!checkPositionVsOtherBots(coverPosition))
+            {
                 reason = "tooCloseToAnotherBot";
                 return false;
             }
 
-            if (isPositionSpotted(coverPosition)) {
+            if (isPositionSpotted(coverPosition))
+            {
                 reason = "tooCloseToSpottedPoint";
                 return false;
             }
 
-            if (!checkDistToTarget(coverPosition, targetData)) {
+            if (!checkDistToTarget(coverPosition, targetData))
+            {
                 reason = "tooCloseToTarget";
                 return false;
             }
 
-            if (!visibilityCheck(coverPosition, targetData, colliderData, hardData)) {
+            if (!visibilityCheck(coverPosition, targetData, colliderData, hardData))
+            {
                 reason = "pointVisibleToTarget";
                 return false;
             }
 
-            PathData pathData = new PathData(new NavMeshPath());
+            PathData pathData = new(new NavMeshPath());
             if (!CheckPath(coverPosition, pathData, targetData))
             {
                 reason = "badPath";
@@ -65,7 +67,7 @@ namespace SAIN.SAINComponent.SubComponents.CoverFinder
         public bool RecheckCoverPoint(CoverPoint coverPoint, TargetData targetData, out string reason)
         {
             var hardData = coverPoint.HardColliderData;
-            ColliderData colliderData = new ColliderData(hardData, targetData);
+            ColliderData colliderData = new(hardData, targetData);
 
             if (!GetPlaceToMove(colliderData, hardData, targetData, out Vector3 coverPosition))
             {
@@ -73,7 +75,8 @@ namespace SAIN.SAINComponent.SubComponents.CoverFinder
                 return false;
             }
 
-            if (!checkPositionVsOtherBots(coverPosition)) {
+            if (!checkPositionVsOtherBots(coverPosition))
+            {
                 reason = "tooCloseToAnotherBot";
                 return false;
             }
@@ -85,17 +88,20 @@ namespace SAIN.SAINComponent.SubComponents.CoverFinder
                 return true;
             }
 
-            if (isPositionSpotted(coverPosition)) {
+            if (isPositionSpotted(coverPosition))
+            {
                 reason = "tooCloseToSpottedPoint";
                 return false;
             }
 
-            if (!checkDistToTarget(coverPosition, targetData)) {
+            if (!checkDistToTarget(coverPosition, targetData))
+            {
                 reason = "tooCloseToTarget";
                 return false;
             }
 
-            if (!visibilityCheck(coverPosition, targetData, colliderData, hardData)) {
+            if (!visibilityCheck(coverPosition, targetData, colliderData, hardData))
+            {
                 reason = "pointVisibleToTarget";
                 return false;
             }
@@ -105,7 +111,7 @@ namespace SAIN.SAINComponent.SubComponents.CoverFinder
                 reason = "badPath";
                 return false;
             }
-            
+
             coverPoint.Position = coverPosition;
             reason = string.Empty;
             return true;
@@ -251,7 +257,8 @@ namespace SAIN.SAINComponent.SubComponents.CoverFinder
 
         private bool checkPathToEnemy(NavMeshPath path, TargetData targetData)
         {
-            if (!SAINBotSpaceAwareness.ArePathsDifferent(path, targetData.TargetEnemy.Path.PathToEnemy, PATH_SAME_DIST_MIN_RATIO, PATH_SAME_CHECK_DIST)) {
+            if (!SAINBotSpaceAwareness.ArePathsDifferent(path, targetData.TargetEnemy.Path.PathToEnemy, PATH_SAME_DIST_MIN_RATIO, PATH_SAME_CHECK_DIST))
+            {
                 return false;
             }
 
@@ -263,28 +270,37 @@ namespace SAIN.SAINComponent.SubComponents.CoverFinder
                 Vector3 cornerToTarget = TargetPoint - corner;
                 Vector3 botToCorner = corner - OriginPoint;
 
-                if (cornerToTarget.sqrMagnitude < PATH_NODE_MIN_DIST_SQR) {
-                    if (DebugCoverFinder) {
+                if (cornerToTarget.sqrMagnitude < PATH_NODE_MIN_DIST_SQR)
+                {
+                    if (DebugCoverFinder)
+                    {
                         //DrawDebugGizmos.Ray(OriginPoint, corner - OriginPoint, Color.red, (corner - OriginPoint).magnitude, 0.05f, true, 30f);
                     }
                     return false;
                 }
 
-                if (i == 1) {
-                    if (Vector3.Dot(botToCorner.normalized, botToTargetNormal) > PATH_NODE_FIRST_DOT_MAX) {
-                        if (DebugCoverFinder) {
+                if (i == 1)
+                {
+                    if (Vector3.Dot(botToCorner.normalized, botToTargetNormal) > PATH_NODE_FIRST_DOT_MAX)
+                    {
+                        if (DebugCoverFinder)
+                        {
                             //DrawDebugGizmos.Ray(corner, cornerToTarget, Color.red, cornerToTarget.magnitude, 0.05f, true, 30f);
                         }
                         return false;
                     }
                 }
-                else if (i < path.corners.Length - 2) {
+                else if (i < path.corners.Length - 2)
+                {
                     Vector3 cornerB = path.corners[i + 1];
                     Vector3 directionToNextCorner = cornerB - corner;
 
-                    if (Vector3.Dot(cornerToTarget.normalized, directionToNextCorner.normalized) > 0.5f) {
-                        if (directionToNextCorner.sqrMagnitude > cornerToTarget.sqrMagnitude) {
-                            if (DebugCoverFinder) {
+                    if (Vector3.Dot(cornerToTarget.normalized, directionToNextCorner.normalized) > 0.5f)
+                    {
+                        if (directionToNextCorner.sqrMagnitude > cornerToTarget.sqrMagnitude)
+                        {
+                            if (DebugCoverFinder)
+                            {
                                 //DrawDebugGizmos.Ray(corner, cornerToTarget, Color.red, cornerToTarget.magnitude, 0.05f, true, 30f);
                             }
                             return false;
@@ -299,17 +315,21 @@ namespace SAIN.SAINComponent.SubComponents.CoverFinder
         {
             string profileID = Bot.ProfileId;
 
-            if (checkIfPlayerCollidersNear(position, profileID, 0.5f)) {
+            if (checkIfPlayerCollidersNear(position, profileID, 0.5f))
+            {
                 return false;
             }
 
             var members = Bot.Squad.Members;
 
-            if (members != null) {
-                foreach (var member in Bot.Squad.Members.Values) {
+            if (members != null)
+            {
+                foreach (var member in Bot.Squad.Members.Values)
+                {
                     if (member == null || member.ProfileId == profileID) continue;
                     var coverPoints = member.Cover.CoverPoints;
-                    foreach (var point in coverPoints) {
+                    foreach (var point in coverPoints)
+                    {
                         if (isDistanceTooClose(point, position))
                             return false;
 
@@ -322,7 +342,8 @@ namespace SAIN.SAINComponent.SubComponents.CoverFinder
 
         private static bool checkIfPlayerCollidersNear(Vector3 point, string botProfileId, float radius)
         {
-            for (int i = 0; i < _playerColliderArray.Length; i++) {
+            for (int i = 0; i < _playerColliderArray.Length; i++)
+            {
                 _playerColliderArray[i] = null;
             }
 
@@ -330,23 +351,28 @@ namespace SAIN.SAINComponent.SubComponents.CoverFinder
 
             int count = 0;
             Collider foundCollider = null;
-            foreach (var collider in _playerColliderArray) {
+            foreach (var collider in _playerColliderArray)
+            {
                 if (collider == null) continue;
                 count++;
-                if (count > 1) {
+                if (count > 1)
+                {
                     return true;
                 }
                 foundCollider = collider;
             }
-            if (count == 0) {
+            if (count == 0)
+            {
                 return false;
             }
 
             var player = Singleton<GameWorld>.Instance?.GetPlayerByCollider(foundCollider);
-            if (player == null) {
+            if (player == null)
+            {
                 return false;
             }
-            if (player.ProfileId == botProfileId) {
+            if (player.ProfileId == botProfileId)
+            {
                 return false;
             }
             return true;

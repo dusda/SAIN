@@ -1,8 +1,4 @@
-﻿using EFT;
-using SAIN.Components;
-using SAIN.SAINComponent.SubComponents;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace SAIN.SAINComponent.Classes.WeaponFunction
 {

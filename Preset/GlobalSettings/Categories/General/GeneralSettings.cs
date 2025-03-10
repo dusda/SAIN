@@ -1,8 +1,6 @@
-﻿using HarmonyLib;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using SAIN.Attributes;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace SAIN.Preset.GlobalSettings
 {
@@ -17,30 +15,30 @@ namespace SAIN.Preset.GlobalSettings
 
         [Name("Vanilla Bot Behavior Settings")]
         [Description("If a option here is set to ON, they will use vanilla logic, ALL Features will be disabled for these types, including personality, recoil, difficulty, and behavior.")]
-        public VanillaBotSettings VanillaBots = new VanillaBotSettings();
+        public VanillaBotSettings VanillaBots = new();
 
-        public PerformanceSettings Performance = new PerformanceSettings();
+        public PerformanceSettings Performance = new();
 
-        public AILimitSettings AILimit = new AILimitSettings();
+        public AILimitSettings AILimit = new();
 
-        public CoverSettings Cover = new CoverSettings();
+        public CoverSettings Cover = new();
 
-        public DoorSettings Doors = new DoorSettings();
+        public DoorSettings Doors = new();
 
-        public ExtractSettings Extract = new ExtractSettings();
+        public ExtractSettings Extract = new();
 
-        public FlashlightSettings Flashlight = new FlashlightSettings();
+        public FlashlightSettings Flashlight = new();
 
         [Name("Looting Bots Integration")]
         [Description("Modify settings that relate to Looting Bots. Requires Looting Bots to be installed.")]
-        public LootingBotsSettings LootingBots = new LootingBotsSettings();
+        public LootingBotsSettings LootingBots = new();
 
-        public JokeSettings Jokes = new JokeSettings();
+        public JokeSettings Jokes = new();
 
-        public DebugSettings Debug = new DebugSettings();
+        public DebugSettings Debug = new();
 
         [Hidden]
-        public LayerSettings Layers = new LayerSettings();
+        public LayerSettings Layers = new();
 
         public override void Init(List<ISAINSettings> list)
         {

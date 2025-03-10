@@ -1,5 +1,4 @@
 ﻿using EFT;
-using System;
 using UnityEngine;
 
 namespace SAIN.SAINComponent.Classes.EnemyClasses
@@ -143,8 +142,8 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
             LastShotPosition = null;
         }
 
-        public bool PositionalFlareEnabled => 
-            Enemy.EnemyKnown && 
+        public bool PositionalFlareEnabled =>
+            Enemy.EnemyKnown &&
             Enemy.KnownPlaces.EnemyDistanceFromLastKnown < _maxDistFromPosFlareEnabled;
 
         public bool HeardRecently
@@ -301,7 +300,7 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
         public void GetHit(DamageInfoStruct DamageInfoStruct)
         {
             IPlayer player = DamageInfoStruct.Player?.iPlayer;
-            if (player != null && 
+            if (player != null &&
                 player.ProfileId == Enemy.EnemyProfileId)
             {
                 ShotByEnemyRecently = true;
@@ -310,22 +309,22 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
         }
 
         public bool ShotByEnemy { get; private set; }
-        public float TimeFirstShot { get; private set; } 
+        public float TimeFirstShot { get; private set; }
         public Vector3? LastShotPosition { get; private set; }
 
         public SAINEnemyStatus(Enemy enemy) : base(enemy)
         {
         }
 
-        private readonly ExpirableBool _heardRecently = new ExpirableBool(2f, 0.85f, 1.15f);
-        private readonly ExpirableBool _enemyIsReloading = new ExpirableBool(4f, 0.75f, 1.25f);
-        private readonly ExpirableBool _enemyHasGrenade = new ExpirableBool(4f, 0.75f, 1.25f);
-        private readonly ExpirableBool _enemyIsHealing = new ExpirableBool(4f, 0.75f, 1.25f);
-        private readonly ExpirableBool _enemyShotAtMe = new ExpirableBool(30f, 0.75f, 1.25f);
-        private readonly ExpirableBool _enemyIsSuppressed = new ExpirableBool(4f, 0.85f, 1.15f);
-        private readonly ExpirableBool _enemyLooting = new ExpirableBool(30f, 0.85f, 1.15f);
-        private readonly ExpirableBool _enemySurgery = new ExpirableBool(8f, 0.85f, 1.15f);
-        private readonly ExpirableBool _shotByEnemy = new ExpirableBool(2f, 0.75f, 1.25f);
+        private readonly ExpirableBool _heardRecently = new(2f, 0.85f, 1.15f);
+        private readonly ExpirableBool _enemyIsReloading = new(4f, 0.75f, 1.25f);
+        private readonly ExpirableBool _enemyHasGrenade = new(4f, 0.75f, 1.25f);
+        private readonly ExpirableBool _enemyIsHealing = new(4f, 0.75f, 1.25f);
+        private readonly ExpirableBool _enemyShotAtMe = new(30f, 0.75f, 1.25f);
+        private readonly ExpirableBool _enemyIsSuppressed = new(4f, 0.85f, 1.15f);
+        private readonly ExpirableBool _enemyLooting = new(30f, 0.85f, 1.15f);
+        private readonly ExpirableBool _enemySurgery = new(8f, 0.85f, 1.15f);
+        private readonly ExpirableBool _shotByEnemy = new(2f, 0.75f, 1.25f);
         private bool _enemyLookAtMe;
         private float _nextCheckEnemyLookTime;
         private const float _maxDistFromPosFlareEnabled = 10f;

@@ -6,7 +6,6 @@ using SAIN.SAINComponent;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using System.Text;
 using UnityEngine;
 
 namespace SAIN.Components
@@ -26,7 +25,7 @@ namespace SAIN.Components
         public bool WhiteLight => ActiveModes.Contains(DeviceMode.WhiteLight);
         public LightDetectionClass LightDetection { get; }
 
-        public readonly List<DeviceMode> ActiveModes = new List<DeviceMode>();
+        public readonly List<DeviceMode> ActiveModes = new();
 
         public FlashLightClass(PlayerComponent component) : base(component)
         {
@@ -52,7 +51,7 @@ namespace SAIN.Components
         private void createPoints()
         {
             if (!PlayerComponent.IsAI &&
-                _nextPointCreateTime < Time.time && 
+                _nextPointCreateTime < Time.time &&
                 ActiveModes.Count > 0)
             {
                 _nextPointCreateTime = Time.time + 0.15f;
@@ -64,7 +63,7 @@ namespace SAIN.Components
 
         private void detectPoints()
         {
-            if (PlayerComponent.IsAI && 
+            if (PlayerComponent.IsAI &&
                 _nextPointCheckTime < Time.time)
             {
                 _nextPointCheckTime = Time.time + 0.05f;
@@ -132,7 +131,7 @@ namespace SAIN.Components
                 foreach (var mode in tacticalModes)
                 {
                     // Skip disabled modes
-                    if (!mode.gameObject.activeInHierarchy) 
+                    if (!mode.gameObject.activeInHierarchy)
                         continue;
 
                     foreach (var child in mode.GetChildren())
@@ -145,7 +144,7 @@ namespace SAIN.Components
                             if (_debugMode) Logger.LogDebug("Found Light!");
                             ActiveModes.Add(DeviceMode.WhiteLight);
                         }
-                        if (!foundVisibleLaser && 
+                        if (!foundVisibleLaser &&
                             child.name.StartsWith("VIS_"))
                         {
                             foundVisibleLaser = true;
@@ -159,7 +158,7 @@ namespace SAIN.Components
                             if (_debugMode) Logger.LogDebug("Found IR Light!");
                             ActiveModes.Add(DeviceMode.IRLight);
                         }
-                        if (!FoundIRLaser && 
+                        if (!FoundIRLaser &&
                             child.name.StartsWith("IR_"))
                         {
                             if (_debugMode) Logger.LogDebug("Found IR Laser!");

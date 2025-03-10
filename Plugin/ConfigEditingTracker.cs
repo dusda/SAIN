@@ -85,10 +85,10 @@ namespace SAIN.Plugin
         }
 
         private static string _unsavedValues = string.Empty;
-        private static readonly StringBuilder _stringBuilder = new StringBuilder();
+        private static readonly StringBuilder _stringBuilder = new();
 
         public static bool UnsavedChanges => EditedConfigValues.Count > 0;
 
-        public static readonly Dictionary<string, object> EditedConfigValues = new Dictionary<string, object>();
+        public static readonly Dictionary<string, object> EditedConfigValues = new();
     }
 }

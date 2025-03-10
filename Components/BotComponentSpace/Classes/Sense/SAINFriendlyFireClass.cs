@@ -1,6 +1,5 @@
 ﻿using EFT;
 using SAIN.Components;
-using System.Collections;
 using UnityEngine;
 
 namespace SAIN.SAINComponent.Classes

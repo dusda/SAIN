@@ -291,7 +291,7 @@ namespace SAIN.SAINComponent.SubComponents.CoverFinder
                     Bot.Cover.CoverInUse = null;
                 }
 
-                FallBackPoint = null; 
+                FallBackPoint = null;
                 clearTarget();
             }
         }
@@ -309,7 +309,8 @@ namespace SAIN.SAINComponent.SubComponents.CoverFinder
             CoverFinderStatus lastStatus = CurrentStatus;
             CurrentStatus = shallLimit ? CoverFinderStatus.RecheckingPointsWithLimit : CoverFinderStatus.RecheckingPointsNoLimit;
 
-            foreach (var coverPoint in tempList) {
+            foreach (var coverPoint in tempList)
+            {
                 var data = TargetData;
                 if (data != null && coverPoint != null)
                     yield return checkCoverPoint(coverPoint, data, wait);
@@ -340,7 +341,7 @@ namespace SAIN.SAINComponent.SubComponents.CoverFinder
             float targetDifference = (_lastRecheckTargetPosition - targetData.TargetPosition).sqrMagnitude;
             float botDifference = (_lastRecheckBotPosition - targetData.BotPosition).sqrMagnitude;
 
-            if (targetDifference < recheckThresh && 
+            if (targetDifference < recheckThresh &&
                 botDifference < recheckThresh)
             {
                 return false;
@@ -400,7 +401,7 @@ namespace SAIN.SAINComponent.SubComponents.CoverFinder
 
         private IEnumerator recheckCoverLoop()
         {
-            WaitForSeconds wait = new WaitForSeconds(RECHECK_COVER_WAIT_FREQ);
+            WaitForSeconds wait = new(RECHECK_COVER_WAIT_FREQ);
             while (true)
             {
                 clearSpotted();
@@ -453,7 +454,7 @@ namespace SAIN.SAINComponent.SubComponents.CoverFinder
 
         private IEnumerator findCoverLoop()
         {
-            WaitForSeconds wait = new WaitForSeconds(FIND_COVER_WAIT_FREQ);
+            WaitForSeconds wait = new(FIND_COVER_WAIT_FREQ);
             while (true)
             {
                 int coverCount = CoverPoints.Count;
@@ -690,7 +691,7 @@ namespace SAIN.SAINComponent.SubComponents.CoverFinder
             Dispose();
         }
 
-        private readonly WaitForSeconds _recheckWait = new WaitForSeconds(RECHECK_COVER_WAIT_FOREACH_FREQ);
+        private readonly WaitForSeconds _recheckWait = new(RECHECK_COVER_WAIT_FOREACH_FREQ);
         private TargetData _targetData;
         private float _updateTargetTime;
         private readonly Collider[] _colliderArray = new Collider[COLLIDER_ARRAY_SIZE];
@@ -702,7 +703,7 @@ namespace SAIN.SAINComponent.SubComponents.CoverFinder
         private float _nextClearSpottedTime;
         private Coroutine _findCoverPointsCoroutine;
         private Coroutine _recheckCoverPointsCoroutine;
-        private readonly List<CoverPoint> _tempRecheckList = new List<CoverPoint>();
+        private readonly List<CoverPoint> _tempRecheckList = new();
 
         public static bool PerformanceMode { get; private set; } = false;
         public static float CoverMinHeight { get; private set; } = 0.5f;
@@ -714,7 +715,7 @@ namespace SAIN.SAINComponent.SubComponents.CoverFinder
         private static float _debugTimer;
         private static float _debugTimer2;
 
-        private static readonly List<string> _excludedColliderNames = new List<string>
+        private static readonly List<string> _excludedColliderNames = new()
         {
             "metall_fence_2",
             "metallstolb",

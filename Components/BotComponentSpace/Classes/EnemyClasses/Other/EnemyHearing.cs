@@ -26,7 +26,8 @@ namespace SAIN.Components.BotComponentSpace.Classes.EnemyClasses
 
         public void Update()
         {
-            if (Enemy.Seen && EnemyHeardFromPeace) {
+            if (Enemy.Seen && EnemyHeardFromPeace)
+            {
                 EnemyHeardFromPeace = false;
             }
         }
@@ -43,7 +44,8 @@ namespace SAIN.Components.BotComponentSpace.Classes.EnemyClasses
 
         public void OnEnemyKnownChanged(bool known, Enemy enemy)
         {
-            if (!known) {
+            if (!known)
+            {
                 Heard = false;
                 LastSoundHeard = null;
                 LastHeardPosition = null;
@@ -54,7 +56,8 @@ namespace SAIN.Components.BotComponentSpace.Classes.EnemyClasses
 
         public EnemyPlace SetHeard(HearingReport report)
         {
-            if (Enemy.IsVisible) {
+            if (Enemy.IsVisible)
+            {
                 report.position = Enemy.EnemyPosition;
             }
 
@@ -71,7 +74,8 @@ namespace SAIN.Components.BotComponentSpace.Classes.EnemyClasses
             if (place != null)
                 Enemy.Events.EnemyHeard(report.soundType, report.isDanger, place);
 
-            if (wasGunfire || !report.shallReportToSquad) {
+            if (wasGunfire || !report.shallReportToSquad)
+            {
                 return place;
             }
             updateEnemyAction(report.soundType, report.position);
@@ -81,7 +85,8 @@ namespace SAIN.Components.BotComponentSpace.Classes.EnemyClasses
         private void updateEnemyAction(SAINSoundType soundType, Vector3 soundPosition)
         {
             EEnemyAction action;
-            switch (soundType) {
+            switch (soundType)
+            {
                 case SAINSoundType.GrenadeDraw:
                 case SAINSoundType.GrenadePin:
                     action = EEnemyAction.HasGrenade;
@@ -109,7 +114,8 @@ namespace SAIN.Components.BotComponentSpace.Classes.EnemyClasses
                     break;
             }
 
-            if (action != EEnemyAction.None) {
+            if (action != EEnemyAction.None)
+            {
                 Enemy.Status.SetVulnerableAction(action);
                 Bot.Squad.SquadInfo.UpdateSharedEnemyStatus(EnemyIPlayer, action, Bot, soundType, soundPosition);
             }
@@ -120,7 +126,8 @@ namespace SAIN.Components.BotComponentSpace.Classes.EnemyClasses
             EnemyPlace place = Enemy.KnownPlaces.UpdatePersonalHeardPosition(report);
             if (report.shallReportToSquad &&
                 place != null &&
-                _nextReportHeardTime < Time.time) {
+                _nextReportHeardTime < Time.time)
+            {
                 _nextReportHeardTime = Time.time + REPORT_HEARD_FREQUENCY;
                 Bot.Squad?.SquadInfo?.ReportEnemyPosition(Enemy, place, false);
             }
@@ -133,7 +140,8 @@ namespace SAIN.Components.BotComponentSpace.Classes.EnemyClasses
         {
         }
 
-        public float DispersionModifier {
+        public float DispersionModifier
+        {
             get
             {
                 return 1f;

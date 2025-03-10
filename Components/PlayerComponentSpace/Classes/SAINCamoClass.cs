@@ -111,8 +111,8 @@ namespace SAIN.Components
                         if (screenPos.z > 0)
                         {
                             GUIStyle guiStyle = GUI.skin.box;
-                            GUIContent content = new GUIContent($"{bush.name} : {bush.material?.name} : {size} : {EnvironmentType}");
-                            Rect guiRect = new Rect();
+                            GUIContent content = new($"{bush.name} : {bush.material?.name} : {size} : {EnvironmentType}");
+                            Rect guiRect = new();
                             Vector2 guiSize = guiStyle.CalcSize(content);
                             guiRect.x = screenPos.x - (guiSize.x / 2);
                             guiRect.y = Screen.height - (screenPos.y + guiSize.y);

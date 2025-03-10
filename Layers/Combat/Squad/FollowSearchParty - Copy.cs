@@ -1,9 +1,5 @@
 ﻿using DrakiaXYZ.BigBrain.Brains;
 using EFT;
-using SAIN.SAINComponent.Classes.EnemyClasses;
-using System.Collections;
-using UnityEngine;
-using UnityEngine.AI;
 
 namespace SAIN.Layers.Combat.Squad
 {

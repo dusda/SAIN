@@ -38,7 +38,7 @@ namespace SAIN
 
         public float EngagementDistance()
         {
-            if (SAINPlugin.LoadedPreset.GlobalSettings.Shoot.EngagementDistance.TryGetValue( WeaponClass, out float distance ))
+            if (SAINPlugin.LoadedPreset.GlobalSettings.Shoot.EngagementDistance.TryGetValue(WeaponClass, out float distance))
             {
                 return distance;
             }

@@ -49,7 +49,8 @@ namespace SAIN.Patches.Movement
         [PatchPrefix]
         public static bool PatchPrefix(Player ___player_0)
         {
-            if (___player_0.IsAI) {
+            if (___player_0.IsAI)
+            {
                 return false;
             }
             return true;
@@ -66,7 +67,8 @@ namespace SAIN.Patches.Movement
         [PatchPrefix]
         public static bool PatchPrefix(Player ___player_0)
         {
-            if (___player_0.IsAI) {
+            if (___player_0.IsAI)
+            {
                 return false;
             }
             return true;
@@ -83,19 +85,24 @@ namespace SAIN.Patches.Movement
         [PatchPrefix]
         public static bool PatchPrefix(PathFinderClass __instance, BotOwner ___botOwner_0, Vector3 pos, bool slowAtTheEnd, bool getUpWithCheck)
         {
-            if (SAINPlugin.IsBotExluded(___botOwner_0)) {
+            if (SAINPlugin.IsBotExluded(___botOwner_0))
+            {
                 return true;
             }
             if (___botOwner_0.BotLay.IsLay &&
-                getUpWithCheck) {
+                getUpWithCheck)
+            {
                 Vector3 vector = pos - ___botOwner_0.Position;
-                if (vector.y < 0.5f) {
+                if (vector.y < 0.5f)
+                {
                     vector.y = 0f;
                 }
-                if (vector.sqrMagnitude > 0.2f) {
+                if (vector.sqrMagnitude > 0.2f)
+                {
                     ___botOwner_0.BotLay.GetUp(getUpWithCheck);
                 }
-                if (___botOwner_0.BotLay.IsLay) {
+                if (___botOwner_0.BotLay.IsLay)
+                {
                     return false;
                 }
             }
@@ -115,10 +122,12 @@ namespace SAIN.Patches.Movement
         [PatchPrefix]
         public static bool PatchPrefix(BotOwner ___botOwner_0, bool val)
         {
-            if (!val) {
+            if (!val)
+            {
                 return true;
             }
-            if (SAINPlugin.IsBotExluded(___botOwner_0)) {
+            if (SAINPlugin.IsBotExluded(___botOwner_0))
+            {
                 return true;
             }
             ___botOwner_0.GetPlayer.MovementContext.IsInPronePose = true;
@@ -136,21 +145,25 @@ namespace SAIN.Patches.Movement
         [PatchPrefix]
         public static bool PatchPrefix(bool ___bool_7, BasePhysicalClass.IObserverToPlayerBridge ___iobserverToPlayerBridge_0, BasePhysicalClass __instance)
         {
-            if (___bool_7) {
+            if (___bool_7)
+            {
                 return true;
             }
 
             IPlayer player = ___iobserverToPlayerBridge_0.iPlayer;
-            if (player == null) {
+            if (player == null)
+            {
                 Logger.LogWarning($"Player is Null, can't set weight limits for AI.");
                 return true;
             }
 
-            if (!player.IsAI) {
+            if (!player.IsAI)
+            {
                 return true;
             }
 
-            if (SAINPlugin.IsBotExluded(player.AIData.BotOwner)) {
+            if (SAINPlugin.IsBotExluded(player.AIData.BotOwner))
+            {
                 return true;
             }
 
@@ -160,11 +173,11 @@ namespace SAIN.Patches.Movement
             float d = carryWeightModifier * carryWeightModifier;
 
             float absoluteWeightModifier = ___iobserverToPlayerBridge_0.iPlayer.HealthController.CarryingWeightAbsoluteModifier;
-            Vector2 b = new Vector2(absoluteWeightModifier, absoluteWeightModifier);
+            Vector2 b = new(absoluteWeightModifier, absoluteWeightModifier);
 
             var inertia = Singleton<BackendConfigSettingsClass>.Instance.Inertia;
             float strength = (float)___iobserverToPlayerBridge_0.Skills.Strength.SummaryLevel;
-            Vector3 b2 = new Vector3(inertia.InertiaLimitsStep * strength, inertia.InertiaLimitsStep * strength, 0f);
+            Vector3 b2 = new(inertia.InertiaLimitsStep * strength, inertia.InertiaLimitsStep * strength, 0f);
 
             __instance.BaseInertiaLimits = inertia.InertiaLimits + b2;
             __instance.WalkOverweightLimits = stamina.WalkOverweightLimits * d + b;
@@ -187,13 +200,15 @@ namespace SAIN.Patches.Movement
         public static bool PatchPrefix(ref BotOwner ____owner, ref bool __result)
         {
             var settings = GlobalSettingsClass.Instance.General.Doors;
-            if (settings.DisableAllDoors) {
+            if (settings.DisableAllDoors)
+            {
                 __result = false;
                 return false;
             }
             if (settings.NewDoorOpening &&
                 SAINEnableClass.GetSAIN(____owner, out var botComponent) &&
-                botComponent.SAINLayersActive) {
+                botComponent.SAINLayersActive)
+            {
                 __result = botComponent.DoorOpener.FindDoorsToOpen();
                 return false;
             }
@@ -211,7 +226,8 @@ namespace SAIN.Patches.Movement
         [PatchPrefix]
         public static bool PatchPrefix(WorldInteractiveObject __instance)
         {
-            if (!__instance.enabled || !__instance.gameObject.activeInHierarchy) {
+            if (!__instance.enabled || !__instance.gameObject.activeInHierarchy)
+            {
                 return false;
             }
             return true;

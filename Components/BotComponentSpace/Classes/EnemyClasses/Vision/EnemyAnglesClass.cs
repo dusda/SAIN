@@ -23,7 +23,7 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
 
         public void Init() { }
 
-        public void Update() 
+        public void Update()
         {
             calcAngles();
         }
@@ -67,7 +67,7 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
 
         private float calcVerticalAngle(Vector3 enemyDirNormal, Vector3 lookDirection, out float yDiff)
         {
-            Vector3 enemyElevDir = new Vector3(lookDirection.x, enemyDirNormal.y, lookDirection.z);
+            Vector3 enemyElevDir = new(lookDirection.x, enemyDirNormal.y, lookDirection.z);
             yDiff = (enemyElevDir.y - lookDirection.y).Round100();
             if (yDiff == 0)
             {

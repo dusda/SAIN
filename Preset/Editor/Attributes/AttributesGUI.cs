@@ -27,7 +27,8 @@ namespace SAIN.Attributes
         {
             string name = member.Name + member.DeclaringType.Name;
             AddAttributesToDictionary(name, member);
-            if (_attributeClasses.TryGetValue(name, out var value)) {
+            if (_attributeClasses.TryGetValue(name, out var value))
+            {
                 return value;
             }
             return null;
@@ -35,12 +36,15 @@ namespace SAIN.Attributes
 
         private static void AddAttributesToDictionary(string name, MemberInfo member)
         {
-            if (!_attributeClasses.ContainsKey(name) && !_failedAdds.Contains(name)) {
+            if (!_attributeClasses.ContainsKey(name) && !_failedAdds.Contains(name))
+            {
                 var attributes = new ConfigInfoClass(member);
-                if (attributes.ValueType != null) {
+                if (attributes.ValueType != null)
+                {
                     _attributeClasses.Add(name, attributes);
                 }
-                else {
+                else
+                {
                     _failedAdds.Add(name);
                 }
             }
@@ -49,11 +53,14 @@ namespace SAIN.Attributes
         public static object EditValue(ref object value, object settingsObject, ConfigInfoClass attributes, out bool wasEdited, int listDepth, GUIEntryConfig config = null, string search = null)
         {
             checkEditValue(ref value, settingsObject, attributes, out wasEdited, listDepth, config, search);
-            if (wasEdited) {
-                if (value is ISAINSettings || value is ISettingsGroup) {
+            if (wasEdited)
+            {
+                if (value is ISAINSettings || value is ISettingsGroup)
+                {
                     // is not
                 }
-                else {
+                else
+                {
                     ConfigEditingTracker.Add(attributes.Name, value);
                 }
             }
@@ -63,31 +70,38 @@ namespace SAIN.Attributes
         private static object checkEditValue(ref object value, object settingsObject, ConfigInfoClass info, out bool wasEdited, int listDepth, GUIEntryConfig config = null, string search = null)
         {
             wasEdited = false;
-            if (value != null && info != null && !info.DoNotShowGUI) {
+            if (value != null && info != null && !info.DoNotShowGUI)
+            {
                 config = config ?? _defaultEntryConfig;
 
-                if (value is string stringValue) {
+                if (value is string stringValue)
+                {
                     DisplayString(stringValue, listDepth, config, info);
                     return value;
                 }
 
-                if (value is float || value is bool || value is int) {
+                if (value is float || value is bool || value is int)
+                {
                     value = EditFloatBoolInt(ref value, settingsObject, info, config, listDepth, out wasEdited);
                     return value;
                 }
 
-                if (value is EHeardFromPeaceBehavior peaceBehavior) {
+                if (value is EHeardFromPeaceBehavior peaceBehavior)
+                {
                     return value;
                 }
 
-                if (!ExpandableList(info, config.EntryHeight + 3, listDepth++, config)) {
+                if (!ExpandableList(info, config.EntryHeight + 3, listDepth++, config))
+                {
                     return value;
                 }
-                if (value is ISAINSettings settings) {
+                if (value is ISAINSettings settings)
+                {
                     EditAllValuesInObj(settings, out wasEdited, search, config, listDepth++);
                     return value;
                 }
-                if (value is ISettingsGroup group) {
+                if (value is ISettingsGroup group)
+                {
                     EditAllValuesInObj(group, out wasEdited, search, config, listDepth++);
                     return value;
                 }
@@ -102,10 +116,12 @@ namespace SAIN.Attributes
             CreateLabelStyle();
 
             BeginVertical(5f);
-            foreach (KeyValuePair<ESuppressionState, SuppressionConfig> kvp in suppDict) {
+            foreach (KeyValuePair<ESuppressionState, SuppressionConfig> kvp in suppDict)
+            {
                 BeginHorizontal(150f);
                 string suppStateString = $"Suppression State: {kvp.Key}";
-                if (ExpandableList(suppStateString, null, PresetHandler.EditorDefaults.ConfigEntryHeight, 1, _defaultEntryConfig)) {
+                if (ExpandableList(suppStateString, null, PresetHandler.EditorDefaults.ConfigEntryHeight, 1, _defaultEntryConfig))
+                {
                 }
                 EndHorizontal(150f);
             }
@@ -116,8 +132,10 @@ namespace SAIN.Attributes
         {
             if (value != null &&
                 info != null &&
-                !info.DoNotShowGUI) {
-                if (entryConfig == null) {
+                !info.DoNotShowGUI)
+            {
+                if (entryConfig == null)
+                {
                     entryConfig = _defaultEntryConfig;
                 }
                 startConfigEntry(listDepth, entryConfig, info);
@@ -129,12 +147,15 @@ namespace SAIN.Attributes
 
         public static void DisplayString(string value, float listDepth, GUIEntryConfig entryConfig, float heightOverride = -1)
         {
-            if (value != null) {
-                if (entryConfig == null) {
+            if (value != null)
+            {
+                if (entryConfig == null)
+                {
                     entryConfig = _defaultEntryConfig;
                 }
                 startConfigEntry(listDepth, entryConfig, null);
-                if (heightOverride < 0) {
+                if (heightOverride < 0)
+                {
                     heightOverride = entryConfig.EntryHeight;
                 }
                 Box(value, Height(heightOverride));
@@ -147,67 +168,80 @@ namespace SAIN.Attributes
             wasEdited = false;
             CreateLabelStyle();
 
-            if (value is Dictionary<ELocation, DifficultySettings> locationDict) {
+            if (value is Dictionary<ELocation, DifficultySettings> locationDict)
+            {
                 editLocationDict(locationDict, settingsObject, info, listDepth, config, out wasEdited, search);
                 return value;
             }
 
-            if (value is Dictionary<ESuppressionState, SuppressionConfig> suppDict) {
+            if (value is Dictionary<ESuppressionState, SuppressionConfig> suppDict)
+            {
                 editSuppressionDict(suppDict, out wasEdited);
                 return value;
             }
 
-            if (value is Dictionary<string, EPersonality> nicknamePersDict) {
+            if (value is Dictionary<string, EPersonality> nicknamePersDict)
+            {
                 createPersonalityDict(nicknamePersDict, out wasEdited);
                 return value;
             }
 
-            if (value is Dictionary<WildSpawnType, EPersonality> bossPersDict) {
+            if (value is Dictionary<WildSpawnType, EPersonality> bossPersDict)
+            {
                 createPersonalityDict(bossPersDict, config, out wasEdited);
                 return value;
             }
 
-            if (value is Dictionary<ECaliber, float>) {
+            if (value is Dictionary<ECaliber, float>)
+            {
                 EditFloatDictionary<ECaliber>(value, info, out wasEdited);
                 return value;
             }
 
-            if (value is Dictionary<SAINSoundType, float>) {
+            if (value is Dictionary<SAINSoundType, float>)
+            {
                 EditFloatDictionary<SAINSoundType>(value, info, out wasEdited);
                 return value;
             }
 
-            if (value is Dictionary<EWeaponClass, float>) {
+            if (value is Dictionary<EWeaponClass, float>)
+            {
                 EditFloatDictionary<EWeaponClass>(value, info, out wasEdited);
                 return value;
             }
 
-            if (value is Dictionary<ESoundDispersionType, DispersionValues> dispDict) {
+            if (value is Dictionary<ESoundDispersionType, DispersionValues> dispDict)
+            {
                 EditDispersionDictionary(dispDict, settingsObject, info, out wasEdited);
                 return value;
             }
 
-            if (value is Dictionary<AILimitSetting, float> aiLimitDict) {
+            if (value is Dictionary<AILimitSetting, float> aiLimitDict)
+            {
                 EditAILimitDictionary(aiLimitDict, settingsObject, info, out wasEdited);
                 return value;
             }
 
-            if (value is Dictionary<EPersonality, bool> boolDict) {
+            if (value is Dictionary<EPersonality, bool> boolDict)
+            {
                 EditBoolDictionary<EPersonality>(boolDict, info, out wasEdited);
                 return value;
             }
 
-            if (value is List<WildSpawnType> wildList) {
+            if (value is List<WildSpawnType> wildList)
+            {
                 ModifyLists.AddOrRemove(wildList, out wasEdited);
                 return value;
             }
 
-            if (value is List<BotType> botList) {
+            if (value is List<BotType> botList)
+            {
                 ModifyLists.AddOrRemove(botList, out wasEdited);
                 return value;
             }
 
-            if (value is List<Brain> brainList) {
+            if (value is List<Brain> brainList)
+            {
                 ModifyLists.AddOrRemove(brainList, out wasEdited);
                 return value;
             }
@@ -222,7 +256,8 @@ namespace SAIN.Attributes
 
             wasEdited = false;
 
-            foreach (KeyValuePair<string, EPersonality> kvp in persDictionary) {
+            foreach (KeyValuePair<string, EPersonality> kvp in persDictionary)
+            {
                 BeginHorizontal(150f);
                 string outputNickname = TextArea(kvp.Key, null, Width(300f), Height(PresetHandler.EditorDefaults.ConfigEntryHeight));
                 string outputPers = TextArea(kvp.Value.ToString(), null, Width(300f), Height(PresetHandler.EditorDefaults.ConfigEntryHeight));
@@ -240,12 +275,15 @@ namespace SAIN.Attributes
 
             BeginVertical(5f);
 
-            foreach (KeyValuePair<WildSpawnType, EPersonality> kvp in _tempBossPersDict) {
+            foreach (KeyValuePair<WildSpawnType, EPersonality> kvp in _tempBossPersDict)
+            {
                 BeginHorizontal(150f);
                 string bossPerString = $"Boss Personality: {kvp.Key}";
-                if (ExpandableList(bossPerString, null, 25f, 1, entryConfig)) {
+                if (ExpandableList(bossPerString, null, 25f, 1, entryConfig))
+                {
                     EPersonality newSelection = selectPersonality(kvp.Value, entryConfig);
-                    if (newSelection != kvp.Value) {
+                    if (newSelection != kvp.Value)
+                    {
                         persDictionary[kvp.Key] = newSelection;
                     }
                 }
@@ -257,8 +295,8 @@ namespace SAIN.Attributes
             _tempBossPersDict.Clear();
         }
 
-        private static Dictionary<string, bool> openedSelections = new Dictionary<string, bool>();
-        private static Dictionary<WildSpawnType, EPersonality> _tempBossPersDict = new Dictionary<WildSpawnType, EPersonality>();
+        private static Dictionary<string, bool> openedSelections = new();
+        private static Dictionary<WildSpawnType, EPersonality> _tempBossPersDict = new();
 
         private static EPersonality selectPersonality(EPersonality selected, GUIEntryConfig entryConfig)
         {
@@ -267,17 +305,21 @@ namespace SAIN.Attributes
             EPersonality[] allPersonalities = EnumValues.GetEnum<EPersonality>();
 
             // Get all possible personalities and create a string array of all options
-            if (personalities_strings == null) {
-                List<string> personalitiesstringList = new List<string>();
-                for (int i = 0; i < allPersonalities.Length; i++) {
+            if (personalities_strings == null)
+            {
+                List<string> personalitiesstringList = new();
+                for (int i = 0; i < allPersonalities.Length; i++)
+                {
                     personalitiesstringList.Add(allPersonalities[i].ToString());
                 }
                 personalities_strings = personalitiesstringList.ToArray();
             }
 
             // find which one we have selected
-            for (int i = 0; i < personalities_strings.Length; i++) {
-                if (personalities_strings[i] == selected.ToString()) {
+            for (int i = 0; i < personalities_strings.Length; i++)
+            {
+                if (personalities_strings[i] == selected.ToString())
+                {
                     selectedId = i;
                     break;
                 }
@@ -288,10 +330,12 @@ namespace SAIN.Attributes
             // select from string array
             EPersonality newPersonality = BotPersonalityEditor.SelectPersonality(selected, gridOptionHeight, 3);
             //int newSelection = GUILayout.SelectionGrid(selectedId, personalities_strings, 4, GetStyle(Style.selectionGrid), Width(gridWidth), Height(gridHeight));
-            if (newPersonality != selected) {
+            if (newPersonality != selected)
+            {
                 selected = newPersonality;
                 SAIN.Editor.Sounds.PlaySound(EUISoundType.MenuCheckBox, 0.5f);
-            };
+            }
+            ;
 
             EndVertical(10f);
 
@@ -302,9 +346,11 @@ namespace SAIN.Attributes
 
         private static void CreateLabelStyle()
         {
-            if (_labelStyle == null) {
+            if (_labelStyle == null)
+            {
                 GUIStyle boxstyle = GetStyle(Style.box);
-                _labelStyle = new GUIStyle(GetStyle(Style.label)) {
+                _labelStyle = new GUIStyle(GetStyle(Style.label))
+                {
                     alignment = TextAnchor.MiddleLeft,
                     margin = boxstyle.margin,
                     padding = boxstyle.padding
@@ -315,7 +361,8 @@ namespace SAIN.Attributes
         private static void startConfigEntry(float listDepth, GUIEntryConfig entryConfig, ConfigInfoClass info)
         {
             float horizDepth = listDepth * entryConfig.SubList_Indent_Horizontal;
-            if (info != null && (info.AdvancedOption || info.DeveloperOption)) {
+            if (info != null && (info.AdvancedOption || info.DeveloperOption))
+            {
                 BeginHorizontal(25f);
                 var oldAlignment = _labelStyle.alignment;
                 _labelStyle.alignment = TextAnchor.MiddleCenter;
@@ -326,39 +373,45 @@ namespace SAIN.Attributes
                     Height(PresetHandler.EditorDefaults.ConfigEntryHeight));
                 _labelStyle.alignment = oldAlignment;
             }
-            else {
+            else
+            {
                 BeginHorizontal(100f + horizDepth);
             }
         }
 
         public static object EditFloatBoolInt(ref object value, object settingsObject, ConfigInfoClass info, GUIEntryConfig entryConfig, int listDepth, out bool wasEdited, bool showLabel = true, bool beginHoriz = true)
         {
-            if (value == null) {
+            if (value == null)
+            {
                 wasEdited = false;
                 return null;
             }
 
-            if (beginHoriz) {
+            if (beginHoriz)
+            {
                 startConfigEntry(listDepth, entryConfig, info);
             }
 
             GUILayoutOption[] layoutParams;
             bool useSimpleLayout = info.SimpleValueEdit || !PresetHandler.EditorDefaults.SliderToggle;
 
-            if (showLabel) {
+            if (showLabel)
+            {
                 CreateLabelStyle();
-                if (useSimpleLayout) {
-                    layoutParams = new GUILayoutOption[]
-                    {
+                if (useSimpleLayout)
+                {
+                    layoutParams =
+                    [
                         GUILayout.Width(450f),
                         GUILayout.Height(PresetHandler.EditorDefaults.ConfigEntryHeight)
-                    };
+                    ];
                 }
-                else {
-                    layoutParams = new GUILayoutOption[]
-                    {
+                else
+                {
+                    layoutParams =
+                    [
                         GUILayout.Height(PresetHandler.EditorDefaults.ConfigEntryHeight)
-                    };
+                    ];
                 }
                 Box(new GUIContent(
                     info.Name,
@@ -371,64 +424,79 @@ namespace SAIN.Attributes
             object originalValue = value;
             string result = string.Empty;
 
-            if (info.ValueType == typeof(bool)) {
-                if (!useSimpleLayout) {
+            if (info.ValueType == typeof(bool))
+            {
+                if (!useSimpleLayout)
+                {
                     value = Toggle((bool)value, (bool)value ? "On" : "Off", EUISoundType.MenuCheckBox, entryConfig.Toggle);
                 }
                 result = value.ToString();
             }
-            else if (info.ValueType == typeof(float)) {
+            else if (info.ValueType == typeof(float))
+            {
                 float flValue = (float)value;
-                if (!useSimpleLayout) {
+                if (!useSimpleLayout)
+                {
                     flValue = BuilderClass.CreateSlider(flValue, info.Min, info.Max, info.Rounding, entryConfig.Toggle);
                 }
                 value = flValue;
                 result = flValue.Round(info.Rounding).ToString();
             }
 
-            if (useSimpleLayout) {
-                layoutParams = new GUILayoutOption[]
-                {
+            if (useSimpleLayout)
+            {
+                layoutParams =
+                [
                     GUILayout.Width(100),
                     GUILayout.Height(PresetHandler.EditorDefaults.ConfigEntryHeight)
-                };
+                ];
             }
-            else {
+            else
+            {
                 layoutParams = entryConfig.Result;
             }
 
-            if (useSimpleLayout && info.ValueType == typeof(bool)) {
+            if (useSimpleLayout && info.ValueType == typeof(bool))
+            {
                 value = Toggle((bool)value, (bool)value ? "On" : "Off", EUISoundType.MenuCheckBox, layoutParams);
             }
-            else {
+            else
+            {
                 string dirtyString = TextField(result, null, layoutParams);
-                if (dirtyString != result) {
+                if (dirtyString != result)
+                {
                     value = BuilderClass.CleanString(dirtyString, value);
                 }
-                if (value is int || value is float) {
+                if (value is int || value is float)
+                {
                     value = info.Clamp(value);
                 }
             }
 
-            if (useSimpleLayout) {
-                layoutParams = new GUILayoutOption[]
-                {
+            if (useSimpleLayout)
+            {
+                layoutParams =
+                [
                     GUILayout.Width(100),
                     GUILayout.Height(PresetHandler.EditorDefaults.ConfigEntryHeight)
-                };
+                ];
             }
-            else {
+            else
+            {
                 layoutParams = entryConfig.Reset;
             }
 
             var defaultValue = info.GetDefault(settingsObject);
-            if (defaultValue != null) {
-                if (Button("Reset", "Reset To Default Value", EUISoundType.ButtonClick, layoutParams)) {
+            if (defaultValue != null)
+            {
+                if (Button("Reset", "Reset To Default Value", EUISoundType.ButtonClick, layoutParams))
+                {
                     value = defaultValue;
                     ConfigEditingTracker.Remove(info);
                 }
             }
-            else {
+            else
+            {
                 Box(" ", "No Default Value is assigned to this option.", layoutParams);
             }
 
@@ -448,10 +516,13 @@ namespace SAIN.Attributes
             var values = stealthClass.ItemStealthValues;
             var defaults = stealthClass.Defaults;
 
-            for (int i = 0; i < count; i++) {
+            for (int i = 0; i < count; i++)
+            {
                 var type = possibleTypes[i];
-                if (values.TryGetValue(type, out var list)) {
-                    if (!ExpandableList(type.ToString(), string.Empty, _defaultEntryConfig.EntryHeight + 5, 0, _defaultEntryConfig)) {
+                if (values.TryGetValue(type, out var list))
+                {
+                    if (!ExpandableList(type.ToString(), string.Empty, _defaultEntryConfig.EntryHeight + 5, 0, _defaultEntryConfig))
+                    {
                         continue;
                     }
                     editStealthValueList(list, defaults);
@@ -465,7 +536,8 @@ namespace SAIN.Attributes
         {
             if (list.Count == 0) return;
             BeginVertical(10f);
-            for (int i = 0; i < list.Count; i++) {
+            for (int i = 0; i < list.Count; i++)
+            {
                 ItemStealthValue value = list[i];
                 ItemStealthValue defaultValue = getDefault(value, defaults);
                 editStealthValue(value, defaultValue);
@@ -478,7 +550,8 @@ namespace SAIN.Attributes
             if (!defaults.Contains(value))
                 return null;
 
-            foreach (ItemStealthValue value2 in defaults) {
+            foreach (ItemStealthValue value2 in defaults)
+            {
                 if (value2.Name == value.Name)
                     return value2;
             }
@@ -496,11 +569,13 @@ namespace SAIN.Attributes
 
             fvalue = slider(name, description, fvalue, min, max, 1000f);
             if (defaultValue != null &&
-                resetButton()) {
+                resetButton())
+            {
                 fvalue = defaultValue.StealthValue;
             }
 
-            if (fvalue != stealthValue.StealthValue) {
+            if (fvalue != stealthValue.StealthValue)
+            {
                 stealthValue.StealthValue = fvalue;
                 ConfigEditingTracker.Add(name, fvalue);
             }
@@ -516,7 +591,8 @@ namespace SAIN.Attributes
         {
             BeginHorizontal(100f + (listDepth * config.SubList_Indent_Horizontal));
 
-            if (!_listOpen.ContainsKey(name)) {
+            if (!_listOpen.ContainsKey(name))
+            {
                 _listOpen.Add(name, false);
             }
             bool isOpen = _listOpen[name];
@@ -539,35 +615,41 @@ namespace SAIN.Attributes
 
             CreateLabelStyle();
 
-            for (int i = 0; i < list.Count; i++) {
+            for (int i = 0; i < list.Count; i++)
+            {
                 BeginHorizontal(150f);
 
                 var item = list[i];
                 var name = item.ToString();
                 Box(new GUIContent(name), _labelStyle, Height(PresetHandler.EditorDefaults.ConfigEntryHeight));
-                if (Toggle(dictionary[item], dictionary[item] ? "On" : "Off", EUISoundType.MenuCheckBox, _defaultEntryConfig.Toggle)) {
+                if (Toggle(dictionary[item], dictionary[item] ? "On" : "Off", EUISoundType.MenuCheckBox, _defaultEntryConfig.Toggle))
+                {
                     // Option was selected, set all other values to false, other than the 1 selected
-                    for (int j = 0; j < list.Count; j++) {
+                    for (int j = 0; j < list.Count; j++)
+                    {
                         var item2 = list[j];
                         bool selected = item2.ToString() == name;
 
                         // Set all other options to false
                         if (!selected &&
-                            dictionary[item2] != false) {
+                            dictionary[item2] != false)
+                        {
                             dictionary[item2] = false;
                             edited = true;
                         }
 
                         // Set the selected option to true
                         if (selected &&
-                            dictionary[item2] != true) {
+                            dictionary[item2] != true)
+                        {
                             dictionary[item2] = true;
                             edited = true;
                         }
                     }
                 }
                 // Option was set to true, but is now set to false
-                else if (dictionary[item] != false) {
+                else if (dictionary[item] != false)
+                {
                     // Option deselected
                     dictionary[item] = false;
                     edited = true;
@@ -587,9 +669,11 @@ namespace SAIN.Attributes
             ESoundDispersionType[] array = EnumValues.GetEnum<ESoundDispersionType>();
             wasEdited = false;
 
-            for (int i = 0; i < array.Length; i++) {
+            for (int i = 0; i < array.Length; i++)
+            {
                 var soundType = array[i];
-                if (!dictionary.TryGetValue(soundType, out DispersionValues values)) {
+                if (!dictionary.TryGetValue(soundType, out DispersionValues values))
+                {
                     continue;
                 }
                 editDispStruct(values, soundType, defaultDictionary, out bool newEdit);
@@ -607,14 +691,17 @@ namespace SAIN.Attributes
             ELocation[] array = EnumValues.GetEnum<ELocation>();
             wasEdited = false;
 
-            for (int i = 0; i < array.Length; i++) {
+            for (int i = 0; i < array.Length; i++)
+            {
                 var location = array[i];
-                if (!dictionary.TryGetValue(location, out DifficultySettings originalValue)) {
+                if (!dictionary.TryGetValue(location, out DifficultySettings originalValue))
+                {
                     continue;
                 }
                 string name = location.ToString();
 
-                if (!ExpandableList(name, string.Empty, PresetHandler.EditorDefaults.ConfigEntryHeight + 3, listDepth, config)) {
+                if (!ExpandableList(name, string.Empty, PresetHandler.EditorDefaults.ConfigEntryHeight + 3, listDepth, config))
+                {
                     continue;
                 }
 
@@ -624,7 +711,8 @@ namespace SAIN.Attributes
 
                 int subListDepth = listDepth + 1;
                 EditAllValuesInObj(originalValue, out bool newEdit, search, config, subListDepth);
-                if (newEdit) {
+                if (newEdit)
+                {
                     wasEdited = true;
                 }
             }
@@ -639,9 +727,11 @@ namespace SAIN.Attributes
             AILimitSetting[] array = EnumValues.GetEnum<AILimitSetting>();
             wasEdited = false;
 
-            for (int i = 0; i < array.Length; i++) {
+            for (int i = 0; i < array.Length; i++)
+            {
                 var limitSetting = array[i];
-                if (!dictionary.TryGetValue(limitSetting, out float originalValue)) {
+                if (!dictionary.TryGetValue(limitSetting, out float originalValue))
+                {
                     continue;
                 }
                 BeginHorizontal(200f);
@@ -652,13 +742,15 @@ namespace SAIN.Attributes
                 float max = 800f;
 
                 float newValue = slider(name, description, originalValue, min, max, 10f);
-                if (resetButton()) {
+                if (resetButton())
+                {
                     newValue = defaultDictionary[limitSetting];
                     dictionary[limitSetting] = newValue;
                     //ConfigEditingTracker.Remove(attributes);
                 }
 
-                if (dictionary[limitSetting] != newValue) {
+                if (dictionary[limitSetting] != newValue)
+                {
                     dictionary[limitSetting] = newValue;
                     wasEdited = true;
                 }
@@ -689,7 +781,8 @@ namespace SAIN.Attributes
             if (resetButton())
                 fvalue = defaultDictionary[soundType].DistanceModifier;
 
-            if (fvalue != values.DistanceModifier) {
+            if (fvalue != values.DistanceModifier)
+            {
                 values.DistanceModifier = fvalue;
                 wasEdited = true;
             }
@@ -707,7 +800,8 @@ namespace SAIN.Attributes
             if (resetButton())
                 fvalue = defaultDictionary[soundType].MinAngle;
 
-            if (fvalue != values.MinAngle) {
+            if (fvalue != values.MinAngle)
+            {
                 values.MinAngle = fvalue;
                 wasEdited = true;
             }
@@ -725,7 +819,8 @@ namespace SAIN.Attributes
             if (resetButton())
                 fvalue = defaultDictionary[soundType].MaxAngle;
 
-            if (fvalue != values.MaxAngle) {
+            if (fvalue != values.MaxAngle)
+            {
                 values.MaxAngle = fvalue;
                 wasEdited = true;
             }
@@ -743,7 +838,8 @@ namespace SAIN.Attributes
             if (resetButton())
                 fvalue = defaultDictionary[soundType].VerticalModifier;
 
-            if (fvalue != values.VerticalModifier) {
+            if (fvalue != values.VerticalModifier)
+            {
                 values.VerticalModifier = fvalue;
                 wasEdited = true;
             }
@@ -778,14 +874,18 @@ namespace SAIN.Attributes
             var dictionary = dictValue as Dictionary<T, float>;
 
             T[] array = EnumValues.GetEnum<T>();
-            if (array != null && array.Length > 0) {
-                for (int i = 0; i < array.Length; i++) {
+            if (array != null && array.Length > 0)
+            {
+                for (int i = 0; i < array.Length; i++)
+                {
                     //Logger.LogInfo(array[i]);
                 }
             }
-            List<T> list = new List<T>();
-            foreach (var entry in dictionary) {
-                if (entry.Key.ToString() == "Default") {
+            List<T> list = new();
+            foreach (var entry in dictionary)
+            {
+                if (entry.Key.ToString() == "Default")
+                {
                     continue;
                 }
                 list.Add(entry.Key);
@@ -794,7 +894,8 @@ namespace SAIN.Attributes
             CreateLabelStyle();
 
             wasEdited = false;
-            for (int i = 0; i < list.Count; i++) {
+            for (int i = 0; i < list.Count; i++)
+            {
                 BeginHorizontal(150f);
 
                 var item = list[i];
@@ -808,7 +909,8 @@ namespace SAIN.Attributes
                 if (resetButton())
                     floatValue = defaultDictionary[item];
 
-                if (floatValue != originalValue) {
+                if (floatValue != originalValue)
+                {
                     wasEdited = true;
                     dictionary[item] = floatValue;
                 }
@@ -820,7 +922,8 @@ namespace SAIN.Attributes
 
         public static void EditAllValuesInObj(object obj, out bool wasEdited, string search = null, GUIEntryConfig entryConfig = null, int listDepth = 0)
         {
-            ConfigParams configParams = new ConfigParams {
+            ConfigParams configParams = new()
+            {
                 SettingsObject = obj,
                 Search = search,
                 EntryConfig = entryConfig,
@@ -833,7 +936,7 @@ namespace SAIN.Attributes
         {
             float indent = getIndentValue(configParams.EntryConfig);
             BeginVertical(0f);
-            List<ConfigInfoClass> attributeInfos = new List<ConfigInfoClass>();
+            List<ConfigInfoClass> attributeInfos = new();
             getAllAttributeInfos(configParams.SettingsObject, attributeInfos, configParams.Search);
             displayOptionsByCategory(configParams, attributeInfos, out wasEdited);
             attributeInfos.Clear();
@@ -844,10 +947,12 @@ namespace SAIN.Attributes
         {
             const float defaultIndent = 5f;
             float indent;
-            if (entryConfig != null) {
+            if (entryConfig != null)
+            {
                 indent = entryConfig.SubList_Indent_Vertical;
             }
-            else {
+            else
+            {
                 indent = defaultIndent;
             }
             return indent;
@@ -861,71 +966,91 @@ namespace SAIN.Attributes
             int count = 0;
 
             // Display Non-Advanced Settings first, thats why there are 3 loops here. Probably a better way to do this.
-            foreach (ConfigInfoClass attributes in attributeInfos) {
-                if (attributes.AdvancedOption || attributes.DeveloperOption) {
+            foreach (ConfigInfoClass attributes in attributeInfos)
+            {
+                if (attributes.AdvancedOption || attributes.DeveloperOption)
+                {
                     continue;
                 }
-                if (attributes.DoNotShowGUI) {
+                if (attributes.DoNotShowGUI)
+                {
                     continue;
                 }
-                if (attributes.Category != category) {
+                if (attributes.Category != category)
+                {
                     continue;
                 }
-                if (!categoryDrawn) {
+                if (!categoryDrawn)
+                {
                     categoryDrawn = true;
                     drawCategory(configParams, attributes, category);
                 }
                 displayConfigGUI(attributes, configParams, count++, out bool newEdit);
-                if (newEdit) {
+                if (newEdit)
+                {
                     wasEdited = true;
                 }
             }
-            foreach (ConfigInfoClass attributes in attributeInfos) {
-                if (attributes.AdvancedOption == false) {
+            foreach (ConfigInfoClass attributes in attributeInfos)
+            {
+                if (attributes.AdvancedOption == false)
+                {
                     continue;
                 }
-                if (attributes.DoNotShowGUI) {
+                if (attributes.DoNotShowGUI)
+                {
                     continue;
                 }
-                if (attributes.Category != category) {
+                if (attributes.Category != category)
+                {
                     continue;
                 }
-                if (!categoryDrawn) {
+                if (!categoryDrawn)
+                {
                     categoryDrawn = true;
                     drawCategory(configParams, attributes, category);
                 }
                 displayConfigGUI(attributes, configParams, count++, out bool newEdit);
-                if (newEdit) {
+                if (newEdit)
+                {
                     wasEdited = true;
                 }
             }
-            foreach (ConfigInfoClass attributes in attributeInfos) {
-                if (attributes.DeveloperOption == false) {
+            foreach (ConfigInfoClass attributes in attributeInfos)
+            {
+                if (attributes.DeveloperOption == false)
+                {
                     continue;
                 }
-                if (attributes.DoNotShowGUI) {
+                if (attributes.DoNotShowGUI)
+                {
                     continue;
                 }
-                if (attributes.Category != category) {
+                if (attributes.Category != category)
+                {
                     continue;
                 }
-                if (!categoryDrawn) {
+                if (!categoryDrawn)
+                {
                     categoryDrawn = true;
                     drawCategory(configParams, attributes, category);
                 }
                 displayConfigGUI(attributes, configParams, count++, out bool newEdit);
-                if (newEdit) {
+                if (newEdit)
+                {
                     wasEdited = true;
                 }
             }
-            if (count > 0) {
+            if (count > 0)
+            {
                 Space(10f);
             }
         }
 
         private static void drawCategory(ConfigParams configParams, ConfigInfoClass configInfo, string category)
         {
-            if (category == "None") {
+            if (category == "None")
+            {
                 return;
             }
             BeginHorizontal(0f);
@@ -937,11 +1062,13 @@ namespace SAIN.Attributes
         private static void displayOptionsByCategory(ConfigParams configParams, List<ConfigInfoClass> configInfos, out bool wasEdited)
         {
             wasEdited = false;
-            List<string> categoriesList = new List<string>();
+            List<string> categoriesList = new();
             getCategories(configInfos, categoriesList);
-            for (int i = 0; i < categoriesList.Count; i++) {
+            for (int i = 0; i < categoriesList.Count; i++)
+            {
                 displayCategory(configParams, configInfos, categoriesList[i], out bool newEdit);
-                if (newEdit) {
+                if (newEdit)
+                {
                     wasEdited = true;
                 }
             }
@@ -952,11 +1079,13 @@ namespace SAIN.Attributes
         {
             outputList.Clear();
             // Get all categories that exist on this settings page, populate list with unique ones.
-            for (int i = 0; i < configInfos.Count; i++) {
+            for (int i = 0; i < configInfos.Count; i++)
+            {
                 ConfigInfoClass configInfo = configInfos[i];
                 string category = configInfo.Category;
                 if (category.IsNullOrEmpty() ||
-                    outputList.Contains(category)) {
+                    outputList.Contains(category))
+                {
                     continue;
                 }
                 outputList.Add(category);
@@ -975,7 +1104,8 @@ namespace SAIN.Attributes
         {
             object oldValue = getConfigValue(configInfo, configParams.SettingsObject);
             object newValue = EditValue(ref oldValue, configParams.SettingsObject, configInfo, out bool newEdit, configParams.ListDepth, configParams.EntryConfig, configParams.Search);
-            if (newEdit) {
+            if (newEdit)
+            {
                 setConfigValue(newValue, configInfo.MemberInfo, configParams.SettingsObject);
                 edited = true;
                 return;
@@ -986,7 +1116,8 @@ namespace SAIN.Attributes
         private static object getConfigValue(ConfigInfoClass configInfo, object obj)
         {
             MemberInfo memberInfo = configInfo.MemberInfo;
-            switch (memberInfo.MemberType) {
+            switch (memberInfo.MemberType)
+            {
                 case MemberTypes.Field:
                     return (memberInfo as FieldInfo).GetValue(obj);
 
@@ -1000,7 +1131,8 @@ namespace SAIN.Attributes
 
         private static void setConfigValue(object value, MemberInfo memberInfo, object obj)
         {
-            switch (memberInfo.MemberType) {
+            switch (memberInfo.MemberType)
+            {
                 case MemberTypes.Field:
                     (memberInfo as FieldInfo).SetValue(obj, value);
                     return;
@@ -1018,9 +1150,11 @@ namespace SAIN.Attributes
         {
             outputList.Clear();
             FieldInfo[] fieldInfos = obj.GetType().GetFields();
-            foreach (FieldInfo field in fieldInfos) {
+            foreach (FieldInfo field in fieldInfos)
+            {
                 ConfigInfoClass configInfo = GetAttributeInfo(field);
-                if (SkipForSearch(configInfo, search)) {
+                if (SkipForSearch(configInfo, search))
+                {
                     continue;
                 }
                 outputList.Add(configInfo);
@@ -1067,10 +1201,10 @@ namespace SAIN.Attributes
                 attributes.Category?.ToLower().Contains(searchQuerry) == false);
         }
 
-        private static readonly Dictionary<string, bool> _listOpen = new Dictionary<string, bool>();
-        private static readonly List<string> _failedAdds = new List<string>();
-        private static readonly GUIEntryConfig _defaultEntryConfig = new GUIEntryConfig();
+        private static readonly Dictionary<string, bool> _listOpen = new();
+        private static readonly List<string> _failedAdds = new();
+        private static readonly GUIEntryConfig _defaultEntryConfig = new();
         private static GUIStyle _labelStyle;
-        private static readonly Dictionary<string, ConfigInfoClass> _attributeClasses = new Dictionary<string, ConfigInfoClass>();
+        private static readonly Dictionary<string, ConfigInfoClass> _attributeClasses = new();
     }
 }

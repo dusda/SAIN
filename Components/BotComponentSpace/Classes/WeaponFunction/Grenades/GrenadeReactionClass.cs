@@ -26,11 +26,13 @@ namespace SAIN.SAINComponent.Classes.WeaponFunction
         private void Update()
         {
             if (_grenade == null) return;
-            if (_rigidBody == null) {
+            if (_rigidBody == null)
+            {
                 grenadeDestroyed(_grenade);
                 return;
             }
-            if (_nextUpdateTime < Time.time) {
+            if (_nextUpdateTime < Time.time)
+            {
                 _nextUpdateTime = Time.time + GRENADE_UPDATE_FREQUENCY;
                 Velocity = _rigidBody.velocity;
                 VelocityMagnitude = Velocity.magnitude;
@@ -48,7 +50,8 @@ namespace SAIN.SAINComponent.Classes.WeaponFunction
 
         private void grenadeDestroyed(Throwable grenade)
         {
-            if (grenade != null) {
+            if (grenade != null)
+            {
                 grenade.DestroyEvent -= grenadeDestroyed;
             }
             Destroy(this);
@@ -77,10 +80,12 @@ namespace SAIN.SAINComponent.Classes.WeaponFunction
 
         public void Update()
         {
-            foreach (var tracker in EnemyGrenadesList.Values) {
+            foreach (var tracker in EnemyGrenadesList.Values)
+            {
                 tracker?.Update();
             }
-            foreach (var grenade in FriendlyGrenadesList.Values) {
+            foreach (var grenade in FriendlyGrenadesList.Values)
+            {
             }
         }
 
@@ -89,13 +94,17 @@ namespace SAIN.SAINComponent.Classes.WeaponFunction
             SAINBotController.Instance.GrenadeController.OnGrenadeCollision -= grenadeCollision;
             SAINBotController.Instance.GrenadeController.OnGrenadeThrown -= enemyGrenadeThrown;
 
-            foreach (var tracker in EnemyGrenadesList.Values) {
-                if (tracker?.Grenade != null) {
+            foreach (var tracker in EnemyGrenadesList.Values)
+            {
+                if (tracker?.Grenade != null)
+                {
                     tracker.Grenade.DestroyEvent -= removeGrenade;
                 }
             }
-            foreach (var grenade in FriendlyGrenadesList.Values) {
-                if (grenade != null) {
+            foreach (var grenade in FriendlyGrenadesList.Values)
+            {
+                if (grenade != null)
+                {
                     grenade.DestroyEvent -= removeGrenade;
                 }
             }
@@ -105,12 +114,14 @@ namespace SAIN.SAINComponent.Classes.WeaponFunction
 
         public void enemyGrenadeThrown(Grenade grenade, Vector3 dangerPoint, string profileId)
         {
-            if (Bot == null || profileId == Bot.ProfileId || !Bot.BotActive) {
+            if (Bot == null || profileId == Bot.ProfileId || !Bot.BotActive)
+            {
                 return;
             }
             Enemy enemy = Bot.EnemyController.GetEnemy(profileId, false);
             if (enemy != null &&
-                enemy.RealDistance <= MAX_ENEMY_GRENADE_DIST_TOCARE) {
+                enemy.RealDistance <= MAX_ENEMY_GRENADE_DIST_TOCARE)
+            {
                 float reactionTime = getReactionTime(Bot.Info.Profile.DifficultyModifier);
                 EnemyGrenadesList.Add(grenade.Id, new GrenadeTracker(Bot, grenade, dangerPoint, reactionTime));
                 grenade.DestroyEvent += removeGrenade;
@@ -129,12 +140,15 @@ namespace SAIN.SAINComponent.Classes.WeaponFunction
 
         private void grenadeCollision(Grenade grenade, float maxRange)
         {
-            if (Bot == null || grenade.ProfileId == Bot.ProfileId) {
+            if (Bot == null || grenade.ProfileId == Bot.ProfileId)
+            {
                 return;
             }
 
-            foreach (var tracker in EnemyGrenadesList.Values) {
-                if (tracker.Grenade == grenade) {
+            foreach (var tracker in EnemyGrenadesList.Values)
+            {
+                if (tracker.Grenade == grenade)
+                {
                     tracker.CheckHeardGrenadeCollision(maxRange);
                 }
             }
@@ -142,7 +156,8 @@ namespace SAIN.SAINComponent.Classes.WeaponFunction
 
         private void removeGrenade(Throwable grenade)
         {
-            if (grenade != null) {
+            if (grenade != null)
+            {
                 grenade.DestroyEvent -= removeGrenade;
                 EnemyGrenadesList.Remove(grenade.Id);
                 FriendlyGrenadesList.Remove(grenade.Id);

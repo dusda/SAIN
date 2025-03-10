@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
-using UnityEngine.AI;
 
 namespace SAIN.SAINComponent.Classes.EnemyClasses
 {
@@ -22,11 +21,13 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
 
         public void Dispose()
         {
-            if (_blindCornerLoop != null) {
+            if (_blindCornerLoop != null)
+            {
                 Bot.StopCoroutine(_blindCornerLoop);
                 _blindCornerLoop = null;
             }
-            foreach (var debug in _debugObjects) {
+            foreach (var debug in _debugObjects)
+            {
                 GameObject.Destroy(debug);
             }
         }
@@ -40,17 +41,20 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
 
         public IEnumerator blindCornerLoop()
         {
-            WaitForSeconds wait = new WaitForSeconds(1f);
+            WaitForSeconds wait = new(1f);
             yield return wait;
 
-            while (true) {
-                if (!Enemy.EnemyKnown) {
+            while (true)
+            {
+                if (!Enemy.EnemyKnown)
+                {
                     yield return wait;
                     continue;
                 }
 
                 Vector3[] corners = Enemy.Path.PathToEnemy.corners;
-                if (corners == null || corners.Length <= 1) {
+                if (corners == null || corners.Length <= 1)
+                {
                     yield return wait;
                     continue;
                 }
@@ -59,15 +63,18 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
                 int castPointCount = _castPoints.Count;
                 Logger.LogDebug($"Found {castPointCount} castPoints");
 
-                if (castPointCount == 0) {
+                if (castPointCount == 0)
+                {
                     yield return wait;
                     continue;
                 }
 
-                for (int i = 0; i < _debugObjects.Length; i++) {
+                for (int i = 0; i < _debugObjects.Length; i++)
+                {
                     GameObject sphere = _debugObjects[i];
                     var renderer = sphere.GetComponent<Renderer>();
-                    if (i < castPointCount) {
+                    if (i < castPointCount)
+                    {
                         renderer.enabled = true;
                         sphere.transform.position = _castPoints[i];
                         continue;
@@ -82,7 +89,8 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
         {
             float size = 0.015f;
             Color color = Color.white;
-            for (int i = 0; i < _debugObjects.Length; i++) {
+            for (int i = 0; i < _debugObjects.Length; i++)
+            {
                 GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
                 sphere.GetComponent<Renderer>().material.color = color;
                 sphere.GetComponent<Collider>().enabled = false;
@@ -102,7 +110,8 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
             Vector3 characterHeight = Vector3.up * 1.65f;
             Vector3 step = characterHeight * (1 / STEPCOUNT);
 
-            for (int i = count - 1; i > 0; i--) {
+            for (int i = count - 1; i > 0; i--)
+            {
                 Vector3 corner = corners[i];
                 Vector3 nextCorner = corners[i - 1];
 
@@ -111,10 +120,12 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
 
                 Logger.LogInfo($"segments count {_segments.Count}");
 
-                for (int j = 0; j < _segments.Count; j++) {
+                for (int j = 0; j < _segments.Count; j++)
+                {
                     Vector3 segment = _segments[j];
                     castPoints.Add(segment);
-                    for (int h = 0; h < STEPCOUNT; h++) {
+                    for (int h = 0; h < STEPCOUNT; h++)
+                    {
                         segment += step;
                         castPoints.Add(segment);
                     }
@@ -122,7 +133,7 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
             }
         }
 
-        private readonly List<Vector3> _castPoints = new List<Vector3>();
+        private readonly List<Vector3> _castPoints = new();
 
         public IEnumerator FindBlindCorner2(Vector3[] corners, Vector3 enemyPosition)
         {
@@ -130,7 +141,8 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
             _corners.AddRange(corners);
             int count = _corners.Count;
 
-            if (count <= 2) {
+            if (count <= 2)
+            {
                 ClearBlindCorner();
                 yield break;
             }
@@ -138,7 +150,8 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
             int blindCornerIndex = count - 1;
             Vector3? blindCorner = null;
 
-            for (int i = count - 1; i > 0; i--) {
+            for (int i = count - 1; i > 0; i--)
+            {
                 Vector3 corner = _corners[i];
                 blindCornerIndex = i - 1;
                 Vector3 nextCorner = _corners[i - 1];
@@ -146,21 +159,25 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
                 _segments.Clear();
                 findSegmentsBetweenCorner(corner, nextCorner, _segments);
 
-                for (int j = 0; j < _segments.Count; j++) {
+                for (int j = 0; j < _segments.Count; j++)
+                {
                     Vector3 segment = _segments[j];
-                    if (CheckSightAtSegment(segment, Bot.Transform.EyePosition, out Vector3 sightPoint)) {
+                    if (CheckSightAtSegment(segment, Bot.Transform.EyePosition, out Vector3 sightPoint))
+                    {
                         blindCorner = segment;
                         break;
                     }
 
                     yield return null;
                 }
-                if (blindCorner != null) {
+                if (blindCorner != null)
+                {
                     break;
                 }
             }
 
-            if (blindCorner != null) {
+            if (blindCorner != null)
+            {
                 Vector3 blindCornerDir = (blindCorner.Value - Bot.Transform.EyePosition).normalized;
                 blindCornerDir.y = 0;
                 Vector3 enemyPosDir = (enemyPosition - Bot.Transform.EyePosition).normalized;
@@ -179,7 +196,8 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
             Vector3 firstDir = first - origin;
             DebugGizmos.Sphere(first, 0.1f, Color.blue, true, 10f);
 
-            if (!Physics.Raycast(origin, firstDir, firstDir.magnitude, LayerMaskClass.HighPolyWithTerrainMaskAI)) {
+            if (!Physics.Raycast(origin, firstDir, firstDir.magnitude, LayerMaskClass.HighPolyWithTerrainMaskAI))
+            {
                 sightPoint = segment;
                 DebugGizmos.Line(origin, sightPoint, Color.blue, 0.05f, true, 10f, false);
                 return true;
@@ -187,7 +205,8 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
 
             Vector3 second = segment + HEIGHT_OFFSET_HALF;
             Vector3 secondDir = second - origin;
-            if (!Physics.Raycast(origin, secondDir, secondDir.magnitude, LayerMaskClass.HighPolyWithTerrainMaskAI)) {
+            if (!Physics.Raycast(origin, secondDir, secondDir.magnitude, LayerMaskClass.HighPolyWithTerrainMaskAI))
+            {
                 sightPoint = second;
                 DebugGizmos.Line(origin, sightPoint, Color.blue, 0.05f, true, 10f, false);
                 return true;
@@ -195,7 +214,8 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
 
             Vector3 third = segment + HEIGHT_OFFSET;
             Vector3 thirdDir = third - origin;
-            if (!Physics.Raycast(origin, thirdDir, thirdDir.magnitude, LayerMaskClass.HighPolyWithTerrainMaskAI)) {
+            if (!Physics.Raycast(origin, thirdDir, thirdDir.magnitude, LayerMaskClass.HighPolyWithTerrainMaskAI))
+            {
                 sightPoint = third;
                 DebugGizmos.Line(origin, sightPoint, Color.blue, 0.025f, true, 10f, false);
                 return true;
@@ -215,10 +235,12 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
             segmentsList.Add(corner);
             Vector3 cornerDirection = (nextCorner - corner);
             float sqrMag = cornerDirection.sqrMagnitude;
-            if (sqrMag <= SEGMENT_LENGTH_SQR) {
+            if (sqrMag <= SEGMENT_LENGTH_SQR)
+            {
                 return;
             }
-            if (sqrMag <= SEGMENT_LENGTH_SQR * 2f) {
+            if (sqrMag <= SEGMENT_LENGTH_SQR * 2f)
+            {
                 segmentsList.Add(Vector3.Lerp(corner, nextCorner, 0.5f));
                 return;
             }
@@ -226,20 +248,22 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
             Vector3 segmentDir = cornerDirection.normalized * segmentLength;
             int segmentCount = Mathf.RoundToInt(segmentLength);
             Vector3 segmentPoint = corner;
-            for (int i = 0; i < segmentCount; i++) {
+            for (int i = 0; i < segmentCount; i++)
+            {
                 segmentPoint += segmentDir;
                 segmentsList.Add(segmentPoint);
             }
         }
 
-        private readonly List<Vector3> _segments = new List<Vector3>();
+        private readonly List<Vector3> _segments = new();
         private const float SEGMENT_LENGTH = 0.5f;
         private const float SEGMENT_LENGTH_SQR = SEGMENT_LENGTH * SEGMENT_LENGTH;
 
         public IEnumerator FindBlindCorner(Vector3[] corners, Vector3 enemyPosition)
         {
             int count = corners.Length;
-            if (count <= 1) {
+            if (count <= 1)
+            {
                 ClearBlindCorner();
                 yield break;
             }
@@ -262,23 +286,27 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
 
             // Note: currently this only finds the first corner they can't see past,
             // I should refactor and have it start from the last corner and descend until they CAN see a corner
-            if (count > 2) {
+            if (count > 2)
+            {
                 _corners.Clear();
                 _corners.AddRange(corners);
 
                 notVisibleCorner = _corners[2];
                 lastVisibleCorner = _corners[1];
 
-                for (int i = 1; i < count; i++) {
+                for (int i = 1; i < count; i++)
+                {
                     raycasts++;
                     Vector3 checkingCorner = _corners[i];
-                    if (rayCastToCorner(checkingCorner, lookPoint, heightOffset)) {
+                    if (rayCastToCorner(checkingCorner, lookPoint, heightOffset))
+                    {
                         index = i - 1;
                         lastVisibleCorner = _corners[i - 1];
                         notVisibleCorner = checkingCorner;
                         break;
                     }
-                    if (raycasts >= MAX_CASTS_PER_FRAME) {
+                    if (raycasts >= MAX_CASTS_PER_FRAME)
+                    {
                         totalRaycasts += raycasts;
                         raycasts = 0;
                         yield return null;
@@ -294,7 +322,8 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
             Vector3 pointPastCorner = RaycastPastCorner(lastVisibleCorner, lookPoint, 0f, 10f);
             raycasts++;
 
-            if (raycasts >= MAX_CASTS_PER_FRAME) {
+            if (raycasts >= MAX_CASTS_PER_FRAME)
+            {
                 totalRaycasts += raycasts;
                 raycasts = 0;
                 yield return null;
@@ -308,7 +337,8 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
             Vector3 directionToBlind = lastVisibleCorner - lookPoint;
             float rayMaxDist = (pointPastCorner - lookPoint).magnitude;
 
-            for (int i = 0; i < MAX_ITERATIONS_REAL_CORNER; i++) {
+            for (int i = 0; i < MAX_ITERATIONS_REAL_CORNER; i++)
+            {
                 raycasts++;
 
                 directionToBlind = Vector.Rotate(directionToBlind, 0, rotationStep, 0);
@@ -316,14 +346,16 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
                 bool hit = Physics.Raycast(lookPoint, directionToBlind, rayMaxDist, LayerMaskClass.HighPolyWithTerrainMask);
                 drawDebug(lookPoint + directionToBlind, lookPoint, hit);
 
-                if (hit) {
+                if (hit)
+                {
                     //Logger.LogDebug($"Angle where LOS broken [{rotationStep * i}] after [{i}] iterations");
                     break;
                 }
 
                 blindCorner = lookPoint + directionToBlind;
 
-                if (raycasts >= MAX_CASTS_PER_FRAME) {
+                if (raycasts >= MAX_CASTS_PER_FRAME)
+                {
                     totalRaycasts += raycasts;
                     raycasts = 0;
                     yield return null;
@@ -333,13 +365,15 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
             blindCorner.y -= heightOffset;
             Enemy.Path.EnemyCorners.AddOrReplace(ECornerType.Blind, new EnemyCorner(blindCorner, angle, index));
 
-            if (raycasts > 0) {
+            if (raycasts > 0)
+            {
                 totalRaycasts += raycasts;
                 raycasts = 0;
                 yield return null;
             }
             sw.Stop();
-            if (_nextLogTime < Time.time) {
+            if (_nextLogTime < Time.time)
+            {
                 _nextLogTime = Time.time + 5f;
                 //float time = (sw.ElapsedMilliseconds / 1000f).Round100();
                 //Logger.LogDebug($"Total Raycasts: [{totalRaycasts}] Time To Complete: [{time}] seconds");
@@ -413,7 +447,8 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
 
         private void drawDebug(Vector3 corner, Vector3 lookPoint, bool hit)
         {
-            if (SAINPlugin.DebugMode && SAINPlugin.DebugSettings.Gizmos.DebugDrawBlindCorner) {
+            if (SAINPlugin.DebugMode && SAINPlugin.DebugSettings.Gizmos.DebugDrawBlindCorner)
+            {
                 Color color = hit ? Color.red : Color.green;
                 float lineWidth = 0.01f;
                 float expireTime = 30f;
@@ -432,10 +467,12 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
             Vector3 cornerDir = corner - lookPoint;
 
             Vector3 farPoint;
-            if (Physics.Raycast(lookPoint, cornerDir, out var hit, addDistance, _mask)) {
+            if (Physics.Raycast(lookPoint, cornerDir, out var hit, addDistance, _mask))
+            {
                 farPoint = hit.point;
             }
-            else {
+            else
+            {
                 farPoint = corner + cornerDir.normalized * addDistance;
             }
             Vector3 midPoint = Vector3.Lerp(farPoint, corner, 0.5f);
@@ -450,6 +487,6 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
         }
 
         private static readonly LayerMask _mask = LayerMaskClass.HighPolyWithTerrainMask;
-        private readonly List<Vector3> _corners = new List<Vector3>();
+        private readonly List<Vector3> _corners = new();
     }
 }

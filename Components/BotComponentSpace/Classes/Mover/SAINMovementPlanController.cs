@@ -1,11 +1,8 @@
-﻿using EFT;
-using SAIN.Helpers;
+﻿using SAIN.Helpers;
 using SAIN.SAINComponent.SubComponents.CoverFinder;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.UI;
-using static UnityEngine.UI.GridLayoutGroup;
 
 namespace SAIN.SAINComponent.Classes.Mover
 {
@@ -15,7 +12,7 @@ namespace SAIN.SAINComponent.Classes.Mover
         {
         }
 
-        public static readonly List<SAINVaultPoint> GlobalVaultPoints = new List<SAINVaultPoint>();
+        public static readonly List<SAINVaultPoint> GlobalVaultPoints = new();
 
         public void Init()
         {

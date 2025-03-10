@@ -1,8 +1,8 @@
-﻿using SPT.Reflection.Patching;
-using EFT;
+﻿using EFT;
 using EFT.InventoryLogic;
 using HarmonyLib;
 using SAIN.Components;
+using SPT.Reflection.Patching;
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
@@ -20,8 +20,8 @@ namespace SAIN.Patches.Generic.Fixes
         [PatchPrefix]
         public static void Patch(Player __instance, ref bool aiControlled)
         {
-			if (__instance.UsedSimplifiedSkeleton)
-				return;
+            if (__instance.UsedSimplifiedSkeleton)
+                return;
 
             aiControlled = false;
         }
@@ -37,19 +37,23 @@ namespace SAIN.Patches.Generic.Fixes
         [PatchPrefix]
         public static bool Patch(BotOwner ___botOwner_0, ref bool __result)
         {
-            if (SAINPlugin.IsBotExluded(___botOwner_0)) {
+            if (SAINPlugin.IsBotExluded(___botOwner_0))
+            {
                 return true;
             }
-            if (___botOwner_0.Medecine?.Using == true) {
+            if (___botOwner_0.Medecine?.Using == true)
+            {
                 __result = false;
                 return false;
             }
-            if (!___botOwner_0.WeaponManager.IsWeaponReady) {
+            if (!___botOwner_0.WeaponManager.IsWeaponReady)
+            {
                 __result = false;
                 return false;
             }
             if (___botOwner_0.WeaponManager.Malfunctions.HaveMalfunction() &&
-                ___botOwner_0.WeaponManager.Malfunctions.MalfunctionType() != Weapon.EMalfunctionState.Misfire) {
+                ___botOwner_0.WeaponManager.Malfunctions.MalfunctionType() != Weapon.EMalfunctionState.Misfire)
+            {
                 __result = false;
                 return false;
             }
@@ -96,9 +100,12 @@ namespace SAIN.Patches.Generic.Fixes
         [PatchPrefix]
         public static bool PatchPrefix(List<BotOwner> followers, ref bool __result)
         {
-            using (List<BotOwner>.Enumerator enumerator = followers.GetEnumerator()) {
-                while (enumerator.MoveNext()) {
-                    if (!GenericHelpers.CheckNotNull(enumerator.Current) || enumerator.Current.BotFollower?.PatrolDataFollower?.HaveProblems == true) {
+            using (List<BotOwner>.Enumerator enumerator = followers.GetEnumerator())
+            {
+                while (enumerator.MoveNext())
+                {
+                    if (!GenericHelpers.CheckNotNull(enumerator.Current) || enumerator.Current.BotFollower?.PatrolDataFollower?.HaveProblems == true)
+                    {
                         __result = false;
                         return false;
                     }
@@ -119,11 +126,14 @@ namespace SAIN.Patches.Generic.Fixes
         [PatchPrefix]
         public static bool PatchPrefix(ref BotOwner ___botOwner_0, ref bool ___bool_1, ref bool ___bool_0, ref float ___float_0)
         {
-            if (___bool_1) {
+            if (___bool_1)
+            {
                 return false;
             }
-            if (___bool_0) {
-                if (___float_0 < Time.time + 3f) {
+            if (___bool_0)
+            {
+                if (___float_0 < Time.time + 3f)
+                {
                     ___float_0 += 5f;
                 }
                 ___bool_1 = true;
@@ -138,7 +148,8 @@ namespace SAIN.Patches.Generic.Fixes
             if (bot != null &&
                 bot.GetPlayer != null &&
                 bot.GetPlayer.HealthController.IsAlive &&
-                bot.Medecine?.Using == true) {
+                bot.Medecine?.Using == true)
+            {
                 bot.WeaponManager?.Selector?.TakePrevWeapon();
             }
         }
@@ -148,7 +159,7 @@ namespace SAIN.Patches.Generic.Fixes
     {
         protected override MethodBase GetTargetMethod()
         {
-            return AccessTools.Method(typeof(BotMover), "GoToPoint", new[] { typeof(Vector3), typeof(bool), typeof(float), typeof(bool), typeof(bool), typeof(bool) });
+            return AccessTools.Method(typeof(BotMover), "GoToPoint", [typeof(Vector3), typeof(bool), typeof(float), typeof(bool), typeof(bool), typeof(bool)]);
         }
 
         [PatchPrefix]
@@ -169,7 +180,8 @@ namespace SAIN.Patches.Generic.Fixes
         public static void PatchPrefix(ref Player __instance, ref bool ignoreClamp)
         {
             if (__instance?.IsAI == true
-                && __instance.IsSprintEnabled) {
+                && __instance.IsSprintEnabled)
+            {
                 ignoreClamp = true;
             }
         }
@@ -182,7 +194,8 @@ namespace SAIN.Patches.Generic.Fixes
         [PatchPrefix]
         public static bool PatchPrefix(IPlayer person)
         {
-            if (person == null || person.IsAI && person.AIData?.BotOwner?.GetPlayer == null) {
+            if (person == null || person.IsAI && person.AIData?.BotOwner?.GetPlayer == null)
+            {
                 return false;
             }
 
@@ -197,7 +210,8 @@ namespace SAIN.Patches.Generic.Fixes
         [PatchPrefix]
         public static bool PatchPrefix(IPlayer enemy)
         {
-            if (enemy == null || enemy.IsAI && enemy.AIData?.BotOwner?.GetPlayer == null) {
+            if (enemy == null || enemy.IsAI && enemy.AIData?.BotOwner?.GetPlayer == null)
+            {
                 return false;
             }
 

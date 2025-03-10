@@ -38,31 +38,37 @@ namespace SAIN.Components
         {
             yield return null;
 
-            while (true) {
-                if (BotController == null) {
+            while (true)
+            {
+                if (BotController == null)
+                {
                     yield return null;
                     continue;
                 }
 
                 var bots = BotController.BotSpawnController?.BotDictionary;
-                if (bots == null || bots.Count == 0) {
+                if (bots == null || bots.Count == 0)
+                {
                     yield return null;
                     continue;
                 }
 
-                if (BotController.BotGame?.Status == EFT.GameStatus.Stopping) {
+                if (BotController.BotGame?.Status == EFT.GameStatus.Stopping)
+                {
                     yield return null;
                     continue;
                 }
 
                 findEnemies(bots, _enemies);
                 int enemyCount = _enemies.Count;
-                if (enemyCount == 0) {
+                if (enemyCount == 0)
+                {
                     yield return null;
                     continue;
                 }
 
-                if (_partCount < 0) {
+                if (_partCount < 0)
+                {
                     _partCount = _enemies[0].Vision.VisionChecker.EnemyParts.PartsArray.Length;
                 }
                 int partCount = _partCount;
@@ -101,7 +107,8 @@ namespace SAIN.Components
             _castPoints.Clear();
 
             int commands = 0;
-            for (int i = 0; i < enemyCount; i++) {
+            for (int i = 0; i < enemyCount; i++)
+            {
                 var enemy = _enemies[i];
                 var transform = enemy.Bot.Transform;
                 Vector3 eyePosition = transform.EyePosition;
@@ -109,7 +116,8 @@ namespace SAIN.Components
                 var parts = enemy.Vision.VisionChecker.EnemyParts.PartsArray;
                 var partDistances = enemy.EnemyPlayerData.DistanceData.BodyPartDistances;
 
-                for (int j = 0; j < partCount; j++) {
+                for (int j = 0; j < partCount; j++)
+                {
                     var part = parts[j];
                     BodyPartRaycast raycastData = part.GetRaycast(eyePosition, float.MaxValue);
                     Vector3 castPoint = raycastData.CastPoint;
@@ -139,7 +147,8 @@ namespace SAIN.Components
             int hits = 0;
             int colliderTypeCount = 0;
 
-            for (int i = 0; i < enemyCount; i++) {
+            for (int i = 0; i < enemyCount; i++)
+            {
                 var enemy = _enemies[i];
                 var transform = enemy.Bot.Transform;
                 Vector3 origin = transform.EyePosition;
@@ -149,7 +158,8 @@ namespace SAIN.Components
                 visionChecker.LastCheckLOSTime = time + (enemy.IsAI ? 0.1f : 0.05f);
                 enemy.Bot.Vision.TimeLastCheckedLOS = time;
 
-                for (int j = 0; j < partCount; j++) {
+                for (int j = 0; j < partCount; j++)
+                {
                     var part = parts[j];
                     EBodyPartColliderType colliderType = _colliderTypes[colliderTypeCount];
                     Vector3 castPoint = _castPoints[colliderTypeCount];
@@ -170,27 +180,30 @@ namespace SAIN.Components
         private readonly LayerMask _VisionMask = LayerMaskClass.AI;
         private readonly LayerMask _ShootMask = LayerMaskClass.HighPolyWithTerrainMask;
         private int _partCount = -1;
-        private readonly List<EBodyPartColliderType> _colliderTypes = new List<EBodyPartColliderType>();
-        private readonly List<Vector3> _castPoints = new List<Vector3>();
+        private readonly List<EBodyPartColliderType> _colliderTypes = new();
+        private readonly List<Vector3> _castPoints = new();
 
         private static void findEnemies(BotDictionary bots, List<Enemy> result)
         {
             result.Clear();
             float time = Time.time;
-            foreach (var bot in bots.Values) {
+            foreach (var bot in bots.Values)
+            {
                 if (bot == null || !bot.BotActive) continue;
                 if (bot.Vision.TimeSinceCheckedLOS < 0.05f) continue;
-                foreach (var enemy in bot.EnemyController.Enemies.Values) {
+                foreach (var enemy in bot.EnemyController.Enemies.Values)
+                {
                     if (!enemy.CheckValid()) continue;
                     var visionChecker = enemy.Vision.VisionChecker;
                     if (enemy.RealDistance > visionChecker.AIVisionRangeLimit()) continue;
-                    if (visionChecker.LastCheckLOSTime < time) {
+                    if (visionChecker.LastCheckLOSTime < time)
+                    {
                         result.Add(enemy);
                     }
                 }
             }
         }
 
-        private readonly List<Enemy> _enemies = new List<Enemy>();
+        private readonly List<Enemy> _enemies = new();
     }
 }

@@ -34,7 +34,7 @@ namespace SAIN.SAINComponent.Classes
                 // CurrentFlankRoute = FindFlankRoute();
                 if (CurrentFlankRoute != null)
                 {
-                    Logger.NotifyDebug("Found Flank Route"); 
+                    Logger.NotifyDebug("Found Flank Route");
                     DrawDebug(CurrentFlankRoute);
                 }
             }
@@ -106,7 +106,7 @@ namespace SAIN.SAINComponent.Classes
         private FlankRoute FindFlank(Vector3 middleNode, Vector3 directionFromMiddle, Vector3 botPosition, Enemy enemy, SideTurn sideTurn)
         {
             Vector3 flankDirection1 = Vector.Rotate90(directionFromMiddle, sideTurn);
-            if (SamplePointAndCheckPath(flankDirection1, middleNode, out NavMeshPath path) 
+            if (SamplePointAndCheckPath(flankDirection1, middleNode, out NavMeshPath path)
                 && SamplePointAndCheckPath(flankDirection1 * 0.5f, enemy.EnemyPosition, out NavMeshPath path2))
             {
                 Vector3 flankPoint1 = path.corners[path.corners.Length - 1];
@@ -114,17 +114,17 @@ namespace SAIN.SAINComponent.Classes
 
                 NavMeshPath pathToEnemy = enemy.Path.PathToEnemy;
 
-                NavMeshPath flankPath = new NavMeshPath();
+                NavMeshPath flankPath = new();
                 if (NavMesh.CalculatePath(botPosition, flankPoint1, -1, flankPath)
                     && ArePathsDifferent(pathToEnemy, flankPath))
                 {
-                    NavMeshPath flankPath2 = new NavMeshPath();
+                    NavMeshPath flankPath2 = new();
                     if (NavMesh.CalculatePath(flankPoint1, flankPoint2, -1, flankPath2)
                         && ArePathsDifferent(pathToEnemy, flankPath2)
-                        && ArePathsDifferent(flankPath, flankPath2) 
+                        && ArePathsDifferent(flankPath, flankPath2)
                         && CheckPathSafety(flankPath2, enemy.EnemyHeadPosition))
                     {
-                        NavMeshPath flankPath3 = new NavMeshPath();
+                        NavMeshPath flankPath3 = new();
                         if (NavMesh.CalculatePath(flankPoint2, enemy.EnemyPosition, -1, flankPath3)
                             && ArePathsDifferent(pathToEnemy, flankPath3)
                             && ArePathsDifferent(flankPath, flankPath3)
@@ -169,9 +169,9 @@ namespace SAIN.SAINComponent.Classes
 
         float _timer;
 
-        DebugGizmos.DrawLists list1 = new DebugGizmos.DrawLists(Color.red, Color.red, "flankroute1");
-        DebugGizmos.DrawLists list2 = new DebugGizmos.DrawLists(Color.blue, Color.blue, "flankroute2");
-        DebugGizmos.DrawLists list3 = new DebugGizmos.DrawLists(Color.blue, Color.blue, "flankroute3");
+        DebugGizmos.DrawLists list1 = new(Color.red, Color.red, "flankroute1");
+        DebugGizmos.DrawLists list2 = new(Color.blue, Color.blue, "flankroute2");
+        DebugGizmos.DrawLists list3 = new(Color.blue, Color.blue, "flankroute3");
 
         public static bool ArePathsDifferent(NavMeshPath path1, NavMeshPath path2, float minRatio = 0.5f, float sqrDistCheck = 0.05f)
         {

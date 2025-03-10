@@ -1,8 +1,6 @@
-﻿using Comfort.Common;
-using EFT;
+﻿using EFT;
 using SAIN.Components;
 using SAIN.Components.BotController;
-using SAIN.Helpers;
 using SAIN.Preset.GlobalSettings;
 using SAIN.SAINComponent;
 using System.Collections.Generic;
@@ -53,9 +51,9 @@ namespace SAIN
             return false;
         }
 
-        private static readonly List<string> _excludedBots = new List<string>();
+        private static readonly List<string> _excludedBots = new();
 
-        private static readonly List<string> _enabledBots = new List<string>();
+        private static readonly List<string> _enabledBots = new();
 
         private static void clear()
         {
@@ -137,7 +135,7 @@ namespace SAIN
         private static bool excludeScav(WildSpawnType wildSpawnType, BotOwner botOwner)
         {
             return SAINEnabled.VanillaScavs
-            && WildSpawn.IsScav(wildSpawnType) && 
+            && WildSpawn.IsScav(wildSpawnType) &&
             !isPlayerScav(botOwner.Profile.Nickname);
         }
 
@@ -161,7 +159,7 @@ namespace SAIN
             //}
             if (SAINEnabled.VanillaBloodHounds)
             {
-                if (wildSpawnType == WildSpawnType.arenaFighter || 
+                if (wildSpawnType == WildSpawnType.arenaFighter ||
                     wildSpawnType == WildSpawnType.arenaFighterEvent)
                 {
                     return true;
@@ -174,7 +172,7 @@ namespace SAIN
         {
             // Pattern: xxx (xxx)
             string pattern = "\\w+.[(]\\w+[)]";
-            Regex regex = new Regex(pattern);
+            Regex regex = new(pattern);
             if (regex.Matches(nickname).Count > 0)
             {
                 return true;

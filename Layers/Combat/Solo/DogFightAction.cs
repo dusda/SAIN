@@ -1,8 +1,5 @@
 ﻿using DrakiaXYZ.BigBrain.Brains;
 using EFT;
-using System.Collections;
-using UnityEngine;
-using UnityEngine.Profiling;
 
 namespace SAIN.Layers.Combat.Solo
 {

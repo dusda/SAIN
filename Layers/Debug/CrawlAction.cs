@@ -1,7 +1,5 @@
 ﻿using DrakiaXYZ.BigBrain.Brains;
 using EFT;
-using SAIN.Helpers;
-using System.Collections;
 using System.Text;
 using UnityEngine;
 using UnityEngine.AI;
@@ -47,7 +45,7 @@ namespace SAIN.Layers.Combat.Run
 
         private bool findRandomPlace(out NavMeshPath path)
         {
-            for (int i = 0; i < 10;  i++)
+            for (int i = 0; i < 10; i++)
             {
                 Vector3 random = UnityEngine.Random.onUnitSphere * 100f;
                 if (NavMesh.SamplePosition(random + Bot.Position, out var hit, 10f, -1))

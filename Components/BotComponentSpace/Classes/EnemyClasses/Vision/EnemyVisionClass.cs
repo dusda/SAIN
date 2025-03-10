@@ -1,11 +1,7 @@
 ﻿using HarmonyLib;
-using SAIN.Components;
-using SAIN.Components.PlayerComponentSpace;
-using System;
 using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
-using static WindowsManager;
 
 namespace SAIN.SAINComponent.Classes.EnemyClasses
 {
@@ -79,7 +75,8 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
 
         public void OnEnemyKnownChanged(bool known, Enemy enemy)
         {
-            if (known) {
+            if (known)
+            {
                 return;
             }
             UpdateVisibleState(true);
@@ -100,14 +97,18 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
             else
                 IsVisible = EnemyInfo.IsVisible && Angles.CanBeSeen;
 
-            if (IsVisible) {
-                if (!wasVisible) {
+            if (IsVisible)
+            {
+                if (!wasVisible)
+                {
                     VisibleStartTime = Time.time;
-                    if (Seen && TimeSinceSeen >= _repeatContactMinSeenTime) {
+                    if (Seen && TimeSinceSeen >= _repeatContactMinSeenTime)
+                    {
                         ShallReportRepeatContact = true;
                     }
                 }
-                if (!Seen) {
+                if (!Seen)
+                {
                     FirstContactOccured = true;
                     TimeFirstSeen = Time.time;
                     Seen = true;
@@ -118,13 +119,15 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
                 Enemy.UpdateCurrentEnemyPos(EnemyTransform.Position);
             }
 
-            if (!IsVisible) {
+            if (!IsVisible)
+            {
                 if (wasVisible)
                     Enemy.UpdateLastSeenPosition(EnemyTransform.Position);
 
                 if (Seen &&
                     TimeSinceSeen > _lostContactMinSeenTime &&
-                    _nextReportLostVisualTime < Time.time) {
+                    _nextReportLostVisualTime < Time.time)
+                {
                     _nextReportLostVisualTime = Time.time + 20f;
                     ShallReportLostVisual = true;
                 }
@@ -132,14 +135,16 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
             }
 
             Enemy.Events.OnVisionChange.CheckToggle(IsVisible);
-            if (IsVisible != wasVisible) {
+            if (IsVisible != wasVisible)
+            {
                 LastChangeVisionTime = Time.time;
             }
         }
 
         public void UpdateCanShootState(bool forceOff)
         {
-            if (forceOff) {
+            if (forceOff)
+            {
                 CanShoot = false;
                 return;
             }

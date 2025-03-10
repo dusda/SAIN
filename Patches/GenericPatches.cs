@@ -90,12 +90,14 @@ namespace SAIN.Patches.Generic
         [PatchPostfix]
         public static void PatchPostfix(ref bool __result, EnemyInfo __instance)
         {
-            if (__result == true) {
+            if (__result == true)
+            {
                 return;
             }
             if (SAINEnableClass.GetSAIN(__instance.Owner, out var sain)
                 //&& sain.Info.Profile.IsPMC
-                && sain.EnemyController.CheckAddEnemy(__instance.Person)?.Heard == true) {
+                && sain.EnemyController.CheckAddEnemy(__instance.Person)?.Heard == true)
+            {
                 __result = true;
             }
         }
@@ -126,7 +128,8 @@ namespace SAIN.Patches.Generic
         [PatchPostfix]
         public static void PatchPostfix(EnemyInfo __instance, ref bool __result)
         {
-            if (!SAINEnableClass.GetSAIN(__instance.Owner, out var botComponent)) {
+            if (!SAINEnableClass.GetSAIN(__instance.Owner, out var botComponent))
+            {
                 return;
             }
             var enemy = botComponent.EnemyController.CheckAddEnemy(__instance.Person);
@@ -136,9 +139,11 @@ namespace SAIN.Patches.Generic
         public static bool BotsGroupSenseRecently(EnemyInfo enemyInfo)
         {
             BotsGroup group = enemyInfo.GroupOwner;
-            for (int i = 0; i < group.MembersCount; i++) {
+            for (int i = 0; i < group.MembersCount; i++)
+            {
                 if (SAINEnableClass.GetSAIN(group.Member(i), out BotComponent sain)
-                    && EnemySenseRecently(sain, enemyInfo)) {
+                    && EnemySenseRecently(sain, enemyInfo))
+                {
                     return true;
                 }
             }
@@ -172,7 +177,8 @@ namespace SAIN.Patches.Generic
         [PatchPostfix]
         public static void PatchPostfix(EnemyInfo __instance, ref bool __result)
         {
-            if (!SAINEnableClass.GetSAIN(__instance.Owner, out var botComponent)) {
+            if (!SAINEnableClass.GetSAIN(__instance.Owner, out var botComponent))
+            {
                 return;
             }
             var enemy = botComponent.EnemyController.CheckAddEnemy(__instance.Person);
@@ -191,8 +197,10 @@ namespace SAIN.Patches.Generic
         public static bool PatchPrefix(BotsController __instance, Grenade grenade, Vector3 position, Vector3 force, float mass)
         {
             Vector3 danger = Vector.DangerPoint(position, force, mass);
-            foreach (BotOwner bot in __instance.Bots.BotOwners) {
-                if (SAINPlugin.IsBotExluded(bot)) {
+            foreach (BotOwner bot in __instance.Bots.BotOwners)
+            {
+                if (SAINPlugin.IsBotExluded(bot))
+                {
                     bot.BewareGrenade.AddGrenadeDanger(danger, grenade);
                 }
             }
@@ -225,13 +233,16 @@ namespace SAIN.Patches.Generic
         public static bool Patch(BotOwner ____owner)
         {
             BotRequest curRequest = ____owner.BotRequestController.CurRequest;
-            if (curRequest == null) {
+            if (curRequest == null)
+            {
                 return false;
             }
-            if (!SAINEnableClass.GetSAIN(____owner, out BotComponent sain)) {
+            if (!SAINEnableClass.GetSAIN(____owner, out BotComponent sain))
+            {
                 return true;
             }
-            if (sain.HasEnemy && curRequest.Requester?.IsAI == true) {
+            if (sain.HasEnemy && curRequest.Requester?.IsAI == true)
+            {
                 curRequest.Dispose();
                 return false;
             }
@@ -251,28 +262,34 @@ namespace SAIN.Patches.Generic
         {
             // Copied original code in FindForMe, but add check to see if requester is AI or not if this bot currently has an active enemy.
             // START NEW //
-            if (!SAINEnableClass.GetSAIN(executer, out BotComponent sain)) {
+            if (!SAINEnableClass.GetSAIN(executer, out BotComponent sain))
+            {
                 return true;
             }
-            if (!sain.HasEnemy) {
+            if (!sain.HasEnemy)
+            {
                 return true;
             }
             // END NEW //
 
             BotRequest botRequest = null;
-            foreach (BotRequest botRequest2 in ____listOfRequests) {
+            foreach (BotRequest botRequest2 in ____listOfRequests)
+            {
                 // START NEW //
                 IPlayer requestor = botRequest2.Requester;
-                if (requestor != null && requestor.IsAI) {
+                if (requestor != null && requestor.IsAI)
+                {
                     continue;
                 }
                 // END NEW //
-                if ((botRequest2.CanExecuteByMyself || (Player)botRequest2.Requester != executer.GetPlayer) && (!executer.Boss.IamBoss || executer.Boss.AllowRequestSelf || executer.GetPlayer.Id != botRequest2.Requester.Id) && botRequest2.CanStartExecute(executer)) {
+                if ((botRequest2.CanExecuteByMyself || (Player)botRequest2.Requester != executer.GetPlayer) && (!executer.Boss.IamBoss || executer.Boss.AllowRequestSelf || executer.GetPlayer.Id != botRequest2.Requester.Id) && botRequest2.CanStartExecute(executer))
+                {
                     botRequest = botRequest2;
                     break;
                 }
             }
-            if (botRequest != null) {
+            if (botRequest != null)
+            {
                 botRequest.Take(executer);
                 ____listOfRequests.Remove(botRequest);
             }

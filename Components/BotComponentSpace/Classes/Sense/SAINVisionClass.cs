@@ -1,13 +1,9 @@
 ﻿using EFT;
-using HarmonyLib;
 using SAIN.Components;
 using SAIN.SAINComponent.Classes.Sense;
-using SPT.Reflection.Patching;
-using System.Reflection;
 using System;
+using System.Reflection;
 using UnityEngine;
-using static EFT.SpeedTree.TreeWind;
-using SAIN.Helpers;
 
 namespace SAIN.SAINComponent.Classes
 {
@@ -56,7 +52,8 @@ namespace SAIN.SAINComponent.Classes
         private void updateVisionDistance()
         {
             BotOwner botOwner = BotOwner;
-            if (_nextUpdateVisibleDist < Time.time) {
+            if (_nextUpdateVisibleDist < Time.time)
+            {
                 _nextUpdateVisibleDist = Time.time + (botOwner.FlashGrenade.IsFlashed ? VISIONDISTANCE_UPDATE_FREQ_FLASHED : VISIONDISTANCE_UPDATE_FREQ);
                 var timeSettings = GlobalSettings.Look.Time;
                 var lookSensor = botOwner.LookSensor;
@@ -64,11 +61,13 @@ namespace SAIN.SAINComponent.Classes
                 float timeMod = 1f;
                 float weatherMod = 1f;
                 var botController = SAINBotController.Instance;
-                if (botController != null) {
+                if (botController != null)
+                {
                     timeMod = botController.TimeVision.TimeVisionDistanceModifier;
                     weatherMod = Mathf.Clamp(botController.WeatherVision.VisionDistanceModifier, timeSettings.VISION_WEATHER_MIN_COEF, 1f);
                     DateTime? dateTime = botController.TimeVision.DateTime;
-                    if (dateTime != null) {
+                    if (dateTime != null)
+                    {
                         _HourServerProperty.SetValue(lookSensor, (int)((short)dateTime.Value.Hour));
                     }
                 }

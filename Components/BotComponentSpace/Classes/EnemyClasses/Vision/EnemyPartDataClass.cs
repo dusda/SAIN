@@ -1,6 +1,5 @@
 ﻿using EFT;
 using SAIN.Components;
-using SAIN.Helpers;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,7 +7,7 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
 {
     public class EnemyPartDataClass
     {
-        public readonly Dictionary<ERaycastCheck, RaycastResult> RaycastResults = new Dictionary<ERaycastCheck, RaycastResult>();
+        public readonly Dictionary<ERaycastCheck, RaycastResult> RaycastResults = new();
 
         public float TimeSeen { get; private set; }
         public float TimeSinceSeen => IsVisible ? Time.time - TimeSeen : -1f;
@@ -20,11 +19,13 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
                 RaycastResults[ERaycastCheck.Vision].InSight &&
                 RaycastResults[ERaycastCheck.LineofSight].InSight;
 
-            if (!IsVisible) {
+            if (!IsVisible)
+            {
                 TimeSeen = 0f;
                 return;
             }
-            if (TimeSeen <= 0f) {
+            if (TimeSeen <= 0f)
+            {
                 TimeSeen = Time.time;
             }
         }
@@ -37,8 +38,10 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
             Transform = transform;
             Colliders = colliders;
             _indexMax = colliders.Count - 1;
-            foreach (BodyPartCollider collider in colliders) {
-                if (!_colliderDictionary.ContainsKey(collider.BodyPartColliderType)) {
+            foreach (BodyPartCollider collider in colliders)
+            {
+                if (!_colliderDictionary.ContainsKey(collider.BodyPartColliderType))
+                {
                     _colliderDictionary.Add(collider.BodyPartColliderType, collider);
                 }
             }
@@ -47,7 +50,7 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
             RaycastResults.Add(ERaycastCheck.Vision, new RaycastResult());
         }
 
-        private readonly Dictionary<EBodyPartColliderType, BodyPartCollider> _colliderDictionary = new Dictionary<EBodyPartColliderType, BodyPartCollider>();
+        private readonly Dictionary<EBodyPartColliderType, BodyPartCollider> _colliderDictionary = new();
 
         public void SetLineOfSight(Vector3 castPoint, EBodyPartColliderType colliderType, RaycastHit raycastHit, ERaycastCheck type, float time)
         {
@@ -59,7 +62,8 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
             BodyPartCollider collider = getCollider();
             Vector3 castPoint = getCastPoint(origin, collider);
 
-            return new BodyPartRaycast {
+            return new BodyPartRaycast
+            {
                 CastPoint = castPoint,
                 PartType = BodyPart,
                 ColliderType = collider.BodyPartColliderType
@@ -82,7 +86,8 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
         {
             BodyPartCollider collider = Colliders[_index];
             _index++;
-            if (_index > _indexMax) {
+            if (_index > _indexMax)
+            {
                 _index = 0;
             }
             return collider;
@@ -102,15 +107,18 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
 
         private float getColliderMinSize(BodyPartCollider collider)
         {
-            if (collider.Collider == null) {
+            if (collider.Collider == null)
+            {
                 return 0f;
             }
             Vector3 bounds = collider.Collider.bounds.size;
             float lowest = bounds.x;
-            if (bounds.y < lowest) {
+            if (bounds.y < lowest)
+            {
                 lowest = bounds.y;
             }
-            if (bounds.z < lowest) {
+            if (bounds.z < lowest)
+            {
                 lowest = bounds.z;
             }
             return lowest;

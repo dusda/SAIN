@@ -1,9 +1,6 @@
-﻿using EFT;
-using SAIN.Components.BotComponentSpace.Classes.EnemyClasses;
+﻿using SAIN.Components.BotComponentSpace.Classes.EnemyClasses;
 using System;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 namespace SAIN.SAINComponent.Classes.EnemyClasses
 {

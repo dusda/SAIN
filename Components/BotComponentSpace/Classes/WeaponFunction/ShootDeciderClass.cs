@@ -1,6 +1,5 @@
 ﻿using EFT;
 using EFT.InventoryLogic;
-using SAIN.Layers;
 using SAIN.Preset.GlobalSettings;
 using SAIN.SAINComponent.Classes.EnemyClasses;
 using SAIN.SAINComponent.Classes.Info;
@@ -40,7 +39,8 @@ namespace SAIN.SAINComponent.Classes
         private void checkEndShoot()
         {
             if (_shooting &&
-                !BotOwner.ShootData.Shooting) {
+                !BotOwner.ShootData.Shooting)
+            {
                 _shooting = false;
                 OnEndShoot?.Invoke();
             }
@@ -48,7 +48,8 @@ namespace SAIN.SAINComponent.Classes
 
         private void checkClearEnemy(string profileId, Enemy enemy)
         {
-            if (LastShotEnemy != null && LastShotEnemy.EnemyProfileId == profileId) {
+            if (LastShotEnemy != null && LastShotEnemy.EnemyProfileId == profileId)
+            {
                 LastShotEnemy = null;
             }
         }
@@ -61,14 +62,16 @@ namespace SAIN.SAINComponent.Classes
 
             if (weaponManager.Selector.EquipmentSlot == EquipmentSlot.Holster
                 && !weaponManager.HaveBullets
-                && !weaponManager.Selector.TryChangeToMain()) {
+                && !weaponManager.Selector.TryChangeToMain())
+            {
                 selectWeapon();
             }
 
             if (!Bot.Aim.CanAim)
                 return;
 
-            if (_changeAimTimer < Time.time) {
+            if (_changeAimTimer < Time.time)
+            {
                 _changeAimTimer = Time.time + 0.5f;
                 Bot.AimDownSightsController.UpdateADSstatus();
             }
@@ -76,11 +79,13 @@ namespace SAIN.SAINComponent.Classes
             Vector3? target = getTarget(out Enemy enemy);
             //Bot.BotLight.HandleLightForEnemy(enemy);
             if (target != null &&
-                enemy != null) {
+                enemy != null)
+            {
                 Bot.BotLight.HandleLightForEnemy(enemy);
 
                 if (aimAtTarget(target.Value) &&
-                    weaponManager.HaveBullets) {
+                    weaponManager.HaveBullets)
+                {
                     tryShoot(enemy);
                 }
             }
@@ -93,18 +98,22 @@ namespace SAIN.SAINComponent.Classes
 
         private bool tryPauseForShoot(bool shallUnpause)
         {
-            if (ShallPauseForShoot()) {
+            if (ShallPauseForShoot())
+            {
                 if (_nextPauseMoveTime < Time.time &&
-                    !IsMovementPaused) {
+                    !IsMovementPaused)
+                {
                     _nextPauseMoveTime = Time.time + Random.Range(_pauseMoveFrequencyMin, _pauseMoveFrequencyMax);
                     Bot.Mover.PauseMovement(Random.Range(_pauseMoveDurationMin, _pauseMoveDurationMax));
                 }
-                if (!IsMovementPaused) {
+                if (!IsMovementPaused)
+                {
                     BotOwner.AimingManager.CurrentAiming?.LoseTarget();
                     return false;
                 }
             }
-            else if (IsMovementPaused && _shallUnpause) {
+            else if (IsMovementPaused && _shallUnpause)
+            {
                 //BotOwner.Mover.MovementResume();
             }
             return true;
@@ -119,7 +128,8 @@ namespace SAIN.SAINComponent.Classes
                 IsAiming;
         }
 
-        public bool IsAiming {
+        public bool IsAiming
+        {
             get
             {
                 return BotOwner?.ShootData?.ShootController?.IsAiming == true || BotOwner.AimingManager.CurrentAiming.IsReady == true;
@@ -129,7 +139,8 @@ namespace SAIN.SAINComponent.Classes
         private void selectWeapon()
         {
             EquipmentSlot optimalSlot = findOptimalWeaponForDistance(getDistance());
-            if (currentSlot != optimalSlot) {
+            if (currentSlot != optimalSlot)
+            {
                 tryChangeWeapon(optimalSlot);
             }
         }
@@ -138,11 +149,14 @@ namespace SAIN.SAINComponent.Classes
 
         private void tryChangeWeapon(EquipmentSlot slot)
         {
-            if (_nextChangeWeaponTime < Time.time) {
+            if (_nextChangeWeaponTime < Time.time)
+            {
                 var selector = BotOwner?.WeaponManager?.Selector;
-                if (selector != null) {
+                if (selector != null)
+                {
                     _nextChangeWeaponTime = Time.time + 1f;
-                    switch (slot) {
+                    switch (slot)
+                    {
                         case EquipmentSlot.FirstPrimaryWeapon:
                             selector.TryChangeToMain();
                             break;
@@ -164,10 +178,12 @@ namespace SAIN.SAINComponent.Classes
 
         private float getDistance()
         {
-            if (_nextGetDistTime < Time.time) {
+            if (_nextGetDistTime < Time.time)
+            {
                 _nextGetDistTime = Time.time + 0.5f;
                 Vector3? target = Bot.CurrentTargetPosition;
-                if (target != null) {
+                if (target != null)
+                {
                     _lastDistance = Bot.CurrentTargetDistance;
                 }
             }
@@ -176,26 +192,30 @@ namespace SAIN.SAINComponent.Classes
 
         private EquipmentSlot findOptimalWeaponForDistance(float distance)
         {
-            if (_nextCheckOptimalTime < Time.time) {
+            if (_nextCheckOptimalTime < Time.time)
+            {
                 _nextCheckOptimalTime = Time.time + 0.5f;
 
                 var equipment = Bot.PlayerComponent.Equipment;
 
                 float? primaryEngageDist = null;
                 var primary = equipment.PrimaryWeapon;
-                if (isWeaponDurableEnough(primary)) {
+                if (isWeaponDurableEnough(primary))
+                {
                     primaryEngageDist = primary.EngagementDistance;
                 }
 
                 float? secondaryEngageDist = null;
                 var secondary = equipment.SecondaryWeapon;
-                if (isWeaponDurableEnough(secondary)) {
+                if (isWeaponDurableEnough(secondary))
+                {
                     secondaryEngageDist = secondary.EngagementDistance;
                 }
 
                 float? holsterEngageDist = null;
                 var holster = equipment.HolsterWeapon;
-                if (isWeaponDurableEnough(holster)) {
+                if (isWeaponDurableEnough(holster))
+                {
                     holsterEngageDist = holster.EngagementDistance;
                 }
 
@@ -203,14 +223,17 @@ namespace SAIN.SAINComponent.Classes
                 optimalSlot = EquipmentSlot.FirstPrimaryWeapon;
 
                 float difference = Mathf.Abs(distance - secondaryEngageDist ?? 0);
-                if (difference < minDifference) {
+                if (difference < minDifference)
+                {
                     minDifference = difference;
                     optimalSlot = EquipmentSlot.SecondPrimaryWeapon;
                 }
 
-                if (!BotOwner.WeaponManager.HaveBullets) {
+                if (!BotOwner.WeaponManager.HaveBullets)
+                {
                     difference = Mathf.Abs(distance - holsterEngageDist ?? 0);
-                    if (difference < minDifference) {
+                    if (difference < minDifference)
+                    {
                         minDifference = difference;
                         optimalSlot = EquipmentSlot.Holster;
                     }
@@ -255,11 +278,13 @@ namespace SAIN.SAINComponent.Classes
 
             aimData.NodeUpdate();
 
-            if (!Bot.FriendlyFire.CheckFriendlyFire(aimData.EndTargetPoint)) {
+            if (!Bot.FriendlyFire.CheckFriendlyFire(aimData.EndTargetPoint))
+            {
                 BotOwner.ShootData.EndShoot();
                 return false;
             }
-            if (Bot.NoBushESP.NoBushESPActive) {
+            if (Bot.NoBushESP.NoBushESPActive)
+            {
                 return false;
             }
 
@@ -284,9 +309,11 @@ namespace SAIN.SAINComponent.Classes
             Vector3? result = null;
             if (!enemy.IsVisible
                     && enemy.Status.HeardRecently
-                    && enemy.InLineOfSight) {
+                    && enemy.InLineOfSight)
+            {
                 EnemyPlace lastKnown = enemy.KnownPlaces.LastKnownPlace;
-                if (lastKnown != null && lastKnown.CheckLineOfSight(BotOwner.LookSensor._headPoint, LayerMaskClass.HighPolyWithTerrainMask)) {
+                if (lastKnown != null && lastKnown.CheckLineOfSight(BotOwner.LookSensor._headPoint, LayerMaskClass.HighPolyWithTerrainMask))
+                {
                     result = lastKnown.Position + Vector3.up + UnityEngine.Random.onUnitSphere;
                 }
             }
@@ -297,13 +324,15 @@ namespace SAIN.SAINComponent.Classes
         {
             enemy = Bot.Enemy;
             Vector3? target = getAimTarget(enemy);
-            if (target != null) {
+            if (target != null)
+            {
                 return target;
             }
 
             enemy = Bot.LastEnemy;
             target = getAimTarget(enemy);
-            if (target != null) {
+            if (target != null)
+            {
                 return target;
             }
 
@@ -315,7 +344,8 @@ namespace SAIN.SAINComponent.Classes
         {
             if (enemy != null &&
                 enemy.IsVisible &&
-                enemy.CanShoot) {
+                enemy.CanShoot)
+            {
                 //Vector3? test = enemy.Shoot.Targets.GetPointToShoot();
                 //if (test == null) {
                 //    Logger.LogWarning($"cant get point to shoot with new system! oh no!");
@@ -325,7 +355,8 @@ namespace SAIN.SAINComponent.Classes
                 Vector3? partToShoot = getEnemyPartToShoot(enemy.EnemyInfo);
                 Vector3? modifiedTarget = checkYValue(centerMass, partToShoot);
                 Vector3? finalTarget = modifiedTarget ?? partToShoot ?? centerMass;
-                if (finalTarget != null) {
+                if (finalTarget != null)
+                {
                     _targetEnemy = enemy;
                 }
 
@@ -338,7 +369,8 @@ namespace SAIN.SAINComponent.Classes
         {
             if (centerMass != null &&
                 partTarget != null &&
-                centerMass.Value.y < partTarget.Value.y) {
+                centerMass.Value.y < partTarget.Value.y)
+            {
                 Vector3 newTarget = partTarget.Value;
                 newTarget.y = centerMass.Value.y;
                 return new Vector3?(newTarget);
@@ -348,16 +380,20 @@ namespace SAIN.SAINComponent.Classes
 
         private Vector3? findCenterMassPoint(Enemy enemy)
         {
-            if (enemy.IsAI) {
+            if (enemy.IsAI)
+            {
                 return null;
             }
-            if (!SAINPlugin.LoadedPreset.GlobalSettings.Aiming.AimCenterMassGlobal) {
+            if (!SAINPlugin.LoadedPreset.GlobalSettings.Aiming.AimCenterMassGlobal)
+            {
                 return null;
             }
-            if (!Bot.Info.FileSettings.Aiming.AimCenterMass) {
+            if (!Bot.Info.FileSettings.Aiming.AimCenterMass)
+            {
                 return null;
             }
-            if (Bot.Info.Profile.IsPMC && GlobalSettingsClass.Instance.Aiming.PMCSAimForHead) {
+            if (Bot.Info.Profile.IsPMC && GlobalSettingsClass.Instance.Aiming.PMCSAimForHead)
+            {
                 return null;
             }
             return enemy.CenterMass;
@@ -365,12 +401,15 @@ namespace SAIN.SAINComponent.Classes
 
         private Vector3? getEnemyPartToShoot(EnemyInfo enemy)
         {
-            if (enemy != null) {
+            if (enemy != null)
+            {
                 Vector3 value;
-                if (enemy.Distance < 6f) {
+                if (enemy.Distance < 6f)
+                {
                     value = enemy.GetCenterPart();
                 }
-                else {
+                else
+                {
                     value = enemy.GetPartToShoot();
                 }
                 return new Vector3?(value);
@@ -380,7 +419,8 @@ namespace SAIN.SAINComponent.Classes
 
         private void tryShoot(Enemy enemy)
         {
-            if (BotOwner.ShootData.Shoot()) {
+            if (BotOwner.ShootData.Shoot())
+            {
                 OnShootEnemy?.Invoke(enemy);
                 LastShotEnemy = enemy;
                 enemy.EnemyInfo?.SetLastShootTime();

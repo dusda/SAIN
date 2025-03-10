@@ -1,19 +1,10 @@
-using SPT.Common.Utils;
-using BepInEx.Logging;
-using Comfort.Common;
-using EFT;
-using JetBrains.Annotations;
 using Newtonsoft.Json;
 using SAIN.Preset;
-using SAIN.Editor;
-using SAIN.Editor.Util;
+using SAIN.Preset.GearStealthValues;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
-using SAIN.Preset.Personalities;
-using System.Diagnostics;
-using SAIN.Preset.GearStealthValues;
 
 namespace SAIN.Helpers
 {
@@ -25,7 +16,7 @@ namespace SAIN.Helpers
 
     public static class JsonUtility
     {
-        public static readonly Dictionary<JsonEnum, string> FileAndFolderNames = new Dictionary<JsonEnum, string> 
+        public static readonly Dictionary<JsonEnum, string> FileAndFolderNames = new()
         {
             { JsonEnum.Presets, "Presets" },
             { JsonEnum.GlobalSettings, "GlobalSettings" },
@@ -55,7 +46,7 @@ namespace SAIN.Helpers
                 string jsonString = JsonConvert.SerializeObject(objectToSave, Formatting.Indented);
                 File.Create(filePath).Dispose();
 
-                StreamWriter streamWriter = new StreamWriter(filePath);
+                StreamWriter streamWriter = new(filePath);
                 streamWriter.Write(jsonString);
                 streamWriter.Flush();
                 streamWriter.Close();
@@ -92,7 +83,7 @@ namespace SAIN.Helpers
                     Directory.CreateDirectory(foldersPath);
                 }
                 var array = Directory.GetDirectories(foldersPath);
-                foreach ( var item in array )
+                foreach (var item in array)
                 {
                     string path = Path.Combine(item, Info) + JSON;
                     if (File.Exists(path))
@@ -180,7 +171,8 @@ namespace SAIN.Helpers
         public static void DeletePreset(SAINPresetDefinition preset)
         {
             var path = getPath("Presets", preset.Name);
-            if (Directory.Exists(path)) {
+            if (Directory.Exists(path))
+            {
                 Directory.Delete(path, true);
             }
         }

@@ -46,7 +46,7 @@ namespace SAIN.Layers
         {
             get
             {
-                if (_bot == null && 
+                if (_bot == null &&
                     BotController.GetSAIN(BotOwner, out var bot))
                 {
                     _bot = bot;
@@ -60,7 +60,7 @@ namespace SAIN.Layers
         }
 
         private BotComponent _bot;
-        
+
 
         public override void BuildDebugText(StringBuilder stringBuilder)
         {

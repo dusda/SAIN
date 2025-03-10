@@ -1,9 +1,6 @@
-﻿using EFT;
-using SAIN.Helpers;
-using UnityEngine;
-using UnityEngine.AI;
+﻿using SAIN.Helpers;
 using System.Collections.Generic;
-using System.Collections;
+using UnityEngine;
 
 namespace SAIN.SAINComponent.Classes.Search
 {

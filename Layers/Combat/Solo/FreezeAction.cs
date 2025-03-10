@@ -1,7 +1,5 @@
 ﻿using DrakiaXYZ.BigBrain.Brains;
 using EFT;
-using System.Collections;
-using UnityEngine.Profiling;
 
 namespace SAIN.Layers.Combat.Solo
 {
@@ -20,7 +18,8 @@ namespace SAIN.Layers.Combat.Solo
         {
             this.StartProfilingSample("Update");
             Bot.Mover.SetTargetPose(0f);
-            if (!Bot.Steering.SteerByPriority(null, false)) {
+            if (!Bot.Steering.SteerByPriority(null, false))
+            {
                 Bot.Steering.LookToLastKnownEnemyPosition(Bot.Enemy);
             }
             Shoot.CheckAimAndFire();

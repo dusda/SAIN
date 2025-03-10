@@ -31,10 +31,12 @@ namespace SAIN.Patches.Vision
             BotLight __instance)
         {
             __result = curLightDist;
-            if (___botOwner_0.FlashGrenade.IsFlashed) {
+            if (___botOwner_0.FlashGrenade.IsFlashed)
+            {
                 return false;
             }
-            if (!____haveLight) {
+            if (!____haveLight)
+            {
                 return false;
             }
             ____curLightDist = curLightDist;
@@ -49,40 +51,52 @@ namespace SAIN.Patches.Vision
             bool wantOff = isOn && timeModifier >= turnOffRatio;
             ____canUseNow = timeModifier < turnOffRatio;
 
-            if (wantOn) {
-                try {
+            if (wantOn)
+            {
+                try
+                {
                     __instance.TurnOn(true);
                 }
-                catch (Exception e) {
-                    if (SAINPlugin.DebugMode) {
+                catch (Exception e)
+                {
+                    if (SAINPlugin.DebugMode)
+                    {
                         Logger.LogError(e);
                     }
                 }
             }
-            if (wantOff) {
-                try {
+            if (wantOff)
+            {
+                try
+                {
                     __instance.TurnOff(true, true);
                 }
-                catch (Exception e) {
-                    if (SAINPlugin.DebugMode) {
+                catch (Exception e)
+                {
+                    if (SAINPlugin.DebugMode)
+                    {
                         Logger.LogError(e);
                     }
                 }
             }
 
-            if (__instance.IsEnable) {
+            if (__instance.IsEnable)
+            {
                 var gameworld = GameWorldComponent.Instance;
-                if (gameworld == null) {
+                if (gameworld == null)
+                {
                     Logger.LogError($"GameWorldComponent is null, cannot check if bot has flashlight on!");
                     return false;
                 }
                 PlayerComponent playerComponent = gameworld.PlayerTracker.GetPlayerComponent(___botOwner_0.ProfileId);
-                if (playerComponent == null) {
+                if (playerComponent == null)
+                {
                     Logger.LogError($"Player Component is null, cannot check if bot has flashlight on!");
                     return false;
                 }
                 if (playerComponent.Flashlight.WhiteLight ||
-                    (___botOwner_0.NightVision.UsingNow && playerComponent.Flashlight.IRLight)) {
+                    (___botOwner_0.NightVision.UsingNow && playerComponent.Flashlight.IRLight))
+                {
                     float min = ___botOwner_0.Settings.FileSettings.Look.VISIBLE_DISNACE_WITH_LIGHT;
                     __result = Mathf.Clamp(curLightDist, min, float.MaxValue);
                 }
@@ -102,13 +116,15 @@ namespace SAIN.Patches.Vision
         [PatchPrefix]
         public static bool PatchPrefix(BotLight __instance)
         {
-            if (!__instance.IsEnable) {
+            if (!__instance.IsEnable)
+            {
                 return false;
             }
             float timeModifier = SAINBotController.Instance.TimeVision.TimeVisionDistanceModifier;
             float turnOffRatio = GlobalSettingsClass.Instance.Look.Light.LightOffRatio;
             bool wantOff = timeModifier >= turnOffRatio;
-            if (wantOff) {
+            if (wantOff)
+            {
                 __instance.TurnOff(true, true);
             }
             return false;
@@ -125,7 +141,8 @@ namespace SAIN.Patches.Vision
         [PatchPrefix]
         public static bool PatchPrefix(BotOwner ___botOwner_0, bool ____nightVisionAtPocket, BotNightVisionData __instance)
         {
-            if (___botOwner_0.FlashGrenade.IsFlashed) {
+            if (___botOwner_0.FlashGrenade.IsFlashed)
+            {
                 return false;
             }
 
@@ -134,17 +151,22 @@ namespace SAIN.Patches.Vision
             float turnOnRatio = lookSettings.NightVisionOnRatio;
             float turnOffRatio = lookSettings.NightVisionOffRatio;
 
-            if (____nightVisionAtPocket) {
-                if (timeModifier < turnOnRatio) {
+            if (____nightVisionAtPocket)
+            {
+                if (timeModifier < turnOnRatio)
+                {
                     __instance.method_4();
                     return false;
                 }
             }
-            else {
-                if (timeModifier < turnOnRatio) {
+            else
+            {
+                if (timeModifier < turnOnRatio)
+                {
                     __instance.method_5();
                 }
-                if (timeModifier >= turnOffRatio) {
+                if (timeModifier >= turnOffRatio)
+                {
                     __instance.method_1();
                 }
             }
@@ -162,29 +184,36 @@ namespace SAIN.Patches.Vision
         [PatchPrefix]
         public static bool PatchPrefix(EnemyInfo __instance)
         {
-            bool isAI = __instance?.Person?.IsAI == true;
+            bool isAI = __instance.Person?.IsAI == true;
             bool visible = __instance.IsVisible;
 
-            if (isAI) {
-                if (!__instance.HaveSeenPersonal || Time.time - __instance.TimeLastSeenReal > 5f) {
+            if (isAI)
+            {
+                if (!__instance.HaveSeenPersonal || Time.time - __instance.TimeLastSeenReal > 5f)
+                {
                     __instance.SetFarParts();
                 }
-                else {
+                else
+                {
                     __instance.SetMiddleParts();
                 }
                 return false;
             }
 
             if (!isAI &&
-                SAINEnableClass.GetSAIN(__instance.Owner, out BotComponent botComponent)) {
+                SAINEnableClass.GetSAIN(__instance.Owner, out BotComponent botComponent))
+            {
                 Enemy enemy = botComponent.EnemyController.CheckAddEnemy(__instance.Person);
-                if (enemy != null) {
-                    if (enemy.IsCurrentEnemy) {
+                if (enemy != null)
+                {
+                    if (enemy.IsCurrentEnemy)
+                    {
                         __instance.SetCloseParts();
                         return false;
                     }
                     if ((enemy.Status.ShotAtMeRecently ||
-                        enemy.Status.PositionalFlareEnabled)) {
+                        enemy.Status.PositionalFlareEnabled))
+                    {
                         __instance.SetCloseParts();
                         return false;
                     }
@@ -235,8 +264,10 @@ namespace SAIN.Patches.Vision
         [PatchPrefix]
         public static bool PatchPrefix(BotOwner ____botOwner, ref float ____nextUpdateVisibleDist)
         {
-            if (____nextUpdateVisibleDist < Time.time) {
-                if (SAINEnableClass.isBotExcluded(____botOwner)) {
+            if (____nextUpdateVisibleDist < Time.time)
+            {
+                if (SAINEnableClass.isBotExcluded(____botOwner))
+                {
                     return true;
                 }
                 ____nextUpdateVisibleDist = float.MaxValue;
@@ -250,7 +281,7 @@ namespace SAIN.Patches.Vision
     {
         protected override MethodBase GetTargetMethod()
         {
-            return typeof(BotOwner)?.GetMethod("IsEnemyLookingAtMe", BindingFlags.Instance | BindingFlags.Public, null, new[] { typeof(IPlayer) }, null);
+            return typeof(BotOwner).GetMethod("IsEnemyLookingAtMe", BindingFlags.Instance | BindingFlags.Public, null, [typeof(IPlayer)], null);
         }
 
         [PatchPrefix]
@@ -272,35 +303,43 @@ namespace SAIN.Patches.Vision
         public static bool PatchPrefix(BotOwner ___botOwner_0, ref bool ____isInDarkPlace)
         {
             if (____isInDarkPlace
-                && !SAINPlugin.LoadedPreset.GlobalSettings.General.Flashlight.AllowLightOnForDarkBuildings) {
+                && !SAINPlugin.LoadedPreset.GlobalSettings.General.Flashlight.AllowLightOnForDarkBuildings)
+            {
                 ____isInDarkPlace = false;
             }
-            if (____isInDarkPlace || ___botOwner_0.Memory.GoalEnemy != null) {
+            if (____isInDarkPlace || ___botOwner_0.Memory.GoalEnemy != null)
+            {
                 return true;
             }
-            if (!shallTurnLightOff(___botOwner_0.Profile.Info.Settings.Role)) {
+            if (!ShallTurnLightOff(___botOwner_0.Profile.Info.Settings.Role))
+            {
                 return true;
             }
             ___botOwner_0.BotLight.TurnOff(false, true);
             return false;
         }
 
-        private static bool shallTurnLightOff(WildSpawnType wildSpawnType)
+        private static bool ShallTurnLightOff(WildSpawnType wildSpawnType)
         {
             FlashlightSettings settings = SAINPlugin.LoadedPreset.GlobalSettings.General.Flashlight;
-            if (EnumValues.WildSpawn.IsScav(wildSpawnType)) {
+            if (EnumValues.WildSpawn.IsScav(wildSpawnType))
+            {
                 return settings.TurnLightOffNoEnemySCAV;
             }
-            if (EnumValues.WildSpawn.IsPMC(wildSpawnType)) {
+            if (EnumValues.WildSpawn.IsPMC(wildSpawnType))
+            {
                 return settings.TurnLightOffNoEnemyPMC;
             }
-            if (EnumValues.WildSpawn.IsGoons(wildSpawnType)) {
+            if (EnumValues.WildSpawn.IsGoons(wildSpawnType))
+            {
                 return settings.TurnLightOffNoEnemyGOONS;
             }
-            if (EnumValues.WildSpawn.IsBoss(wildSpawnType)) {
+            if (EnumValues.WildSpawn.IsBoss(wildSpawnType))
+            {
                 return settings.TurnLightOffNoEnemyBOSS;
             }
-            if (EnumValues.WildSpawn.IsFollower(wildSpawnType)) {
+            if (EnumValues.WildSpawn.IsFollower(wildSpawnType))
+            {
                 return settings.TurnLightOffNoEnemyFOLLOWER;
             }
             return settings.TurnLightOffNoEnemyRAIDERROGUE;
@@ -317,7 +356,8 @@ namespace SAIN.Patches.Vision
         [PatchPrefix]
         public static bool Patch(float time, Vector3 position, BotOwner ___botOwner_0)
         {
-            if (SAINEnableClass.GetSAIN(___botOwner_0, out var sain)) {
+            if (SAINEnableClass.GetSAIN(___botOwner_0, out var sain))
+            {
                 sain.Grenade.BotFlash.BotFlashed(time, position);
                 return false;
             }
@@ -335,9 +375,11 @@ namespace SAIN.Patches.Vision
         [PatchPostfix]
         public static void PatchPostfix(ref float __result, EnemyInfo __instance)
         {
-            if (SAINEnableClass.GetSAIN(__instance?.Owner, out var sain)) {
+            if (SAINEnableClass.GetSAIN(__instance?.Owner, out var sain))
+            {
                 Enemy enemy = sain.EnemyController.GetEnemy(__instance.Person.ProfileId, true);
-                if (enemy != null) {
+                if (enemy != null)
+                {
                     if (!enemy.Vision.Angles.CanBeSeen)
                         __result = 696969;
                     else
@@ -346,7 +388,8 @@ namespace SAIN.Patches.Vision
                 }
 
                 float minSpeed = sain.Info.FileSettings.Look.MinimumVisionSpeed;
-                if (minSpeed > 0) {
+                if (minSpeed > 0)
+                {
                     __result = Mathf.Clamp(__result, minSpeed, float.MaxValue);
                 }
             }
@@ -364,10 +407,13 @@ namespace SAIN.Patches.Vision
         [PatchPrefix]
         public static void PatchPrefix(ref float addSensorDistance, EnemyInfo __instance)
         {
-            if (SAINEnableClass.GetSAIN(__instance?.Owner, out var sain)) {
+            if (SAINEnableClass.GetSAIN(__instance?.Owner, out var sain))
+            {
                 Enemy enemy = sain.EnemyController.GetEnemy(__instance.ProfileId, true);
-                if (enemy != null) {
-                    if (!enemy.Vision.Angles.CanBeSeen) {
+                if (enemy != null)
+                {
+                    if (!enemy.Vision.Angles.CanBeSeen)
+                    {
                         addSensorDistance = float.MinValue;
                         return;
                     }
@@ -391,13 +437,15 @@ namespace SAIN.Patches.Vision
         public static void PatchPostfix(ref Player ____player)
         {
             PlayerComponent playerComponent = GameWorldComponent.Instance?.PlayerTracker.GetPlayerComponent(____player?.ProfileId);
-            if (playerComponent != null) {
+            if (playerComponent != null)
+            {
                 SAINBotController.Instance.BotHearing.PlayAISound(playerComponent, SAINSoundType.GearSound, playerComponent.Player.WeaponRoot.position, 60f, 1f, true);
                 var flashLight = playerComponent.Flashlight;
                 flashLight.CheckDevice();
 
-                if (!flashLight.WhiteLight && !flashLight.Laser) {
-                    _UsingLight.Invoke(____player.AIData, new object[] { false });
+                if (!flashLight.WhiteLight && !flashLight.Laser)
+                {
+                    _UsingLight.Invoke(____player.AIData, [false]);
                 }
             }
         }

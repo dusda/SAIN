@@ -1,5 +1,4 @@
-﻿using Comfort.Common;
-using EFT;
+﻿using EFT;
 using EFT.InventoryLogic;
 using HarmonyLib;
 using System;
@@ -180,9 +179,9 @@ namespace SAIN.SAINComponent.Classes
             }
         }
 
-        private Dictionary<GEventArgs1, float> _OngoingEvents = new Dictionary<GEventArgs1, float>();
-        private List<HandEvent> _eventsToRemove = new List<HandEvent>();
-        private List<HandEvent> _events = new List<HandEvent>();
+        private Dictionary<GEventArgs1, float> _OngoingEvents = new();
+        private List<HandEvent> _eventsToRemove = new();
+        private List<HandEvent> _events = new();
 
         // Credit to Lacyway's "Hands are Not Busy" mod https://github.com/Lacyway/HandsAreNotBusy/blob/main/HANB_Component.cs
         private static void resetHandsController(Player player)
@@ -209,10 +208,10 @@ namespace SAIN.SAINComponent.Classes
 
             if (handsController is FirearmController currentFirearmController)
             {
-				player.MovementContext.OnStateChanged -= currentFirearmController.method_17;
-				player.Physical.OnSprintStateChangedEvent -= currentFirearmController.method_16;
-				currentFirearmController.RemoveBallisticCalculator();
-			}
+                player.MovementContext.OnStateChanged -= currentFirearmController.method_17;
+                player.Physical.OnSprintStateChangedEvent -= currentFirearmController.method_16;
+                currentFirearmController.RemoveBallisticCalculator();
+            }
 
             try
             {
@@ -225,9 +224,9 @@ namespace SAIN.SAINComponent.Classes
 
             if (player.LastEquippedWeaponOrKnifeItem != null)
             {
-				InteractionsHandlerClass.Discard(player.LastEquippedWeaponOrKnifeItem, inventoryController, true);
+                InteractionsHandlerClass.Discard(player.LastEquippedWeaponOrKnifeItem, inventoryController, true);
 
-				player.ProcessStatus = EProcessStatus.None;
+                player.ProcessStatus = EProcessStatus.None;
                 player.TrySetLastEquippedWeapon();
             }
             else

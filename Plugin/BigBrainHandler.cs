@@ -1,10 +1,4 @@
-﻿using SPT.Reflection.Patching;
-using Comfort.Common;
-using Dissonance;
-using DrakiaXYZ.BigBrain.Brains;
-using EFT;
-using HarmonyLib;
-using SAIN.Helpers;
+﻿using DrakiaXYZ.BigBrain.Brains;
 using SAIN.Layers;
 using SAIN.Layers.Combat.Run;
 using SAIN.Layers.Combat.Solo;
@@ -12,7 +6,6 @@ using SAIN.Layers.Combat.Squad;
 using SAIN.Preset.GlobalSettings;
 using SAIN.Preset.GlobalSettings.Categories;
 using System.Collections.Generic;
-using System.Reflection;
 
 namespace SAIN
 {
@@ -42,7 +35,7 @@ namespace SAIN
             private static void handlePMCandRaiders()
             {
                 var settings = SAINPlugin.LoadedPreset.GlobalSettings.General.Layers;
-                List<string> pmcBrain = new List<string>();
+                List<string> pmcBrain = new();
                 pmcBrain.Add(Brain.PMC.ToString());
 
                 BrainManager.AddCustomLayer(typeof(DebugLayer), pmcBrain, 99);
@@ -51,7 +44,7 @@ namespace SAIN
                 BrainManager.AddCustomLayer(typeof(CombatSquadLayer), pmcBrain, settings.SAINCombatSquadLayerPriority);
                 BrainManager.AddCustomLayer(typeof(CombatSoloLayer), pmcBrain, settings.SAINCombatSoloLayerPriority);
 
-                List<string> LayersToRemove = new List<string>
+                List<string> LayersToRemove = new()
                 {
                     "Help",
                     "AdvAssaultTarget",
@@ -75,7 +68,8 @@ namespace SAIN
 
             private static void handleScavs()
             {
-                if (_vanillaBotSettings.VanillaScavs) {
+                if (_vanillaBotSettings.VanillaScavs)
+                {
                     return;
                 }
 
@@ -89,7 +83,7 @@ namespace SAIN
                 BrainManager.AddCustomLayer(typeof(CombatSquadLayer), brainList, settings.SAINCombatSquadLayerPriority);
                 BrainManager.AddCustomLayer(typeof(CombatSoloLayer), brainList, settings.SAINCombatSoloLayerPriority);
 
-                List<string> LayersToRemove = new List<string>
+                List<string> LayersToRemove = new()
                 {
                     "Help",
                     "AdvAssaultTarget",
@@ -120,7 +114,7 @@ namespace SAIN
                 BrainManager.AddCustomLayer(typeof(CombatSquadLayer), brainList, settings.SAINCombatSquadLayerPriority);
                 BrainManager.AddCustomLayer(typeof(CombatSoloLayer), brainList, settings.SAINCombatSoloLayerPriority);
 
-                List<string> LayersToRemove = new List<string>
+                List<string> LayersToRemove = new()
                 {
                     "Help",
                     "AdvAssaultTarget",
@@ -144,11 +138,12 @@ namespace SAIN
 
             private static void handleRogues()
             {
-                if (_vanillaBotSettings.VanillaRogues) {
+                if (_vanillaBotSettings.VanillaRogues)
+                {
                     return;
                 }
 
-                List<string> brainList = new List<string>();
+                List<string> brainList = new();
                 brainList.Add(Brain.ExUsec.ToString());
 
                 var settings = SAINPlugin.LoadedPreset.GlobalSettings.General.Layers;
@@ -159,7 +154,7 @@ namespace SAIN
                 BrainManager.AddCustomLayer(typeof(CombatSquadLayer), brainList, settings.SAINCombatSquadLayerPriority);
                 BrainManager.AddCustomLayer(typeof(CombatSoloLayer), brainList, settings.SAINCombatSoloLayerPriority);
 
-                List<string> LayersToRemove = new List<string>
+                List<string> LayersToRemove = new()
                 {
                     "Help",
                     "AdvAssaultTarget",
@@ -183,11 +178,12 @@ namespace SAIN
 
             private static void handleBloodHounds()
             {
-                if (_vanillaBotSettings.VanillaBloodHounds) {
+                if (_vanillaBotSettings.VanillaBloodHounds)
+                {
                     return;
                 }
 
-                List<string> brainList = new List<string>();
+                List<string> brainList = new();
                 brainList.Add(Brain.ArenaFighter.ToString());
 
                 var settings = SAINPlugin.LoadedPreset.GlobalSettings.General.Layers;
@@ -198,7 +194,7 @@ namespace SAIN
                 BrainManager.AddCustomLayer(typeof(CombatSquadLayer), brainList, settings.SAINCombatSquadLayerPriority);
                 BrainManager.AddCustomLayer(typeof(CombatSoloLayer), brainList, settings.SAINCombatSoloLayerPriority);
 
-                List<string> LayersToRemove = new List<string>
+                List<string> LayersToRemove = new()
                 {
                     "Help",
                     "AdvAssaultTarget",
@@ -222,7 +218,8 @@ namespace SAIN
 
             private static void handleBosses()
             {
-                if (_vanillaBotSettings.VanillaBosses) {
+                if (_vanillaBotSettings.VanillaBosses)
+                {
                     return;
                 }
 
@@ -235,7 +232,7 @@ namespace SAIN
                 BrainManager.AddCustomLayer(typeof(CombatSquadLayer), brainList, 70);
                 BrainManager.AddCustomLayer(typeof(CombatSoloLayer), brainList, 69);
 
-                List<string> LayersToRemove = new List<string>
+                List<string> LayersToRemove = new()
                 {
                     "Help",
                     "AdvAssaultTarget",
@@ -255,7 +252,8 @@ namespace SAIN
 
             private static void handleFollowers()
             {
-                if (_vanillaBotSettings.VanillaFollowers) {
+                if (_vanillaBotSettings.VanillaFollowers)
+                {
                     return;
                 }
 
@@ -268,7 +266,7 @@ namespace SAIN
                 BrainManager.AddCustomLayer(typeof(CombatSquadLayer), brainList, 70);
                 BrainManager.AddCustomLayer(typeof(CombatSoloLayer), brainList, 69);
 
-                List<string> LayersToRemove = new List<string>
+                List<string> LayersToRemove = new()
                 {
                     "Help",
                     "AdvAssaultTarget",
@@ -287,7 +285,8 @@ namespace SAIN
 
             private static void handleGoons()
             {
-                if (_vanillaBotSettings.VanillaGoons) {
+                if (_vanillaBotSettings.VanillaGoons)
+                {
                     return;
                 }
 
@@ -298,7 +297,7 @@ namespace SAIN
                 BrainManager.AddCustomLayer(typeof(CombatSquadLayer), brainList, 64);
                 BrainManager.AddCustomLayer(typeof(CombatSoloLayer), brainList, 62);
 
-                List<string> LayersToRemove = new List<string>
+                List<string> LayersToRemove = new()
                 {
                     "Help",
                     "AdvAssaultTarget",
@@ -320,15 +319,17 @@ namespace SAIN
 
             private static void checkExtractEnabled(List<string> layersToRemove)
             {
-                if (GlobalSettingsClass.Instance.General.Extract.SAIN_EXTRACT_TOGGLE) {
+                if (GlobalSettingsClass.Instance.General.Extract.SAIN_EXTRACT_TOGGLE)
+                {
                     layersToRemove.Add("Exfiltration");
                 }
             }
 
             private static List<string> getBrainList(List<Brain> brains)
             {
-                List<string> brainList = new List<string>();
-                for (int i = 0; i < brains.Count; i++) {
+                List<string> brainList = new();
+                for (int i = 0; i < brains.Count; i++)
+                {
                     brainList.Add(brains[i].ToString());
                 }
                 return brainList;

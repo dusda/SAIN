@@ -51,12 +51,15 @@ namespace SAIN.SAINComponent.Classes.Mover
 
         public void CancelRun(float afterTime = -1f)
         {
-            if (Running) {
-                if (afterTime <= 0) {
+            if (Running)
+            {
+                if (afterTime <= 0)
+                {
                     stopRunCoroutine();
                     return;
                 }
-                if (!Canceling) {
+                if (!Canceling)
+                {
                     Canceling = true;
                     Bot.StartCoroutine(cancelRunAfterTime(afterTime));
                 }
@@ -65,7 +68,8 @@ namespace SAIN.SAINComponent.Classes.Mover
 
         private void stopRunCoroutine()
         {
-            if (!Running) {
+            if (!Running)
+            {
                 return;
             }
             OnSprintEnd?.Invoke();
@@ -84,11 +88,13 @@ namespace SAIN.SAINComponent.Classes.Mover
 
         public bool RunToPointByWay(NavMeshPath way, ESprintUrgency urgency, bool stopSprintEnemyVisible, bool checkSameWay = true, System.Action callback = null)
         {
-            if (!getLastCorner(way, out Vector3 point)) {
+            if (!getLastCorner(way, out Vector3 point))
+            {
                 return false;
             }
             ShallStopSprintWhenSeeEnemy = stopSprintEnemyVisible;
-            if (checkSameWay && IsPointSameWay(point)) {
+            if (checkSameWay && IsPointSameWay(point))
+            {
                 return true;
             }
             startRun(way, point, urgency, callback);
@@ -98,17 +104,20 @@ namespace SAIN.SAINComponent.Classes.Mover
         private bool getLastCorner(NavMeshPath way, out Vector3 result)
         {
             Vector3[] corners = way?.corners;
-            if (corners == null) {
+            if (corners == null)
+            {
                 result = Vector3.zero;
                 return false;
             }
-            if (way.status != NavMeshPathStatus.PathComplete) {
+            if (way.status != NavMeshPathStatus.PathComplete)
+            {
                 result = Vector3.zero;
                 return false;
             }
 
             Vector3? last = corners.LastElement();
-            if (last == null) {
+            if (last == null)
+            {
                 result = Vector3.zero;
                 return false;
             }
@@ -119,11 +128,13 @@ namespace SAIN.SAINComponent.Classes.Mover
 
         public bool RunToPoint(Vector3 point, ESprintUrgency urgency, bool stopSprintEnemyVisible, bool checkSameWay = true, System.Action callback = null)
         {
-            if (checkSameWay && IsPointSameWay(point)) {
+            if (checkSameWay && IsPointSameWay(point))
+            {
                 return true;
             }
 
-            if (!Bot.Mover.CanGoToPoint(point, out NavMeshPath path)) {
+            if (!Bot.Mover.CanGoToPoint(point, out NavMeshPath path))
+            {
                 return false;
             }
             ShallStopSprintWhenSeeEnemy = stopSprintEnemyVisible;
@@ -168,7 +179,8 @@ namespace SAIN.SAINComponent.Classes.Mover
 
         public Vector3 CurrentCornerDestination()
         {
-            if (_path.Count <= _currentIndex) {
+            if (_path.Count <= _currentIndex)
+            {
                 return Vector3.zero;
             }
             return _path[_currentIndex];
@@ -202,11 +214,12 @@ namespace SAIN.SAINComponent.Classes.Mover
             stopRunCoroutine();
         }
 
-        private readonly List<Vector3> _path = new List<Vector3>();
+        private readonly List<Vector3> _path = new();
 
         private void moveToNextCorner()
         {
-            if (totalCorners() > _currentIndex) {
+            if (totalCorners() > _currentIndex)
+            {
                 checkCornerLength();
                 _currentIndex++;
                 Vector3 currentCorner = _path[_currentIndex];
@@ -237,7 +250,8 @@ namespace SAIN.SAINComponent.Classes.Mover
         private Vector3 lastCorner()
         {
             int count = _path.Count;
-            if (count == 0) {
+            if (count == 0)
+            {
                 return Vector3.zero;
             }
             return _path[count - 1];
@@ -248,15 +262,18 @@ namespace SAIN.SAINComponent.Classes.Mover
         private IEnumerator runPath(ESprintUrgency urgency)
         {
             int total = totalCorners();
-            for (int i = 1; i <= total; i++) {
+            for (int i = 1; i <= total; i++)
+            {
                 // Track distance to target corner in the path.
                 float distToCurrent = float.MaxValue;
-                while (distToCurrent > _moveSettings.BotSprintCornerReachDist) {
+                while (distToCurrent > _moveSettings.BotSprintCornerReachDist)
+                {
                     distToCurrent = distanceToCurrentCornerSqr();
                     DistanceToCurrentCorner = distToCurrent;
 
                     Vector3 current = CurrentCornerDestination();
-                    if (SAINPlugin.DebugMode) {
+                    if (SAINPlugin.DebugMode)
+                    {
                         //DebugGizmos.Sphere(current, 0.1f);
                         //DebugGizmos.Line(current, Bot.Position, 0.1f, 0.1f);
                     }
@@ -266,10 +283,12 @@ namespace SAIN.SAINComponent.Classes.Mover
 
                     Vector3 destination = CurrentCornerDestination();
                     if (!Bot.DoorOpener.Interacting &&
-                        !Bot.DoorOpener.BreachingDoor) {
+                        !Bot.DoorOpener.BreachingDoor)
+                    {
                         trackMovement();
                         float timeSinceNoMove = timeSinceNotMoving;
-                        if (timeSinceNoMove > _moveSettings.BotSprintRecalcTime && Time.time - _timeStartRun > 2f) {
+                        if (timeSinceNoMove > _moveSettings.BotSprintRecalcTime && Time.time - _timeStartRun > 2f)
+                        {
                             RecalcPath();
                             yield break;
                         }
@@ -279,7 +298,8 @@ namespace SAIN.SAINComponent.Classes.Mover
                         //}
                         else if (Bot.Info.FileSettings.Move.VAULT_TOGGLE
                             && GlobalSettingsClass.Instance.Move.VAULT_TOGGLE
-                            && timeSinceNoMove > _moveSettings.BotSprintTryVaultTime) {
+                            && timeSinceNoMove > _moveSettings.BotSprintTryVaultTime)
+                        {
                             Bot.Mover.TryVault();
                         }
 
@@ -306,7 +326,8 @@ namespace SAIN.SAINComponent.Classes.Mover
 
         private float findStartSprintStamina(ESprintUrgency urgency)
         {
-            switch (urgency) {
+            switch (urgency)
+            {
                 case ESprintUrgency.None:
                 case ESprintUrgency.Low:
                     return 0.75f;
@@ -324,7 +345,8 @@ namespace SAIN.SAINComponent.Classes.Mover
 
         private float findEndSprintStamina(ESprintUrgency urgency)
         {
-            switch (urgency) {
+            switch (urgency)
+            {
                 case ESprintUrgency.None:
                 case ESprintUrgency.Low:
                     return 0.4f;
@@ -348,47 +370,56 @@ namespace SAIN.SAINComponent.Classes.Mover
         private void handleSprinting(float distToCurrent, ESprintUrgency urgency)
         {
             // I cant sprint :(
-            if (!Player.MovementContext.CanSprint) {
+            if (!Player.MovementContext.CanSprint)
+            {
                 CurrentRunStatus = RunStatus.CantSprint;
                 return;
             }
 
-            if (Canceling) {
+            if (Canceling)
+            {
                 CurrentRunStatus = RunStatus.Canceling;
                 Bot.Mover.EnableSprintPlayer(false);
                 return;
             }
 
-            if (shallLookAtEnemy()) {
+            if (shallLookAtEnemy())
+            {
                 CurrentRunStatus = RunStatus.LookAtEnemyNoSprint;
                 Bot.Mover.EnableSprintPlayer(false);
                 return;
             }
 
-            if (isShortCorner) {
+            if (isShortCorner)
+            {
                 CurrentRunStatus = RunStatus.ShortCorner;
                 Bot.Mover.EnableSprintPlayer(false);
                 return;
             }
 
-            if (Player.IsSprintEnabled) {
-                if (Bot.IsCheater) {
+            if (Player.IsSprintEnabled)
+            {
+                if (Bot.IsCheater)
+                {
                     Player.MovementContext.SprintSpeed = 50f;
                 }
-                else if (_moveSettings.EditSprintSpeed) {
+                else if (_moveSettings.EditSprintSpeed)
+                {
                     Player.MovementContext.SprintSpeed = 1.5f;
                 }
             }
 
             // Were messing with a door, dont sprint
-            if (Bot.DoorOpener.ShallPauseSprintForOpening()) {
+            if (Bot.DoorOpener.ShallPauseSprintForOpening())
+            {
                 CurrentRunStatus = RunStatus.InteractingWithDoor;
                 Bot.Mover.EnableSprintPlayer(false);
                 return;
             }
 
             // We are arriving to our destination, stop sprinting when you get close.
-            if ((lastCorner() - BotPosition).magnitude <= _moveSettings.BotSprintDistanceToStopSprintDestination) {
+            if ((lastCorner() - BotPosition).magnitude <= _moveSettings.BotSprintDistanceToStopSprintDestination)
+            {
                 Bot.Mover.EnableSprintPlayer(false);
                 CurrentRunStatus = RunStatus.ArrivingAtDestination;
                 return;
@@ -397,14 +428,16 @@ namespace SAIN.SAINComponent.Classes.Mover
             float staminaValue = Player.Physical.Stamina.NormalValue;
 
             // We are out of stamina, stop sprinting.
-            if (shallPauseSprintStamina(staminaValue, urgency)) {
+            if (shallPauseSprintStamina(staminaValue, urgency))
+            {
                 Bot.Mover.EnableSprintPlayer(false);
                 CurrentRunStatus = RunStatus.NoStamina;
                 return;
             }
 
             // We are approaching a sharp corner, or we are currently not looking in the direction we need to go, stop sprinting
-            if (shallPauseSprintAngle()) {
+            if (shallPauseSprintAngle())
+            {
                 Bot.Mover.EnableSprintPlayer(false);
                 CurrentRunStatus = RunStatus.Turning;
                 return;
@@ -412,7 +445,8 @@ namespace SAIN.SAINComponent.Classes.Mover
 
             // If we arne't already sprinting, and our corner were moving to is far enough away, and I have enough stamina, and the angle isn't too sharp... enable sprint
             if (shallStartSprintStamina(staminaValue, urgency) &&
-                _timeStartCorner + 0.25f < Time.time) {
+                _timeStartCorner + 0.25f < Time.time)
+            {
                 Bot.Mover.EnableSprintPlayer(true);
                 CurrentRunStatus = RunStatus.Running;
                 return;
@@ -463,15 +497,18 @@ namespace SAIN.SAINComponent.Classes.Mover
 
         private void trackMovement()
         {
-            if (nextCheckPosTime < Time.time) {
+            if (nextCheckPosTime < Time.time)
+            {
                 nextCheckPosTime = Time.time + _moveSettings.BotSprintNotMovingCheckFreq;
                 Vector3 botPos = BotPosition;
                 positionMoving = (botPos - lastCheckPos).sqrMagnitude > _moveSettings.BotSprintNotMovingThreshold;
-                if (positionMoving) {
+                if (positionMoving)
+                {
                     _timeNotMoving = -1f;
                     lastCheckPos = botPos;
                 }
-                else if (_timeNotMoving < 0) {
+                else if (_timeNotMoving < 0)
+                {
                     _timeNotMoving = Time.time;
                 }
             }
@@ -483,11 +520,13 @@ namespace SAIN.SAINComponent.Classes.Mover
         private float timeSinceNotMoving => positionMoving ? 0f : Time.time - _timeNotMoving;
         private float _timeNotMoving;
 
-        private Vector3 BotPosition {
+        private Vector3 BotPosition
+        {
             get
             {
                 Vector3 botPos = Bot.Position;
-                if (NavMesh.SamplePosition(botPos, out var hit, 0.5f, -1)) {
+                if (NavMesh.SamplePosition(botPos, out var hit, 0.5f, -1))
+                {
                     botPos = hit.position;
                 }
                 return botPos;
@@ -498,7 +537,8 @@ namespace SAIN.SAINComponent.Classes.Mover
         {
             Vector3 destination = CurrentCornerDestination();
             Vector3 testPoint = destination + Vector3.up;
-            if (Physics.Raycast(testPoint, Vector3.down, out var hit, 1.5f, LayerMaskClass.HighPolyWithTerrainMask)) {
+            if (Physics.Raycast(testPoint, Vector3.down, out var hit, 1.5f, LayerMaskClass.HighPolyWithTerrainMask))
+            {
                 destination = hit.point;
             }
             return (destination - BotPosition).sqrMagnitude;
@@ -511,12 +551,14 @@ namespace SAIN.SAINComponent.Classes.Mover
 
             // First step, look towards the path we want to run
             float dotProduct = 0f;
-            while (dotProduct < _moveSettings.BotSprintFirstTurnDotThreshold) {
+            while (dotProduct < _moveSettings.BotSprintFirstTurnDotThreshold)
+            {
                 BotOwner.Mover.IsMoving = true;
                 Vector3 targetLookDir = firstCorner - Bot.Position;
                 targetLookDir.y = 0f;
                 dotProduct = steer(firstCorner, _moveSettings.BotSprintTurningSpeed);
-                if (!BotOwner.DoorOpener.Interacting) {
+                if (!BotOwner.DoorOpener.Interacting)
+                {
                     move(targetLookDir);
                 }
                 yield return null;
@@ -531,11 +573,14 @@ namespace SAIN.SAINComponent.Classes.Mover
             Vector3 targetLookDir = (target - playerPosition);
             Vector3 targetLookDirNormal = targetLookDir.normalized;
 
-            if (!Bot.DoorOpener.Interacting) {
-                if (shallLookAtEnemy()) {
+            if (!Bot.DoorOpener.Interacting)
+            {
+                if (shallLookAtEnemy())
+                {
                     Bot.Steering.LookToEnemy(Bot.Enemy);
                 }
-                else if (!shallSteerbyPriority() || !Bot.Steering.SteerByPriority(null, false, true)) {
+                else if (!shallSteerbyPriority() || !Bot.Steering.SteerByPriority(null, false, true))
+                {
                     Bot.Steering.LookToDirection(targetLookDirNormal, true, turnSpeed);
                 }
             }
@@ -545,7 +590,8 @@ namespace SAIN.SAINComponent.Classes.Mover
 
         private bool shallSteerbyPriority()
         {
-            switch (CurrentRunStatus) {
+            switch (CurrentRunStatus)
+            {
                 case RunStatus.Turning:
                 case RunStatus.FirstTurn:
                 case RunStatus.Running:
@@ -559,16 +605,17 @@ namespace SAIN.SAINComponent.Classes.Mover
 
         private void move(Vector3 direction)
         {
-            if (Bot.IsCheater) {
+            if (Bot.IsCheater)
+            {
                 direction *= 10f;
             }
             Player.CharacterController.SetSteerDirection(direction);
             BotOwner.AimingManager.CurrentAiming.Move(Player.Speed);
-			if (BotOwner.Mover != null)
-			{
-				BotOwner.Mover.IsMoving = true;
-			}
-			Player.Move(findMoveDirection(direction));
+            if (BotOwner.Mover != null)
+            {
+                BotOwner.Mover.IsMoving = true;
+            }
+            Player.Move(findMoveDirection(direction));
         }
 
         public Vector2 findMoveDirection(Vector3 direction)

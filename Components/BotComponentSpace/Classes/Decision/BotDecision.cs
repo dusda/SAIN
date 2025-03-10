@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace SAIN.SAINComponent.Classes.Decision
 {
@@ -43,6 +42,6 @@ namespace SAIN.SAINComponent.Classes.Decision
             _decisions.Sort((x, y) => x.Priority.CompareTo(y.Priority));
         }
 
-        private readonly List<AIDecisionStruct<T>> _decisions = new List<AIDecisionStruct<T>>();
+        private readonly List<AIDecisionStruct<T>> _decisions = new();
     }
 }

@@ -50,7 +50,8 @@ namespace SAIN.SAINComponent.Classes.WeaponFunction
         public void BotFlashed(float time, Vector3 position)
         {
             EBotFlashedType flashedType = checkIfFlashed(position);
-            if (flashedType == EBotFlashedType.None) {
+            if (flashedType == EBotFlashedType.None)
+            {
                 return;
             }
             OnBotFlashed?.Invoke(flashedType, BOT_FLASH_DURATION, BOT_FLASH_DURATION_EXPIRE_TIME);
@@ -65,28 +66,35 @@ namespace SAIN.SAINComponent.Classes.WeaponFunction
             Vector3 lookDirection = Bot.LookDirection;
             Vector3 flashDirection = position - Bot.Transform.EyePosition;
             float sqrMag = flashDirection.sqrMagnitude;
-            if (sqrMag <= BOT_FLASHED_HEARING_RANGE_SQR) {
+            if (sqrMag <= BOT_FLASHED_HEARING_RANGE_SQR)
+            {
                 hearingAffected = true;
             }
-            if (sqrMag <= BOT_FLASHED_MAX_RANGE_VISION_SQR) {
+            if (sqrMag <= BOT_FLASHED_MAX_RANGE_VISION_SQR)
+            {
                 float angle = Vector3.Angle(lookDirection, flashDirection);
-                if (angle <= BOT_FLASHED_FULL_ANGLE) {
+                if (angle <= BOT_FLASHED_FULL_ANGLE)
+                {
                     fullFlashed = true;
                 }
-                else if (angle <= BOT_FLASHED_PARTIAL_ANGLE) {
+                else if (angle <= BOT_FLASHED_PARTIAL_ANGLE)
+                {
                     partialFlashed = true;
                 }
             }
 
             bool visionAffected = partialFlashed || fullFlashed;
 
-            if (!visionAffected && !hearingAffected) {
+            if (!visionAffected && !hearingAffected)
+            {
                 return EBotFlashedType.None;
             }
-            if (!visionAffected) {
+            if (!visionAffected)
+            {
                 return EBotFlashedType.HearingDamaged;
             }
-            if (partialFlashed) {
+            if (partialFlashed)
+            {
                 return EBotFlashedType.Partial;
             }
             return EBotFlashedType.Full;

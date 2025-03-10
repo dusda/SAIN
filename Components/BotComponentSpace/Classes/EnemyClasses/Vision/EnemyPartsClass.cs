@@ -1,8 +1,4 @@
-﻿using EFT;
-using SAIN.Components;
-using SAIN.Components.PlayerComponentSpace;
-using SAIN.Helpers;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -43,15 +39,18 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
             bool canShoot = false;
             float time = Time.time;
 
-            foreach (var part in Parts.Values) {
+            foreach (var part in Parts.Values)
+            {
                 part.Update(Enemy);
 
-                if (!canShoot && part.CanShoot) {
+                if (!canShoot && part.CanShoot)
+                {
                     canShoot = true;
                     _timeLastCanShoot = time;
                 }
 
-                if (!inSight && part.LineOfSight) {
+                if (!inSight && part.LineOfSight)
+                {
                     inSight = true;
                     _timeLastInSight = time;
                 }
@@ -62,17 +61,20 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
         {
             EnemyPartDataClass result = null;
             EBodyPart epart = (EBodyPart)_index;
-            if (!Parts.TryGetValue(epart, out result)) {
+            if (!Parts.TryGetValue(epart, out result))
+            {
                 _index = 0;
                 result = Parts[EBodyPart.Chest];
             }
 
             _index++;
-            if (_index > _indexMax) {
+            if (_index > _indexMax)
+            {
                 _index = 0;
             }
 
-            if (result == null) {
+            if (result == null)
+            {
                 result = Parts.PickRandom().Value;
             }
             return result;
@@ -81,7 +83,8 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
         private void createPartDatas(PlayerBones bones)
         {
             var parts = Enemy.EnemyPlayerComponent.BodyParts.Parts;
-            foreach (var bodyPart in parts) {
+            foreach (var bodyPart in parts)
+            {
                 Parts.Add(bodyPart.Key, new EnemyPartDataClass(bodyPart.Key, bodyPart.Value.Transform, bodyPart.Value.Colliders));
             }
         }

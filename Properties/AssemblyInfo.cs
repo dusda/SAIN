@@ -1,8 +1,8 @@
 ﻿using DrakiaXYZ.VersionChecker;
+using SAIN;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using static SAIN.AssemblyInfoClass;
-using SAIN;
 
 [assembly: AssemblyTitle(Title)]
 [assembly: AssemblyDescription(Description)]

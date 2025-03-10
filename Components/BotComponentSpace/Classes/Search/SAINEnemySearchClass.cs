@@ -79,7 +79,7 @@ namespace SAIN.SAINComponent.Classes.Search
 
         private void checkStopSearch(Enemy enemy)
         {
-            if (Searching && 
+            if (Searching &&
                 enemy.EnemyProfileId == Enemy.EnemyProfileId)
             {
                 StopSearch();
@@ -98,7 +98,7 @@ namespace SAIN.SAINComponent.Classes.Search
         {
         }
 
-        private readonly List<Vector3> _cornersToEnemy = new List<Vector3>();
+        private readonly List<Vector3> _cornersToEnemy = new();
         private float _checkResetTime;
         private Coroutine _searchCoroutine;
         private Vector3 _searchDestination;

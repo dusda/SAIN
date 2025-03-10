@@ -1,12 +1,9 @@
 ﻿using EFT;
-using HarmonyLib;
 using SAIN.SAINComponent.Classes.EnemyClasses;
 using System.Collections.Generic;
-using System.Reflection;
 using UnityEngine;
 
 // Found in Botowner.Looksensor
-using EnemyTotalCheck = GClass583;
 using EnemyVisionCheck = GClass564;
 using LookAllData = GClass589;
 
@@ -41,7 +38,8 @@ namespace SAIN.SAINComponent.Classes
         public int UpdateLook()
         {
             if (BotOwner.LeaveData == null ||
-                BotOwner.LeaveData.LeaveComplete) {
+                BotOwner.LeaveData.LeaveComplete)
+            {
                 return 0;
             }
 
@@ -52,7 +50,8 @@ namespace SAIN.SAINComponent.Classes
 
         public void UpdateLookData(LookAllData lookData)
         {
-            for (int i = 0; i < lookData.ReportsData.Count; i++) {
+            for (int i = 0; i < lookData.ReportsData.Count; i++)
+            {
                 EnemyVisionCheck enemyVision = lookData.ReportsData[i];
                 BotOwner.BotsGroup.ReportAboutEnemy(enemyVision.Enemy, enemyVision.VisibleOnlyBySence);
             }
@@ -71,11 +70,13 @@ namespace SAIN.SAINComponent.Classes
             int updated = 0;
             _cachedList.Clear();
             _cachedList.AddRange(_enemies.Values);
-            foreach (Enemy enemy in _cachedList) {
+            foreach (Enemy enemy in _cachedList)
+            {
                 if (!shallCheckEnemy(enemy))
                     continue;
 
-                if (checkEnemy(enemy, lookAll)) {
+                if (checkEnemy(enemy, lookAll))
+                {
                     updated++;
                 }
             }
@@ -83,7 +84,7 @@ namespace SAIN.SAINComponent.Classes
             return updated;
         }
 
-        private readonly List<Enemy> _cachedList = new List<Enemy>();
+        private readonly List<Enemy> _cachedList = new();
 
         private bool shallCheckEnemy(Enemy enemy)
         {
@@ -91,7 +92,8 @@ namespace SAIN.SAINComponent.Classes
                 return false;
 
             if (!enemy.InLineOfSight ||
-                !enemy.Vision.Angles.CanBeSeen) {
+                !enemy.Vision.Angles.CanBeSeen)
+            {
                 setNotVis(enemy);
                 return false;
             }
@@ -100,12 +102,15 @@ namespace SAIN.SAINComponent.Classes
 
         private void setNotVis(Enemy enemy)
         {
-            foreach (var part in enemy.EnemyInfo.AllActiveParts.Values) {
-                if (part.IsVisible || part.VisibleType == EEnemyPartVisibleType.Sence) {
+            foreach (var part in enemy.EnemyInfo.AllActiveParts.Values)
+            {
+                if (part.IsVisible || part.VisibleType == EEnemyPartVisibleType.Sence)
+                {
                     part.UpdateVisibility(BotOwner, false, false, false, Time.deltaTime);
                 }
             }
-            if (enemy.EnemyInfo.IsVisible) {
+            if (enemy.EnemyInfo.IsVisible)
+            {
                 enemy.EnemyInfo.SetVisible(false);
             }
         }
@@ -115,7 +120,8 @@ namespace SAIN.SAINComponent.Classes
             float delay = getDelay(enemy);
             var look = enemy.Vision.VisionChecker;
             float timeSince = Time.time - look.LastCheckLookTime;
-            if (timeSince >= delay) {
+            if (timeSince >= delay)
+            {
                 look.LastCheckLookTime = Time.time;
                 enemy.EnemyInfo.CheckLookEnemy(lookAll, Time.deltaTime);
                 return true;
@@ -127,11 +133,13 @@ namespace SAIN.SAINComponent.Classes
         {
             float updateFreqCoef = enemy.UpdateFrequencyCoefNormal + 1f;
             float baseDelay = calcBaseDelay(enemy) * updateFreqCoef;
-            if (!enemy.IsAI) {
+            if (!enemy.IsAI)
+            {
                 return baseDelay;
             }
             var active = Bot.BotActivation;
-            if (!active.BotActive || active.BotInStandBy) {
+            if (!active.BotActive || active.BotInStandBy)
+            {
                 return baseDelay * VISION_FREQ_INACTIVE_BOT_COEF;
             }
             return baseDelay * VISION_FREQ_ACTIVE_BOT_COEF;

@@ -15,8 +15,8 @@ namespace SAIN.Preset.GlobalSettings.Categories
             {
                 var layerInfo = new LayerInfoClass();
 
-                Dictionary<Brain, int> usedByBrains = new Dictionary<Brain, int>();
-                List<WildSpawnType> usedByWST = new List<WildSpawnType>();
+                Dictionary<Brain, int> usedByBrains = new();
+                List<WildSpawnType> usedByWST = new();
                 foreach (var brain in BrainInfos)
                 {
                     var usedLayers = brain.Value.Layers;
@@ -99,7 +99,7 @@ namespace SAIN.Preset.GlobalSettings.Categories
         GClass245 BotBaseBrainClass		return "Assault";
         */
 
-        public static readonly Dictionary<Layer, string> LayersNames = new Dictionary<Layer, string>
+        public static readonly Dictionary<Layer, string> LayersNames = new()
         {
             { Layer.Kojaniy_Target, "Kojaniy Target" },
             { Layer.Follower_bully, "Follower bully" },
@@ -158,7 +158,7 @@ namespace SAIN.Preset.GlobalSettings.Categories
             { Layer.TagillaMain , "TagillaMain"}
         };
 
-        public static readonly Dictionary<Brain, BrainInfoClass> BrainInfos = new Dictionary<Brain, BrainInfoClass>
+        public static readonly Dictionary<Brain, BrainInfoClass> BrainInfos = new()
         {
             {
                 Brain.Marksman, new BrainInfoClass()
@@ -171,10 +171,10 @@ namespace SAIN.Preset.GlobalSettings.Categories
                         { Layer.StandBy, 3},
                         { Layer.PatrolAssault , 1},
                     },
-                    UsedByWildSpawns = new WildSpawnType[]
-                    {
+                    UsedByWildSpawns =
+                    [
                         WildSpawnType.marksman,
-                    },
+                    ],
                 }
             },
             {
@@ -185,10 +185,10 @@ namespace SAIN.Preset.GlobalSettings.Categories
                         { Layer.GrenadeDanger, 80 },
                         { Layer.TestLayer, 100},
                     },
-                    UsedByWildSpawns = new WildSpawnType[]
-                    {
+                    UsedByWildSpawns =
+                    [
                         WildSpawnType.bossTest,
-                    },
+                    ],
                 }
             },
             {
@@ -203,10 +203,10 @@ namespace SAIN.Preset.GlobalSettings.Categories
                         { Layer.AdvAssaultTarget , 9},
                         { Layer.PatrolAssault , 0},
                     },
-                    UsedByWildSpawns = new WildSpawnType[]
-                    {
+                    UsedByWildSpawns =
+                    [
                         WildSpawnType.followerBully,
-                    },
+                    ],
                 }
             },
             {
@@ -224,10 +224,10 @@ namespace SAIN.Preset.GlobalSettings.Categories
                         { Layer.PatrolFollower , 2},
                         { Layer.PatrolAssault , 0},
                     },
-                    UsedByWildSpawns = new WildSpawnType[]
-                    {
+                    UsedByWildSpawns =
+                    [
                         WildSpawnType.followerBully,
-                    },
+                    ],
                 }
             },
             {
@@ -241,10 +241,10 @@ namespace SAIN.Preset.GlobalSettings.Categories
                         { Layer.Simple_Target, 9 },
                         { Layer.PatrolAssault , 0 },
                     },
-                    UsedByWildSpawns = new WildSpawnType[]
-                    {
+                    UsedByWildSpawns =
+                    [
                         WildSpawnType.bossKilla,
-                    },
+                    ],
                 }
             },
             {
@@ -258,10 +258,10 @@ namespace SAIN.Preset.GlobalSettings.Categories
                         { Layer.Kojaniy_Target , 40 },
                         { Layer.StayAtPos, 11 },
                     },
-                    UsedByWildSpawns = new WildSpawnType[]
-                    {
+                    UsedByWildSpawns =
+                    [
                         WildSpawnType.bossKojaniy,
-                    },
+                    ],
                 }
             },
             {
@@ -276,10 +276,10 @@ namespace SAIN.Preset.GlobalSettings.Categories
                         { Layer.Kojaniy_Target, 40},
                         { Layer.StayAtPos , 11},
                     },
-                    UsedByWildSpawns = new WildSpawnType[]
-                    {
+                    UsedByWildSpawns =
+                    [
                         WildSpawnType.followerKojaniy,
-                    },
+                    ],
                 }
             },
             {
@@ -299,12 +299,12 @@ namespace SAIN.Preset.GlobalSettings.Categories
                         {Layer.PatrolFollower, 2 },
                         {Layer.PatrolAssault, 0 }
                     },
-                    UsedByWildSpawns = new WildSpawnType[]
-                    {
+                    UsedByWildSpawns =
+                    [
                         WildSpawnType.pmcBot,
                         WildSpawnType.arenaFighterEvent,
                         WildSpawnType.assaultGroup,
-                    },
+                    ],
                 }
             },
             {
@@ -323,10 +323,10 @@ namespace SAIN.Preset.GlobalSettings.Categories
                         { Layer.Utility_peace , 2},
                         { Layer.PatrolAssault , 1},
                     },
-                    UsedByWildSpawns = new WildSpawnType[]
-                    {
+                    UsedByWildSpawns =
+                    [
                         WildSpawnType.cursedAssault,
-                    },
+                    ],
                 }
             },
             {
@@ -342,10 +342,10 @@ namespace SAIN.Preset.GlobalSettings.Categories
                         { Layer.AdvAssaultTarget , 9},
                         { Layer.PatrolAssault , 0},
                     },
-                    UsedByWildSpawns = new WildSpawnType[]
-                    {
+                    UsedByWildSpawns =
+                    [
                         WildSpawnType.bossGluhar,
-                    },
+                    ],
                 }
             },
             {
@@ -365,10 +365,10 @@ namespace SAIN.Preset.GlobalSettings.Categories
                         { Layer.Simple_Target , 9},
                         { Layer.PatrolAssault, 0},
                     },
-                    UsedByWildSpawns = new WildSpawnType[]
-                    {
+                    UsedByWildSpawns =
+                    [
                         WildSpawnType.followerGluharAssault,
-                    },
+                    ],
                 }
             },
             {
@@ -387,11 +387,11 @@ namespace SAIN.Preset.GlobalSettings.Categories
                         { Layer.PatrolFollower, 2},
                         { Layer.PatrolAssault, 0},
                     },
-                    UsedByWildSpawns = new WildSpawnType[]
-                    {
+                    UsedByWildSpawns =
+                    [
                         WildSpawnType.followerGluharSecurity,
                         WildSpawnType.followerGluharSnipe,
-                    },
+                    ],
                 }
             },
             {
@@ -408,10 +408,10 @@ namespace SAIN.Preset.GlobalSettings.Categories
                         { Layer.Simple_Target , 9},
                         { Layer.PatrolAssault, 0},
                     },
-                    UsedByWildSpawns = new WildSpawnType[]
-                    {
+                    UsedByWildSpawns =
+                    [
                         WildSpawnType.followerGluharScout,
-                    },
+                    ],
                 }
             },
             {
@@ -430,10 +430,10 @@ namespace SAIN.Preset.GlobalSettings.Categories
                         { Layer.PatrolFollower, 2},
                         { Layer.PatrolAssault, 0},
                     },
-                    UsedByWildSpawns = new WildSpawnType[]
-                    {
+                    UsedByWildSpawns =
+                    [
                         WildSpawnType.followerSanitar,
-                    },
+                    ],
                 }
             },
             {
@@ -450,10 +450,10 @@ namespace SAIN.Preset.GlobalSettings.Categories
                         { Layer.Utility_peace, 2},
                         { Layer.PatrolAssault, 0},
                     },
-                    UsedByWildSpawns = new WildSpawnType[]
-                    {
+                    UsedByWildSpawns =
+                    [
                         WildSpawnType.bossSanitar,
-                    },
+                    ],
                 }
             },
             {
@@ -474,10 +474,10 @@ namespace SAIN.Preset.GlobalSettings.Categories
                         { Layer.Leave_Map, 12 },
                         { Layer.StayAtPosOpt, 11 },
                     },
-                    UsedByWildSpawns = new WildSpawnType[]
-                    {
+                    UsedByWildSpawns =
+                    [
                         WildSpawnType.sectantWarrior,
-                    },
+                    ],
                 }
             },
             {
@@ -493,10 +493,10 @@ namespace SAIN.Preset.GlobalSettings.Categories
                         { Layer.Leave_Map, 12 },
                         { Layer.StayAtPos, 11 },
                     },
-                    UsedByWildSpawns = new WildSpawnType[]
-                    {
+                    UsedByWildSpawns =
+                    [
                         WildSpawnType.sectantPriest,
-                    },
+                    ],
                 }
             },
             {
@@ -513,10 +513,10 @@ namespace SAIN.Preset.GlobalSettings.Categories
                         { Layer.Simple_Target, 9 },
                         { Layer.PatrolAssault, 0 },
                     },
-                    UsedByWildSpawns = new WildSpawnType[]
-                    {
+                    UsedByWildSpawns =
+                    [
                         WildSpawnType.bossTagilla,
-                    },
+                    ],
                 }
             },
             {
@@ -534,10 +534,10 @@ namespace SAIN.Preset.GlobalSettings.Categories
                         { Layer.Simple_Target, 9 },
                         { Layer.PatrolAssault, 0 },
                     },
-                    UsedByWildSpawns = new WildSpawnType[]
-                    {
+                    UsedByWildSpawns =
+                    [
                         WildSpawnType.followerTagilla,
-                    },
+                    ],
                 }
             },
             {
@@ -559,10 +559,10 @@ namespace SAIN.Preset.GlobalSettings.Categories
                         { Layer.PatrolFollower, 2},
                         { Layer.PatrolAssault, 0},
                     },
-                    UsedByWildSpawns = new WildSpawnType[]
-                    {
+                    UsedByWildSpawns =
+                    [
                         WildSpawnType.exUsec,
-                    },
+                    ],
                 }
             },
             {
@@ -582,10 +582,10 @@ namespace SAIN.Preset.GlobalSettings.Categories
                         { Layer.Utility_peace , 2},
                         { Layer.PatrolAssault, 1},
                     },
-                    UsedByWildSpawns = new WildSpawnType[]
-                    {
+                    UsedByWildSpawns =
+                    [
                         WildSpawnType.gifter,
-                    },
+                    ],
                 }
             },
             {
@@ -602,10 +602,10 @@ namespace SAIN.Preset.GlobalSettings.Categories
                         { Layer.Request, 30},
                         { Layer.PtrlBirdEye, 0 },
                     },
-                    UsedByWildSpawns = new WildSpawnType[]
-                    {
+                    UsedByWildSpawns =
+                    [
                         WildSpawnType.bossKnight,
-                    },
+                    ],
                 }
             },
             {
@@ -622,10 +622,10 @@ namespace SAIN.Preset.GlobalSettings.Categories
                         { Layer.Request, 30},
                         { Layer.PtrlBirdEye, 0 },
                     },
-                    UsedByWildSpawns = new WildSpawnType[]
-                    {
+                    UsedByWildSpawns =
+                    [
                         WildSpawnType.followerBigPipe,
-                    },
+                    ],
                 }
             },
             {
@@ -643,10 +643,10 @@ namespace SAIN.Preset.GlobalSettings.Categories
                         { Layer.Request, 30},
                         { Layer.PtrlBirdEye, 0 },
                     },
-                    UsedByWildSpawns = new WildSpawnType[]
-                    {
+                    UsedByWildSpawns =
+                    [
                         WildSpawnType.followerBirdEye,
-                    },
+                    ],
                 }
             },
             /*
@@ -701,10 +701,10 @@ namespace SAIN.Preset.GlobalSettings.Categories
                         { Layer.PatrolFollower, 2 },
                         { Layer.PatrolAssault, 0 },
                     },
-                    UsedByWildSpawns = new WildSpawnType[]
-                    {
+                    UsedByWildSpawns =
+                    [
                         WildSpawnType.arenaFighter,
-                    },
+                    ],
                 }
             },
             {
@@ -716,10 +716,10 @@ namespace SAIN.Preset.GlobalSettings.Categories
                         { Layer.ObdolbosFight, 72 },
                         { Layer.Obd_Patrol, 10 },
                     },
-                    UsedByWildSpawns = new WildSpawnType[]
-                    {
+                    UsedByWildSpawns =
+                    [
                         WildSpawnType.crazyAssaultEvent,
-                    },
+                    ],
                 }
             },
             {
@@ -740,14 +740,14 @@ namespace SAIN.Preset.GlobalSettings.Categories
                         { Layer.Utility_peace, 2 },
                         { Layer.PatrolAssault, 1 },
                     },
-                    UsedByWildSpawns = new WildSpawnType[]
-                    {
+                    UsedByWildSpawns =
+                    [
                         WildSpawnType.assault,
-                    },
+                    ],
                 }
             },
         };
 
-        public static readonly Dictionary<Layer, LayerInfoClass> LayerInfos = new Dictionary<Layer, LayerInfoClass>();
+        public static readonly Dictionary<Layer, LayerInfoClass> LayerInfos = new();
     }
 }

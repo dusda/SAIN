@@ -191,7 +191,6 @@ namespace SAIN.Components
         }
 
         private static LayerMask NoBushMask = 0;
-        private static readonly List<string> ExclusionList = new List<string> 
-        { "filbert", "fibert", "tree", "pine", "plant", "birch", "collider", "timber", "spruce", "bush", "metal", "wood", "grass" };
+        private static readonly List<string> ExclusionList = new() { "filbert", "fibert", "tree", "pine", "plant", "birch", "collider", "timber", "spruce", "bush", "metal", "wood", "grass" };
     }
 }

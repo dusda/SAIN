@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SAIN.Preset.Personalities.Perks
+﻿namespace SAIN.Preset.Personalities.Perks
 {
     public enum EBotPerk
     {
@@ -19,7 +13,7 @@ namespace SAIN.Preset.Personalities.Perks
         LegMetaEnjoyer,
     }
 
-    internal class BotPerksClass: BasePreset
+    internal class BotPerksClass : BasePreset
     {
         public BotPerksClass(SAINPresetClass preset) : base(preset)
         {

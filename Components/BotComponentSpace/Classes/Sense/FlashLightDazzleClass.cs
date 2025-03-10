@@ -1,18 +1,14 @@
-﻿using BepInEx.Logging;
-using EFT;
+﻿using EFT;
 using SAIN.Components;
-using UnityEngine;
-using static SAIN.Helpers.HelpersGClass;
 using SAIN.Helpers;
 using SAIN.SAINComponent.Classes.EnemyClasses;
-using System;
-using static UnityEngine.EventSystems.EventTrigger;
+using UnityEngine;
 
 namespace SAIN.SAINComponent.Classes.Sense
 {
     public class FlashLightDazzleClass : BotBase
     {
-        private TemporaryStatModifiers Modifiers = new TemporaryStatModifiers(1f, 1f, 1f, 1f, 1f);
+        private TemporaryStatModifiers Modifiers = new(1f, 1f, 1f, 1f, 1f);
 
         public FlashLightDazzleClass(BotComponent owner) : base(owner)
         {
@@ -20,7 +16,7 @@ namespace SAIN.SAINComponent.Classes.Sense
 
         public void CheckIfDazzleApplied(Enemy enemy)
         {
-            if (enemy?.CheckValid() == true && 
+            if (enemy?.CheckValid() == true &&
                 enemy.IsVisible)
             {
                 // If modifier is already applied, don't re-apply it
@@ -50,7 +46,7 @@ namespace SAIN.SAINComponent.Classes.Sense
         private bool enemyWithFlashlight(Enemy enemy)
         {
             float dist = enemy.RealDistance;
-            if (dist < 80f && 
+            if (dist < 80f &&
                 flashlightVisionCheck(enemy.EnemyIPlayer))
             {
                 Vector3 botPos = BotOwner.MyHead.position;
@@ -134,7 +130,7 @@ namespace SAIN.SAINComponent.Classes.Sense
             float ratio = (num2 / num);
             float result = Mathf.InverseLerp(1f, 2f, ratio);
 
-            if (BotOwner.NightVision.UsingNow && 
+            if (BotOwner.NightVision.UsingNow &&
                 (enemy.EnemyPlayerComponent.Flashlight.WhiteLight || enemy.EnemyPlayerComponent.Flashlight.Laser))
             {
                 result *= 1.5f;

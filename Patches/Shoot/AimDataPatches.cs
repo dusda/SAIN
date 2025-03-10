@@ -29,7 +29,8 @@ namespace SAIN.Patches.Shoot.Aim
         [PatchPrefix]
         public static bool Patch()
         {
-            if (!GlobalSettingsClass.Instance.Aiming.HitEffects.HIT_REACTION_TOGGLE) {
+            if (!GlobalSettingsClass.Instance.Aiming.HitEffects.HIT_REACTION_TOGGLE)
+            {
                 return true;
             }
             return false;
@@ -46,10 +47,12 @@ namespace SAIN.Patches.Shoot.Aim
         [PatchPrefix]
         public static bool Patch(BotOwner ___botOwner_0, ref Vector3 __result, Vector3 dir)
         {
-            if (!GlobalSettingsClass.Instance.Aiming.HitEffects.HIT_REACTION_TOGGLE) {
+            if (!GlobalSettingsClass.Instance.Aiming.HitEffects.HIT_REACTION_TOGGLE)
+            {
                 return true;
             }
-            if (SAINEnableClass.GetSAIN(___botOwner_0, out var bot)) {
+            if (SAINEnableClass.GetSAIN(___botOwner_0, out var bot))
+            {
                 __result = bot.Medical.HitReaction.AimHitEffect.ApplyEffect(dir);
                 return false;
             }
@@ -67,10 +70,12 @@ namespace SAIN.Patches.Shoot.Aim
         [PatchPrefix]
         public static bool Patch(BotOwner ___botOwner_0)
         {
-            if (!GlobalSettingsClass.Instance.Aiming.HitEffects.HIT_REACTION_TOGGLE) {
+            if (!GlobalSettingsClass.Instance.Aiming.HitEffects.HIT_REACTION_TOGGLE)
+            {
                 return true;
             }
-            if (SAINEnableClass.GetSAIN(___botOwner_0, out var bot)) {
+            if (SAINEnableClass.GetSAIN(___botOwner_0, out var bot))
+            {
                 return false;
             }
             return true;
@@ -87,10 +92,12 @@ namespace SAIN.Patches.Shoot.Aim
         [PatchPrefix]
         public static bool PatchPrefix(BotAimingClass __instance, AimStatus value, BotOwner ___botOwner_0, ref AimStatus ___aimStatus_0, float ___float_7)
         {
-            if (___aimStatus_0 == value || ___botOwner_0.BotState != EBotState.Active) {
+            if (___aimStatus_0 == value || ___botOwner_0.BotState != EBotState.Active)
+            {
                 return false;
             }
-            if (SAINEnableClass.GetSAIN(___botOwner_0, out var bot)) {
+            if (SAINEnableClass.GetSAIN(___botOwner_0, out var bot))
+            {
                 ___aimStatus_0 = value;
                 //bool flag;
                 //if ((flag = (((this.bool_0 && this.botOwner_0.Tactic.IsCurTactic(BotsGroup.BotCurrentTactic.Attack)) || this.botOwner_0.Memory.IsInCover || this.method_1()) && this.aimStatus_0 != AimStatus.NoTarget && this.method_0())) != this.botOwner_0.WeaponManager.ShootController.IsAiming)
@@ -98,7 +105,8 @@ namespace SAIN.Patches.Shoot.Aim
                 //	this.botOwner_0.WeaponManager.ShootController.SetAim(flag);
                 //}
                 //this.HardAim = flag;
-                if (value == AimStatus.AimComplete) {
+                if (value == AimStatus.AimComplete)
+                {
                     ___botOwner_0.BotPersonalStats.Aim(__instance.EndTargetPoint, ___float_7);
                 }
                 return false;
@@ -120,19 +128,22 @@ namespace SAIN.Patches.Shoot.Aim
         [PatchPrefix]
         public static bool PatchPrefix(ref BotOwner ___botOwner_0, ref Vector3 ___vector3_5, ref Vector3 ___vector3_4, ref float ___float_13)
         {
-            if (!SAINEnableClass.GetSAIN(___botOwner_0, out var bot)) {
+            if (!SAINEnableClass.GetSAIN(___botOwner_0, out var bot))
+            {
                 return true;
             }
 
             Vector3 realTargetPoint = ___botOwner_0.AimingManager.CurrentAiming.RealTargetPoint;
 
-            if (bot.IsCheater) {
+            if (bot.IsCheater)
+            {
                 _endTargetPointProp.SetValue(___botOwner_0.AimingManager.CurrentAiming, realTargetPoint);
                 return false;
             }
 
             Enemy enemy = bot.Shoot.LastShotEnemy ?? bot.Enemy ?? bot.LastEnemy;
-            if (enemy == null) {
+            if (enemy == null)
+            {
                 return true;
             }
 
@@ -144,29 +155,34 @@ namespace SAIN.Patches.Shoot.Aim
             // Default Setup :: Vector3 finalTarget = __instance.RealTargetPoint + badShootOffset + (AimUpgradeByTime * (AimOffset + ___botOwner_0.RecoilData.RecoilOffset));
 
             Vector3 aimOffset;
-            if (___botOwner_0.Settings.FileSettings.Aiming.DIST_TO_SHOOT_NO_OFFSET > enemy.RealDistance) {
+            if (___botOwner_0.Settings.FileSettings.Aiming.DIST_TO_SHOOT_NO_OFFSET > enemy.RealDistance)
+            {
                 aimOffset = Vector3.zero;
             }
-            else {
+            else
+            {
                 float spread = aimUpgradeByTime / enemy.Aim.AimAndScatterMultiplier;
                 spread = Mathf.Clamp(spread, 0f, 3f);
                 aimOffset = ___vector3_4 * spread;
             }
 
-            if (bot.Info.Profile.IsPMC || bot.Info.Profile.WildSpawnType.isGoons()) {
+            if (bot.Info.Profile.IsPMC || bot.Info.Profile.WildSpawnType.isGoons())
+            {
                 badShootOffset = Vector3.zero;
             }
 
             Vector3 finalOffset = badShootOffset + aimOffset + recoilOffset;
             if (!enemy.IsAI &&
-                SAINPlugin.LoadedPreset.GlobalSettings.Look.NotLooking.NotLookingToggle) {
+                SAINPlugin.LoadedPreset.GlobalSettings.Look.NotLooking.NotLookingToggle)
+            {
                 finalOffset += NotLookingOffset(enemy.EnemyPerson.IPlayer, ___botOwner_0);
             }
 
             Vector3 result = realTargetPoint + finalOffset;
 
             if (SAINPlugin.LoadedPreset.GlobalSettings.General.Debug.Gizmos.DebugDrawAimGizmos &&
-                enemy.EnemyPerson.IPlayer.IsYourPlayer == true) {
+                enemy.EnemyPerson.IPlayer.IsYourPlayer == true)
+            {
                 Vector3 weaponRoot = ___botOwner_0.WeaponRoot.position;
                 DebugGizmos.Line(weaponRoot, result, Color.red, 0.02f, true, 0.25f, true);
                 DebugGizmos.Sphere(result, 0.025f, Color.red, true, 10f);
@@ -188,7 +204,8 @@ namespace SAIN.Patches.Shoot.Aim
         private static Vector3 NotLookingOffset(IPlayer person, BotOwner botOwner)
         {
             float ExtraSpread = SAINNotLooking.GetSpreadIncrease(person, botOwner);
-            if (ExtraSpread > 0) {
+            if (ExtraSpread > 0)
+            {
                 Vector3 vectorSpread = UnityEngine.Random.insideUnitSphere * ExtraSpread;
                 vectorSpread.y = 0;
                 return vectorSpread;
@@ -207,7 +224,8 @@ namespace SAIN.Patches.Shoot.Aim
         [PatchPrefix]
         public static void PatchPrefix(BotOwner ___botOwner_0, ref float additionCoef)
         {
-            if (SAINEnableClass.GetSAIN(___botOwner_0, out var bot)) {
+            if (SAINEnableClass.GetSAIN(___botOwner_0, out var bot))
+            {
             }
         }
     }
@@ -222,7 +240,8 @@ namespace SAIN.Patches.Shoot.Aim
         [PatchPrefix]
         public static bool PatchPrefix(BotOwner ___botOwner_0, DamageInfoStruct DamageInfoStruct)
         {
-            if (SAINPlugin.IsBotExluded(___botOwner_0)) {
+            if (SAINPlugin.IsBotExluded(___botOwner_0))
+            {
                 return true;
             }
 
@@ -241,7 +260,8 @@ namespace SAIN.Patches.Shoot.Aim
         public static void Patch(BotOwner ___botOwner_0, IHandsController handsController)
         {
             IFirearmHandsController firearmHandsController;
-            if ((firearmHandsController = (handsController as IFirearmHandsController)) != null) {
+            if ((firearmHandsController = (handsController as IFirearmHandsController)) != null)
+            {
                 SAINBotController.Instance?.BotChangedWeapon(___botOwner_0, firearmHandsController);
             }
         }
@@ -260,7 +280,8 @@ namespace SAIN.Patches.Shoot.Aim
         [PatchPrefix]
         public static bool PatchPrefix(ref BotOwner ___botOwner_0, float dist, float ang, ref bool ___bool_1, ref float ___float_10, ref float __result)
         {
-            if (!SAINEnableClass.GetSAIN(___botOwner_0, out var bot)) {
+            if (!SAINEnableClass.GetSAIN(___botOwner_0, out var bot))
+            {
                 return true;
             }
 
@@ -302,7 +323,8 @@ namespace SAIN.Patches.Shoot.Aim
             timeToAimResult = calcAttachmentMod(botComponent, timeToAimResult, stringBuilder);
 
             if (stringBuilder != null &&
-                botOwner?.Memory?.GoalEnemy?.Person?.IsYourPlayer == true) {
+                botOwner?.Memory?.GoalEnemy?.Person?.IsYourPlayer == true)
+            {
                 Logger.LogDebug(stringBuilder.ToString());
             }
             return timeToAimResult;
@@ -322,7 +344,8 @@ namespace SAIN.Patches.Shoot.Aim
         {
             CoverPoint coverInUse = botComponent?.Cover.CoverInUse;
             bool inCover = botOwner.Memory.IsInCover || coverInUse?.BotInThisCover == true;
-            if (inCover) {
+            if (inCover)
+            {
                 baseAimTime *= fileSettings.Aiming.COEF_FROM_COVER;
                 stringBuilder?.AppendLine($"In Cover: [{baseAimTime}] : COEF_FROM_COVER [{fileSettings.Aiming.COEF_FROM_COVER}]");
             }
@@ -339,7 +362,8 @@ namespace SAIN.Patches.Shoot.Aim
 
         private static float calcMoveModifier(bool moving, float timeToAimResult, BotSettingsComponents fileSettings, StringBuilder stringBuilder)
         {
-            if (moving) {
+            if (moving)
+            {
                 timeToAimResult *= fileSettings.Aiming.COEF_IF_MOVE;
                 stringBuilder?.AppendLine($"Moving [{timeToAimResult}] : Moving Coef [{fileSettings.Aiming.COEF_IF_MOVE}]");
             }
@@ -348,7 +372,8 @@ namespace SAIN.Patches.Shoot.Aim
 
         private static float calcADSModifier(bool aiming, float timeToAimResult, StringBuilder stringBuilder)
         {
-            if (aiming) {
+            if (aiming)
+            {
                 float adsMulti = SAINPlugin.LoadedPreset.GlobalSettings.Aiming.AimDownSightsAimTimeMultiplier;
                 timeToAimResult *= adsMulti;
                 stringBuilder?.AppendLine($"Aiming Down Sights [{timeToAimResult}] : ADS Multiplier [{adsMulti}]");
@@ -359,7 +384,8 @@ namespace SAIN.Patches.Shoot.Aim
         private static float clampAimTime(float timeToAimResult, BotSettingsComponents fileSettings, StringBuilder stringBuilder)
         {
             float clampedResult = Mathf.Clamp(timeToAimResult, 0f, fileSettings.Aiming.MAX_AIM_TIME);
-            if (clampedResult != timeToAimResult) {
+            if (clampedResult != timeToAimResult)
+            {
                 stringBuilder?.AppendLine($"Clamped Aim Time [{clampedResult}] : MAX_AIM_TIME [{fileSettings.Aiming.MAX_AIM_TIME}]");
             }
             return clampedResult;
@@ -367,7 +393,8 @@ namespace SAIN.Patches.Shoot.Aim
 
         private static float calcPanic(bool panicing, float calculatedAimTime, BotSettingsComponents fileSettings, StringBuilder stringBuilder)
         {
-            if (panicing) {
+            if (panicing)
+            {
                 calculatedAimTime *= fileSettings.Aiming.PANIC_COEF;
                 stringBuilder?.AppendLine($"Panicing [{calculatedAimTime}] : Panic Coef [{fileSettings.Aiming.PANIC_COEF}]");
             }
@@ -376,11 +403,13 @@ namespace SAIN.Patches.Shoot.Aim
 
         private static float calcFasterCQB(float distance, float aimTimeResult, SAINAimingSettings aimSettings, StringBuilder stringBuilder)
         {
-            if (!SAINPlugin.LoadedPreset.GlobalSettings.Aiming.FasterCQBReactionsGlobal) {
+            if (!SAINPlugin.LoadedPreset.GlobalSettings.Aiming.FasterCQBReactionsGlobal)
+            {
                 return aimTimeResult;
             }
             if (aimSettings?.FasterCQBReactions == true &&
-                distance <= aimSettings.FasterCQBReactionsDistance) {
+                distance <= aimSettings.FasterCQBReactionsDistance)
+            {
                 float ratio = distance / aimSettings.FasterCQBReactionsDistance;
                 float fasterTime = aimTimeResult * ratio;
                 fasterTime = Mathf.Clamp(fasterTime, aimSettings.FasterCQBReactionsMinimum, aimTimeResult);
@@ -393,7 +422,8 @@ namespace SAIN.Patches.Shoot.Aim
         private static float calcAttachmentMod(BotComponent bot, float aimTimeResult, StringBuilder stringBuilder)
         {
             Enemy enemy = bot?.Enemy;
-            if (enemy != null) {
+            if (enemy != null)
+            {
                 float modifier = enemy.Aim.AimAndScatterMultiplier;
                 stringBuilder?.AppendLine($"Bot Attachment Mod: Result [{aimTimeResult / modifier}] : Original [{aimTimeResult}] : Modifier [{modifier}]");
                 aimTimeResult /= modifier;
@@ -442,12 +472,14 @@ namespace SAIN.Patches.Shoot.Aim
         [PatchPrefix]
         public static void PatchPrefix(ref bool withLegs, ref bool canBehead, EnemyInfo __instance)
         {
-            if (!__instance.Person.IsAI) {
+            if (!__instance.Person.IsAI)
+            {
                 var aim = GlobalSettingsClass.Instance.Aiming;
                 canBehead = EFTMath.RandomBool(aim.PMCAimForHeadChance) && aim.PMCSAimForHead && isPMC(__instance);
                 withLegs = true;
             }
-            else {
+            else
+            {
                 canBehead = true;
                 withLegs = true;
             }

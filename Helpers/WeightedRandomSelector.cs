@@ -32,7 +32,8 @@ namespace SAIN.Helpers
 
             _options.Add(new WeightedOption { Option = option, Weight = weight });
             _totalWeight += weight;
-            if (weight > _highestWeight) {
+            if (weight > _highestWeight)
+            {
                 _highestWeight = weight;
             }
         }
@@ -45,28 +46,34 @@ namespace SAIN.Helpers
         public void Test(int iterations = 1000)
         {
             var results = new Dictionary<T, int>();
-            foreach (var option in _options) {
-                if (results.ContainsKey(option.Option)) {
+            foreach (var option in _options)
+            {
+                if (results.ContainsKey(option.Option))
+                {
                     Logger.LogWarning($"Copy of {option.Option} in list");
                     continue;
                 }
                 results.Add(option.Option, 0);
             }
 
-            for (int i = 0; i < iterations; i++) {
-                
+            for (int i = 0; i < iterations; i++)
+            {
+
                 _options.Shuffle();
                 int random = _random.Next(1, _highestWeight);
-                foreach (var option in _options) {
-                    if (option.Weight > random) {
+                foreach (var option in _options)
+                {
+                    if (option.Weight > random)
+                    {
                         results[option.Option]++;
                         break;
                     }
                 }
             }
 
-            StringBuilder sb =  new StringBuilder();
-            foreach (var option in results) {
+            StringBuilder sb = new();
+            foreach (var option in results)
+            {
                 sb.AppendLine($"{option.Key} : {option.Value}");
             }
             Logger.LogInfo(sb.ToString());
@@ -78,10 +85,13 @@ namespace SAIN.Helpers
                 throw new InvalidOperationException("No options available.");
 
             _options.Shuffle();
-            for (int i = 0; i < maxIterations; i++) {
+            for (int i = 0; i < maxIterations; i++)
+            {
                 int random = _random.Next(1, _highestWeight);
-                foreach (var option in _options) {
-                    if (option.Weight > random) {
+                foreach (var option in _options)
+                {
+                    if (option.Weight > random)
+                    {
                         return option.Option;
                     }
                 }

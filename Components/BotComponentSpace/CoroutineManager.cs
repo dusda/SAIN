@@ -182,8 +182,8 @@ namespace SAIN.SAINComponent
             _coroutines.Clear();
         }
 
-        private readonly Dictionary<string, IEnumerator> _enumerators = new Dictionary<string, IEnumerator>();
-        private readonly Dictionary<string, Routine> _coroutines = new Dictionary<string, Routine>();
+        private readonly Dictionary<string, IEnumerator> _enumerators = new();
+        private readonly Dictionary<string, Routine> _coroutines = new();
         private readonly T Component;
     }
 }

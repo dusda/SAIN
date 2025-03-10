@@ -64,7 +64,7 @@ namespace SAIN.Layers.Combat.Squad
 
         public override bool IsCurrentActionEnding()
         {
-            return Bot?.BotActive == true && 
+            return Bot?.BotActive == true &&
                 SquadDecision != LastActionDecision;
         }
 

@@ -1,10 +1,7 @@
 ﻿using EFT;
 using Newtonsoft.Json;
-using SPT.Reflection.Utils;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
 using EFTCore = GClass598;
 using EFTStatModifiersClass = GClass595;
 
@@ -27,7 +24,8 @@ namespace SAIN.Helpers
     {
         public TemporaryStatModifiers(float precision = 1f, float accuracySpeed = 1f, float gainSight = 1f, float scatter = 1f, float priorityScatter = 1f, float visibleDistance = 1f, float hearingDistance = 1f)
         {
-            Modifiers = new EFTStatModifiersClass {
+            Modifiers = new EFTStatModifiersClass
+            {
                 PrecicingSpeedCoef = precision,
                 AccuratySpeedCoef = accuracySpeed,
                 GainSightCoef = gainSight,
@@ -65,7 +63,8 @@ namespace SAIN.Helpers
     {
         static EFTCoreSettings()
         {
-            if (!JsonUtility.Load.LoadObject<CoreOverrides>(out _overrides, nameof(CoreOverrides))) {
+            if (!JsonUtility.Load.LoadObject<CoreOverrides>(out _overrides, nameof(CoreOverrides)))
+            {
                 _overrides = new CoreOverrides();
                 JsonUtility.SaveObjectToJson(_overrides, nameof(CoreOverrides));
             }
@@ -75,9 +74,11 @@ namespace SAIN.Helpers
 
         public static void UpdateCoreSettings()
         {
-            try {
+            try
+            {
                 var core = EFTCore.Core;
-                if (_overrides == null) {
+                if (_overrides == null)
+                {
                     _overrides = new CoreOverrides();
                 }
 
@@ -100,7 +101,8 @@ namespace SAIN.Helpers
 
                 ModDetection.UpdateArmorClassCoef();
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
                 Logger.LogError(e);
             }
         }
@@ -123,7 +125,8 @@ namespace SAIN.Helpers
         {
             Name = name;
             WildSpawnType = type;
-            foreach (BotDifficulty diff in difficulties) {
+            foreach (BotDifficulty diff in difficulties)
+            {
                 Settings.Add(diff, EFTCore.GetSettings(diff, type));
             }
         }
@@ -135,6 +138,6 @@ namespace SAIN.Helpers
         public WildSpawnType WildSpawnType;
 
         [JsonProperty]
-        public Dictionary<BotDifficulty, BotSettingsComponents> Settings = new Dictionary<BotDifficulty, BotSettingsComponents>();
+        public Dictionary<BotDifficulty, BotSettingsComponents> Settings = new();
     }
 }
