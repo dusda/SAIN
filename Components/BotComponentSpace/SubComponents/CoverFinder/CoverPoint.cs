@@ -1,5 +1,6 @@
 ﻿using EFT;
 using SAIN.Helpers;
+using SAIN.Models.Structs;
 using SAIN.SAINComponent.Classes.EnemyClasses;
 using System;
 using UnityEngine;
@@ -131,7 +132,7 @@ namespace SAIN.SAINComponent.SubComponents.CoverFinder
         public NavMeshPath PathToPoint => PathData.Path;
         public float CoverHeight => HardData.Height;
         public Collider Collider => HardColliderData.Collider;
-        public HardColliderData HardColliderData { get; }
+        public SAINHardColliderData HardColliderData { get; }
         public float LastHitInCoverTime { get; private set; }
         public bool IsCurrent => Bot.Cover.CoverInUse == this;
 
@@ -205,14 +206,14 @@ namespace SAIN.SAINComponent.SubComponents.CoverFinder
             _hitsInCover.Reset();
         }
 
-        public CoverPoint(BotComponent bot, HardColliderData colliderData, PathData pathData, Vector3 coverPosition)
+        public CoverPoint(BotComponent bot, SAINHardColliderData colliderData, PathData pathData, Vector3 coverPosition)
         {
             Bot = bot;
             HardColliderData = colliderData;
             PathData = pathData;
             Vector3 size = colliderData.Collider.bounds.size;
-            HardData = new HardCoverData
-            {
+            HardData = new SAINHardCoverData
+			{
                 Id = _count,
                 Height = size.y,
                 Value = (size.x + size.y + size.z).Round10(),
@@ -221,7 +222,7 @@ namespace SAIN.SAINComponent.SubComponents.CoverFinder
             _count++;
         }
 
-        public HardCoverData HardData { get; }
+        public SAINHardCoverData HardData { get; }
 
         public PathData PathData { get; }
 

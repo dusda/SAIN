@@ -2,6 +2,7 @@
 using SAIN.Components;
 using SAIN.Components.PlayerComponentSpace.PersonClasses;
 using SAIN.Helpers;
+using SAIN.Models.Enums;
 using SAIN.Preset.GlobalSettings;
 using SAIN.Preset.GlobalSettings.Categories;
 using SAIN.SAINComponent.Classes;
@@ -71,7 +72,6 @@ namespace SAIN.SAINComponent
         public BotGrenadeManager Grenade { get; private set; }
         public SAINSteeringClass Steering { get; private set; }
         public AimClass Aim { get; private set; }
-        public CoroutineManager<BotComponent> CoroutineManager { get; private set; }
 
         public bool ShallExecuteRequests
         {
@@ -206,7 +206,6 @@ namespace SAIN.SAINComponent
                 // Must be first, other classes use it
                 Info = initBotClass<SAINBotInfoClass>();
 
-                CoroutineManager = new CoroutineManager<BotComponent>(this);
                 NoBushESP = this.gameObject.AddComponent<SAINNoBushESP>();
 
                 Squad =

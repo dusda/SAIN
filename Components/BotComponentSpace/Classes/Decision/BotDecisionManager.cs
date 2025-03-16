@@ -1,5 +1,6 @@
 ﻿using EFT;
 using SAIN.Helpers.Events;
+using SAIN.Models.Enums;
 using SAIN.SAINComponent.SubComponents.CoverFinder;
 using System;
 using UnityEngine;
@@ -77,7 +78,7 @@ namespace SAIN.SAINComponent.Classes.Decision
                 return false;
             }
             bool alreadyAttacking = CurrentCombatDecision == ECombatDecision.TagillaMelee;
-            if (!alreadyAttacking && enemy.Path.PathDistance < 20 && enemy.Status.VulnerableAction != EnemyClasses.EEnemyAction.None)
+            if (!alreadyAttacking && enemy.Path.PathDistance < 20 && enemy.Status.VulnerableAction != EEnemyAction.None)
             {
                 return true;
             }

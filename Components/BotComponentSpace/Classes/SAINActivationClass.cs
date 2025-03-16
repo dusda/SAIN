@@ -1,6 +1,7 @@
 ﻿using Comfort.Common;
 using EFT;
 using SAIN.Helpers.Events;
+using SAIN.Models.Enums;
 using UnityEngine;
 
 namespace SAIN.SAINComponent.Classes
@@ -25,25 +26,12 @@ namespace SAIN.SAINComponent.Classes
         public void SetActive(bool botActive)
         {
             BotActiveToggle.CheckToggle(botActive);
-            setCoroutines(botActive);
+
             if (!botActive)
             {
                 BotStandByToggle.CheckToggle(true);
                 ActiveLayer = ESAINLayer.None;
                 SAINLayersActiveToggle.CheckToggle(false);
-            }
-        }
-
-        private void setCoroutines(bool value)
-        {
-            bool started = Bot.CoroutineManager.CoroutinesStarted;
-            if (value && !started)
-            {
-                Bot.CoroutineManager.StartCoroutines();
-            }
-            else if (!value && started)
-            {
-                Bot.CoroutineManager.StopCoroutines();
             }
         }
 

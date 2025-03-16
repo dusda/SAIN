@@ -1,5 +1,6 @@
 ﻿using EFT;
 using SAIN.Layers.Combat.Solo;
+using SAIN.Models.Enums;
 using SAIN.SAINComponent;
 
 namespace SAIN.Layers.Combat.Squad

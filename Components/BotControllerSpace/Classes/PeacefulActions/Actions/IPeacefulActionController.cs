@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using SAIN.Models.Enums;
+using System.Collections.Generic;
 
 namespace SAIN.Components.BotController.PeacefulActions
 {
@@ -8,7 +9,7 @@ namespace SAIN.Components.BotController.PeacefulActions
 
         int Count { get; }
 
-        EPeacefulAction Action { get; }
+		EPeacefulAction Action { get; }
 
         void CheckExecute(BotZoneData data);
 

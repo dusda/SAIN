@@ -1,4 +1,5 @@
 ﻿using EFT;
+using SAIN.Models.Enums;
 using SAIN.Preset.GlobalSettings;
 using SAIN.SAINComponent;
 using SAIN.SAINComponent.Classes.Memory;

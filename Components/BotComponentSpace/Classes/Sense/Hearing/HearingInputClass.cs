@@ -4,6 +4,8 @@ using SAIN.Components.BotComponentSpace.Classes.EnemyClasses;
 using SAIN.Components.BotController;
 using SAIN.Components.PlayerComponentSpace;
 using SAIN.Helpers;
+using SAIN.Models.Enums;
+using SAIN.Models.Structs;
 using SAIN.SAINComponent.Classes.EnemyClasses;
 using UnityEngine;
 
@@ -183,7 +185,7 @@ namespace SAIN.SAINComponent.Classes
             random = random.normalized * dispersion;
             Vector3 estimatedPos = enemy.EnemyPosition + random;
 
-            HearingReport report = new()
+			SAINHearingReport report = new()
             {
                 position = estimatedPos,
                 soundType = SAINSoundType.BulletImpact,

@@ -1,6 +1,7 @@
 ﻿using EFT;
 using SAIN.Components;
 using SAIN.Helpers;
+using SAIN.Models.Enums;
 using SAIN.Plugin;
 using SAIN.Preset;
 using SAIN.SAINComponent.Classes.EnemyClasses;
@@ -43,7 +44,7 @@ namespace SAIN.SAINComponent.SubComponents.CoverFinder
         private const int COLLIDERS_TO_CHECK_PER_FRAME = 3;
         private const int COLLIDERS_TO_CHECK_PER_FRAME_NO_COVER = 5;
 
-        public CoverFinderStatus CurrentStatus { get; private set; }
+        public ECoverFinderStatus CurrentStatus { get; private set; }
 
         public TargetData TargetData
         {
@@ -277,7 +278,7 @@ namespace SAIN.SAINComponent.SubComponents.CoverFinder
         {
             if (_findCoverPointsCoroutine != null)
             {
-                CurrentStatus = CoverFinderStatus.None;
+                CurrentStatus = ECoverFinderStatus.None;
                 StopCoroutine(_findCoverPointsCoroutine);
                 _findCoverPointsCoroutine = null;
 
@@ -306,8 +307,8 @@ namespace SAIN.SAINComponent.SubComponents.CoverFinder
             bool shallLimit = limit && shallLimitProcessing();
             WaitForSeconds wait = shallLimit ? _recheckWait : null;
 
-            CoverFinderStatus lastStatus = CurrentStatus;
-            CurrentStatus = shallLimit ? CoverFinderStatus.RecheckingPointsWithLimit : CoverFinderStatus.RecheckingPointsNoLimit;
+			ECoverFinderStatus lastStatus = CurrentStatus;
+            CurrentStatus = shallLimit ? ECoverFinderStatus.RecheckingPointsWithLimit : ECoverFinderStatus.RecheckingPointsNoLimit;
 
             foreach (var coverPoint in tempList)
             {
@@ -460,7 +461,7 @@ namespace SAIN.SAINComponent.SubComponents.CoverFinder
                 int coverCount = CoverPoints.Count;
                 if (needToFindCover(coverCount, out int max))
                 {
-                    CurrentStatus = CoverFinderStatus.SearchingColliders;
+                    CurrentStatus = ECoverFinderStatus.SearchingColliders;
                     _lastPositionChecked = OriginPoint;
 
                     bool debug = DebugCoverFinder;
@@ -478,7 +479,7 @@ namespace SAIN.SAINComponent.SubComponents.CoverFinder
                     sort(coverCount, CoverPoints);
                     log(coverCount, findFirstPointStopWatch, fullStopWatch);
                 }
-                CurrentStatus = CoverFinderStatus.None;
+                CurrentStatus = ECoverFinderStatus.None;
                 yield return wait;
             }
         }

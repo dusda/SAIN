@@ -1,4 +1,6 @@
 ﻿using EFT;
+using SAIN.Models.Enums;
+using SAIN.Models.Structs;
 using SAIN.Preset.Personalities;
 using SAIN.SAINComponent.Classes.EnemyClasses;
 using UnityEngine;

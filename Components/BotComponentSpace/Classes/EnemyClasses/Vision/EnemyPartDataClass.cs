@@ -1,5 +1,7 @@
 ﻿using EFT;
 using SAIN.Components;
+using SAIN.Models.Enums;
+using SAIN.Models.Structs;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -57,13 +59,13 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
             RaycastResults[type].Update(castPoint, _colliderDictionary[colliderType], raycastHit, time);
         }
 
-        public BodyPartRaycast GetRaycast(Vector3 origin, float maxRange)
+        public SAINBodyPartRaycast GetRaycast(Vector3 origin, float maxRange)
         {
             BodyPartCollider collider = getCollider();
             Vector3 castPoint = getCastPoint(origin, collider);
 
-            return new BodyPartRaycast
-            {
+            return new SAINBodyPartRaycast
+			{
                 CastPoint = castPoint,
                 PartType = BodyPart,
                 ColliderType = collider.BodyPartColliderType

@@ -1,5 +1,7 @@
 ﻿using EFT;
 using SAIN.Helpers;
+using SAIN.Models.Enums;
+using SAIN.Models.Structs;
 using SAIN.SAINComponent.Classes.EnemyClasses;
 using System.Collections.Generic;
 using UnityEngine;

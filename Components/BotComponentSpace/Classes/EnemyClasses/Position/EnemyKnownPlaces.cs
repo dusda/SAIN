@@ -1,6 +1,7 @@
 ﻿using EFT;
 using SAIN.Components.BotComponentSpace.Classes.EnemyClasses;
 using SAIN.Helpers;
+using SAIN.Models.Structs;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
@@ -282,7 +283,7 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
             addPlace(place);
         }
 
-        public EnemyPlace UpdatePersonalHeardPosition(HearingReport report)
+        public EnemyPlace UpdatePersonalHeardPosition(SAINHearingReport report)
         {
             if (Enemy.IsVisible)
             {

@@ -1,4 +1,6 @@
 ﻿using SAIN.Helpers;
+using SAIN.Models.Enums;
+using SAIN.Models.Structs;
 using SAIN.SAINComponent.Classes;
 using SAIN.SAINComponent.Classes.EnemyClasses;
 using UnityEngine;
@@ -54,7 +56,7 @@ namespace SAIN.Components.BotComponentSpace.Classes.EnemyClasses
             }
         }
 
-        public EnemyPlace SetHeard(HearingReport report)
+        public EnemyPlace SetHeard(SAINHearingReport report)
         {
             if (Enemy.IsVisible)
             {
@@ -121,7 +123,7 @@ namespace SAIN.Components.BotComponentSpace.Classes.EnemyClasses
             }
         }
 
-        public EnemyPlace UpdateHeardPosition(HearingReport report)
+        public EnemyPlace UpdateHeardPosition(SAINHearingReport report)
         {
             EnemyPlace place = Enemy.KnownPlaces.UpdatePersonalHeardPosition(report);
             if (report.shallReportToSquad &&

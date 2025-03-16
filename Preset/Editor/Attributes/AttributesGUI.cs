@@ -4,6 +4,8 @@ using SAIN.Editor;
 using SAIN.Editor.GUISections;
 using SAIN.Editor.Util;
 using SAIN.Helpers;
+using SAIN.Models.Enums;
+using SAIN.Models.Structs;
 using SAIN.Plugin;
 using SAIN.Preset;
 using SAIN.Preset.GearStealthValues;

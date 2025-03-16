@@ -1,4 +1,6 @@
 ﻿using SAIN.Components.BotController;
+using SAIN.Models.Enums;
+using SAIN.Models.Structs;
 using SAIN.SAINComponent.Classes.EnemyClasses;
 using System.Collections;
 using System.Collections.Generic;
@@ -119,7 +121,7 @@ namespace SAIN.Components
                 for (int j = 0; j < partCount; j++)
                 {
                     var part = parts[j];
-                    BodyPartRaycast raycastData = part.GetRaycast(eyePosition, float.MaxValue);
+					SAINBodyPartRaycast raycastData = part.GetRaycast(eyePosition, float.MaxValue);
                     Vector3 castPoint = raycastData.CastPoint;
 
                     _colliderTypes.Add(raycastData.ColliderType);

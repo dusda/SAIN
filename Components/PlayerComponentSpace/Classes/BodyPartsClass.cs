@@ -1,5 +1,6 @@
 ﻿using EFT;
 using SAIN.Components.PlayerComponentSpace;
+using SAIN.Models.Structs;
 using SAIN.SAINComponent;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace SAIN.Components
     {
         public PartDictionary Parts { get; } = new PartDictionary();
 
-        public BodyPart[] PartsArray { get; private set; }
+        public SAINBodyPart[] PartsArray { get; private set; }
 
         public BodyPartsClass(PlayerComponent component) : base(component)
         {
@@ -24,7 +25,7 @@ namespace SAIN.Components
             foreach (var part in PartToBoneTypes.PartsToCollidersTypes)
             {
                 EBodyPart bodyPartType = part.Key;
-                BodyPart bodyPart = createPart(bodyPartType, playerBones, part.Value);
+				SAINBodyPart bodyPart = createPart(bodyPartType, playerBones, part.Value);
                 Parts.Add(bodyPartType, bodyPart);
             }
 
@@ -63,7 +64,7 @@ namespace SAIN.Components
             }
         }
 
-        private BodyPart createPart(EBodyPart bodyPartType, PlayerBones playerBones, EBodyPartColliderType[] colliderTypes)
+        private SAINBodyPart createPart(EBodyPart bodyPartType, PlayerBones playerBones, EBodyPartColliderType[] colliderTypes)
         {
             BifacialTransform transform = getTransform(bodyPartType, playerBones);
             if (transform == null)
@@ -75,7 +76,7 @@ namespace SAIN.Components
             {
                 Logger.LogWarning($"No Colliders for {bodyPartType}!");
             }
-            return new BodyPart(bodyPartType, transform, colliders);
+            return new SAINBodyPart(bodyPartType, transform, colliders);
         }
 
         private List<BodyPartCollider> getColliders(PlayerBones playerBones, EBodyPartColliderType[] colliderTypes)

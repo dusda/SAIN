@@ -1,6 +1,7 @@
 ﻿using Comfort.Common;
 using EFT;
 using SAIN.Helpers;
+using SAIN.Models.Structs;
 using SAIN.SAINComponent.Classes;
 using UnityEngine;
 using UnityEngine.AI;
@@ -19,7 +20,7 @@ namespace SAIN.SAINComponent.SubComponents.CoverFinder
         public bool CheckCollider(Collider collider, TargetData targetData, out CoverPoint coverPoint, out string reason)
         {
             coverPoint = null;
-            HardColliderData hardData = new(collider);
+			SAINHardColliderData hardData = new(collider);
             ColliderData colliderData = new(hardData, targetData);
 
             if (!GetPlaceToMove(colliderData, hardData, targetData, out Vector3 coverPosition))
@@ -117,7 +118,7 @@ namespace SAIN.SAINComponent.SubComponents.CoverFinder
             return true;
         }
 
-        public bool GetPlaceToMove(ColliderData colliderData, HardColliderData hardData, TargetData targetDirections, out Vector3 place)
+        public bool GetPlaceToMove(ColliderData colliderData, SAINHardColliderData hardData, TargetData targetDirections, out Vector3 place)
         {
             if (!checkColliderDirectionvsTargetDirection(colliderData, targetDirections))
             {
@@ -138,7 +139,7 @@ namespace SAIN.SAINComponent.SubComponents.CoverFinder
         private const float POSTIION_EDGE_SAMPLE_RANGE = 0.5f;
         private const float POSITION_SAMPLE_RANGE = 1f;
 
-        private bool checkFinalPositionDirection(ColliderData colliderDirs, HardColliderData hardData, TargetData targetDirs, Vector3 place)
+        private bool checkFinalPositionDirection(ColliderData colliderDirs, SAINHardColliderData hardData, TargetData targetDirs, Vector3 place)
         {
             Vector3 dirToPlace = place - hardData.Position;
             Vector3 dirToPlaceNormal = dirToPlace.normalized;
@@ -147,7 +148,7 @@ namespace SAIN.SAINComponent.SubComponents.CoverFinder
             return dot > POSITION_FINAL_MIN_DOT;
         }
 
-        private bool findSampledPosition(ColliderData colliderDirs, HardColliderData hardData, float navSampleRange, out Vector3 coverPosition)
+        private bool findSampledPosition(ColliderData colliderDirs, SAINHardColliderData hardData, float navSampleRange, out Vector3 coverPosition)
         {
             Vector3 samplePos = hardData.Position + colliderDirs.dirTargetToColliderNormal;
             if (!NavMesh.SamplePosition(samplePos, out var hit, navSampleRange, -1))
@@ -198,7 +199,7 @@ namespace SAIN.SAINComponent.SubComponents.CoverFinder
             return colliderDist < targetDist * 0.5f;
         }
 
-        private bool CheckPosition(Vector3 coverPosition, TargetData targetData, ColliderData colliderData, HardColliderData hardData)
+        private bool CheckPosition(Vector3 coverPosition, TargetData targetData, ColliderData colliderData, SAINHardColliderData hardData)
         {
             return (coverPosition - targetData.TargetPosition).sqrMagnitude > CoverMinEnemyDistSqr &&
                 !isPositionSpotted(coverPosition) &&
@@ -387,7 +388,7 @@ namespace SAIN.SAINComponent.SubComponents.CoverFinder
             return point != null && (position - point.Position).sqrMagnitude < distSqr;
         }
 
-        private static bool visibilityCheck(Vector3 position, TargetData targetData, ColliderData colliderData, HardColliderData hardColliderData)
+        private static bool visibilityCheck(Vector3 position, TargetData targetData, ColliderData colliderData, SAINHardColliderData hardColliderData)
         {
             const float offset = 0.1f;
 

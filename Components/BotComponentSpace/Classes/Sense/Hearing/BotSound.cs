@@ -1,4 +1,5 @@
 ﻿using SAIN.Components.PlayerComponentSpace;
+using SAIN.Models.Enums;
 using SAIN.SAINComponent.Classes.EnemyClasses;
 using UnityEngine;
 

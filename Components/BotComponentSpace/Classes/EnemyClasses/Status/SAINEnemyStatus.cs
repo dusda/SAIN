@@ -1,4 +1,5 @@
 ﻿using EFT;
+using SAIN.Models.Enums;
 using UnityEngine;
 
 namespace SAIN.SAINComponent.Classes.EnemyClasses

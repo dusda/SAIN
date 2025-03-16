@@ -1,4 +1,5 @@
 ﻿using SAIN.Helpers;
+using SAIN.Models.Enums;
 using System.Collections.Generic;
 
 namespace SAIN.SAINComponent.Classes.EnemyClasses

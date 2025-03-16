@@ -1,6 +1,7 @@
 ﻿using EFT;
 using Newtonsoft.Json;
 using SAIN.Attributes;
+using SAIN.Models.Enums;
 using SAIN.SAINComponent.Classes.WeaponFunction;
 using System.Collections.Generic;
 

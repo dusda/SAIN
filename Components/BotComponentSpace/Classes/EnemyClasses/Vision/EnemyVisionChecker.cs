@@ -1,5 +1,7 @@
 ﻿using SAIN.Components;
 using SAIN.Components.PlayerComponentSpace.PersonClasses;
+using SAIN.Models.Enums;
+using SAIN.Models.Structs;
 using SAIN.Preset;
 using SAIN.Preset.GlobalSettings;
 using System.Collections.Generic;
@@ -68,7 +70,7 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
         private const float MAX_LOS_RANGE_HEAD_HUMAN = 125f;
         private const float MAX_LOS_RANGE_LIMBS_AI = 200f;
 
-        private readonly List<BodyPartRaycast> _raycasts = new();
+        private readonly List<SAINBodyPartRaycast> _raycasts = new();
 
         private static readonly ERaycastPart[] _empty = [];
         private static readonly ERaycastPart[] _onlyBody = [ERaycastPart.Body];

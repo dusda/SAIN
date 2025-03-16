@@ -8,6 +8,7 @@ using SAIN.Components.BotController.PeacefulActions;
 using SAIN.Components.BotControllerSpace.Classes;
 using SAIN.Helpers;
 using SAIN.Layers;
+using SAIN.Models.Structs;
 using SAIN.SAINComponent;
 using SAIN.SAINComponent.Classes.EnemyClasses;
 using SAIN.SAINComponent.Classes.WeaponFunction;
@@ -107,7 +108,7 @@ namespace SAIN.Components
                             random.y = 0;
                             Vector3 estimatedThrowPosition = enemy.EnemyPosition + random;
 
-                            HearingReport report = new()
+							SAINHearingReport report = new()
                             {
                                 position = estimatedThrowPosition,
                                 soundType = SAINSoundType.GrenadeExplosion,

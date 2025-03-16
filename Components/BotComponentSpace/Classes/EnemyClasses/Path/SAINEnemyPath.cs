@@ -1,4 +1,5 @@
 ﻿using SAIN.Helpers;
+using SAIN.Models.Enums;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;

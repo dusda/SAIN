@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using SAIN.Models.Enums;
+using System.Text;
 using UnityEngine;
 
 namespace SAIN.Components.BotController.PeacefulActions

@@ -3,6 +3,8 @@ using EFT;
 using SAIN.Components;
 using SAIN.Components.BotComponentSpace.Classes.EnemyClasses;
 using SAIN.Helpers;
+using SAIN.Models.Enums;
+using SAIN.Models.Structs;
 using SAIN.Preset;
 using SAIN.Preset.BotSettings.SAINSettings;
 using SAIN.Preset.Personalities;
@@ -464,7 +466,7 @@ namespace SAIN.SAINComponent.Classes.Talk
                 if (enemy.RealDistance <= painRange)
                 {
                     Vector3 randomizedPos = randomizePos(player.Position, enemy.RealDistance, 20f);
-                    HearingReport report = new()
+					SAINHearingReport report = new()
                     {
                         position = randomizedPos,
                         soundType = SAINSoundType.Pain,
@@ -481,7 +483,7 @@ namespace SAIN.SAINComponent.Classes.Talk
                 if (enemy.RealDistance <= breathRange)
                 {
                     Vector3 randomizedPos = randomizePos(player.Position, enemy.RealDistance, 20f);
-                    HearingReport report = new()
+					SAINHearingReport report = new()
                     {
                         position = randomizedPos,
                         soundType = SAINSoundType.Breathing,
@@ -497,7 +499,7 @@ namespace SAIN.SAINComponent.Classes.Talk
             if (enemy.RealDistance <= 65f)
             {
                 Vector3 randomizedPos = randomizePos(player.Position, enemy.RealDistance, 20f);
-                HearingReport report = new()
+				SAINHearingReport report = new()
                 {
                     position = randomizedPos,
                     soundType = SAINSoundType.Conversation,
@@ -587,8 +589,8 @@ namespace SAIN.SAINComponent.Classes.Talk
             }
             else if (Bot?.Squad.SquadInfo != null
                 && Bot.Talk.GroupTalk.FriendIsClose
-                && (Bot.Squad.SquadInfo.SquadPersonality != BotController.Classes.ESquadPersonality.GigaChads
-                    || Bot.Squad.SquadInfo.SquadPersonality != BotController.Classes.ESquadPersonality.Elite)
+                && (Bot.Squad.SquadInfo.SquadPersonality != ESquadPersonality.GigaChads
+                    || Bot.Squad.SquadInfo.SquadPersonality != ESquadPersonality.Elite)
                 && (Bot.Info.Personality == EPersonality.GigaChad
                     || Bot.Info.Personality == EPersonality.Chad))
             {

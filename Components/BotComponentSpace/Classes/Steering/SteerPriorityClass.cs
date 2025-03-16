@@ -1,5 +1,6 @@
 ﻿using EFT;
 using HarmonyLib;
+using SAIN.Models.Enums;
 using SAIN.SAINComponent.Classes.EnemyClasses;
 using SAIN.SAINComponent.Classes.WeaponFunction;
 using System.Reflection;

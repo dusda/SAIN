@@ -1,4 +1,5 @@
-﻿using SAIN.SAINComponent;
+﻿using SAIN.Models.Enums;
+using SAIN.SAINComponent;
 using System.Collections.Generic;
 using System.Text;
 

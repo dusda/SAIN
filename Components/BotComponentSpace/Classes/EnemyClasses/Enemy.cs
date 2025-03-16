@@ -3,6 +3,7 @@ using SAIN.Components.BotComponentSpace.Classes.EnemyClasses;
 using SAIN.Components.PlayerComponentSpace;
 using SAIN.Components.PlayerComponentSpace.PersonClasses;
 using SAIN.Helpers;
+using SAIN.Models.Enums;
 using SAIN.Preset;
 using System;
 using UnityEngine;
