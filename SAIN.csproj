@@ -26,7 +26,7 @@
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <LangVersion>latest</LangVersion>
-    <SPTPath Condition="'$(SPTPath)' == ''">../../</SPTPath>
+    <SPTPath Condition="'$(SPTPath)' == ''">$(MSBuildProjectDirectory)\..\..</SPTPath>
   </PropertyGroup>
   <PropertyGroup>
     <RootNamespace>SAIN</RootNamespace>
@@ -661,10 +661,10 @@
   <ProjectExtensions>
     <VisualStudio AllowExistingFolder="true" />
   </ProjectExtensions>
-  <!-- <PropertyGroup>
-    <PostBuildEvent>xcopy "$(TargetPath)" "$(SPTPath)\BepInEx\plugins\SAIN" /Y</PostBuildEvent>
-  </PropertyGroup>
   <PropertyGroup>
+    <PostBuildEvent>xcopy /Y "$(TargetPath)" "$(SPTPath)\BepInEx\plugins\SAIN\"</PostBuildEvent>
+  </PropertyGroup>
+  <!--PropertyGroup>
     <PreBuildEvent>powershell.exe -ExecutionPolicy Bypass -NoProfile -NonInteractive -File "$(ProjectDir)\Plugin\VersionChecker\setbuild.ps1"</PreBuildEvent>
   </PropertyGroup> -->
 </Project>
