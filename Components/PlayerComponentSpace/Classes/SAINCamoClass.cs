@@ -1,6 +1,7 @@
 ﻿using EFT;
 using EFT.EnvironmentEffect;
 using SAIN.Components.BotController;
+using SAIN.Models.Enums;
 using SAIN.Components.PlayerComponentSpace;
 using SAIN.Editor;
 using SAIN.Helpers;
