@@ -26,6 +26,7 @@
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <LangVersion>latest</LangVersion>
+    <SPTPath Condition="'$(SPTPath)' == ''">$(MSBuildProjectDirectory)\..\..</SPTPath>
   </PropertyGroup>
   <PropertyGroup>
     <RootNamespace>SAIN</RootNamespace>
@@ -59,61 +60,61 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="0Harmony">
-      <HintPath>D:\Games\SPT\Dev40\BepInEx\core\0Harmony.dll</HintPath>
+      <HintPath>$(SPTPath)\BepInEx\core\0Harmony.dll</HintPath>
     </Reference>
     <Reference Include="Assembly-CSharp, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>D:\Games\SPT\Dev40\EscapeFromTarkov_Data\Managed\Assembly-CSharp.dll</HintPath>
+      <HintPath>$(SPTPath)\EscapeFromTarkov_Data\Managed\Assembly-CSharp.dll</HintPath>
     </Reference>
     <Reference Include="BepInEx">
-      <HintPath>D:\Games\SPT\Dev40\BepInEx\core\BepInEx.dll</HintPath>
+      <HintPath>$(SPTPath)\BepInEx\core\BepInEx.dll</HintPath>
     </Reference>
     <Reference Include="bsg.console.core, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>D:\Games\SPT\Dev40\EscapeFromTarkov_Data\Managed\bsg.console.core.dll</HintPath>
+      <HintPath>$(SPTPath)\EscapeFromTarkov_Data\Managed\bsg.console.core.dll</HintPath>
     </Reference>
     <Reference Include="Comfort, Version=1.0.0.4, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>D:\Games\SPT\Dev40\EscapeFromTarkov_Data\Managed\Comfort.dll</HintPath>
+      <HintPath>$(SPTPath)\EscapeFromTarkov_Data\Managed\Comfort.dll</HintPath>
     </Reference>
     <Reference Include="DissonanceVoip, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>D:\Games\SPT\Dev40\EscapeFromTarkov_Data\Managed\DissonanceVoip.dll</HintPath>
+      <HintPath>$(SPTPath)\EscapeFromTarkov_Data\Managed\DissonanceVoip.dll</HintPath>
     </Reference>
     <Reference Include="DrakiaXYZ-BigBrain">
-      <HintPath>D:\Games\SPT\Dev40\BepInEx\Plugins\DrakiaXYZ-BigBrain.dll</HintPath>
+      <HintPath>$(SPTPath)\BepInEx\Plugins\DrakiaXYZ-BigBrain.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Data.Sqlite, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>D:\Games\SPT\Dev40\EscapeFromTarkov_Data\Managed\Mono.Data.Sqlite.dll</HintPath>
+      <HintPath>$(SPTPath)\EscapeFromTarkov_Data\Managed\Mono.Data.Sqlite.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Posix, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>D:\Games\SPT\Dev40\EscapeFromTarkov_Data\Managed\Mono.Posix.dll</HintPath>
+      <HintPath>$(SPTPath)\EscapeFromTarkov_Data\Managed\Mono.Posix.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Security, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>D:\Games\SPT\Dev40\EscapeFromTarkov_Data\Managed\Mono.Security.dll</HintPath>
+      <HintPath>$(SPTPath)\EscapeFromTarkov_Data\Managed\Mono.Security.dll</HintPath>
     </Reference>
     <Reference Include="Mono.WebBrowser, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>D:\Games\SPT\Dev40\EscapeFromTarkov_Data\Managed\Mono.WebBrowser.dll</HintPath>
+      <HintPath>$(SPTPath)\EscapeFromTarkov_Data\Managed\Mono.WebBrowser.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>D:\Games\SPT\Dev40\EscapeFromTarkov_Data\Managed\Newtonsoft.Json.dll</HintPath>
+      <HintPath>$(SPTPath)\EscapeFromTarkov_Data\Managed\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Sirenix.Serialization">
-      <HintPath>D:\Games\SPT\Dev40\EscapeFromTarkov_Data\Managed\Sirenix.Serialization.dll</HintPath>
+      <HintPath>$(SPTPath)\EscapeFromTarkov_Data\Managed\Sirenix.Serialization.dll</HintPath>
     </Reference>
     <Reference Include="spt-common">
-      <HintPath>D:\Games\SPT\Dev40\BepInEx\plugins\spt\spt-common.dll</HintPath>
+      <HintPath>$(SPTPath)\BepInEx\plugins\spt\spt-common.dll</HintPath>
     </Reference>
     <Reference Include="spt-reflection">
-      <HintPath>D:\Games\SPT\Dev40\BepInEx\plugins\spt\spt-reflection.dll</HintPath>
+      <HintPath>$(SPTPath)\BepInEx\plugins\spt\spt-reflection.dll</HintPath>
     </Reference>
     <Reference Include="spt-singleplayer">
-      <HintPath>D:\Games\SPT\Dev40\BepInEx\plugins\spt\spt-singleplayer.dll</HintPath>
+      <HintPath>$(SPTPath)\BepInEx\plugins\spt\spt-singleplayer.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -125,66 +126,66 @@
     <Reference Include="System.Xml.Linq" />
     <Reference Include="Unity.Postprocessing.Runtime, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>D:\Games\SPT\Dev40\EscapeFromTarkov_Data\Managed\Unity.Postprocessing.Runtime.dll</HintPath>
+      <HintPath>$(SPTPath)\EscapeFromTarkov_Data\Managed\Unity.Postprocessing.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>D:\Games\SPT\Dev40\EscapeFromTarkov_Data\Managed\UnityEngine.dll</HintPath>
+      <HintPath>$(SPTPath)\EscapeFromTarkov_Data\Managed\UnityEngine.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>D:\Games\SPT\Dev40\EscapeFromTarkov_Data\Managed\UnityEngine.AIModule.dll</HintPath>
+      <HintPath>$(SPTPath)\EscapeFromTarkov_Data\Managed\UnityEngine.AIModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AudioModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>D:\Games\SPT\Dev40\EscapeFromTarkov_Data\Managed\UnityEngine.AudioModule.dll</HintPath>
+      <HintPath>$(SPTPath)\EscapeFromTarkov_Data\Managed\UnityEngine.AudioModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>D:\Games\SPT\Dev40\EscapeFromTarkov_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+      <HintPath>$(SPTPath)\EscapeFromTarkov_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.ImageConversionModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>D:\Games\SPT\Dev40\EscapeFromTarkov_Data\Managed\UnityEngine.ImageConversionModule.dll</HintPath>
+      <HintPath>$(SPTPath)\EscapeFromTarkov_Data\Managed\UnityEngine.ImageConversionModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.IMGUIModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>D:\Games\SPT\Dev40\EscapeFromTarkov_Data\Managed\UnityEngine.IMGUIModule.dll</HintPath>
+      <HintPath>$(SPTPath)\EscapeFromTarkov_Data\Managed\UnityEngine.IMGUIModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.InputLegacyModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>D:\Games\SPT\Dev40\EscapeFromTarkov_Data\Managed\UnityEngine.InputLegacyModule.dll</HintPath>
+      <HintPath>$(SPTPath)\EscapeFromTarkov_Data\Managed\UnityEngine.InputLegacyModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.PhysicsModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>D:\Games\SPT\Dev40\EscapeFromTarkov_Data\Managed\UnityEngine.PhysicsModule.dll</HintPath>
+      <HintPath>$(SPTPath)\EscapeFromTarkov_Data\Managed\UnityEngine.PhysicsModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.ProfilerModule">
-      <HintPath>D:\Games\SPT\Dev40\EscapeFromTarkov_Data\Managed\UnityEngine.ProfilerModule.dll</HintPath>
+      <HintPath>$(SPTPath)\EscapeFromTarkov_Data\Managed\UnityEngine.ProfilerModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.TextRenderingModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>D:\Games\SPT\Dev40\EscapeFromTarkov_Data\Managed\UnityEngine.TextRenderingModule.dll</HintPath>
+      <HintPath>$(SPTPath)\EscapeFromTarkov_Data\Managed\UnityEngine.TextRenderingModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>D:\Games\SPT\Dev40\EscapeFromTarkov_Data\Managed\UnityEngine.UI.dll</HintPath>
+      <HintPath>$(SPTPath)\EscapeFromTarkov_Data\Managed\UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UIElementsModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>D:\Games\SPT\Dev40\EscapeFromTarkov_Data\Managed\UnityEngine.UIElementsModule.dll</HintPath>
+      <HintPath>$(SPTPath)\EscapeFromTarkov_Data\Managed\UnityEngine.UIElementsModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UnityWebRequestAudioModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>D:\Games\SPT\Dev40\EscapeFromTarkov_Data\Managed\UnityEngine.UnityWebRequestAudioModule.dll</HintPath>
+      <HintPath>$(SPTPath)\EscapeFromTarkov_Data\Managed\UnityEngine.UnityWebRequestAudioModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UnityWebRequestModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>D:\Games\SPT\Dev40\EscapeFromTarkov_Data\Managed\UnityEngine.UnityWebRequestModule.dll</HintPath>
+      <HintPath>$(SPTPath)\EscapeFromTarkov_Data\Managed\UnityEngine.UnityWebRequestModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UnityWebRequestWWWModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>D:\Games\SPT\Dev40\EscapeFromTarkov_Data\Managed\UnityEngine.UnityWebRequestWWWModule.dll</HintPath>
+      <HintPath>$(SPTPath)\EscapeFromTarkov_Data\Managed\UnityEngine.UnityWebRequestWWWModule.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -204,10 +205,6 @@
     <Compile Include="Components\BotComponentSpace\Classes\Decision\BotDecisionManager.cs" />
     <Compile Include="Components\BotComponentSpace\Classes\Doors\DoorData.cs" />
     <Compile Include="Components\BotComponentSpace\Classes\Doors\DoorFinder.cs" />
-    <Compile Include="Components\BotComponentSpace\Classes\EBackpackStatus.cs" />
-    <Compile Include="Components\BotComponentSpace\Classes\EnemyClasses\EnemyEquipmentInfo.cs" />
-    <Compile Include="Components\BotComponentSpace\Classes\EnemyClasses\Other\HearingReport.cs" />
-    <Compile Include="Components\BotComponentSpace\Classes\EnemyClasses\Path\ECornerType.cs" />
     <Compile Include="Components\BotComponentSpace\Classes\EnemyClasses\Checkers\EnemyActiveThreatChecker.cs" />
     <Compile Include="Components\BotComponentSpace\Classes\EnemyClasses\Path\EnemyCornerDictionary.cs" />
     <Compile Include="Components\BotComponentSpace\Classes\EnemyClasses\Other\EnemyEvents.cs" />
@@ -217,8 +214,6 @@
     <Compile Include="Components\BotComponentSpace\Classes\EnemyClasses\Vision\EnemyVisionChecker.cs" />
     <Compile Include="Components\BotComponentSpace\Classes\EnemyClasses\Vision\EnemyPartDataClass.cs" />
     <Compile Include="Components\BotComponentSpace\Classes\EnemyClasses\Vision\EnemyPartsClass.cs" />
-    <Compile Include="Components\BotComponentSpace\Classes\EnemyClasses\Vision\ERaycastCheck.cs" />
-    <Compile Include="Components\BotComponentSpace\Classes\EnemyClasses\Vision\ERaycastPart.cs" />
     <Compile Include="Components\BotComponentSpace\Classes\EnemyClasses\Vision\RaycastResult.cs" />
     <Compile Include="Components\BotComponentSpace\Classes\EnemyControllers\EnemyControllerEvents.cs" />
     <Compile Include="Components\BotComponentSpace\Classes\EnemyControllers\EnemyListController.cs" />
@@ -232,7 +227,6 @@
     <Compile Include="Components\BotComponentSpace\Classes\Sense\Hearing\HearingDispersionClass.cs" />
     <Compile Include="Components\BotComponentSpace\Classes\Sense\Hearing\HearingInputClass.cs" />
     <Compile Include="Components\BotComponentSpace\Classes\Steering\SteeringController.cs" />
-    <Compile Include="Components\BotComponentSpace\Classes\WeaponFunction\ESuppressionState.cs" />
     <Compile Include="Components\BotComponentSpace\Classes\WeaponFunction\Grenades\BotFlashbangedClass.cs" />
     <Compile Include="Components\BotComponentSpace\Classes\WeaponFunction\Grenades\GrenadeReactionClass.cs" />
     <Compile Include="Components\BotComponentSpace\Classes\WeaponFunction\Grenades\GrenadeThrowDecider.cs" />
@@ -241,30 +235,22 @@
     <Compile Include="Components\BotComponentSpace\SubComponents\CoverFinder\ColliderData.cs" />
     <Compile Include="Components\BotComponentSpace\SubComponents\CoverFinder\CoverData.cs" />
     <Compile Include="Components\BotComponentSpace\SubComponents\CoverFinder\CoverHitCounts.cs" />
-    <Compile Include="Components\BotComponentSpace\SubComponents\CoverFinder\HardColliderData.cs" />
-    <Compile Include="Components\BotComponentSpace\SubComponents\CoverFinder\HardCoverData.cs" />
     <Compile Include="Components\BotComponentSpace\SubComponents\CoverFinder\PathData.cs" />
     <Compile Include="Components\BotComponentSpace\SubComponents\CoverFinder\TargetData.cs" />
     <Compile Include="Components\BotControllerSpace\Classes\PeacefulActions\Actions\BotGatheringController.cs" />
     <Compile Include="Components\BotControllerSpace\Classes\PeacefulActions\Actions\IPeacefulActionExecutor.cs" />
     <Compile Include="Components\BotControllerSpace\Classes\PeacefulActions\Actions\PeacefulActionHelpers.cs" />
-    <Compile Include="Components\BotControllerSpace\Classes\PeacefulActions\EPeacefulAction.cs" />
     <Compile Include="Components\BotControllerSpace\Classes\PeacefulActions\Actions\IPeacefulActionController.cs" />
     <Compile Include="Components\BotControllerSpace\Classes\PeacefulActions\PeacefulActionSet.cs" />
     <Compile Include="Components\BotControllerSpace\Classes\PeacefulActions\PeacefulBotFinder.cs" />
     <Compile Include="Components\BotControllerSpace\Classes\PeacefulActions\BotZoneData.cs" />
-    <Compile Include="Components\BotControllerSpace\Classes\Jobs\BodyPartRaycast.cs" />
     <Compile Include="Components\BotControllerSpace\Classes\Jobs\PlayerDistancesJob.cs" />
     <Compile Include="Components\BotControllerSpace\Classes\Jobs\BotRaycastJobs.cs" />
-    <Compile Include="Components\BotControllerSpace\Classes\Jobs\UnityJobExample%281%29.cs" />
     <Compile Include="Components\GameWorldSpace\Doors\BotDoorTrigger.cs" />
     <Compile Include="Components\GameWorldSpace\Doors\DoorHandler.cs" />
     <Compile Include="Components\GameWorldSpace\GameWorldBase.cs" />
     <Compile Include="Components\GameWorldSpace\IGameWorldClass.cs" />
-    <Compile Include="Components\GameWorldSpace\Lights\BotLightTracker.cs" />
-    <Compile Include="Components\GameWorldSpace\Lights\LightComponent.cs" />
     <Compile Include="Components\GameWorldSpace\Info\LocationClass.cs" />
-    <Compile Include="Components\PlayerComponentSpace\Classes\BodyPart.cs" />
     <Compile Include="Components\PlayerComponentSpace\Classes\BodyPartsClass.cs" />
     <Compile Include="Components\PlayerComponentSpace\Classes\PartDictionary.cs" />
     <Compile Include="Components\PlayerComponentSpace\PersonClasses\Transform\NavMeshChecker.cs" />
@@ -280,12 +266,10 @@
     <Compile Include="Components\PlayerComponentSpace\PersonClasses\PlayerData.cs" />
     <Compile Include="Components\PlayerComponentSpace\PlayerData.cs" />
     <Compile Include="Components\PlayerComponentSpace\PlayerDistanceData.cs" />
-    <Compile Include="Components\PlayerComponentSpace\PlayerIlluminationClass.cs" />
     <Compile Include="Components\PlayerComponentSpace\OtherPlayersData.cs" />
     <Compile Include="Helpers\Events\ToggleEvent.cs" />
     <Compile Include="Components\BotComponentSpace\Classes\EnemyControllers\EnemyChooserClass.cs" />
     <Compile Include="Components\BotComponentSpace\Classes\EnemyClasses\Path\CornerHelpers.cs" />
-    <Compile Include="Components\BotComponentSpace\Classes\EnemyControllers\EEnemyListType.cs" />
     <Compile Include="Components\BotComponentSpace\Classes\EnemyControllers\EnemyList.cs" />
     <Compile Include="Components\BotComponentSpace\Classes\EnemyControllers\EnemyListsClass.cs" />
     <Compile Include="Components\BotComponentSpace\Classes\EnemyControllers\EnemyUpdaterClass.cs" />
@@ -293,22 +277,15 @@
     <Compile Include="Components\BotComponentSpace\Classes\Medical\BodyPartStatus.cs" />
     <Compile Include="Components\BotComponentSpace\Classes\Medical\BotMedicalBase.cs" />
     <Compile Include="Components\BotComponentSpace\Classes\Medical\BotSurgery.cs" />
-    <Compile Include="Components\BotComponentSpace\Classes\Medical\EHitReaction.cs" />
     <Compile Include="Components\BotComponentSpace\Classes\Medical\EInjurySeverity.cs" />
     <Compile Include="Components\BotComponentSpace\Classes\EnemyClasses\Path\EnemyCorner.cs" />
     <Compile Include="Components\BotComponentSpace\Classes\EnemyClasses\Path\BlindCornerFinder.cs" />
     <Compile Include="Components\BotComponentSpace\Classes\EnemyClasses\Other\EnemyHearing.cs" />
     <Compile Include="Components\BotComponentSpace\Classes\EnemyClasses\Checkers\EnemyKnownChecker.cs" />
     <Compile Include="Components\BotComponentSpace\Classes\Info\WeaponAIPresetHistory.cs" />
-    <Compile Include="Components\BotComponentSpace\Classes\Sense\Hearing\DispersionDictionary.cs" />
-    <Compile Include="Components\BotComponentSpace\Classes\Sense\Hearing\DispersionValues.cs" />
-    <Compile Include="Components\BotComponentSpace\Classes\Sense\Hearing\ESoundDispersionType.cs" />
-    <Compile Include="Components\BotComponentSpace\Classes\Steering\EEnemySteerDir.cs" />
     <Compile Include="Components\BotComponentSpace\Classes\Steering\HeardSoundSteeringClass.cs" />
     <Compile Include="Components\BotComponentSpace\Classes\Steering\RandomLookClass.cs" />
     <Compile Include="Components\BotComponentSpace\Classes\Steering\SAINHeadSteering.cs" />
-    <Compile Include="Components\BotComponentSpace\Classes\Steering\ESteerPriority.cs" />
-    <Compile Include="Components\BotComponentSpace\Classes\Search\ESearchReason.cs" />
     <Compile Include="Components\BotComponentSpace\Classes\Search\SearchDeciderClass.cs" />
     <Compile Include="Components\BotComponentSpace\Classes\Search\SearchPathFinder.cs" />
     <Compile Include="Components\BotComponentSpace\Classes\Search\SearchReasonsStruct.cs" />
@@ -319,12 +296,8 @@
     <Compile Include="Components\BotComponentSpace\Classes\WeaponFunction\ReloadClass.cs" />
     <Compile Include="Components\BotComponentSpace\Classes\Search\SAINEnemySearchClass.cs" />
     <Compile Include="Components\BotComponentSpace\Classes\Sense\SAINBotLookClass.cs" />
-    <Compile Include="Components\BotComponentSpace\CoroutineManager.cs" />
     <Compile Include="Components\BotComponentSpace\PresetUpdaterBase.cs" />
-    <Compile Include="Components\BotComponentSpace\Routine.cs" />
-    <Compile Include="Components\BotComponentSpace\SubComponents\CoverFinder\CoverFinderStatus.cs" />
     <Compile Include="Components\BotControllerSpace\Classes\BotHearingClass.cs" />
-    <Compile Include="Components\BotControllerSpace\Classes\ETimeOfDay.cs" />
     <Compile Include="Components\GameWorldSpace\Players\PlayerDictionary.cs" />
     <Compile Include="Components\PlayerComponentSpace\Classes\AIDataBase.cs" />
     <Compile Include="Components\PlayerComponentSpace\Classes\DeviceMode.cs" />
@@ -336,6 +309,7 @@
     <Compile Include="Components\PlayerComponentSpace\PersonClasses\PersonActiveClass.cs" />
     <Compile Include="Helpers\PerformanceHelpers.cs" />
     <Compile Include="Helpers\WeightedRandomSelector.cs" />
+    <Compile Include="Interfaces.cs" />
     <Compile Include="Layers\BotAction.cs" />
     <Compile Include="Layers\Combat\Solo\MeleeAttackAction.cs" />
     <Compile Include="Layers\Combat\Squad\FollowSearchParty - Copy.cs" />
@@ -349,6 +323,33 @@
     <Compile Include="Layers\Peace\Actions\ConversationAction.cs" />
     <Compile Include="Components\BotControllerSpace\Classes\IBotControllerClass.cs" />
     <Compile Include="Layers\Peace\PeacefulLayer.cs" />
+    <Compile Include="Logger.cs" />
+    <Compile Include="Models\Enums\EBackpackStatus.cs" />
+    <Compile Include="Models\Enums\ECornerType.cs" />
+    <Compile Include="Models\Enums\ECoverFinderStatus.cs" />
+    <Compile Include="Models\Enums\EEnemyAction.cs" />
+    <Compile Include="Models\Enums\EEnemyListType.cs" />
+    <Compile Include="Models\Enums\EEnemySteerDir.cs" />
+    <Compile Include="Models\Enums\EHitReaction.cs" />
+    <Compile Include="Models\Enums\EPeacefulAction.cs" />
+    <Compile Include="Models\Enums\ERaycastCheck.cs" />
+    <Compile Include="Models\Enums\ERaycastPart.cs" />
+    <Compile Include="Models\Enums\ESAINLayer.cs" />
+    <Compile Include="Models\Enums\ESearchMove.cs" />
+    <Compile Include="Models\Enums\EShootReason.cs" />
+    <Compile Include="Models\Enums\ESoundDispersionType.cs" />
+    <Compile Include="Models\Enums\ESquadPersonality.cs" />
+    <Compile Include="Models\Enums\ESquadRole.cs" />
+    <Compile Include="Models\Enums\ESteerPriority.cs" />
+    <Compile Include="Models\Enums\ESuppressionState.cs" />
+    <Compile Include="Models\Enums\ETimeOfDay.cs" />
+    <Compile Include="Models\Structs\BotPeekPlan.cs" />
+    <Compile Include="Models\Structs\DispersionValues.cs" />
+    <Compile Include="Models\Structs\PeekPosition.cs" />
+    <Compile Include="Models\Structs\SAINBodyPart.cs" />
+    <Compile Include="Models\Structs\SAINHardColliderData.cs" />
+    <Compile Include="Models\Structs\SAINHardCoverData.cs" />
+    <Compile Include="Models\Structs\SAINHearingReport.cs" />
     <Compile Include="Patches\FixPatches.cs" />
     <Compile Include="Patches\Shoot\AimDataPatches.cs" />
     <Compile Include="Patches\Shoot\GrenadePatches.cs" />
@@ -359,14 +360,11 @@
     <Compile Include="Preset\Editor\Attributes\AttributesGUI.cs" />
     <Compile Include="Preset\Editor\Attributes\ConfigInfoClass.cs" />
     <Compile Include="Preset\Editor\Attributes\GUIEntryConfig.cs" />
-    <Compile Include="Components\PlayerComponentSpace\Classes\Equipment\EScopeType.cs" />
     <Compile Include="Components\PlayerComponentSpace\Classes\Equipment\EquipmentClass.cs" />
     <Compile Include="Components\PlayerComponentSpace\Classes\Equipment\GearInfo.cs" />
     <Compile Include="Components\PlayerComponentSpace\Classes\Equipment\WeaponInfo.cs" />
     <Compile Include="Components\BotControllerSpace\Classes\GlobalCoverfinder.cs" />
     <Compile Include="Components\BotControllerSpace\Classes\BotSquads.cs" />
-    <Compile Include="Components\BotControllerSpace\Classes\ESquadPersonality.cs" />
-    <Compile Include="Components\BotControllerSpace\Classes\ESquadRole.cs" />
     <Compile Include="Components\BotControllerSpace\Classes\MemberInfo.cs" />
     <Compile Include="Components\BotControllerSpace\Classes\Squad.cs" />
     <Compile Include="Components\BotControllerSpace\Classes\SquadPersonalityManager.cs" />
@@ -390,8 +388,6 @@
     <Compile Include="Components\Extract\ExtractPositionFinder.cs" />
     <Compile Include="Helpers\ListHelpers.cs" />
     <Compile Include="Helpers\NavMeshHelpers.cs" />
-    <Compile Include="Helpers\SAINWeaponInfo.cs" />
-    <Compile Include="Helpers\UpdateSettingClass.cs" />
     <Compile Include="Layers\Combat\Solo\FreezeAction.cs" />
     <Compile Include="Layers\SAINAvoidThreatLayer.cs" />
     <Compile Include="Layers\Combat\Solo\Cover\DoSurgeryAction.cs" />
@@ -471,28 +467,21 @@
     <Compile Include="Components\BotComponentSpace\Classes\BotBackpackDropClass.cs" />
     <Compile Include="Components\BotComponentSpace\Classes\Decision\DogFightDecisionClass.cs" />
     <Compile Include="Components\BotComponentSpace\Classes\SAINActivationClass.cs" />
-    <Compile Include="Components\BotComponentSpace\Classes\Search\PeekPosition.cs" />
-    <Compile Include="Components\BotComponentSpace\Classes\Search\ESearchStates.cs" />
     <Compile Include="Components\BotComponentSpace\Classes\WeaponFunction\AimClass.cs" />
-    <Compile Include="Components\BotComponentSpace\Classes\WeaponFunction\EShootReason.cs" />
-    <Compile Include="Components\BotComponentSpace\Classes\WeaponFunction\ESuppressionStatus.cs" />
     <Compile Include="Components\BotComponentSpace\Classes\Memory\EEnemyTargetType.cs" />
     <Compile Include="Components\BotComponentSpace\Classes\Memory\EExtractReason.cs" />
     <Compile Include="Components\BotComponentSpace\Classes\Memory\EExtractStatus.cs" />
     <Compile Include="Components\BotComponentSpace\Classes\Memory\EnemyTarget.cs" />
     <Compile Include="Components\BotComponentSpace\Classes\Memory\EnemyTargetsClass.cs" />
-    <Compile Include="Components\BotComponentSpace\Classes\EnemyClasses\Status\EEnemyAction.cs" />
     <Compile Include="Components\BotComponentSpace\ExpirableBool.cs" />
     <Compile Include="Components\BotComponentSpace\Classes\Memory\HealthTracker.cs" />
     <Compile Include="Components\BotComponentSpace\Classes\Memory\LocationTracker.cs" />
     <Compile Include="Components\BotComponentSpace\Classes\Memory\SAINExtract.cs" />
     <Compile Include="Components\BotComponentSpace\Classes\WeaponFunction\AimDownSightsController.cs" />
-    <Compile Include="Interfaces.cs" />
     <Compile Include="Preset\Editor\PresetSelection.cs" />
     <Compile Include="Components\BotComponentSpace\Classes\EnemyClasses\EnemyBase.cs" />
     <Compile Include="Components\BotComponentSpace\Classes\EnemyClasses\Position\EnemyKnownPlaces.cs" />
     <Compile Include="Components\BotComponentSpace\Classes\EnemyClasses\Position\EnemyPlace.cs" />
-    <Compile Include="Components\BotComponentSpace\Classes\Search\ESearchMove.cs" />
     <Compile Include="Components\BotComponentSpace\Classes\Mover\DogFight.cs" />
     <Compile Include="Components\BotComponentSpace\Classes\Doors\DoorOpener.cs" />
     <Compile Include="Components\BotComponentSpace\Classes\Mover\SAINMovementPlanController.cs" />
@@ -512,7 +501,6 @@
     <Compile Include="Components\BotComponentSpace\Classes\Sense\Hearing\SAINSoundCollection.cs" />
     <Compile Include="Components\BotComponentSpace\Classes\WeaponFunction\BotLightController.cs" />
     <Compile Include="Components\BotComponentSpace\Classes\WeaponFunction\ManualShootClass.cs" />
-    <Compile Include="Components\BotComponentSpace\ESAINLayer.cs" />
     <Compile Include="Components\PlayerComponentSpace\PersonClasses\PersonClass.cs" />
     <Compile Include="Components\PlayerComponentSpace\PersonClasses\Transform\PersonTransformClass.cs" />
     <Compile Include="Components\BotComponentSpace\Classes\Memory\SAINMemoryClass.cs" />
@@ -585,7 +573,6 @@
     <Compile Include="Preset\Editor\BotSelectionClass.cs" />
     <Compile Include="Preset\Editor\Util\Sounds.cs" />
     <Compile Include="Helpers\GameWorldInfo.cs" />
-    <Compile Include="Logger.cs" />
     <Compile Include="Plugin\BigBrainHandler.cs" />
     <Compile Include="Plugin\GameWorldHandler.cs" />
     <Compile Include="Components\BotComponentSpace\Classes\WeaponFunction\ShootDeciderClass.cs" />
@@ -604,14 +591,11 @@
     <Compile Include="Components\BotComponentSpace\SubComponents\CoverFinder\CoverPoint.cs" />
     <Compile Include="Components\BotComponentSpace\Classes\Decision\SAINDecisionClass.cs" />
     <Compile Include="Components\BotComponentSpace\Classes\Sense\Hearing\SAINHearingSensorClass.cs" />
-    <Compile Include="Components\BotComponentSpace\Classes\Search\BotPeekPlan.cs" />
     <Compile Include="Components\BotComponentSpace\Classes\Decision\SquadDecisionClass.cs" />
-    <Compile Include="Components\BotComponentSpace\Classes\Talk\SquadLeaderClass.cs" />
     <Compile Include="Components\BotComponentSpace\SubComponents\CoverFinder\CoverFinderComponent.cs" />
     <Compile Include="Preset\Editor\Util\BuilderClass.cs" />
     <Compile Include="Preset\Editor\Util\RectLayout.cs" />
     <Compile Include="Preset\Editor\Util\StylesClass.cs" />
-    <Compile Include="Helpers\AudioHelpers.cs" />
     <Compile Include="Helpers\DebugGizmos.cs" />
     <Compile Include="Helpers\EFTMath.cs" />
     <Compile Include="Components\BotComponentSpace\Classes\Sense\FlashLightDazzleClass.cs" />
@@ -635,12 +619,10 @@
     <Compile Include="Components\PlayerComponentSpace\Classes\LightDetectionClass.cs" />
     <Compile Include="Components\BotComponentSpace\Classes\Talk\SAINBotTalkClass.cs" />
     <Compile Include="Components\BotComponentSpace\Classes\Talk\EnemyTalkClass.cs" />
-    <Compile Include="Components\BotComponentSpace\Classes\Talk\EnemyTalkObject.cs" />
     <Compile Include="Components\BotComponentSpace\Classes\Talk\GroupTalk.cs" />
     <Compile Include="Components\BotComponentSpace\Classes\Info\BotSquadClass.cs" />
     <Compile Include="Components\BotComponentSpace\Classes\EnemyClasses\Enemy.cs" />
     <Compile Include="Components\BotComponentSpace\Classes\Info\SAINBotInfoClass.cs" />
-    <Compile Include="SAINEnum.cs" />
     <Compile Include="Components\BotComponentSpace\SubComponents\GrenadeTrackerComponent.cs" />
     <Compile Include="Components\BotComponentSpace\Classes\Mover\LeanClass.cs" />
     <Compile Include="Layers\Combat\Solo\SearchAction.cs" />
@@ -661,6 +643,7 @@
     <Compile Include="Plugin\VersionChecker\VersionChecker.cs" />
     <Compile Include="Preset\GlobalSettings\Categories\ShootSettings.cs" />
     <Compile Include="Preset\GlobalSettings\Categories\Look\LookSettings.cs" />
+    <Compile Include="SAINEnum.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
@@ -670,6 +653,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Components\GameWorldSpace\Lights\" />
     <Folder Include="Components\PlayerComponentSpace\SubComponents\" />
     <Folder Include="Preset\BotLevelSettings\" />
   </ItemGroup>
@@ -677,10 +661,10 @@
   <ProjectExtensions>
     <VisualStudio AllowExistingFolder="true" />
   </ProjectExtensions>
-  <!-- <PropertyGroup>
-    <PostBuildEvent>xcopy "$(TargetPath)" "$(ProjectDir)D:\Games\SPT\Dev40\BepInEx\plugins\SAIN" /Y</PostBuildEvent>
-  </PropertyGroup>
   <PropertyGroup>
+    <PostBuildEvent>xcopy /Y "$(TargetPath)" "$(SPTPath)\BepInEx\plugins\SAIN\"</PostBuildEvent>
+  </PropertyGroup>
+  <!--PropertyGroup>
     <PreBuildEvent>powershell.exe -ExecutionPolicy Bypass -NoProfile -NonInteractive -File "$(ProjectDir)\Plugin\VersionChecker\setbuild.ps1"</PreBuildEvent>
   </PropertyGroup> -->
 </Project>
