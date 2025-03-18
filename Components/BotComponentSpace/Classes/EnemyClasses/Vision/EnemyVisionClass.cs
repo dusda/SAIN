@@ -1,21 +1,10 @@
-﻿using HarmonyLib;
-using System.Collections.Generic;
-using System.Reflection;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace SAIN.SAINComponent.Classes.EnemyClasses
 {
     public class EnemyVisionClass : EnemyBase, IBotEnemyClass
     {
-        static EnemyVisionClass()
-        {
-            _bodyPartField = AccessTools.Field(typeof(EnemyInfo), "_bodyPart");
-            _headPartField = AccessTools.Field(typeof(EnemyInfo), "_headPart");
-        }
-
-        private static FieldInfo _bodyPartField;
-        private static FieldInfo _headPartField;
-
         private const float _repeatContactMinSeenTime = 12f;
         private const float _lostContactMinSeenTime = 12f;
 
@@ -52,8 +41,8 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
 
         public void Init()
         {
-            _bodyPart = (KeyValuePair<EnemyPart, EnemyPartData>)_bodyPartField.GetValue(Enemy.EnemyInfo);
-            _headPart = (KeyValuePair<EnemyPart, EnemyPartData>)_headPartField.GetValue(Enemy.EnemyInfo);
+            _bodyPart = Enemy.EnemyInfo._bodyPart;
+            _headPart = Enemy.EnemyInfo._headPart;
             Enemy.Events.OnEnemyKnownChanged.OnToggle += OnEnemyKnownChanged;
             Angles.Init();
             VisionChecker.Init();
