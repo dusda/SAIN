@@ -46,10 +46,12 @@ namespace SAIN
 
         private void Awake()
         {
+            /*
             if (!VersionChecker.CheckEftVersion(Logger, Info, Config))
             {
                 throw new Exception("Invalid EFT Version");
             }
+            */
 
             PresetHandler.Init();
             BindConfigs();
