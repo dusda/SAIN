@@ -4,6 +4,7 @@ using SAIN.Preset.GlobalSettings;
 using SAIN.SAINComponent.Classes.Info;
 using System.Collections.Generic;
 using UnityEngine;
+using JsonUtility = SAIN.Helpers.JsonUtility;
 
 namespace SAIN.Preset.Personalities
 {
