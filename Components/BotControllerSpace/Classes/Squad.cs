@@ -1,5 +1,4 @@
 ﻿using EFT;
-using SAIN.Components.BotComponentSpace.Classes.EnemyClasses;
 using SAIN.Helpers;
 using SAIN.Models.Enums;
 using SAIN.Models.Structs;
@@ -203,7 +202,7 @@ namespace SAIN.BotController.Classes
             PlaceForCheck newPlace = addNewPlaceForCheck(bot.BotOwner, position, checkType, enemy.EnemyIPlayer);
             Vector3 pos = newPlace?.Position ?? position;
 
-			SAINHearingReport report = new()
+            SAINHearingReport report = new()
             {
                 position = position,
                 soundType = soundType,
@@ -523,7 +522,7 @@ namespace SAIN.BotController.Classes
                     continue;
                 }
 
-				SAINHearingReport report = new()
+                SAINHearingReport report = new()
                 {
                     position = position,
                     soundType = soundType,

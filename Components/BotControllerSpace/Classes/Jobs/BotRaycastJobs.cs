@@ -121,7 +121,7 @@ namespace SAIN.Components
                 for (int j = 0; j < partCount; j++)
                 {
                     var part = parts[j];
-					SAINBodyPartRaycast raycastData = part.GetRaycast(eyePosition, float.MaxValue);
+                    SAINBodyPartRaycast raycastData = part.GetRaycast(eyePosition, float.MaxValue);
                     Vector3 castPoint = raycastData.CastPoint;
 
                     _colliderTypes.Add(raycastData.ColliderType);
@@ -139,18 +139,18 @@ namespace SAIN.Components
                     commands++;
 
                     //raycastCommands[commands] = new RaycastCommand(eyePosition, eyeDir, eyeDirMag, _VisionMask);
-					raycastCommands[commands] = new RaycastCommand(eyePosition, eyeDir, new QueryParameters
-					{
-						layerMask = _VisionMask
-					}, eyeDirMag);
-					commands++;
+                    raycastCommands[commands] = new RaycastCommand(eyePosition, eyeDir, new QueryParameters
+                    {
+                        layerMask = _VisionMask
+                    }, eyeDirMag);
+                    commands++;
 
                     //raycastCommands[commands] = new RaycastCommand(weaponFirePort, weaponDir, weaponDir.magnitude, _ShootMask);
-					raycastCommands[commands] = new RaycastCommand(weaponFirePort, weaponDir, new QueryParameters
-					{
-						layerMask = _ShootMask
-					}, weaponDir.magnitude);
-					commands++;
+                    raycastCommands[commands] = new RaycastCommand(weaponFirePort, weaponDir, new QueryParameters
+                    {
+                        layerMask = _ShootMask
+                    }, weaponDir.magnitude);
+                    commands++;
                 }
             }
         }

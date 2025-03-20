@@ -25,7 +25,7 @@ namespace SAIN.Components
             foreach (var part in PartToBoneTypes.PartsToCollidersTypes)
             {
                 EBodyPart bodyPartType = part.Key;
-				SAINBodyPart bodyPart = createPart(bodyPartType, playerBones, part.Value);
+                SAINBodyPart bodyPart = createPart(bodyPartType, playerBones, part.Value);
                 Parts.Add(bodyPartType, bodyPart);
             }
 

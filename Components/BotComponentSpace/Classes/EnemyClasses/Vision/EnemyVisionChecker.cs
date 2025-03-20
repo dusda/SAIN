@@ -1,5 +1,4 @@
-﻿using SAIN.Components;
-using SAIN.Components.PlayerComponentSpace.PersonClasses;
+﻿using SAIN.Components.PlayerComponentSpace.PersonClasses;
 using SAIN.Models.Enums;
 using SAIN.Models.Structs;
 using SAIN.Preset;

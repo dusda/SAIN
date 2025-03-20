@@ -20,7 +20,7 @@ namespace SAIN.SAINComponent.SubComponents.CoverFinder
         public bool CheckCollider(Collider collider, TargetData targetData, out CoverPoint coverPoint, out string reason)
         {
             coverPoint = null;
-			SAINHardColliderData hardData = new(collider);
+            SAINHardColliderData hardData = new(collider);
             ColliderData colliderData = new(hardData, targetData);
 
             if (!GetPlaceToMove(colliderData, hardData, targetData, out Vector3 coverPosition))

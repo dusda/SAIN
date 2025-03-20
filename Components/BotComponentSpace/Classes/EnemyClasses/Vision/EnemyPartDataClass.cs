@@ -1,5 +1,4 @@
 ﻿using EFT;
-using SAIN.Components;
 using SAIN.Models.Enums;
 using SAIN.Models.Structs;
 using System.Collections.Generic;
@@ -65,7 +64,7 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
             Vector3 castPoint = getCastPoint(origin, collider);
 
             return new SAINBodyPartRaycast
-			{
+            {
                 CastPoint = castPoint,
                 PartType = BodyPart,
                 ColliderType = collider.BodyPartColliderType

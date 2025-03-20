@@ -1,5 +1,4 @@
 ﻿using EFT;
-using SAIN.Components.BotComponentSpace.Classes.EnemyClasses;
 using SAIN.Helpers;
 using SAIN.Models.Structs;
 using System.Collections.Generic;

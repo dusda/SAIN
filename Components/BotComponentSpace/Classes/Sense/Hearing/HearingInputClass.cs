@@ -1,6 +1,5 @@
 ﻿using EFT;
 using SAIN.Components;
-using SAIN.Components.BotComponentSpace.Classes.EnemyClasses;
 using SAIN.Components.BotController;
 using SAIN.Components.PlayerComponentSpace;
 using SAIN.Helpers;
@@ -185,7 +184,7 @@ namespace SAIN.SAINComponent.Classes
             random = random.normalized * dispersion;
             Vector3 estimatedPos = enemy.EnemyPosition + random;
 
-			SAINHearingReport report = new()
+            SAINHearingReport report = new()
             {
                 position = estimatedPos,
                 soundType = SAINSoundType.BulletImpact,

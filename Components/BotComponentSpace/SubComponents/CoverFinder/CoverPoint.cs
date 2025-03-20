@@ -213,7 +213,7 @@ namespace SAIN.SAINComponent.SubComponents.CoverFinder
             PathData = pathData;
             Vector3 size = colliderData.Collider.bounds.size;
             HardData = new SAINHardCoverData
-			{
+            {
                 Id = _count,
                 Height = size.y,
                 Value = (size.x + size.y + size.z).Round10(),

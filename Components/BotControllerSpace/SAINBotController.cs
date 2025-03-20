@@ -2,7 +2,6 @@ using Comfort.Common;
 using EFT;
 using EFT.EnvironmentEffect;
 using SAIN.BotController.Classes;
-using SAIN.Components.BotComponentSpace.Classes.EnemyClasses;
 using SAIN.Components.BotController;
 using SAIN.Components.BotController.PeacefulActions;
 using SAIN.Components.BotControllerSpace.Classes;
@@ -108,7 +107,7 @@ namespace SAIN.Components
                             random.y = 0;
                             Vector3 estimatedThrowPosition = enemy.EnemyPosition + random;
 
-							SAINHearingReport report = new()
+                            SAINHearingReport report = new()
                             {
                                 position = estimatedThrowPosition,
                                 soundType = SAINSoundType.GrenadeExplosion,

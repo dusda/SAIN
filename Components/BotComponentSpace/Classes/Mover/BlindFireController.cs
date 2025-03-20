@@ -3,7 +3,6 @@ using SAIN.Helpers;
 using SAIN.Models.Enums;
 using SAIN.Preset.GlobalSettings;
 using SAIN.SAINComponent.Classes.EnemyClasses;
-using SAIN.SAINComponent.Classes.WeaponFunction;
 using UnityEngine;
 
 namespace SAIN.SAINComponent.Classes.Mover

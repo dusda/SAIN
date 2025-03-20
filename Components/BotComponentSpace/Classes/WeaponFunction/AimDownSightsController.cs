@@ -1,7 +1,6 @@
 ﻿using EFT;
 using SAIN.Models.Enums;
 using SAIN.SAINComponent.Classes.EnemyClasses;
-using SAIN.SAINComponent.Classes.Search;
 using UnityEngine;
 
 namespace SAIN.SAINComponent.Classes.WeaponFunction

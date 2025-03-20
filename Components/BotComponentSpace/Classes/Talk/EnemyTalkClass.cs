@@ -1,7 +1,6 @@
 using Comfort.Common;
 using EFT;
 using SAIN.Components;
-using SAIN.Components.BotComponentSpace.Classes.EnemyClasses;
 using SAIN.Helpers;
 using SAIN.Models.Enums;
 using SAIN.Models.Structs;
@@ -466,7 +465,7 @@ namespace SAIN.SAINComponent.Classes.Talk
                 if (enemy.RealDistance <= painRange)
                 {
                     Vector3 randomizedPos = randomizePos(player.Position, enemy.RealDistance, 20f);
-					SAINHearingReport report = new()
+                    SAINHearingReport report = new()
                     {
                         position = randomizedPos,
                         soundType = SAINSoundType.Pain,
@@ -483,7 +482,7 @@ namespace SAIN.SAINComponent.Classes.Talk
                 if (enemy.RealDistance <= breathRange)
                 {
                     Vector3 randomizedPos = randomizePos(player.Position, enemy.RealDistance, 20f);
-					SAINHearingReport report = new()
+                    SAINHearingReport report = new()
                     {
                         position = randomizedPos,
                         soundType = SAINSoundType.Breathing,
@@ -499,7 +498,7 @@ namespace SAIN.SAINComponent.Classes.Talk
             if (enemy.RealDistance <= 65f)
             {
                 Vector3 randomizedPos = randomizePos(player.Position, enemy.RealDistance, 20f);
-				SAINHearingReport report = new()
+                SAINHearingReport report = new()
                 {
                     position = randomizedPos,
                     soundType = SAINSoundType.Conversation,

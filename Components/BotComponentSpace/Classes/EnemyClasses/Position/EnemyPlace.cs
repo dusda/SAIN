@@ -1,5 +1,4 @@
-﻿using SAIN.Components.BotComponentSpace.Classes.EnemyClasses;
-using SAIN.Models.Structs;
+﻿using SAIN.Models.Structs;
 using System;
 using UnityEngine;
 

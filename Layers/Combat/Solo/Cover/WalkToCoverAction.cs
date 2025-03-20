@@ -1,7 +1,6 @@
 ﻿using DrakiaXYZ.BigBrain.Brains;
 using EFT;
 using SAIN.Models.Enums;
-using SAIN.SAINComponent.Classes.WeaponFunction;
 using SAIN.SAINComponent.SubComponents.CoverFinder;
 using System.Text;
 using UnityEngine;

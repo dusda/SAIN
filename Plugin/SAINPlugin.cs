@@ -1,6 +1,5 @@
 using BepInEx;
 using BepInEx.Configuration;
-using DrakiaXYZ.VersionChecker;
 using EFT;
 using SAIN.Editor;
 using SAIN.Helpers;
@@ -8,7 +7,6 @@ using SAIN.Plugin;
 using SAIN.Preset;
 using SAIN.Preset.GlobalSettings;
 using SPT.Reflection.Patching;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using static SAIN.AssemblyInfoClass;

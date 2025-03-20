@@ -12,7 +12,6 @@ using SAIN.Preset.GearStealthValues;
 using SAIN.Preset.GlobalSettings;
 using SAIN.Preset.GlobalSettings.Categories;
 using SAIN.Preset.Personalities;
-using SAIN.SAINComponent.Classes;
 using SAIN.SAINComponent.Classes.WeaponFunction;
 using System;
 using System.Collections.Generic;

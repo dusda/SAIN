@@ -9,7 +9,7 @@ namespace SAIN.Components.BotController.PeacefulActions
 
         int Count { get; }
 
-		EPeacefulAction Action { get; }
+        EPeacefulAction Action { get; }
 
         void CheckExecute(BotZoneData data);
 

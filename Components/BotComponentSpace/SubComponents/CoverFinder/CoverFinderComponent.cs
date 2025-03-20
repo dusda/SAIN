@@ -307,7 +307,7 @@ namespace SAIN.SAINComponent.SubComponents.CoverFinder
             bool shallLimit = limit && shallLimitProcessing();
             WaitForSeconds wait = shallLimit ? _recheckWait : null;
 
-			ECoverFinderStatus lastStatus = CurrentStatus;
+            ECoverFinderStatus lastStatus = CurrentStatus;
             CurrentStatus = shallLimit ? ECoverFinderStatus.RecheckingPointsWithLimit : ECoverFinderStatus.RecheckingPointsNoLimit;
 
             foreach (var coverPoint in tempList)
