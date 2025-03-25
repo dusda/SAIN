@@ -232,9 +232,9 @@ namespace SAIN.Patches.Vision
         }
 
         [PatchPrefix]
-        public static bool Patch(BotOwner ____botOwner)
+        public static bool Patch(LookSensor __instance)
         {
-            return SAINEnableClass.isBotExcluded(____botOwner);
+            return SAINEnableClass.isBotExcluded(__instance._botOwner);
         }
     }
 

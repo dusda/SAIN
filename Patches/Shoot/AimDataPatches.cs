@@ -119,25 +119,22 @@ namespace SAIN.Patches.Shoot.Aim
     {
         protected override MethodBase GetTargetMethod()
         {
-            _endTargetPointProp = AccessTools.Property(HelpersGClass.AimDataType, "EndTargetPoint");
-            return AccessTools.Method(typeof(BotAimingClass), "method_13");
+            return AccessTools.Method(typeof(BotAimingClass), nameof(BotAimingClass.method_13));
         }
 
-        private static PropertyInfo _endTargetPointProp;
-
         [PatchPrefix]
-        public static bool PatchPrefix(ref BotOwner ___botOwner_0, ref Vector3 ___vector3_5, ref Vector3 ___vector3_4, ref float ___float_13)
+        public static bool PatchPrefix(BotAimingClass __instance)
         {
-            if (!SAINEnableClass.GetSAIN(___botOwner_0, out var bot))
+            if (!SAINEnableClass.GetSAIN(__instance.botOwner_0, out var bot))
             {
                 return true;
             }
 
-            Vector3 realTargetPoint = ___botOwner_0.AimingManager.CurrentAiming.RealTargetPoint;
+            Vector3 realTargetPoint = __instance.botOwner_0.AimingManager.CurrentAiming.RealTargetPoint;
 
             if (bot.IsCheater)
             {
-                _endTargetPointProp.SetValue(___botOwner_0.AimingManager.CurrentAiming, realTargetPoint);
+                __instance.RealTargetPoint = realTargetPoint;
                 return false;
             }
 
@@ -147,15 +144,15 @@ namespace SAIN.Patches.Shoot.Aim
                 return true;
             }
 
-            float aimUpgradeByTime = ___float_13;
-            Vector3 badShootOffset = ___vector3_5;
+            float aimUpgradeByTime = __instance.float_13;
+            Vector3 badShootOffset = __instance.vector3_5;
             Vector3 recoilOffset = bot.Info.WeaponInfo.Recoil.CurrentRecoilOffset;
 
             // Applies aiming offset, recoil offset, and scatter offsets
             // Default Setup :: Vector3 finalTarget = __instance.RealTargetPoint + badShootOffset + (AimUpgradeByTime * (AimOffset + ___botOwner_0.RecoilData.RecoilOffset));
 
             Vector3 aimOffset;
-            if (___botOwner_0.Settings.FileSettings.Aiming.DIST_TO_SHOOT_NO_OFFSET > enemy.RealDistance)
+            if (__instance.botOwner_0.Settings.FileSettings.Aiming.DIST_TO_SHOOT_NO_OFFSET > enemy.RealDistance)
             {
                 aimOffset = Vector3.zero;
             }
@@ -163,7 +160,7 @@ namespace SAIN.Patches.Shoot.Aim
             {
                 float spread = aimUpgradeByTime / enemy.Aim.AimAndScatterMultiplier;
                 spread = Mathf.Clamp(spread, 0f, 3f);
-                aimOffset = ___vector3_4 * spread;
+                aimOffset = __instance.vector3_4 * spread;
             }
 
             if (bot.Info.Profile.IsPMC || bot.Info.Profile.WildSpawnType.isGoons())
@@ -175,7 +172,7 @@ namespace SAIN.Patches.Shoot.Aim
             if (!enemy.IsAI &&
                 SAINPlugin.LoadedPreset.GlobalSettings.Look.NotLooking.NotLookingToggle)
             {
-                finalOffset += NotLookingOffset(enemy.EnemyPerson.IPlayer, ___botOwner_0);
+                finalOffset += NotLookingOffset(enemy.EnemyPerson.IPlayer, __instance.botOwner_0);
             }
 
             Vector3 result = realTargetPoint + finalOffset;
@@ -183,7 +180,7 @@ namespace SAIN.Patches.Shoot.Aim
             if (SAINPlugin.LoadedPreset.GlobalSettings.General.Debug.Gizmos.DebugDrawAimGizmos &&
                 enemy.EnemyPerson.IPlayer.IsYourPlayer == true)
             {
-                Vector3 weaponRoot = ___botOwner_0.WeaponRoot.position;
+                Vector3 weaponRoot = __instance.botOwner_0.WeaponRoot.position;
                 DebugGizmos.Line(weaponRoot, result, Color.red, 0.02f, true, 0.25f, true);
                 DebugGizmos.Sphere(result, 0.025f, Color.red, true, 10f);
 
@@ -197,7 +194,7 @@ namespace SAIN.Patches.Shoot.Aim
             //    DebugGizmos.Line(recoilOffset + realTargetPoint, realTargetPoint, Color.red, 0.02f, true, 10f, true);
             //}
 
-            _endTargetPointProp.SetValue(___botOwner_0.AimingManager.CurrentAiming, result);
+            __instance.RealTargetPoint = result;
             return false;
         }
 
@@ -218,13 +215,13 @@ namespace SAIN.Patches.Shoot.Aim
     {
         protected override MethodBase GetTargetMethod()
         {
-            return AccessTools.Method(HelpersGClass.AimDataType, "method_9");
+            return AccessTools.Method(typeof(BotAimingClass), nameof(BotAimingClass.method_9));
         }
 
         [PatchPrefix]
-        public static void PatchPrefix(BotOwner ___botOwner_0, ref float additionCoef)
+        public static void PatchPrefix(BotAimingClass __instance, ref float additionCoef)
         {
-            if (SAINEnableClass.GetSAIN(___botOwner_0, out var bot))
+            if (SAINEnableClass.GetSAIN(__instance.botOwner_0, out var bot))
             {
             }
         }
@@ -234,13 +231,13 @@ namespace SAIN.Patches.Shoot.Aim
     {
         protected override MethodBase GetTargetMethod()
         {
-            return AccessTools.Method(HelpersGClass.AimDataType, "GetHit");
+            return AccessTools.Method(typeof(BotAimingClass), nameof(BotAimingClass.GetHit));
         }
 
         [PatchPrefix]
-        public static bool PatchPrefix(BotOwner ___botOwner_0, DamageInfoStruct DamageInfoStruct)
+        public static bool PatchPrefix(BotAimingClass __instance, DamageInfoStruct DamageInfoStruct)
         {
-            if (SAINPlugin.IsBotExluded(___botOwner_0))
+            if (SAINPlugin.IsBotExluded(__instance.botOwner_0))
             {
                 return true;
             }
@@ -253,43 +250,36 @@ namespace SAIN.Patches.Shoot.Aim
     {
         protected override MethodBase GetTargetMethod()
         {
-            return AccessTools.Method(typeof(BotWeaponManager), "UpdateHandsController");
+            return AccessTools.Method(typeof(BotWeaponManager), nameof(BotWeaponManager.UpdateHandsController));
         }
 
         [PatchPostfix]
-        public static void Patch(BotOwner ___botOwner_0, IHandsController handsController)
+        public static void Patch(BotWeaponManager __instance, IHandsController handsController)
         {
             IFirearmHandsController firearmHandsController;
             if ((firearmHandsController = (handsController as IFirearmHandsController)) != null)
             {
-                SAINBotController.Instance?.BotChangedWeapon(___botOwner_0, firearmHandsController);
+                SAINBotController.Instance?.BotChangedWeapon(__instance.botOwner_0, firearmHandsController);
             }
         }
     }
 
     public class AimTimePatch : ModulePatch
     {
-        private static PropertyInfo _PanicingProp;
-
         protected override MethodBase GetTargetMethod()
         {
-            _PanicingProp = AccessTools.Property(HelpersGClass.AimDataType, "Boolean_0");
-            return AccessTools.Method(HelpersGClass.AimDataType, "method_7");
+            return AccessTools.Method(typeof(BotAimingClass), nameof(BotAimingClass.method_7));
         }
 
         [PatchPrefix]
-        public static bool PatchPrefix(ref BotOwner ___botOwner_0, float dist, float ang, ref bool ___bool_1, ref float ___float_10, ref float __result)
+        public static bool PatchPrefix(BotAimingClass __instance, float dist, float ang, ref float __result)
         {
-            if (!SAINEnableClass.GetSAIN(___botOwner_0, out var bot))
+            if (!SAINEnableClass.GetSAIN(__instance.botOwner_0, out var bot))
             {
                 return true;
             }
 
-            float aimDelay = ___float_10;
-            bool moving = ___bool_1;
-            bool panicing = (bool)_PanicingProp.GetValue(___botOwner_0.AimingManager.CurrentAiming);
-
-            __result = calculateAim(bot, dist, ang, moving, panicing, aimDelay);
+            __result = calculateAim(bot, dist, ang, __instance.bool_1, __instance.bool_0, __instance.float_10);
             bot.Aim.LastAimTime = __result;
 
             return false;
@@ -449,15 +439,15 @@ namespace SAIN.Patches.Shoot.Aim
 
         protected override MethodBase GetTargetMethod()
         {
-            return AccessTools.Method(HelpersGClass.AimDataType, "method_11");
+            return AccessTools.Method(typeof(BotAimingClass), nameof(BotAimingClass.method_11));
         }
 
         [PatchPrefix]
-        public static bool PatchPrefix(ref BotOwner ___botOwner_0, ref Vector3 ___vector3_2, ref Vector3 ___vector3_0, Vector3 dir)
+        public static bool PatchPrefix(BotAimingClass __instance, Vector3 dir)
         {
-            ___vector3_2 = dir;
-            ___botOwner_0.Steering.LookToDirection(dir, _aimTurnSpeed);
-            ___botOwner_0.Steering.SetYByDir(___vector3_0);
+            __instance.vector3_2 = dir;
+            __instance.botOwner_0.Steering.LookToDirection(dir, _aimTurnSpeed);
+            __instance.botOwner_0.Steering.SetYByDir(__instance.vector3_0);
             return false;
         }
     }

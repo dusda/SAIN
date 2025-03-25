@@ -1,12 +1,10 @@
 ﻿using EFT;
-using HarmonyLib;
 using SAIN.Helpers;
 using SAIN.Models.Enums;
 using SAIN.SAINComponent;
 using SAIN.SAINComponent.Classes.EnemyClasses;
 using SAIN.SAINComponent.Classes.Search;
 using System;
-using System.Reflection;
 using System.Text;
 using UnityEngine;
 
@@ -14,15 +12,6 @@ namespace SAIN.Layers
 {
     public static class DebugOverlay
     {
-        static DebugOverlay()
-        {
-            TimeToAim = AccessTools.Field(Helpers.HelpersGClass.AimDataType, "float_7");
-            timeAiming = AccessTools.Field(Helpers.HelpersGClass.AimDataType, "float_5");
-        }
-
-        private static FieldInfo TimeToAim;
-        private static FieldInfo timeAiming;
-
         public static void AddBaseInfo(BotComponent bot, BotOwner botOwner, StringBuilder stringBuilder)
         {
             try
@@ -76,12 +65,12 @@ namespace SAIN.Layers
 
                 if (debug.OverLay_AimInfo)
                 {
-                    if (bot.BotOwner.AimingManager.CurrentAiming != null)
+                    if (bot.BotOwner.AimingManager.CurrentAiming != null && bot.BotOwner.AimingManager.CurrentAiming is BotAimingClass aimClass)
                     {
                         stringBuilder.AppendLine($"AimData: Status [{bot.Aim.AimStatus}] " +
                             $"Last Aim Time: [{bot.Aim.LastAimTime}] " +
-                            $"AimingTime [{timeAiming.GetValue(bot.BotOwner.AimingManager.CurrentAiming)}] " +
-                            $"TimeToFnsh: [{TimeToAim.GetValue(bot.BotOwner.AimingManager.CurrentAiming)}]");
+                            $"AimingTime [{aimClass.float_7}] " +
+                            $"TimeToFnsh: [{aimClass.float_5}]");
                         stringBuilder.AppendLine($"AimOffsetMagnitude [{((bot.BotOwner.AimingManager.CurrentAiming.RealTargetPoint - bot.BotOwner.AimingManager.CurrentAiming.EndTargetPoint).magnitude).Round100()}] " +
                             $"Friendly Fire Status [{bot.FriendlyFire.FriendlyFireStatus}] " +
                             $"No Bush ESP Status: [{bot.NoBushESP.NoBushESPActive}]");

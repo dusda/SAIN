@@ -9,12 +9,6 @@ namespace SAIN.Helpers
 {
     internal class HelpersGClass
     {
-        static HelpersGClass()
-        {
-            AimDataType = typeof(BotAimingClass);
-        }
-
-        public static readonly Type AimDataType;
         public static float LAY_DOWN_ANG_SHOOT => EFTCore.Core.LAY_DOWN_ANG_SHOOT;
         public static float Gravity => EFTCore.Core.G;
         public static float SMOKE_GRENADE_RADIUS_COEF => EFTCore.Core.SMOKE_GRENADE_RADIUS_COEF;

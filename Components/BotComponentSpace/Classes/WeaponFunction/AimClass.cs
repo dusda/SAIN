@@ -208,21 +208,23 @@ namespace SAIN.SAINComponent.Classes.WeaponFunction
         {
             get
             {
-                object aimStatus = aimStatusField.GetValue(BotOwner.AimingManager.CurrentAiming);
-                if (aimStatus == null)
+
+                if (BotOwner.AimingManager.CurrentAiming != null && BotOwner.AimingManager.CurrentAiming is BotAimingClass aimClass)
+                {
+                    var status = aimClass.aimStatus_0;
+
+                    //if (status != AimStatus.NoTarget &&
+                    //    Bot.Enemy?.IsVisible == false &&
+                    //    Bot.LastEnemy?.IsVisible == false)
+                    //{
+                    //    return AimStatus.NoTarget;
+                    //}
+                    return status;
+                }
+                else
                 {
                     return AimStatus.NoTarget;
                 }
-
-                var status = (AimStatus)aimStatus;
-
-                //if (status != AimStatus.NoTarget &&
-                //    Bot.Enemy?.IsVisible == false &&
-                //    Bot.LastEnemy?.IsVisible == false)
-                //{
-                //    return AimStatus.NoTarget;
-                //}
-                return status;
             }
         }
 
@@ -288,12 +290,5 @@ namespace SAIN.SAINComponent.Classes.WeaponFunction
         public void Dispose()
         {
         }
-
-        static AimClass()
-        {
-            aimStatusField = AccessTools.Field(Helpers.HelpersGClass.AimDataType, "aimStatus_0");
-        }
-
-        private static FieldInfo aimStatusField;
     }
 }

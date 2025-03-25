@@ -4,6 +4,7 @@ using SAIN.Models.Enums;
 using SAIN.SAINComponent.Classes.EnemyClasses;
 using System.Reflection;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace SAIN.SAINComponent.Classes.Mover
 {
@@ -30,22 +31,24 @@ namespace SAIN.SAINComponent.Classes.Mover
         {
             get
             {
-                object aimStatus = aimStatusField.GetValue(BotOwner.AimingManager.CurrentAiming);
-                if (aimStatus == null)
+                if (BotOwner.AimingManager.CurrentAiming != null && BotOwner.AimingManager.CurrentAiming is BotAimingClass aimClass)
+                {
+                    var status = aimClass.aimStatus_0;
+
+                    if (status != AimStatus.NoTarget &&
+                        Bot.Enemy?.IsVisible == false &&
+                        Bot.LastEnemy?.IsVisible == false)
+                    {
+                        return AimStatus.NoTarget;
+                    }
+                    return status;
+                }
+                else
                 {
                     return AimStatus.NoTarget;
                 }
-
-                var status = (AimStatus)aimStatus;
-
-                if (status != AimStatus.NoTarget &&
-                    Bot.Enemy?.IsVisible == false &&
-                    Bot.LastEnemy?.IsVisible == false)
-                {
-                    return AimStatus.NoTarget;
-                }
-                return (AimStatus)aimStatus;
             }
+
         }
 
         public SteerPriorityClass(SAINSteeringClass steering) : base(steering)
@@ -239,16 +242,5 @@ namespace SAIN.SAINComponent.Classes.Mover
             }
             return false;
         }
-
-        static SteerPriorityClass()
-        {
-            aimStatusField = AccessTools.Field(Helpers.HelpersGClass.AimDataType, "aimStatus_0");
-        }
-
-        private void updateSettings()
-        {
-        }
-
-        private static FieldInfo aimStatusField;
     }
 }
