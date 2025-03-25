@@ -2,11 +2,9 @@
 using DrakiaXYZ.BigBrain.Brains;
 using EFT;
 using EFT.Interactive;
-using HarmonyLib;
 using SAIN.Components;
 using SAIN.Components.BotController;
 using SAIN.SAINComponent.Classes.Memory;
-using System.Reflection;
 using Systems.Effects;
 using UnityEngine;
 using UnityEngine.AI;
@@ -17,7 +15,6 @@ namespace SAIN.Layers
     {
         static ExtractAction()
         {
-            _pathControllerField = AccessTools.Field(typeof(BotMover), "_pathController");
         }
 
         public void Toggle(bool value)
@@ -165,7 +162,7 @@ namespace SAIN.Layers
 
                 Bot.Memory.Extract.ExtractStatus = EExtractStatus.MovingTo;
                 NavMeshPathStatus pathStatus = BotOwner.Mover.GoToPoint(point, true, 0.5f, false, false);
-                var pathController = (PathControllerClass)_pathControllerField.GetValue(BotOwner.Mover);
+                var pathController = BotOwner.Mover._pathController;
                 if (pathController?.CurPath != null)
                 {
                     float distanceToEndOfPath = Vector3.Distance(BotOwner.Position, pathController.CurPath.LastCorner());
@@ -184,9 +181,7 @@ namespace SAIN.Layers
             }
         }
 
-        private static readonly FieldInfo _pathControllerField;
-
-        private void StartExtract(Vector3 point)
+        public void StartExtract(Vector3 point)
         {
             Bot.Memory.Extract.ExtractStatus = EExtractStatus.ExtractingNow;
             if (ExtractTimer == -1f)

@@ -268,23 +268,15 @@ namespace SAIN.Patches.Hearing
 
     public class TryPlayShootSoundPatch : ModulePatch
     {
-        private static PropertyInfo AIFlareEnabled;
-
         protected override MethodBase GetTargetMethod()
         {
-            AIFlareEnabled = AccessTools.Property(typeof(GClass567), "Boolean_0");
-            return AccessTools.Method(typeof(GClass567), "TryPlayShootSound");
+            return AccessTools.Method(typeof(GClass567), nameof(GClass567.TryPlayShootSound));
         }
 
         [PatchPrefix]
         public static bool PatchPrefix(GClass567 __instance)
         {
-            //if (__instance.IsAI &&
-            //    SAINPlugin.IsBotExluded(__instance.BotOwner))
-            //{
-            //    return true;
-            //}
-            AIFlareEnabled.SetValue(__instance, true);
+            __instance.Boolean_0 = true;
             return false;
         }
     }
@@ -321,7 +313,7 @@ namespace SAIN.Patches.Hearing
         {
             _PlayerBridge = AccessTools.Field(typeof(BaseSoundPlayer), "playersBridge");
             _Player = AccessTools.PropertyGetter(_PlayerBridge.FieldType, "iPlayer");
-            return AccessTools.Method(typeof(BaseSoundPlayer), "SoundEventHandler");
+            return AccessTools.Method(typeof(BaseSoundPlayer), nameof(BaseSoundPlayer.SoundEventHandler));
         }
 
         [PatchPrefix]
