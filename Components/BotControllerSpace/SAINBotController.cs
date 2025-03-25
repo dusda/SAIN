@@ -213,7 +213,7 @@ namespace SAIN.Components
             SAINGameWorld.PlayerTracker.GetPlayerComponent(profileID)?.AIData.PlayerLocation.UpdateEnvironment(trigger);
         }
 
-        private void Awake()
+        public void Awake()
         {
             Instance = this;
             SAINGameWorld = this.GetComponent<GameWorldComponent>();
@@ -229,12 +229,12 @@ namespace SAIN.Components
             GameWorld.OnDispose += Dispose;
         }
 
-        private void Start()
+        public void Start()
         {
             PeacefulActions.Init();
         }
 
-        private void Update()
+        public void Update()
         {
             if (BotGame == null ||
                 BotGame.Status == GameStatus.Stopping)
@@ -362,7 +362,7 @@ namespace SAIN.Components
 
         public List<string> Groups = new();
 
-        private void OnDestroy()
+        public void OnDestroy()
         {
         }
 

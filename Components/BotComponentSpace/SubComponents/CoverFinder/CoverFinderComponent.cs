@@ -134,7 +134,7 @@ namespace SAIN.SAINComponent.SubComponents.CoverFinder
             bot.CurrentTarget.OnLoseTarget += clearTarget;
         }
 
-        private void Update()
+        public void Update()
         {
             updateTarget();
             if (DebugCoverFinder)
@@ -681,7 +681,7 @@ namespace SAIN.SAINComponent.SubComponents.CoverFinder
             return point.Spotted;
         }
 
-        private void OnDestroy()
+        public void OnDestroy()
         {
             StopLooking();
             StopAllCoroutines();

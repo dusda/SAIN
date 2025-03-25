@@ -66,7 +66,7 @@ namespace SAIN.Components
         private static float Frequency => Settings.NoBushESPFrequency;
         private static bool DebugMode => Settings.NoBushESPDebugMode;
 
-        private void Update()
+        public void Update()
         {
             if (BotOwner == null || !UserToggle)
             {

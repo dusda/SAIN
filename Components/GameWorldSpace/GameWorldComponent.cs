@@ -22,7 +22,7 @@ namespace SAIN.Components
         public LocationClass Location { get; private set; }
         public SpawnPointMarker[] SpawnPointMarkers { get; private set; }
 
-        private void Update()
+        public void Update()
         {
             Doors?.Update();
             Location?.Update();
@@ -63,7 +63,7 @@ namespace SAIN.Components
             return spawnPointPositions;
         }
 
-        private void Awake()
+        public void Awake()
         {
             Instance = this;
             GameWorld = this.GetComponent<GameWorld>();

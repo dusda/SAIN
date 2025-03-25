@@ -42,7 +42,7 @@ namespace SAIN
 
         public static ESelfDecision ForceSelfDecision = ESelfDecision.None;
 
-        private void Awake()
+        public void Awake()
         {
             /*
             if (!VersionChecker.CheckEftVersion(Logger, Info, Config))
@@ -193,17 +193,17 @@ namespace SAIN
 
         public static SAINPresetClass LoadedPreset => PresetHandler.LoadedPreset;
 
-        private void Update()
+        public void Update()
         {
             ModDetection.Update();
             SAINEditor.Update();
         }
 
-        private void Start() => SAINEditor.Init();
+        public void Start() => SAINEditor.Init();
 
-        private void LateUpdate() => SAINEditor.LateUpdate();
+        public void LateUpdate() => SAINEditor.LateUpdate();
 
-        private void OnGUI() => SAINEditor.OnGUI();
+        public void OnGUI() => SAINEditor.OnGUI();
 
         public static bool IsBotExluded(BotOwner botOwner) => SAINEnableClass.IsSAINDisabledForBot(botOwner);
     }

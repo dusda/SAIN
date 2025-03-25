@@ -5,7 +5,7 @@ namespace SAIN.Components
 {
     public class BotDoorTrigger : MonoBehaviour
     {
-        private void Awake()
+        public void Awake()
         {
             SphereCollider = this.gameObject.AddComponent<SphereCollider>();
             SphereCollider.isTrigger = true;
@@ -14,7 +14,7 @@ namespace SAIN.Components
             _doorHandler = GameWorldComponent.Instance.Doors;
         }
 
-        private void Update()
+        public void Update()
         {
         }
 
@@ -27,7 +27,7 @@ namespace SAIN.Components
 
         private Door _door;
 
-        private void OnDestroy()
+        public void OnDestroy()
         {
         }
 

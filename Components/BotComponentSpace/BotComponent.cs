@@ -125,7 +125,7 @@ namespace SAIN.SAINComponent
             }
         }
 
-        private void Update()
+        public void Update()
         {
             BotActivation.Update();
             if (!BotActive)
@@ -390,7 +390,7 @@ namespace SAIN.SAINComponent
             StopAllCoroutines();
         }
 
-        private void LateUpdate()
+        public void LateUpdate()
         {
             BotActivation.LateUpdate();
             EnemyController.LateUpdate();

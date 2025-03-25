@@ -607,7 +607,7 @@ namespace SAIN.Helpers
                 public LineRenderer lineRenderer;
                 public float yOffset = 1f;
 
-                private void Update()
+                public void Update()
                 {
                     lineRenderer.SetPosition(0, startObject.transform.position + new Vector3(0, yOffset, 0));
                     lineRenderer.SetPosition(1, endObject.transform.position + new Vector3(0, yOffset, 0));
@@ -666,7 +666,7 @@ namespace SAIN.Helpers
                 }
             }
 
-            private void OnDestroy()
+            public void OnDestroy()
             {
                 StopAllCoroutines();
             }

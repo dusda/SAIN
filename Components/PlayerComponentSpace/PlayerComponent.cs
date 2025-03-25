@@ -19,7 +19,7 @@ namespace SAIN.Components.PlayerComponentSpace
         public OtherPlayersData OtherPlayersData { get; private set; }
         public BodyPartsClass BodyParts { get; private set; }
 
-        private void Update()
+        public void Update()
         {
             Person.Update();
 
@@ -248,7 +248,7 @@ namespace SAIN.Components.PlayerComponentSpace
             }
         }
 
-        private void LateUpdate()
+        public void LateUpdate()
         {
             Person.LateUpdate();
         }

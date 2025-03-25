@@ -16,14 +16,14 @@ namespace SAIN.SAINComponent.Classes.WeaponFunction
 
         private const float GRENADE_UPDATE_FREQUENCY = 0.5f;
 
-        private void Awake()
+        public void Awake()
         {
             _grenade = this.GetComponent<Grenade>();
             _grenade.DestroyEvent += grenadeDestroyed;
             _rigidBody = (Rigidbody)_rigidBodyField.GetValue(_grenade);
         }
 
-        private void Update()
+        public void Update()
         {
             if (_grenade == null) return;
             if (_rigidBody == null)
