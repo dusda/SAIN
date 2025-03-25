@@ -28,7 +28,7 @@ namespace SAIN.Layers.Combat.Run
             }
 
             if (nextRandomRunTime < Time.time &&
-                findRandomPlace(out var path) &&
+                FindRandomPlace(out var path) &&
                 Bot.Mover.GoToPoint(_runDestination, out _, -1f, true))
             {
                 nextRandomRunTime = Time.time + 20f;
@@ -43,7 +43,7 @@ namespace SAIN.Layers.Combat.Run
             Toggle(true);
         }
 
-        private bool findRandomPlace(out NavMeshPath path)
+        private bool FindRandomPlace(out NavMeshPath path)
         {
             for (int i = 0; i < 10; i++)
             {

@@ -158,7 +158,7 @@ namespace SAIN.SAINComponent.SubComponents.CoverFinder
         public void GetHit(DamageInfoStruct DamageInfoStruct, EBodyPart partHit, Enemy currentEnemy)
         {
             int hitCount = calcHitCount(DamageInfoStruct);
-            bool islegs = partHit.isLegs();
+            bool islegs = partHit.IsLegs();
 
             var hits = _hitsInCover;
             LastHitInCoverTime = Time.time;

@@ -47,7 +47,7 @@ namespace SAIN.Layers
         {
             this.StartProfilingSample("Update");
             float stamina = Bot.Player.Physical.Stamina.NormalValue;
-            bool fightingEnemy = isFightingEnemy();
+            bool fightingEnemy = IsFightingEnemy();
             // Environment id of 0 means a bot is outside.
             if (Bot.Player.AIData.EnvironmentId != 0)
             {
@@ -86,7 +86,7 @@ namespace SAIN.Layers
 
             if (ExtractStarted)
             {
-                setStatus(EExtractStatus.ExtractingNow);
+                SetStatus(EExtractStatus.ExtractingNow);
                 StartExtract(point);
                 Bot.Mover.SetTargetPose(0f);
                 Bot.Mover.SetTargetMoveSpeed(0f);
@@ -100,11 +100,11 @@ namespace SAIN.Layers
             {
                 if (fightingEnemy)
                 {
-                    setStatus(EExtractStatus.Fighting);
+                    SetStatus(EExtractStatus.Fighting);
                 }
                 else
                 {
-                    setStatus(EExtractStatus.MovingTo);
+                    SetStatus(EExtractStatus.MovingTo);
                 }
                 MoveToExtract(distance, point);
                 Bot.Mover.SetTargetPose(1f);
@@ -116,14 +116,14 @@ namespace SAIN.Layers
             this.EndProfilingSample();
         }
 
-        private void setStatus(EExtractStatus status)
+        private void SetStatus(EExtractStatus status)
         {
             Bot.Memory.Extract.ExtractStatus = status;
         }
 
         private float _sayExitLocatedTime;
 
-        private bool isFightingEnemy()
+        private bool IsFightingEnemy()
         {
             return Bot.Enemy != null
                 && Bot.Enemy.Seen
@@ -189,7 +189,7 @@ namespace SAIN.Layers
                 ExtractTimer = SAINBotController.Instance.BotExtractManager.GetExfilTime(Bot.Memory.Extract.ExfilPoint);
 
                 // Needed to get car extracts working
-                activateExfil(Bot.Memory.Extract.ExfilPoint);
+                ActivateExfil(Bot.Memory.Extract.ExfilPoint);
 
                 float timeRemaining = ExtractTimer - Time.time;
                 Logger.LogInfo($"{BotOwner.name} Starting Extract Timer of {timeRemaining}");
@@ -213,7 +213,7 @@ namespace SAIN.Layers
             }
         }
 
-        private void activateExfil(ExfiltrationPoint exfil)
+        private void ActivateExfil(ExfiltrationPoint exfil)
         {
             // Needed to start the car extract
             exfil.OnItemTransferred(Bot.Player);

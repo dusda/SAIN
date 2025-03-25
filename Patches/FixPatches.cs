@@ -137,12 +137,12 @@ namespace SAIN.Patches.Generic.Fixes
                     ___float_0 += 5f;
                 }
                 ___bool_1 = true;
-                SAINBotController.Instance?.StartCoroutine(cancelHeal(___botOwner_0));
+                SAINBotController.Instance?.StartCoroutine(CancelHeal(___botOwner_0));
             }
             return false;
         }
 
-        private static IEnumerator cancelHeal(BotOwner bot)
+        private static IEnumerator CancelHeal(BotOwner bot)
         {
             yield return new WaitForSeconds(0.25f);
             if (bot != null &&

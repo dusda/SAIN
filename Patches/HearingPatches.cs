@@ -146,12 +146,12 @@ namespace SAIN.Patches.Hearing
         [PatchPostfix]
         public static void Patch(Player __instance, BetterSource ___NestedStepSoundSource)
         {
-            float volume = calcVolume(__instance);
+            float volume = CalcVolume(__instance);
             float range = ___NestedStepSoundSource.MaxDistance * 0.75f;
             SAINBotController.Instance?.BotHearing.PlayAISound(__instance.ProfileId, SAINSoundType.FootStep, __instance.Position, range, volume);
         }
 
-        public static float calcVolume(Player player)
+        public static float CalcVolume(Player player)
         {
             var maxAllowedSpeed = player.MovementContext.MaxSpeed;
             var charMovementSpeed = player.MovementContext.CharacterMovementSpeed;
@@ -182,7 +182,7 @@ namespace SAIN.Patches.Hearing
                     return false;
                 }
 
-                float volume = ____player.MovementContext.CovertMovementVolumeBySpeed * FootstepSoundPatch.calcVolume(____player);
+                float volume = ____player.MovementContext.CovertMovementVolumeBySpeed * FootstepSoundPatch.CalcVolume(____player);
                 float baseRange = 60f;
                 SAINBotController.Instance?.BotHearing.PlayAISound(____player.ProfileId, SAINSoundType.Sprint, ____player.Position, baseRange, volume);
             }

@@ -13,7 +13,7 @@ namespace SAIN
     {
         static SAINEnableClass()
         {
-            GameWorld.OnDispose += clear;
+            GameWorld.OnDispose += Clear;
         }
 
         public static bool IsSAINDisabledForBot(BotOwner botOwner)
@@ -29,18 +29,18 @@ namespace SAIN
             if (_enabledBots.Contains(botOwner.name))
                 return false;
 
-            return shallExclude(botOwner);
+            return ShallExclude(botOwner);
         }
 
-        private static bool shallExclude(BotOwner botOwner)
+        private static bool ShallExclude(BotOwner botOwner)
         {
-            bool exluded = isBotExcluded(botOwner);
+            bool exluded = IsBotExcluded(botOwner);
             if (botOwner.GetPlayer == null)
             {
                 return exluded;
             }
 
-            botOwner.GetPlayer.OnIPlayerDeadOrUnspawn += clearBot;
+            botOwner.GetPlayer.OnIPlayerDeadOrUnspawn += ClearBot;
 
             if (exluded)
             {
@@ -55,7 +55,7 @@ namespace SAIN
 
         private static readonly List<string> _enabledBots = new();
 
-        private static void clear()
+        private static void Clear()
         {
             if (_excludedBots.Count > 0)
                 _excludedBots.Clear();
@@ -64,18 +64,18 @@ namespace SAIN
                 _enabledBots.Clear();
         }
 
-        private static void clearBot(IPlayer player)
+        private static void ClearBot(IPlayer player)
         {
             if (player != null)
             {
-                player.OnIPlayerDeadOrUnspawn -= clearBot;
+                player.OnIPlayerDeadOrUnspawn -= ClearBot;
                 string id = player.ProfileId;
                 _excludedBots.Remove(id);
                 _enabledBots.Remove(id);
             }
         }
 
-        public static bool isBotExcluded(BotOwner botOwner)
+        public static bool IsBotExcluded(BotOwner botOwner)
         {
             var settings = botOwner.Profile?.Info?.Settings;
             if (settings == null)
@@ -87,7 +87,7 @@ namespace SAIN
             {
                 return true;
             }
-            if (isAlwaysEnabled(wildSpawnType, botOwner))
+            if (IsAlwaysEnabled(wildSpawnType, botOwner))
             {
                 return false;
             }
@@ -98,48 +98,48 @@ namespace SAIN
         public static bool ShallExludeByWildSpawnType(WildSpawnType wildSpawnType, BotOwner botOwner)
         {
             return
-                excludeOthers(wildSpawnType) ||
-                excludeScav(wildSpawnType, botOwner) ||
-                excludeBoss(wildSpawnType) ||
-                excludeFollower(wildSpawnType) ||
-                excludeGoons(wildSpawnType);
+                ExcludeOthers(wildSpawnType) ||
+                ExcludeScav(wildSpawnType, botOwner) ||
+                ExcludeBoss(wildSpawnType) ||
+                ExcludeFollower(wildSpawnType) ||
+                ExcludeGoons(wildSpawnType);
         }
 
-        private static bool isAlwaysEnabled(WildSpawnType wildSpawnType, BotOwner botOwner)
+        private static bool IsAlwaysEnabled(WildSpawnType wildSpawnType, BotOwner botOwner)
         {
             return
                 WildSpawn.IsPMC(wildSpawnType) ||
                 SAINBotController.Instance?.Bots?.ContainsKey(botOwner.name) == true;
         }
 
-        private static bool excludeBoss(WildSpawnType wildSpawnType)
+        private static bool ExcludeBoss(WildSpawnType wildSpawnType)
         {
             return SAINEnabled.VanillaBosses
             && !WildSpawn.IsGoons(wildSpawnType)
             && WildSpawn.IsBoss(wildSpawnType);
         }
 
-        private static bool excludeGoons(WildSpawnType wildSpawnType)
+        private static bool ExcludeGoons(WildSpawnType wildSpawnType)
         {
             return SAINEnabled.VanillaGoons
             && WildSpawn.IsGoons(wildSpawnType);
         }
 
-        private static bool excludeFollower(WildSpawnType wildSpawnType)
+        private static bool ExcludeFollower(WildSpawnType wildSpawnType)
         {
             return SAINEnabled.VanillaFollowers
             && !WildSpawn.IsGoons(wildSpawnType)
             && WildSpawn.IsFollower(wildSpawnType);
         }
 
-        private static bool excludeScav(WildSpawnType wildSpawnType, BotOwner botOwner)
+        private static bool ExcludeScav(WildSpawnType wildSpawnType, BotOwner botOwner)
         {
             return SAINEnabled.VanillaScavs
             && WildSpawn.IsScav(wildSpawnType) &&
-            !isPlayerScav(botOwner.Profile.Nickname);
+            !IsPlayerScav(botOwner.Profile.Nickname);
         }
 
-        private static bool excludeOthers(WildSpawnType wildSpawnType)
+        private static bool ExcludeOthers(WildSpawnType wildSpawnType)
         {
             if (SAINEnabled.VanillaCultists &&
                 WildSpawn.IsCultist(wildSpawnType))
@@ -168,7 +168,7 @@ namespace SAIN
             return false;
         }
 
-        public static bool isPlayerScav(string nickname)
+        public static bool IsPlayerScav(string nickname)
         {
             // Pattern: xxx (xxx)
             string pattern = "\\w+.[(]\\w+[)]";

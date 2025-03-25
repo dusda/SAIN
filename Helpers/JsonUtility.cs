@@ -170,7 +170,7 @@ namespace SAIN.Helpers
 
         public static void DeletePreset(SAINPresetDefinition preset)
         {
-            var path = getPath("Presets", preset.Name);
+            var path = GetPath("Presets", preset.Name);
             if (Directory.Exists(path))
             {
                 Directory.Delete(path, true);
@@ -187,23 +187,23 @@ namespace SAIN.Helpers
 
         public static void CreateFolder(params string[] subFolders)
         {
-            string path = getPath(subFolders);
+            string path = GetPath(subFolders);
             CheckCreateFolder(path);
         }
 
         public static bool DoesFolderExist(params string[] subFolders)
         {
-            string path = getPath(subFolders);
+            string path = GetPath(subFolders);
             return Directory.Exists(path);
         }
 
         public static bool GetFoldersPath(out string path, params string[] folders)
         {
-            path = getPath(folders);
+            path = GetPath(folders);
             return Directory.Exists(path);
         }
 
-        private static string getPath(params string[] folders)
+        private static string GetPath(params string[] folders)
         {
             string path = GetSAINPluginPath();
             for (int i = 0; i < folders.Length; i++)

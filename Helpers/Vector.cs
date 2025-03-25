@@ -550,7 +550,7 @@ namespace SAIN.Helpers
 
         public static Vector3? GetCrossPoint(Vector3 a1, Vector3 b1, Vector3 a2, Vector3 b2)
         {
-            CrossPoint? _cross = cross(new CrossPoint(a1), new CrossPoint(b1), new CrossPoint(a2), new CrossPoint(b2));
+            CrossPoint? _cross = Cross(new CrossPoint(a1), new CrossPoint(b1), new CrossPoint(a2), new CrossPoint(b2));
             if (_cross != null)
             {
                 return new Vector3?(new Vector3(_cross.Value.x, a1.y, _cross.Value.y));
@@ -558,7 +558,7 @@ namespace SAIN.Helpers
             return null;
         }
 
-        public static CrossPoint? cross(CrossPoint p1, CrossPoint p2, CrossPoint p3, CrossPoint p4)
+        public static CrossPoint? Cross(CrossPoint p1, CrossPoint p2, CrossPoint p3, CrossPoint p4)
         {
             float num = (p1.x - p2.x) * (p4.y - p3.y) - (p1.y - p2.y) * (p4.x - p3.x);
             if (num == 0f)

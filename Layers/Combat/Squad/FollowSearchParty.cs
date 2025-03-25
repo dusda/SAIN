@@ -32,13 +32,13 @@ namespace SAIN.Layers.Combat.Squad
 
             if (_nextUpdatePosTime < Time.time)
             {
-                moveToLead(out float nextTime);
+                MoveToLead(out float nextTime);
                 _nextUpdatePosTime = Time.time + nextTime;
             }
             this.EndProfilingSample();
         }
 
-        private void moveToLead(out float nextUpdateTime)
+        private void MoveToLead(out float nextUpdateTime)
         {
             var leader = Bot.Squad.SquadInfo?.LeaderComponent;
             if (leader == null)
@@ -51,7 +51,7 @@ namespace SAIN.Layers.Combat.Squad
                 nextUpdateTime = 1f;
                 return;
             }
-            Vector3? movePosition = getPosNearLead(leader.Position);
+            Vector3? movePosition = GetPosNearLead(leader.Position);
             if (movePosition == null)
             {
                 nextUpdateTime = 0.25f;
@@ -81,7 +81,7 @@ namespace SAIN.Layers.Combat.Squad
             Bot.Mover.GoToPoint(movePosition.Value, out _);
         }
 
-        private Vector3? getPosNearLead(Vector3 leadPos)
+        private Vector3? GetPosNearLead(Vector3 leadPos)
         {
             Vector3? result = null;
             if (NavMesh.SamplePosition(leadPos, out var leadHit, 3f, -1))

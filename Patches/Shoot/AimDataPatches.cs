@@ -163,7 +163,7 @@ namespace SAIN.Patches.Shoot.Aim
                 aimOffset = __instance.vector3_4 * spread;
             }
 
-            if (bot.Info.Profile.IsPMC || bot.Info.Profile.WildSpawnType.isGoons())
+            if (bot.Info.Profile.IsPMC || bot.Info.Profile.WildSpawnType.IsGoons())
             {
                 badShootOffset = Vector3.zero;
             }
@@ -279,13 +279,13 @@ namespace SAIN.Patches.Shoot.Aim
                 return true;
             }
 
-            __result = calculateAim(bot, dist, ang, __instance.bool_1, __instance.bool_0, __instance.float_10);
+            __result = CalculateAim(bot, dist, ang, __instance.bool_1, __instance.bool_0, __instance.float_10);
             bot.Aim.LastAimTime = __result;
 
             return false;
         }
 
-        private static float calculateAim(BotComponent botComponent, float distance, float angle, bool moving, bool panicing, float aimDelay)
+        private static float CalculateAim(BotComponent botComponent, float distance, float angle, bool moving, bool panicing, float aimDelay)
         {
             BotOwner botOwner = botComponent.BotOwner;
             StringBuilder stringBuilder = SAINPlugin.LoadedPreset.GlobalSettings.General.Debug.Logs.DebugAimCalculations ? new StringBuilder() : null;
@@ -296,21 +296,21 @@ namespace SAIN.Patches.Shoot.Aim
 
             float baseAimTime = fileSettings.Aiming.BOTTOM_COEF;
             stringBuilder?.AppendLine($"baseAimTime [{baseAimTime}]");
-            baseAimTime = calcCoverMod(baseAimTime, botOwner, botComponent, fileSettings, stringBuilder);
+            baseAimTime = CalcCoverMod(baseAimTime, botOwner, botComponent, fileSettings, stringBuilder);
             BotCurvSettings curve = botOwner.Settings.Curv;
-            float angleTime = calcCurveOutput(curve.AimAngCoef, angle, sainAimSettings.AngleAimTimeMultiplier, stringBuilder, "Angle");
-            float distanceTime = calcCurveOutput(curve.AimTime2Dist, distance, sainAimSettings.DistanceAimTimeMultiplier, stringBuilder, "Distance");
-            float calculatedAimTime = calcAimTime(angleTime, distanceTime, botOwner, stringBuilder);
-            calculatedAimTime = calcPanic(panicing, calculatedAimTime, fileSettings, stringBuilder);
+            float angleTime = CalcCurveOutput(curve.AimAngCoef, angle, sainAimSettings.AngleAimTimeMultiplier, stringBuilder, "Angle");
+            float distanceTime = CalcCurveOutput(curve.AimTime2Dist, distance, sainAimSettings.DistanceAimTimeMultiplier, stringBuilder, "Distance");
+            float calculatedAimTime = CalcAimTime(angleTime, distanceTime, botOwner, stringBuilder);
+            calculatedAimTime = CalcPanic(panicing, calculatedAimTime, fileSettings, stringBuilder);
 
             float timeToAimResult = (baseAimTime + calculatedAimTime + aimDelay);
             stringBuilder?.AppendLine($"timeToAimResult [{timeToAimResult}] (baseAimTime + calculatedAimTime + aimDelay)");
 
-            timeToAimResult = calcMoveModifier(moving, timeToAimResult, fileSettings, stringBuilder);
-            timeToAimResult = calcADSModifier(botOwner.WeaponManager?.ShootController?.IsAiming == true, timeToAimResult, stringBuilder);
-            timeToAimResult = clampAimTime(timeToAimResult, fileSettings, stringBuilder);
-            timeToAimResult = calcFasterCQB(distance, timeToAimResult, sainAimSettings, stringBuilder);
-            timeToAimResult = calcAttachmentMod(botComponent, timeToAimResult, stringBuilder);
+            timeToAimResult = CalcMoveModifier(moving, timeToAimResult, fileSettings, stringBuilder);
+            timeToAimResult = CalcADSModifier(botOwner.WeaponManager?.ShootController?.IsAiming == true, timeToAimResult, stringBuilder);
+            timeToAimResult = ClampAimTime(timeToAimResult, fileSettings, stringBuilder);
+            timeToAimResult = CalcFasterCQB(distance, timeToAimResult, sainAimSettings, stringBuilder);
+            timeToAimResult = CalcAttachmentMod(botComponent, timeToAimResult, stringBuilder);
 
             if (stringBuilder != null &&
                 botOwner?.Memory?.GoalEnemy?.Person?.IsYourPlayer == true)
@@ -320,7 +320,7 @@ namespace SAIN.Patches.Shoot.Aim
             return timeToAimResult;
         }
 
-        private static float calcAimTime(float angleTime, float distanceTime, BotOwner botOwner, StringBuilder stringBuilder)
+        private static float CalcAimTime(float angleTime, float distanceTime, BotOwner botOwner, StringBuilder stringBuilder)
         {
             float accuracySpeed = botOwner.Settings.Current.CurrentAccuratySpeed;
             stringBuilder?.AppendLine($"accuracySpeed [{accuracySpeed}]");
@@ -330,7 +330,7 @@ namespace SAIN.Patches.Shoot.Aim
             return calculatedAimTime;
         }
 
-        private static float calcCoverMod(float baseAimTime, BotOwner botOwner, BotComponent botComponent, BotSettingsComponents fileSettings, StringBuilder stringBuilder)
+        private static float CalcCoverMod(float baseAimTime, BotOwner botOwner, BotComponent botComponent, BotSettingsComponents fileSettings, StringBuilder stringBuilder)
         {
             CoverPoint coverInUse = botComponent?.Cover.CoverInUse;
             bool inCover = botOwner.Memory.IsInCover || coverInUse?.BotInThisCover == true;
@@ -342,7 +342,7 @@ namespace SAIN.Patches.Shoot.Aim
             return baseAimTime;
         }
 
-        private static float calcCurveOutput(AnimationCurve aimCurve, float input, float modifier, StringBuilder stringBuilder, string curveType)
+        private static float CalcCurveOutput(AnimationCurve aimCurve, float input, float modifier, StringBuilder stringBuilder, string curveType)
         {
             float result = aimCurve.Evaluate(input);
             result *= modifier;
@@ -350,7 +350,7 @@ namespace SAIN.Patches.Shoot.Aim
             return result;
         }
 
-        private static float calcMoveModifier(bool moving, float timeToAimResult, BotSettingsComponents fileSettings, StringBuilder stringBuilder)
+        private static float CalcMoveModifier(bool moving, float timeToAimResult, BotSettingsComponents fileSettings, StringBuilder stringBuilder)
         {
             if (moving)
             {
@@ -360,7 +360,7 @@ namespace SAIN.Patches.Shoot.Aim
             return timeToAimResult;
         }
 
-        private static float calcADSModifier(bool aiming, float timeToAimResult, StringBuilder stringBuilder)
+        private static float CalcADSModifier(bool aiming, float timeToAimResult, StringBuilder stringBuilder)
         {
             if (aiming)
             {
@@ -371,7 +371,7 @@ namespace SAIN.Patches.Shoot.Aim
             return timeToAimResult;
         }
 
-        private static float clampAimTime(float timeToAimResult, BotSettingsComponents fileSettings, StringBuilder stringBuilder)
+        private static float ClampAimTime(float timeToAimResult, BotSettingsComponents fileSettings, StringBuilder stringBuilder)
         {
             float clampedResult = Mathf.Clamp(timeToAimResult, 0f, fileSettings.Aiming.MAX_AIM_TIME);
             if (clampedResult != timeToAimResult)
@@ -381,7 +381,7 @@ namespace SAIN.Patches.Shoot.Aim
             return clampedResult;
         }
 
-        private static float calcPanic(bool panicing, float calculatedAimTime, BotSettingsComponents fileSettings, StringBuilder stringBuilder)
+        private static float CalcPanic(bool panicing, float calculatedAimTime, BotSettingsComponents fileSettings, StringBuilder stringBuilder)
         {
             if (panicing)
             {
@@ -391,7 +391,7 @@ namespace SAIN.Patches.Shoot.Aim
             return calculatedAimTime;
         }
 
-        private static float calcFasterCQB(float distance, float aimTimeResult, SAINAimingSettings aimSettings, StringBuilder stringBuilder)
+        private static float CalcFasterCQB(float distance, float aimTimeResult, SAINAimingSettings aimSettings, StringBuilder stringBuilder)
         {
             if (!SAINPlugin.LoadedPreset.GlobalSettings.Aiming.FasterCQBReactionsGlobal)
             {
@@ -409,7 +409,7 @@ namespace SAIN.Patches.Shoot.Aim
             return aimTimeResult;
         }
 
-        private static float calcAttachmentMod(BotComponent bot, float aimTimeResult, StringBuilder stringBuilder)
+        private static float CalcAttachmentMod(BotComponent bot, float aimTimeResult, StringBuilder stringBuilder)
         {
             Enemy enemy = bot?.Enemy;
             if (enemy != null)
@@ -426,11 +426,11 @@ namespace SAIN.Patches.Shoot.Aim
     {
         static AimRotateSpeedPatch()
         {
-            PresetHandler.OnPresetUpdated += updateSettings;
-            updateSettings(SAINPresetClass.Instance);
+            PresetHandler.OnPresetUpdated += UpdateSettings;
+            UpdateSettings(SAINPresetClass.Instance);
         }
 
-        private static void updateSettings(SAINPresetClass preset)
+        private static void UpdateSettings(SAINPresetClass preset)
         {
             _aimTurnSpeed = preset.GlobalSettings.Steering.AimTurnSpeed;
         }
@@ -465,7 +465,7 @@ namespace SAIN.Patches.Shoot.Aim
             if (!__instance.Person.IsAI)
             {
                 var aim = GlobalSettingsClass.Instance.Aiming;
-                canBehead = EFTMath.RandomBool(aim.PMCAimForHeadChance) && aim.PMCSAimForHead && isPMC(__instance);
+                canBehead = EFTMath.RandomBool(aim.PMCAimForHeadChance) && aim.PMCSAimForHead && IsPMC(__instance);
                 withLegs = true;
             }
             else
@@ -475,7 +475,7 @@ namespace SAIN.Patches.Shoot.Aim
             }
         }
 
-        private static bool isPMC(EnemyInfo __instance)
+        private static bool IsPMC(EnemyInfo __instance)
         {
             return EnumValues.WildSpawn.IsPMC(__instance.Owner.Profile.Info.Settings.Role);
         }

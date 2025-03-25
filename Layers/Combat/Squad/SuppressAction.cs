@@ -63,7 +63,7 @@ namespace SAIN.Layers.Combat.Squad
                 }
             }
 
-            resetManualShoot();
+            ResetManualShoot();
             if (!Bot.Steering.SteerByPriority(enemy, false))
             {
                 Bot.Steering.LookToLastKnownEnemyPosition(enemy);
@@ -71,7 +71,7 @@ namespace SAIN.Layers.Combat.Squad
             this.EndProfilingSample();
         }
 
-        private void resetManualShoot()
+        private void ResetManualShoot()
         {
             if (_manualShooting)
             {
@@ -117,7 +117,7 @@ namespace SAIN.Layers.Combat.Squad
         public override void Stop()
         {
             Toggle(false);
-            resetManualShoot();
+            ResetManualShoot();
         }
     }
 }

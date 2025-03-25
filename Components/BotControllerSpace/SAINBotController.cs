@@ -69,11 +69,11 @@ namespace SAIN.Components
             {
                 if (!isSmoke)
                 {
-                    registerGrenadeExplosionForSAINBots(explosionPosition, player, playerProfileID, 200f);
+                    RegisterGrenadeExplosionForSAINBots(explosionPosition, player, playerProfileID, 200f);
                 }
                 else
                 {
-                    registerGrenadeExplosionForSAINBots(explosionPosition, player, playerProfileID, 50f);
+                    RegisterGrenadeExplosionForSAINBots(explosionPosition, player, playerProfileID, 50f);
 
                     float radius = smokeRadius * HelpersGClass.SMOKE_GRENADE_RADIUS_COEF;
                     Vector3 position = player.Position;
@@ -86,7 +86,7 @@ namespace SAIN.Components
             }
         }
 
-        private void registerGrenadeExplosionForSAINBots(Vector3 explosionPosition, Player player, string playerProfileID, float range)
+        private void RegisterGrenadeExplosionForSAINBots(Vector3 explosionPosition, Player player, string playerProfileID, float range)
         {
             // Play a sound with the input range.
             Singleton<BotEventHandler>.Instance?.PlaySound(player, explosionPosition, range, AISoundType.gun);
@@ -249,27 +249,6 @@ namespace SAIN.Components
             WeatherVision.Update();
             BotJobs.Update();
             PeacefulActions.Update();
-        }
-
-        private void showBotInfoDebug()
-        {
-            foreach (var bot in Bots.Values)
-            {
-                if (bot != null && !_debugObjects.ContainsKey(bot))
-                {
-                    GUIObject obj = DebugGizmos.CreateLabel(bot.Position, "");
-                    _debugObjects.Add(bot, obj);
-                }
-            }
-            foreach (var obj in _debugObjects)
-            {
-                if (obj.Value != null)
-                {
-                    obj.Value.WorldPos = obj.Key.Position;
-                    obj.Value.StringBuilder.Clear();
-                    DebugOverlay.AddBaseInfo(obj.Key, obj.Key.BotOwner, obj.Value.StringBuilder);
-                }
-            }
         }
 
         private readonly Dictionary<BotComponent, GUIObject> _debugObjects = new();

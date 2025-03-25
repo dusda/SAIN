@@ -234,7 +234,7 @@ namespace SAIN.Patches.Vision
         [PatchPrefix]
         public static bool Patch(LookSensor __instance)
         {
-            return SAINEnableClass.isBotExcluded(__instance._botOwner);
+            return SAINEnableClass.IsBotExcluded(__instance._botOwner);
         }
     }
 
@@ -266,7 +266,7 @@ namespace SAIN.Patches.Vision
         {
             if (____nextUpdateVisibleDist < Time.time)
             {
-                if (SAINEnableClass.isBotExcluded(____botOwner))
+                if (SAINEnableClass.IsBotExcluded(____botOwner))
                 {
                     return true;
                 }

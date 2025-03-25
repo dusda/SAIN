@@ -24,12 +24,12 @@ namespace SAIN.Preset
             SAINPlugin.EditorDefaults.SelectedDefaultPreset = SAINDifficulty.none;
             if (isCopy)
             {
-                copyPreset(preset);
+                CopyPreset(preset);
             }
-            createSettings(preset, preset.BaseSAINDifficulty);
+            CreateSettings(preset, preset.BaseSAINDifficulty);
         }
 
-        private void copyPreset(SAINPresetDefinition preset)
+        private void CopyPreset(SAINPresetDefinition preset)
         {
             if (Instance != null)
             {
@@ -46,10 +46,10 @@ namespace SAIN.Preset
             SAINPlugin.EditorDefaults.SelectedCustomPreset = string.Empty;
             SAINPlugin.EditorDefaults.SelectedDefaultPreset = sainDifficulty;
             PresetHandler.ExportEditorDefaults();
-            createSettings(null, sainDifficulty);
+            CreateSettings(null, sainDifficulty);
         }
 
-        private void createSettings(SAINPresetDefinition preset, SAINDifficulty difficulty)
+        private void CreateSettings(SAINPresetDefinition preset, SAINDifficulty difficulty)
         {
             if (preset == null)
             {

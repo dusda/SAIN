@@ -34,12 +34,12 @@ namespace SAIN.Components
 
         public void Update()
         {
-            clearPoints();
-            createPoints();
-            detectPoints();
+            ClearPoints();
+            CreatePoints();
+            DetectPoints();
         }
 
-        private void clearPoints()
+        private void ClearPoints()
         {
             var points = LightDetection.LightPoints;
             if (points.Count > 0)
@@ -48,7 +48,7 @@ namespace SAIN.Components
             }
         }
 
-        private void createPoints()
+        private void CreatePoints()
         {
             if (!PlayerComponent.IsAI &&
                 _nextPointCreateTime < Time.time &&
@@ -61,7 +61,7 @@ namespace SAIN.Components
             }
         }
 
-        private void detectPoints()
+        private void DetectPoints()
         {
             if (PlayerComponent.IsAI &&
                 _nextPointCheckTime < Time.time)
@@ -74,7 +74,7 @@ namespace SAIN.Components
         public void CheckDevice()
         {
             ActiveModes.Clear();
-            checkUsingLightModes();
+            CheckUsingLightModes();
 
             bool wasUsingLight = UsingLight;
             UsingLight = ActiveModes.Contains(DeviceMode.WhiteLight) || ActiveModes.Contains(DeviceMode.IRLight);
@@ -91,7 +91,7 @@ namespace SAIN.Components
             }
         }
 
-        private void checkUsingLightModes()
+        private void CheckUsingLightModes()
         {
             Player player = Player;
             if (player == null) return;

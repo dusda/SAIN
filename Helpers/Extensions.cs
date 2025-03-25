@@ -43,7 +43,7 @@ namespace SAIN.Helpers
             return place.Position;
         }
 
-        public static bool isLegs(this EBodyPart part)
+        public static bool IsLegs(this EBodyPart part)
         {
             switch (part)
             {
@@ -56,7 +56,7 @@ namespace SAIN.Helpers
             }
         }
 
-        public static bool isPMC(this WildSpawnType type)
+        public static bool IsPMC(this WildSpawnType type)
         {
             switch (type)
             {
@@ -69,7 +69,7 @@ namespace SAIN.Helpers
             }
         }
 
-        public static bool isBoss(this WildSpawnType type)
+        public static bool IsBoss(this WildSpawnType type)
         {
             switch (type)
             {
@@ -90,7 +90,7 @@ namespace SAIN.Helpers
             }
         }
 
-        public static bool isOther(this WildSpawnType type)
+        public static bool IsOther(this WildSpawnType type)
         {
             switch (type)
             {
@@ -104,7 +104,7 @@ namespace SAIN.Helpers
             }
         }
 
-        public static bool isFollower(this WildSpawnType type)
+        public static bool IsFollower(this WildSpawnType type)
         {
             switch (type)
             {
@@ -129,7 +129,7 @@ namespace SAIN.Helpers
             }
         }
 
-        public static bool isScav(this WildSpawnType type)
+        public static bool IsScav(this WildSpawnType type)
         {
             switch (type)
             {
@@ -144,7 +144,7 @@ namespace SAIN.Helpers
             }
         }
 
-        public static bool isGoons(this WildSpawnType type)
+        public static bool IsGoons(this WildSpawnType type)
         {
             switch (type)
             {
@@ -157,7 +157,7 @@ namespace SAIN.Helpers
             }
         }
 
-        public static bool isArms(this EBodyPart part)
+        public static bool IsArms(this EBodyPart part)
         {
             switch (part)
             {

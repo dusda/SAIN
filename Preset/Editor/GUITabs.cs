@@ -98,7 +98,7 @@ namespace SAIN.Editor
             EndVertical();
         }
 
-        private static void forceDecisions(int spacing)
+        private static void ForceDecisions(int spacing)
         {
             Space(spacing);
 
@@ -172,11 +172,11 @@ namespace SAIN.Editor
             }
 
             const int spacing = 4;
-            forceDecisions(spacing);
-            forceTalk(spacing);
+            ForceDecisions(spacing);
+            ForceTalk(spacing);
         }
 
-        private static void forceTalk(int spacing)
+        private static void ForceTalk(int spacing)
         {
             Space(spacing);
             _forceTalkMenuOpen = BuilderClass.ExpandableMenu("Force Bots to Say Phrase", _forceTalkMenuOpen);

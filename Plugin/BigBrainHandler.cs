@@ -22,17 +22,17 @@ namespace SAIN
         {
             public static void Init()
             {
-                handlePMCandRaiders();
-                handleScavs();
-                handleRogues();
-                handleBloodHounds();
-                handleBosses();
-                handleFollowers();
-                handleGoons();
-                handleOthers();
+                HandlePMCandRaiders();
+                HandleScavs();
+                HandleRogues();
+                HandleBloodHounds();
+                HandleBosses();
+                HandleFollowers();
+                HandleGoons();
+                HandleOthers();
             }
 
-            private static void handlePMCandRaiders()
+            private static void HandlePMCandRaiders()
             {
                 var settings = SAINPlugin.LoadedPreset.GlobalSettings.General.Layers;
                 List<string> pmcBrain = new();
@@ -62,18 +62,18 @@ namespace SAIN
                     "PmcBear",
                     "PmcUsec",
                 };
-                checkExtractEnabled(LayersToRemove);
+                CheckExtractEnabled(LayersToRemove);
                 BrainManager.RemoveLayers(LayersToRemove, pmcBrain);
             }
 
-            private static void handleScavs()
+            private static void HandleScavs()
             {
                 if (_vanillaBotSettings.VanillaScavs)
                 {
                     return;
                 }
 
-                List<string> brainList = getBrainList(AIBrains.Scavs);
+                List<string> brainList = GetBrainList(AIBrains.Scavs);
                 var settings = SAINPlugin.LoadedPreset.GlobalSettings.General.Layers;
 
                 //BrainManager.AddCustomLayer(typeof(BotUnstuckLayer), stringList, 98);
@@ -98,13 +98,13 @@ namespace SAIN
                     "PmcBear",
                     "PmcUsec",
                 };
-                checkExtractEnabled(LayersToRemove);
+                CheckExtractEnabled(LayersToRemove);
                 BrainManager.RemoveLayers(LayersToRemove, brainList);
             }
 
-            private static void handleOthers()
+            private static void HandleOthers()
             {
-                List<string> brainList = getBrainList(AIBrains.Others);
+                List<string> brainList = GetBrainList(AIBrains.Others);
 
                 var settings = SAINPlugin.LoadedPreset.GlobalSettings.General.Layers;
                 //BrainManager.AddCustomLayer(typeof(BotUnstuckLayer), stringList, 98);
@@ -132,11 +132,11 @@ namespace SAIN
                     "PmcBear",
                     "PmcUsec",
                 };
-                checkExtractEnabled(LayersToRemove);
+                CheckExtractEnabled(LayersToRemove);
                 BrainManager.RemoveLayers(LayersToRemove, brainList);
             }
 
-            private static void handleRogues()
+            private static void HandleRogues()
             {
                 if (_vanillaBotSettings.VanillaRogues)
                 {
@@ -172,11 +172,11 @@ namespace SAIN
                     "PmcBear",
                     "PmcUsec",
                 };
-                checkExtractEnabled(LayersToRemove);
+                CheckExtractEnabled(LayersToRemove);
                 BrainManager.RemoveLayers(LayersToRemove, brainList);
             }
 
-            private static void handleBloodHounds()
+            private static void HandleBloodHounds()
             {
                 if (_vanillaBotSettings.VanillaBloodHounds)
                 {
@@ -212,18 +212,18 @@ namespace SAIN
                     "PmcBear",
                     "PmcUsec",
                 };
-                checkExtractEnabled(LayersToRemove);
+                CheckExtractEnabled(LayersToRemove);
                 BrainManager.RemoveLayers(LayersToRemove, brainList);
             }
 
-            private static void handleBosses()
+            private static void HandleBosses()
             {
                 if (_vanillaBotSettings.VanillaBosses)
                 {
                     return;
                 }
 
-                List<string> brainList = getBrainList(AIBrains.Bosses);
+                List<string> brainList = GetBrainList(AIBrains.Bosses);
 
                 var settings = SAINPlugin.LoadedPreset.GlobalSettings.General;
                 //BrainManager.AddCustomLayer(typeof(BotUnstuckLayer), stringList, 98);
@@ -246,18 +246,18 @@ namespace SAIN
                     "BirdEyeFight",
                     "BossBoarFight"
                 };
-                checkExtractEnabled(LayersToRemove);
+                CheckExtractEnabled(LayersToRemove);
                 BrainManager.RemoveLayers(LayersToRemove, brainList);
             }
 
-            private static void handleFollowers()
+            private static void HandleFollowers()
             {
                 if (_vanillaBotSettings.VanillaFollowers)
                 {
                     return;
                 }
 
-                List<string> brainList = getBrainList(AIBrains.Followers);
+                List<string> brainList = GetBrainList(AIBrains.Followers);
 
                 var settings = SAINPlugin.LoadedPreset.GlobalSettings.General;
                 //BrainManager.AddCustomLayer(typeof(BotUnstuckLayer), stringList, 98);
@@ -279,18 +279,18 @@ namespace SAIN
                     "KnightFight",
                     "BoarGrenadeDanger"
                 };
-                checkExtractEnabled(LayersToRemove);
+                CheckExtractEnabled(LayersToRemove);
                 BrainManager.RemoveLayers(LayersToRemove, brainList);
             }
 
-            private static void handleGoons()
+            private static void HandleGoons()
             {
                 if (_vanillaBotSettings.VanillaGoons)
                 {
                     return;
                 }
 
-                List<string> brainList = getBrainList(AIBrains.Goons);
+                List<string> brainList = GetBrainList(AIBrains.Goons);
 
                 BrainManager.AddCustomLayer(typeof(DebugLayer), brainList, 99);
                 BrainManager.AddCustomLayer(typeof(SAINAvoidThreatLayer), brainList, 80);
@@ -313,11 +313,11 @@ namespace SAIN
                     "BirdEyeFight",
                     "Kill logic"
                 };
-                checkExtractEnabled(LayersToRemove);
+                CheckExtractEnabled(LayersToRemove);
                 BrainManager.RemoveLayers(LayersToRemove, brainList);
             }
 
-            private static void checkExtractEnabled(List<string> layersToRemove)
+            private static void CheckExtractEnabled(List<string> layersToRemove)
             {
                 if (GlobalSettingsClass.Instance.General.Extract.SAIN_EXTRACT_TOGGLE)
                 {
@@ -325,7 +325,7 @@ namespace SAIN
                 }
             }
 
-            private static List<string> getBrainList(List<Brain> brains)
+            private static List<string> GetBrainList(List<Brain> brains)
             {
                 List<string> brainList = new();
                 for (int i = 0; i < brains.Count; i++)

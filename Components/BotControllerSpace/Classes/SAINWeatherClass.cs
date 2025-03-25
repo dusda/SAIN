@@ -28,7 +28,7 @@ namespace SAIN.Components.BotController
             if (_weatherCheckTime < Time.time)
             {
                 _weatherCheckTime = Time.time + WEATHER_VISION_UPDATE_FREQ;
-                VisionDistanceModifier = calcWeatherVisibility();
+                VisionDistanceModifier = CalcWeatherVisibility();
                 GainSightModifier = 2f - VisionDistanceModifier;
             }
             if (_rainCheckTime < Time.time)
@@ -47,7 +47,7 @@ namespace SAIN.Components.BotController
             }
         }
 
-        private float calcWeatherVisibility()
+        private float CalcWeatherVisibility()
         {
             IWeatherCurve weatherCurve = WeatherController.Instance?.WeatherCurve;
             if (weatherCurve == null)
@@ -55,7 +55,7 @@ namespace SAIN.Components.BotController
                 return 1f;
             }
 
-            float weathermodifier = 1f * (fogModifier(weatherCurve.Fog) * rainModifier(weatherCurve.Rain) * cloudsModifier(weatherCurve.Cloudiness));
+            float weathermodifier = 1f * (FogModifier(weatherCurve.Fog) * RainModifier(weatherCurve.Rain) * CloudsModifier(weatherCurve.Cloudiness));
             weathermodifier = Mathf.Clamp(weathermodifier, 0.01f, 1f);
 
             //if (GameWorldComponent.Instance.Location.WinterActive) {
@@ -66,7 +66,7 @@ namespace SAIN.Components.BotController
             return weathermodifier;
         }
 
-        private float fogModifier(float Fog)
+        private float FogModifier(float Fog)
         {
             // Points where fog values actually matter. Anything over 0.018 has little to no effect
             float fogMax = 0.018f;
@@ -74,7 +74,7 @@ namespace SAIN.Components.BotController
             return Mathf.Lerp(1f, _timeSettings.VISION_WEATHER_FOG_MAXCOEF, fogValue);
         }
 
-        private float rainModifier(float rainValue0to1)
+        private float RainModifier(float rainValue0to1)
         {
             // Rain Tiers
             float rainScaleMin;
@@ -102,7 +102,7 @@ namespace SAIN.Components.BotController
             return Mathf.Lerp(1f, rainScaleMin, rainValue0to1);
         }
 
-        private float cloudsModifier(float Clouds)
+        private float CloudsModifier(float Clouds)
         {
             // Clouds Rounding usually scales between -1 and 1, this sets it to scale between 0 and 1
             float cloudsScaled = (Clouds + 1f) / 2f;

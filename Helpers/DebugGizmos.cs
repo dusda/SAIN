@@ -26,7 +26,7 @@ namespace SAIN.Helpers
     {
         static DebugGizmos()
         {
-            GameWorld.OnDispose += dispose;
+            GameWorld.OnDispose += Dispose;
             PresetHandler.OnEditorSettingsChanged += Update;
         }
 
@@ -34,17 +34,17 @@ namespace SAIN.Helpers
         {
             if (!DrawGizmos)
             {
-                clearGizmos();
+                ClearGizmos();
             }
         }
 
-        private static void dispose()
+        private static void Dispose()
         {
-            clearGizmos();
+            ClearGizmos();
             DebugLabels.Clear();
         }
 
-        private static void clearGizmos()
+        private static void ClearGizmos()
         {
             if (DrawnGizmos.Count > 0)
             {

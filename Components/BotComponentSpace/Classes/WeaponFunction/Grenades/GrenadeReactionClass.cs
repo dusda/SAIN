@@ -19,7 +19,7 @@ namespace SAIN.SAINComponent.Classes.WeaponFunction
         public void Awake()
         {
             _grenade = this.GetComponent<Grenade>();
-            _grenade.DestroyEvent += grenadeDestroyed;
+            _grenade.DestroyEvent += GrenadeDestroyed;
             _rigidBody = (Rigidbody)_rigidBodyField.GetValue(_grenade);
         }
 
@@ -28,7 +28,7 @@ namespace SAIN.SAINComponent.Classes.WeaponFunction
             if (_grenade == null) return;
             if (_rigidBody == null)
             {
-                grenadeDestroyed(_grenade);
+                GrenadeDestroyed(_grenade);
                 return;
             }
             if (_nextUpdateTime < Time.time)
@@ -48,11 +48,11 @@ namespace SAIN.SAINComponent.Classes.WeaponFunction
             _rigidBodyField = AccessTools.Field(typeof(Throwable), "Rigidbody");
         }
 
-        private void grenadeDestroyed(Throwable grenade)
+        private void GrenadeDestroyed(Throwable grenade)
         {
             if (grenade != null)
             {
-                grenade.DestroyEvent -= grenadeDestroyed;
+                grenade.DestroyEvent -= GrenadeDestroyed;
             }
             Destroy(this);
         }
@@ -74,8 +74,8 @@ namespace SAIN.SAINComponent.Classes.WeaponFunction
 
         public void Init()
         {
-            SAINBotController.Instance.GrenadeController.OnGrenadeCollision += grenadeCollision;
-            SAINBotController.Instance.GrenadeController.OnGrenadeThrown += enemyGrenadeThrown;
+            SAINBotController.Instance.GrenadeController.OnGrenadeCollision += GrenadeCollision;
+            SAINBotController.Instance.GrenadeController.OnGrenadeThrown += EnemyGrenadeThrown;
         }
 
         public void Update()
@@ -91,28 +91,28 @@ namespace SAIN.SAINComponent.Classes.WeaponFunction
 
         public void Dispose()
         {
-            SAINBotController.Instance.GrenadeController.OnGrenadeCollision -= grenadeCollision;
-            SAINBotController.Instance.GrenadeController.OnGrenadeThrown -= enemyGrenadeThrown;
+            SAINBotController.Instance.GrenadeController.OnGrenadeCollision -= GrenadeCollision;
+            SAINBotController.Instance.GrenadeController.OnGrenadeThrown -= EnemyGrenadeThrown;
 
             foreach (var tracker in EnemyGrenadesList.Values)
             {
                 if (tracker?.Grenade != null)
                 {
-                    tracker.Grenade.DestroyEvent -= removeGrenade;
+                    tracker.Grenade.DestroyEvent -= RemoveGrenade;
                 }
             }
             foreach (var grenade in FriendlyGrenadesList.Values)
             {
                 if (grenade != null)
                 {
-                    grenade.DestroyEvent -= removeGrenade;
+                    grenade.DestroyEvent -= RemoveGrenade;
                 }
             }
             EnemyGrenadesList.Clear();
             FriendlyGrenadesList.Clear();
         }
 
-        public void enemyGrenadeThrown(Grenade grenade, Vector3 dangerPoint, string profileId)
+        public void EnemyGrenadeThrown(Grenade grenade, Vector3 dangerPoint, string profileId)
         {
             if (Bot == null || profileId == Bot.ProfileId || !Bot.BotActive)
             {
@@ -122,9 +122,9 @@ namespace SAIN.SAINComponent.Classes.WeaponFunction
             if (enemy != null &&
                 enemy.RealDistance <= MAX_ENEMY_GRENADE_DIST_TOCARE)
             {
-                float reactionTime = getReactionTime(Bot.Info.Profile.DifficultyModifier);
+                float reactionTime = GetReactionTime(Bot.Info.Profile.DifficultyModifier);
                 EnemyGrenadesList.Add(grenade.Id, new GrenadeTracker(Bot, grenade, dangerPoint, reactionTime));
-                grenade.DestroyEvent += removeGrenade;
+                grenade.DestroyEvent += RemoveGrenade;
                 return;
             }
             //if (enemy == null && (dangerPoint - Bot.Position).sqrMagnitude <= MAX_FRIENDLY_GRENADE_DIST_TOCARE_SQR) {
@@ -138,7 +138,7 @@ namespace SAIN.SAINComponent.Classes.WeaponFunction
         private const float FRIENDLY_GRENADE_DIST_TORUN = 10f;
         private const float FRIENDLY_GRENADE_DIST_TORUN_SQR = FRIENDLY_GRENADE_DIST_TORUN * FRIENDLY_GRENADE_DIST_TORUN;
 
-        private void grenadeCollision(Grenade grenade, float maxRange)
+        private void GrenadeCollision(Grenade grenade, float maxRange)
         {
             if (Bot == null || grenade.ProfileId == Bot.ProfileId)
             {
@@ -154,17 +154,17 @@ namespace SAIN.SAINComponent.Classes.WeaponFunction
             }
         }
 
-        private void removeGrenade(Throwable grenade)
+        private void RemoveGrenade(Throwable grenade)
         {
             if (grenade != null)
             {
-                grenade.DestroyEvent -= removeGrenade;
+                grenade.DestroyEvent -= RemoveGrenade;
                 EnemyGrenadesList.Remove(grenade.Id);
                 FriendlyGrenadesList.Remove(grenade.Id);
             }
         }
 
-        private static float getReactionTime(float diffMod)
+        private static float GetReactionTime(float diffMod)
         {
             float reactionTime = 0.25f;
             reactionTime /= diffMod;

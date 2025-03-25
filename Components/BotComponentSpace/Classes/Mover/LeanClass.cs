@@ -39,25 +39,25 @@ namespace SAIN.SAINComponent.Classes.Mover
 
         public void Update()
         {
-            updateLean();
+            UpdateLean();
         }
 
-        private void updateLean()
+        private void UpdateLean()
         {
-            if (!checkShallLean())
+            if (!CheckShallLean())
             {
                 return;
             }
             if (_leanTimer < Time.time)
             {
                 var enemy = Bot.CurrentTarget.CurrentTargetEnemy;
-                findLean(enemy);
+                FindLean(enemy);
                 float timeAdd = LeanDirection == LeanSetting.None ? LEAN_UPDATE_NOT_FOUND_FREQ : LEAN_UPDATE_FOUND_FREQ;
                 _leanTimer = Time.time + timeAdd;
             }
         }
 
-        private bool checkShallLean()
+        private bool CheckShallLean()
         {
             if (!Bot.Info.FileSettings.Move.LEAN_TOGGLE || !GlobalSettingsClass.Instance.Move.LEAN_TOGGLE)
             {
@@ -104,12 +104,12 @@ namespace SAIN.SAINComponent.Classes.Mover
             return true;
         }
 
-        private void findLean(Enemy enemy)
+        private void FindLean(Enemy enemy)
         {
             var lastKnownPlace = enemy.KnownPlaces.LastKnownPlace;
             if (lastKnownPlace == null)
             {
-                setLean(LeanSetting.None);
+                SetLean(LeanSetting.None);
                 return;
             }
 
@@ -117,7 +117,7 @@ namespace SAIN.SAINComponent.Classes.Mover
             if (DirectLineOfSight)
             {
                 if (Time.time - _timeLastLeaned > RESET_LEAN_AFTER_TIME)
-                    setLean(LeanSetting.None);
+                    SetLean(LeanSetting.None);
 
                 return;
             }
@@ -125,13 +125,13 @@ namespace SAIN.SAINComponent.Classes.Mover
             var blindCornerLean = FindLeanFromBlindCornerAngle(enemy, 1f);
             if (blindCornerLean != LeanSetting.None)
             {
-                setLean(blindCornerLean);
+                SetLean(blindCornerLean);
                 return;
             }
 
             var raycastLean = FindLeanDirectionRayCast(lastKnownPlace.Position);
             if (raycastLean != LeanSetting.None || Time.time - _timeLastLeaned > RESET_LEAN_AFTER_TIME)
-                setLean(raycastLean);
+                SetLean(raycastLean);
         }
 
         public LeanSetting FindLeanFromBlindCornerAngle(Enemy enemy, float minAngle = -1f)
@@ -181,7 +181,7 @@ namespace SAIN.SAINComponent.Classes.Mover
 
         public void ResetLean()
         {
-            setLean(LeanSetting.None);
+            SetLean(LeanSetting.None);
         }
 
         public LeanSetting FindLeanDirectionRayCast(Vector3 targetPos)
@@ -225,7 +225,7 @@ namespace SAIN.SAINComponent.Classes.Mover
             return GetSettingFromResults();
         }
 
-        private void setLean(LeanSetting leanSetting)
+        private void SetLean(LeanSetting leanSetting)
         {
             if (leanSetting != LeanSetting.None)
                 _timeLastLeaned = Time.time;
