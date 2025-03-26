@@ -48,8 +48,6 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
 
             didCheck = true;
             Enemy.Events.OnEnemyLineOfSightChanged.CheckToggle(LineOfSight);
-            //bool canShoot = EnemyParts.CheckCanShoot(Enemy.Shoot.Targets.CanShootHead);
-            //Enemy.Events.OnEnemyCanShootChanged.CheckToggle(canShoot);
         }
 
         private bool shallStart()
@@ -65,17 +63,6 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
             }
             return false;
         }
-
-        private const float MAX_LOS_RANGE_HEAD_HUMAN = 125f;
-        private const float MAX_LOS_RANGE_LIMBS_AI = 200f;
-
-        private readonly List<SAINBodyPartRaycast> _raycasts = new();
-
-        private static readonly ERaycastPart[] _empty = [];
-        private static readonly ERaycastPart[] _onlyBody = [ERaycastPart.Body];
-        private static readonly ERaycastPart[] _bodyPlus1Random = [ERaycastPart.Body, ERaycastPart.RandomPart];
-        private static readonly ERaycastPart[] _bodyHeadPlus1Random = [ERaycastPart.Body, ERaycastPart.Head, ERaycastPart.RandomPart];
-        private static readonly ERaycastPart[] _bodyHeadPlus2Random = [ERaycastPart.Body, ERaycastPart.Head, ERaycastPart.RandomPart, ERaycastPart.RandomPart];
 
         private const float MAX_RANGE_VISION_UNKNOWN = 300f;
 

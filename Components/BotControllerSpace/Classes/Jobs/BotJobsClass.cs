@@ -25,7 +25,7 @@ namespace SAIN.Components
             if (bots != null && bots.Count > 0)
             {
                 RaycastJobs.Update();
-                updateVisionForBots();
+                UpdateVisionForBots();
             }
         }
 
@@ -35,7 +35,7 @@ namespace SAIN.Components
             PlayerDistancesJob.Dispose();
         }
 
-        private void updateVisionForBots()
+        private void UpdateVisionForBots()
         {
             _localBotList.Clear();
             _localBotList.AddRange(Bots.Values);

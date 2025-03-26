@@ -33,10 +33,10 @@ namespace SAIN.Components
     {
         public VisionRaycastJob(SAINBotController botcontroller) : base(botcontroller)
         {
-            botcontroller.StartCoroutine(checkVisionLoop());
+            botcontroller.StartCoroutine(CheckVisionLoop());
         }
 
-        private IEnumerator checkVisionLoop()
+        private IEnumerator CheckVisionLoop()
         {
             yield return null;
 
@@ -61,7 +61,7 @@ namespace SAIN.Components
                     continue;
                 }
 
-                findEnemies(bots, _enemies);
+                FindEnemies(bots, _enemies);
                 int enemyCount = _enemies.Count;
                 if (enemyCount == 0)
                 {
@@ -80,13 +80,13 @@ namespace SAIN.Components
                 _hits = new NativeArray<RaycastHit>(totalRaycasts, Allocator.TempJob);
                 _commands = new NativeArray<RaycastCommand>(totalRaycasts, Allocator.TempJob);
 
-                createCommands(_enemies, _commands, enemyCount, partCount);
+                CreateCommands(_enemies, _commands, enemyCount, partCount);
                 _handle = RaycastCommand.ScheduleBatch(_commands, _hits, 24);
 
                 yield return null;
 
                 _handle.Complete();
-                analyzeHits(_enemies, _hits, enemyCount, partCount);
+                AnalyzeHits(_enemies, _hits, enemyCount, partCount);
                 _commands.Dispose();
                 _hits.Dispose();
             }
@@ -103,7 +103,7 @@ namespace SAIN.Components
         private NativeArray<RaycastCommand> _commands;
         private JobHandle _handle;
 
-        private void createCommands(List<Enemy> enemies, NativeArray<RaycastCommand> raycastCommands, int enemyCount, int partCount)
+        private void CreateCommands(List<Enemy> enemies, NativeArray<RaycastCommand> raycastCommands, int enemyCount, int partCount)
         {
             _colliderTypes.Clear();
             _castPoints.Clear();
@@ -155,7 +155,7 @@ namespace SAIN.Components
             }
         }
 
-        private void analyzeHits(List<Enemy> enemies, NativeArray<RaycastHit> raycastHits, int enemyCount, int partCount)
+        private void AnalyzeHits(List<Enemy> enemies, NativeArray<RaycastHit> raycastHits, int enemyCount, int partCount)
         {
             float time = Time.time;
             int hits = 0;
@@ -164,9 +164,6 @@ namespace SAIN.Components
             for (int i = 0; i < enemyCount; i++)
             {
                 var enemy = _enemies[i];
-                var transform = enemy.Bot.Transform;
-                Vector3 origin = transform.EyePosition;
-                Vector3 weaponFirePort = transform.WeaponFirePort;
                 var visionChecker = enemy.Vision.VisionChecker;
                 var parts = visionChecker.EnemyParts.PartsArray;
                 visionChecker.LastCheckLOSTime = time + (enemy.IsAI ? 0.1f : 0.05f);
@@ -197,19 +194,36 @@ namespace SAIN.Components
         private readonly List<EBodyPartColliderType> _colliderTypes = new();
         private readonly List<Vector3> _castPoints = new();
 
-        private static void findEnemies(BotDictionary bots, List<Enemy> result)
+        private static void FindEnemies(BotDictionary bots, List<Enemy> result)
         {
             result.Clear();
             float time = Time.time;
             foreach (var bot in bots.Values)
             {
-                if (bot == null || !bot.BotActive) continue;
-                if (bot.Vision.TimeSinceCheckedLOS < 0.05f) continue;
+                if (bot == null || !bot.BotActive)
+                {
+                    continue;
+                }
+
+                if (bot.Vision.TimeSinceCheckedLOS < 0.05f)
+                {
+                    continue;
+                }
+
                 foreach (var enemy in bot.EnemyController.Enemies.Values)
                 {
-                    if (!enemy.CheckValid()) continue;
+                    if (!enemy.CheckValid())
+                    {
+                        continue;
+                    }
+
                     var visionChecker = enemy.Vision.VisionChecker;
-                    if (enemy.RealDistance > visionChecker.AIVisionRangeLimit()) continue;
+
+                    if (enemy.RealDistance > visionChecker.AIVisionRangeLimit())
+                    {
+                        continue;
+                    }
+
                     if (visionChecker.LastCheckLOSTime < time)
                     {
                         result.Add(enemy);
