@@ -115,7 +115,7 @@ namespace SAIN.SAINComponent.Classes
             {
                 if (part.IsVisible || part.VisibleType == EEnemyPartVisibleType.Sence)
                 {
-                    part.UpdateVisibility(BotOwner, false, false, false, Time.deltaTime);
+                    part.UpdateVisibility(BotOwner, false, false, false, Time.time - enemy.Vision.VisionChecker.LastCheckLookTime);
                 }
             }
 
@@ -133,7 +133,8 @@ namespace SAIN.SAINComponent.Classes
             if (timeSince >= delay)
             {
                 look.LastCheckLookTime = Time.time;
-                enemy.EnemyInfo.CheckLookEnemy(lookAll, Time.deltaTime);
+                // ArchangelWTF: In AITaskManager.UpdateGroup timeSince is passed here
+                enemy.EnemyInfo.CheckLookEnemy(lookAll, timeSince);
                 return true;
             }
             return false;
