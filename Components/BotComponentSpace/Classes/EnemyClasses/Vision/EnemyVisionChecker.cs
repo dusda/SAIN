@@ -40,7 +40,7 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
         public void CheckVision(out bool didCheck)
         {
             // staggers ai vision over a few quarters of a second
-            if (!shallStart())
+            if (!ShallStart())
             {
                 didCheck = false;
                 return;
@@ -50,7 +50,7 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
             Enemy.Events.OnEnemyLineOfSightChanged.CheckToggle(LineOfSight);
         }
 
-        private bool shallStart()
+        private bool ShallStart()
         {
             if (_visionStarted)
             {
@@ -68,7 +68,7 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
 
         public float AIVisionRangeLimit()
         {
-            float max = checkMaxVisionRangeAI();
+            float max = CheckMaxVisionRangeAI();
             if (!Enemy.EnemyKnown && max > MAX_RANGE_VISION_UNKNOWN)
             {
                 return MAX_RANGE_VISION_UNKNOWN;
@@ -76,7 +76,7 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
             return max;
         }
 
-        private float checkMaxVisionRangeAI()
+        private float CheckMaxVisionRangeAI()
         {
             if (!Enemy.IsAI)
             {
@@ -99,7 +99,7 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
                 {
                     return float.MaxValue;
                 }
-                return getMaxVisionRange(Bot.CurrentAILimit);
+                return GetMaxVisionRange(Bot.CurrentAILimit);
             }
             else
             {
@@ -107,11 +107,11 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
                 {
                     return float.MaxValue;
                 }
-                return getMaxVisionRange(enemyBot.CurrentAILimit);
+                return GetMaxVisionRange(enemyBot.CurrentAILimit);
             }
         }
 
-        private static float getMaxVisionRange(AILimitSetting aiLimit)
+        private static float GetMaxVisionRange(AILimitSetting aiLimit)
         {
             switch (aiLimit)
             {
