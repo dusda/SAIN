@@ -18,7 +18,7 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
         {
             if (Enemy.EnemyKnown)
             {
-                updateVulnerableState();
+                UpdateVulnerableState();
                 updateHealthStatus();
             }
         }
@@ -55,7 +55,7 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
             SetVulnerableAction(EEnemyAction.None);
         }
 
-        private EEnemyAction checkVulnerableAction()
+        private EEnemyAction CheckVulnerableAction()
         {
             if (EnemyUsingSurgery)
             {
@@ -80,10 +80,10 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
             return EEnemyAction.None;
         }
 
-        private void updateVulnerableState()
+        private void UpdateVulnerableState()
         {
             EEnemyAction lastAction = VulnerableAction;
-            VulnerableAction = checkVulnerableAction();
+            VulnerableAction = CheckVulnerableAction();
             if (lastAction != VulnerableAction)
             {
                 Enemy.Events.EnemyVulnerableChanged(VulnerableAction);
@@ -98,7 +98,7 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
                 switch (action)
                 {
                     case EEnemyAction.None:
-                        resetActions();
+                        ResetActions();
                         break;
 
                     case EEnemyAction.Reloading:
@@ -128,7 +128,7 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
             }
         }
 
-        private void resetActions()
+        private void ResetActions()
         {
             HeardRecently = false;
             _enemyLookAtMe = false;
@@ -185,14 +185,14 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
             {
                 if (value)
                 {
-                    updateShotStatus();
-                    updateShotPos();
+                    UpdateShotStatus();
+                    UpdateShotPos();
                 }
                 _shotByEnemy.Value = value;
             }
         }
 
-        private void updateShotStatus()
+        private void UpdateShotStatus()
         {
             if (!ShotByEnemy)
             {
@@ -201,7 +201,7 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
             }
         }
 
-        private void updateShotPos()
+        private void UpdateShotPos()
         {
             Vector3 random = UnityEngine.Random.onUnitSphere;
             random.y = 0f;
