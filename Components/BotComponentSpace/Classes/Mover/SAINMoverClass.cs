@@ -437,16 +437,12 @@ namespace SAIN.SAINComponent.Classes.Mover
 
         public void FastLean(LeanSetting value)
         {
-            float num;
-            switch (value)
+            var num = value switch
             {
-                case LeanSetting.Left:
-                    num = -5f; break;
-                case LeanSetting.Right:
-                    num = 5f; break;
-                default:
-                    num = 0f; break;
-            }
+                LeanSetting.Left => -5f,
+                LeanSetting.Right => 5f,
+                _ => 0f,
+            };
             FastLean(num);
         }
 
