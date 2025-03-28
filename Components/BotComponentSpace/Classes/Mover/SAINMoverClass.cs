@@ -13,18 +13,9 @@ namespace SAIN.SAINComponent.Classes.Mover
 {
     public class SAINMoverClass : BotBase, IBotClass
     {
-        static SAINMoverClass()
-        {
-            _pathControllerField = AccessTools.Field(typeof(BotMover), "_pathController");
-            _patrolField = AccessTools.Field(typeof(MovementContext), "_isInPatrol");
-        }
-
-        private static FieldInfo _pathControllerField;
-        private static FieldInfo _patrolField;
-
         public SAINMoverClass(BotComponent sain) : base(sain)
         {
-            _pathController = _pathControllerField.GetValue(sain.BotOwner.Mover) as PathControllerClass;
+            PathController = sain.BotOwner.Mover._pathController;
             BlindFire = new BlindFireController(sain);
             SideStep = new SideStepClass(sain);
             Lean = new LeanClass(sain);
@@ -34,7 +25,7 @@ namespace SAIN.SAINComponent.Classes.Mover
             DogFight = new DogFight(sain);
         }
 
-        private PathControllerClass _pathController { get; }
+        private PathControllerClass PathController { get; }
 
         public event Action<Vector3, Vector3> OnNewGoToPoint;
 
@@ -90,7 +81,7 @@ namespace SAIN.SAINComponent.Classes.Mover
         private void HandlePatrolStance()
         {
             bool wantToPatrolStance = BotOwner.Memory.IsPeace && !Player.IsSprintEnabled;
-            bool inPatrol = _isInPatrol;
+            bool inPatrol = IsInPatrol;
             if (wantToPatrolStance == inPatrol)
             {
                 return;
@@ -115,7 +106,7 @@ namespace SAIN.SAINComponent.Classes.Mover
             return false;
         }
 
-        private bool _isInPatrol => (bool)_patrolField.GetValue(Player.MovementContext);
+        private bool IsInPatrol => Player.MovementContext._isInPatrol;
 
         private void CheckSetBotToNavMesh()
         {
@@ -275,7 +266,7 @@ namespace SAIN.SAINComponent.Classes.Mover
         {
             if (!wasMoving || (CurrentMoveDestination - destination).sqrMagnitude > 0.1f)
             {
-                Vector3 currentCorner = _pathController.CurrentCorner();
+                Vector3 currentCorner = PathController.CurrentCorner();
                 OnNewGoToPoint?.Invoke(currentCorner, destination);
             }
             CurrentMoveDestination = destination;
@@ -475,7 +466,7 @@ namespace SAIN.SAINComponent.Classes.Mover
 
         private void HandleShoulderSwap(float leanValue)
         {
-            bool shoulderSwapped = isShoulderSwapped;
+            bool shoulderSwapped = IsShoulderSwapped;
             if ((leanValue < 0 && !shoulderSwapped)
                 || (leanValue >= 0 && shoulderSwapped))
             {
@@ -483,7 +474,7 @@ namespace SAIN.SAINComponent.Classes.Mover
             }
         }
 
-        private bool isShoulderSwapped => Player.MovementContext?.LeftStanceController?.LeftStance == true;
+        private bool IsShoulderSwapped => Player.MovementContext?.LeftStanceController?.LeftStance == true;
 
         public bool CanJump => Player.MovementContext?.CanJump == true;
 
