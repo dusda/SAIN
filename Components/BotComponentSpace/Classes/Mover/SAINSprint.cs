@@ -547,17 +547,14 @@ namespace SAIN.SAINComponent.Classes.Mover
 
         private bool ShallSteerbyPriority()
         {
-            switch (CurrentRunStatus)
+            return CurrentRunStatus switch
             {
-                case RunStatus.Turning:
-                case RunStatus.FirstTurn:
-                case RunStatus.Running:
-                case RunStatus.ShortCorner:
-                    return false;
-
-                default:
-                    return true;
-            }
+                RunStatus.Turning or 
+                RunStatus.FirstTurn or 
+                RunStatus.Running or 
+                RunStatus.ShortCorner => false,
+                _ => true,
+            };
         }
 
         private void Move(Vector3 direction)
