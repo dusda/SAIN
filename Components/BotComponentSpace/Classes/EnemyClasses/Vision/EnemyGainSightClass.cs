@@ -14,7 +14,7 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
                 if (_nextCheckVisTime < Time.time)
                 {
                     _nextCheckVisTime = Time.time + 0.05f;
-                    _gainSightModifier = calcModifier() * calcRepeatSeenCoef();
+                    _gainSightModifier = CalcModifier() * CalcRepeatSeenCoef();
                 }
                 return _gainSightModifier;
             }
@@ -44,8 +44,8 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
         private const float PARTS_VISIBLE_MAX_PARTS = 6;
         private const float PARTS_VISIBLE_MIN_PARTS = 2;
 
-        private float PARTS_VISIBLE_MAX_COEF => _settings.PartsVisibility.PARTS_VISIBLE_MAX_COEF;
-        private float PARTS_VISIBLE_MIN_COEF => _settings.PartsVisibility.PARTS_VISIBLE_MIN_COEF;
+        private float PARTS_VISIBLE_MAX_COEF => Settings.PartsVisibility.PARTS_VISIBLE_MAX_COEF;
+        private float PARTS_VISIBLE_MIN_COEF => Settings.PartsVisibility.PARTS_VISIBLE_MIN_COEF;
 
         private const float PARTS_VISIBLE_MAX_TIME_SINCE_CHECKED = 2f;
         private const float PARTS_VISIBLE_MAX_TIME_SINCE_VISIBLE = 1f;
@@ -53,13 +53,13 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
         private const float ELEVATION_LASTKNOWN_MAX_DIST = 1.5f;
         private const float ELEVATION_MIN_ANGLE = 5f;
 
-        private float THIRDPARTY_VISION_START_ANGLE => _settings.ThirdParty.THIRDPARTY_VISION_START_ANGLE;
-        private float THIRDPARTY_VISION_MAX_COEF => _settings.ThirdParty.THIRDPARTY_VISION_MAX_COEF;
+        private float THIRDPARTY_VISION_START_ANGLE => Settings.ThirdParty.THIRDPARTY_VISION_START_ANGLE;
+        private float THIRDPARTY_VISION_MAX_COEF => Settings.ThirdParty.THIRDPARTY_VISION_MAX_COEF;
 
         private const float THIRDPARTY_VISION_MAX_DIST_LASTKNOWN = 50f;
 
-        private float PERIPHERAL_VISION_START_ANGLE => _settings.Peripheral.PERIPHERAL_VISION_START_ANGLE;
-        private float PERIPHERAL_VISION_MAX_REDUCTION_COEF => _settings.Peripheral.PERIPHERAL_VISION_MAX_REDUCTION_COEF;
+        private float PERIPHERAL_VISION_START_ANGLE => Settings.Peripheral.PERIPHERAL_VISION_START_ANGLE;
+        private float PERIPHERAL_VISION_MAX_REDUCTION_COEF => Settings.Peripheral.PERIPHERAL_VISION_MAX_REDUCTION_COEF;
 
         private const float PERIPHERAL_VISION_SPEED_DIRECT_FRONT_ANGLE = 3f;
         private const float PERIPHERAL_VISION_SPEED_DIRECT_FRONT_MOD = 0.66f;
@@ -70,12 +70,12 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
         private const float PERIPHERAL_VISION_SPEED_ENEMY_VERYCLOSE_DIST = 5;
         private const float PERIPHERAL_VISION_SPEED_ENEMY_VERYCLOSE_MOD = 0.8f;
 
-        private float PRONE_VISION_SPEED_COEF => _settings.Pose.PRONE_VISION_SPEED_COEF;
-        private float DUCK_VISION_SPEED_COEF => _settings.Pose.DUCK_VISION_SPEED_COEF;
+        private float PRONE_VISION_SPEED_COEF => Settings.Pose.PRONE_VISION_SPEED_COEF;
+        private float DUCK_VISION_SPEED_COEF => Settings.Pose.DUCK_VISION_SPEED_COEF;
 
         private const float UNKNOWN_ENEMY_HAS_ENEMY_COEF = 1.5f;
 
-        private float calcUnknownMod()
+        private float CalcUnknownMod()
         {
             if (Enemy.EnemyKnown)
             {
@@ -88,10 +88,10 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
             return 1f;
         }
 
-        private float calcModifier()
+        private float CalcModifier()
         {
-            float partMod = calcPartsMod();
-            float gearMod = calcGearMod();
+            float partMod = CalcPartsMod();
+            float gearMod = CalcGearMod();
 
             bool flareEnabled = EnemyPlayer.AIData?.GetFlare == true &&
                 Enemy.EnemyPlayerComponent?.Equipment.CurrentWeapon?.HasSuppressor == false;
@@ -99,14 +99,14 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
             bool underFire = Bot.BotOwner.Memory.IsUnderFire && Bot.Memory.LastUnderFireEnemy == Enemy;
 
             float underFireMod = underFire ? UNDER_FIRE_FROM_ME_COEF : 1f;
-            float weatherMod = calcWeatherMod(flareEnabled);
-            float timeMod = calcTimeModifier(flareEnabled);
-            float moveMod = calcMoveModifier();
-            float elevMod = calcElevationModifier();
-            float thirdPartyMod = calcThirdPartyMod();
-            float angleMod = calcAngleMod();
-            float poseMod = poseModifier();
-            float unknownMod = calcUnknownMod();
+            float weatherMod = CalcWeatherMod(flareEnabled);
+            float timeMod = CalcTimeModifier(flareEnabled);
+            float moveMod = CalcMoveModifier();
+            float elevMod = CalcElevationModifier();
+            float thirdPartyMod = CalcThirdPartyMod();
+            float angleMod = CalcAngleMod();
+            float poseMod = PoseModifier();
+            float unknownMod = CalcUnknownMod();
 
             float notLookMod = 1f;
             if (!Enemy.IsAI)
@@ -135,9 +135,9 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
             return result;
         }
 
-        private float poseModifier()
+        private float PoseModifier()
         {
-            if (_settings.Pose.Enabled == false)
+            if (Settings.Pose.Enabled == false)
             {
                 return 1f;
             }
@@ -157,13 +157,13 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
         {
         }
 
-        private float calcRepeatSeenCoef()
+        private float CalcRepeatSeenCoef()
         {
             EnemyPlace lastSeen = Enemy.KnownPlaces.LastSeenPlace;
             float result = 1f;
             if (lastSeen != null)
             {
-                result *= calcVisionSpeedPositional(
+                result *= CalcVisionSpeedPositional(
                     lastSeen.DistanceToEnemyRealPosition,
                     DIST_SEEN_MIN_COEF,
                     DIST_SEEN_MIN_DIST,
@@ -173,7 +173,7 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
             EnemyPlace lastHeard = Enemy.KnownPlaces.LastHeardPlace;
             if (lastHeard != null)
             {
-                result *= calcVisionSpeedPositional(
+                result *= CalcVisionSpeedPositional(
                     lastHeard.DistanceToEnemyRealPosition,
                     DIST_HEARD_MIN_COEF,
                     DIST_HEARD_MIN_DIST,
@@ -190,7 +190,7 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
             Audio = 2,
         }
 
-        private float calcVisionSpeedPositional(float distance, float minSpeedCoef, float minDist, float maxDist, SeenSpeedCheck check)
+        private float CalcVisionSpeedPositional(float distance, float minSpeedCoef, float minDist, float maxDist, SeenSpeedCheck check)
         {
             if (distance <= minDist)
             {
@@ -212,24 +212,29 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
         private float _gainSightModifier;
         private float _nextCheckVisTime;
 
-        private float calcGearMod()
+        private float CalcGearMod()
         {
             return Enemy.EnemyPlayerComponent.AIData.AIGearModifier.StealthModifier(Enemy.RealDistance);
         }
 
-        private float calcTimeModifier(bool flareEnabled)
+        private float CalcTimeModifier(bool flareEnabled)
         {
-            float baseModifier = baseTimeModifier(flareEnabled);
+            float baseModifier = BaseTimeModifier(flareEnabled);
 
             if (baseModifier <= 1f)
+            {
                 return 1f;
-            if (enemyUsingLight(out float lightModifier))
+            }
+
+            if (EnemyUsingLight(out float lightModifier))
+            {
                 return lightModifier;
+            }
 
             bool usingNVGS = BotOwner.NightVision.UsingNow;
             float enemyDist = Enemy.RealDistance;
 
-            if (enemyInRangeOfLight(enemyDist, usingNVGS))
+            if (EnemyInRangeOfLight(enemyDist, usingNVGS))
                 return 1f;
 
             float max = 1f + baseModifier;
@@ -256,7 +261,7 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
             return result;
         }
 
-        private bool enemyUsingLight(out float modifier)
+        private bool EnemyUsingLight(out float modifier)
         {
             var flashlight = Enemy.EnemyPlayerComponent.Flashlight;
             if (flashlight.WhiteLight)
@@ -287,7 +292,7 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
             return false;
         }
 
-        private bool enemyInRangeOfLight(float enemyDist, bool usingNVGS)
+        private bool EnemyInRangeOfLight(float enemyDist, bool usingNVGS)
         {
             var settings = Bot.Info.FileSettings.Look;
             if (Bot.PlayerComponent.Flashlight.WhiteLight &&
@@ -302,9 +307,9 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
             return false;
         }
 
-        private float calcWeatherMod(bool flareEnabled)
+        private float CalcWeatherMod(bool flareEnabled)
         {
-            float baseModifier = baseWeatherMod(flareEnabled);
+            float baseModifier = BaseWeatherMod(flareEnabled);
 
             if (baseModifier <= 1f)
                 return 1f;
@@ -319,7 +324,7 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
                 return max;
             if (enemyDist < minDist)
                 return min;
-            if (enemyUsingLight(out _))
+            if (EnemyUsingLight(out _))
                 return min;
 
             bool moving = Enemy.Vision.EnemyVelocity > 0.1f;
@@ -333,7 +338,7 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
             return result;
         }
 
-        private float baseWeatherMod(bool flareEnabled)
+        private float BaseWeatherMod(bool flareEnabled)
         {
             if (flareEnabled && Enemy.RealDistance < 100f)
             {
@@ -342,7 +347,7 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
             return SAINBotController.Instance.WeatherVision.GainSightModifier;
         }
 
-        private float baseTimeModifier(bool flareEnabled)
+        private float BaseTimeModifier(bool flareEnabled)
         {
             if (flareEnabled)
             {
@@ -353,11 +358,11 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
 
         // private static float _nextLogTime;
 
-        private static VisionSpeedSettings _settings => GlobalSettingsClass.Instance.Look.VisionSpeed;
+        private static VisionSpeedSettings Settings => GlobalSettingsClass.Instance.Look.VisionSpeed;
 
-        private float calcPartsMod()
+        private float CalcPartsMod()
         {
-            if (_settings.PartsVisibility.Enabled == false)
+            if (Settings.PartsVisibility.Enabled == false)
             {
                 return 1f;
             }
@@ -406,17 +411,17 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
             return (float)visibleCount / (float)partCount;
         }
 
-        private float calcMoveModifier()
+        private float CalcMoveModifier()
         {
-            if (_settings.Movement.Enabled == false)
+            if (Settings.Movement.Enabled == false)
             {
                 return 1f;
             }
             var look = SAINPlugin.LoadedPreset.GlobalSettings.Look.VisionSpeed;
-            return Mathf.Lerp(1, _settings.Movement.MOVEMENT_VISION_MULTIPLIER, Enemy.Vision.EnemyVelocity);
+            return Mathf.Lerp(1, Settings.Movement.MOVEMENT_VISION_MULTIPLIER, Enemy.Vision.EnemyVelocity);
         }
 
-        private bool isLastKnownAtSameElev()
+        private bool IsLastKnownAtSameElev()
         {
             var lastKnown = Enemy.LastKnownPosition;
             if (lastKnown != null)
@@ -430,13 +435,13 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
             return false;
         }
 
-        private float calcElevationModifier()
+        private float CalcElevationModifier()
         {
-            if (_settings.Elevation.Enabled == false)
+            if (Settings.Elevation.Enabled == false)
             {
                 return 1f;
             }
-            if (isLastKnownAtSameElev())
+            if (IsLastKnownAtSameElev())
                 return 1f;
 
             var settings = SAINPlugin.LoadedPreset.GlobalSettings.Look.VisionSpeed.Elevation;
@@ -461,9 +466,9 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
             return result;
         }
 
-        private float calcThirdPartyMod()
+        private float CalcThirdPartyMod()
         {
-            if (_settings.ThirdParty.Enabled == false)
+            if (Settings.ThirdParty.Enabled == false)
             {
                 return 1f;
             }
@@ -513,9 +518,9 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
             return reductionMod;
         }
 
-        private float calcAngleMod()
+        private float CalcAngleMod()
         {
-            if (_settings.Peripheral.Enabled == false)
+            if (Settings.Peripheral.Enabled == false)
             {
                 return 1f;
             }
