@@ -24,16 +24,16 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
         public float TimeSinceCanShoot => Time.time - _timeLastCanShoot;
         public Vector3 LastSuccessShootPosition { get; private set; }
 
-        public Dictionary<EBodyPart, EnemyPartDataClass> Parts { get; } = new Dictionary<EBodyPart, EnemyPartDataClass>();
+        public Dictionary<EBodyPart, EnemyPartDataClass> Parts { get; } = [];
 
         public EnemyPartDataClass[] PartsArray { get; private set; }
 
         public void Update()
         {
-            updateParts();
+            UpdateParts();
         }
 
-        private void updateParts()
+        private void UpdateParts()
         {
             bool inSight = false;
             bool canShoot = false;
@@ -59,9 +59,8 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
 
         public EnemyPartDataClass GetNextPart()
         {
-            EnemyPartDataClass result = null;
             EBodyPart epart = (EBodyPart)_index;
-            if (!Parts.TryGetValue(epart, out result))
+            if (!Parts.TryGetValue(epart, out EnemyPartDataClass result))
             {
                 _index = 0;
                 result = Parts[EBodyPart.Chest];
