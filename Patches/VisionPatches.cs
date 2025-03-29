@@ -425,12 +425,9 @@ namespace SAIN.Patches.Vision
 
     public class CheckFlashlightPatch : ModulePatch
     {
-        private static MethodInfo _UsingLight;
-
         protected override MethodBase GetTargetMethod()
         {
-            _UsingLight = AccessTools.PropertySetter(typeof(GClass567), "UsingLight");
-            return AccessTools.Method(typeof(Player.FirearmController), "SetLightsState");
+            return AccessTools.Method(typeof(Player.FirearmController), nameof(Player.FirearmController.SetLightsState));
         }
 
         [PatchPostfix]
@@ -445,7 +442,7 @@ namespace SAIN.Patches.Vision
 
                 if (!flashLight.WhiteLight && !flashLight.Laser)
                 {
-                    _UsingLight.Invoke(____player.AIData, [false]);
+                    (____player.AIData as GClass567).UsingLight = false;
                 }
             }
         }
