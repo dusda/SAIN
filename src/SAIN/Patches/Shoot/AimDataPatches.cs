@@ -256,10 +256,9 @@ namespace SAIN.Patches.Shoot.Aim
     [PatchPostfix]
     public static void Patch(BotWeaponManager __instance, IHandsController handsController)
     {
-      IFirearmHandsController firearmHandsController;
-      if ((firearmHandsController = (handsController as IFirearmHandsController)) != null)
+      if (handsController is IFirearmHandsController firearmHandsController)
       {
-        SAINBotController.Instance?.BotChangedWeapon(__instance.botOwner_0, firearmHandsController);
+        SAINBotController.BotChangedWeapon(__instance.botOwner_0, firearmHandsController);
       }
     }
   }
@@ -280,7 +279,7 @@ namespace SAIN.Patches.Shoot.Aim
       }
 
       __result = CalculateAim(bot, dist, ang, __instance.bool_1, __instance.bool_0, __instance.float_10);
-      bot.Aim.LastAimTime = __result;
+      bot.Aim!.LastAimTime = __result;
 
       return false;
     }
