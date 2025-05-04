@@ -1,5 +1,4 @@
 ﻿using EFT;
-using System;
 using UnityEngine;
 
 namespace SAIN.Components.PlayerComponentSpace.PersonClasses

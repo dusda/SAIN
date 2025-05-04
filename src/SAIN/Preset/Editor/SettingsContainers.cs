@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace SAIN.Editor
+﻿namespace SAIN.Editor
 {
   public static class SettingsContainers
   {
-    private static readonly Dictionary<Type, SettingsContainer> Containers = new();
+    private static readonly Dictionary<Type, SettingsContainer> Containers = [];
 
-    public static SettingsContainer GetContainer(Type containerType, string name = null)
+    public static SettingsContainer GetContainer(Type containerType, string? name = null)
     {
       if (!Containers.ContainsKey(containerType))
       {

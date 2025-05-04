@@ -1,16 +1,15 @@
 ﻿using SAIN.Plugin;
-using System;
 
 namespace SAIN.Preset
 {
   public sealed class SAINPresetDefinition
   {
-    public string Name;
-    public string Description;
-    public string Creator;
-    public string SAINVersion;
-    public string SAINPresetVersion;
-    public string DateCreated;
+    public string? Name;
+    public string? Description;
+    public string? Creator;
+    public string? SAINVersion;
+    public string? SAINPresetVersion;
+    public string? DateCreated;
     public SAINDifficulty BaseSAINDifficulty = SAINDifficulty.hard;
     public bool IsCustom = true;
     public bool CanEditName = true;
@@ -30,7 +29,7 @@ namespace SAIN.Preset
       };
     }
 
-    public static SAINPresetDefinition CreateDefaultDefinition(string difficulty, SAINDifficulty baseDifficulty, string description = null)
+    public static SAINPresetDefinition CreateDefaultDefinition(string difficulty, SAINDifficulty baseDifficulty, string? description = null)
     {
       return new SAINPresetDefinition
       {

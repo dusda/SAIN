@@ -1,9 +1,6 @@
 using Newtonsoft.Json;
 using SAIN.Preset;
 using SAIN.Preset.GearStealthValues;
-using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Reflection;
 
 namespace SAIN.Helpers

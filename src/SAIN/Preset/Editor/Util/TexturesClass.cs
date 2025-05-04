@@ -1,5 +1,4 @@
 ﻿using SAIN.Editor.Util;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace SAIN.Editor
@@ -38,7 +37,7 @@ namespace SAIN.Editor
       return RandomColors[key];
     }
 
-    private static readonly Dictionary<string, Texture2D> RandomColors = new();
+    private static readonly Dictionary<string, Texture2D> RandomColors = [];
 
     public static Texture2D GetTexture<T>(T name)
     {
@@ -58,9 +57,9 @@ namespace SAIN.Editor
       return Texture2D.redTexture;
     }
 
-    public static readonly Dictionary<string, Texture2D> ColorTextures = new();
+    public static readonly Dictionary<string, Texture2D> ColorTextures = [];
 
-    public static readonly Dictionary<string, Texture2D> CustomTextures = new();
+    public static readonly Dictionary<string, Texture2D> CustomTextures = [];
 
     public static Texture2D NewTexture(Color color, int width = 2, int height = 2)
     {

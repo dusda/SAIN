@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI;
 
 namespace SAIN.Helpers
@@ -54,7 +51,7 @@ namespace SAIN.Helpers
       float heightSpacing = Math.Max(0, (bounds.size.y - (radius * 2)) / heightCount);
 
       // Create a 3D mesh of points within the bounds
-      List<Vector3> testPoints = new();
+      List<Vector3> testPoints = [];
       Vector3 origin = new(bounds.min.x + radius, bounds.min.y + radius, bounds.min.z + radius);
       for (int x = 0; x <= widthCount; x++)
       {

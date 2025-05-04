@@ -1,24 +1,23 @@
 ﻿using EFT;
-using SAIN.Components.BotController;
+using SAIN.Components.BotControllerSpace.Classes;
 using SAIN.Helpers;
-using System.Collections.Generic;
 
 namespace SAIN.Preset
 {
   public sealed class BotType
   {
-    public string Name;
-    public string Description;
-    public string Section;
+    public string? Name;
+    public string? Description;
+    public string? Section;
     public WildSpawnType WildSpawnType;
-    public string BaseBrain;
+    public string? BaseBrain;
   }
 
   public class BotTypeDefinitions
   {
-    public static Dictionary<WildSpawnType, BotType> BotTypes = new();
+    public static Dictionary<WildSpawnType, BotType> BotTypes = [];
     public static List<BotType> BotTypesList;
-    public static readonly List<string> BotTypesNames = new();
+    public static readonly List<string> BotTypesNames = [];
 
     static BotTypeDefinitions()
     {
@@ -92,7 +91,7 @@ namespace SAIN.Preset
       }
     }
 
-    private static readonly List<BotType> _typesToRemove = new();
+    private static readonly List<BotType> _typesToRemove = [];
 
     public static void ExportBotTypes()
     {
@@ -114,8 +113,8 @@ namespace SAIN.Preset
 
     static List<BotType> CreateBotTypes()
     {
-      return new List<BotType>
-            {
+      return
+            [
                 new() { WildSpawnType = WildSpawnType.assault,                 Name = "Scav",                     Section = "Scavs" ,       Description = "Scavs!" },
                 new() { WildSpawnType = WildSpawnType.assaultGroup,            Name = "Scav Group",               Section = "Scavs" ,       Description = "Scavs in a Group!" },
                 new() { WildSpawnType = WildSpawnType.crazyAssaultEvent,       Name = "Crazy Scav Event",         Section = "Scavs" ,       Description = "Scavs!" },
@@ -165,7 +164,7 @@ namespace SAIN.Preset
                 new() { WildSpawnType = WildSpawnType.followerKolontayAssault, Name = "Kolontay Assault",         Section = "Followers" ,   Description = "" },
                 new() { WildSpawnType = WildSpawnType.followerKolontaySecurity,Name = "Kolontay Security",        Section = "Followers" ,   Description = "" },
                 new() { WildSpawnType = WildSpawnType.shooterBTR,              Name = "BTR",                      Section = "Other" ,       Description = "Zoom. Zoom. Bang. Bang." },
-            };
+            ];
     }
   }
 }

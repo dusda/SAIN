@@ -1,7 +1,5 @@
 ﻿using EFT;
 using EFT.InventoryLogic;
-using SAIN.SAINComponent;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace SAIN.Components.BotComponentSpace.Classes
@@ -219,7 +217,7 @@ namespace SAIN.Components.BotComponentSpace.Classes
       return false;
     }
 
-    private float getAmmoRatio(MagazineItemClass magazine)
+    private static float getAmmoRatio(MagazineItemClass magazine)
     {
       if (magazine == null) return 0.0f;
 
@@ -231,7 +229,7 @@ namespace SAIN.Components.BotComponentSpace.Classes
     public int EmptyMagazineCount { get; private set; }
 
     public readonly Weapon Weapon;
-    public readonly List<MagazineItemClass> Magazines = new();
+    public readonly List<MagazineItemClass> Magazines = [];
     private readonly BotWeaponManager _weaponManager;
     private readonly InventoryController _inventoryController;
     private MagRefillClass _refill = new();

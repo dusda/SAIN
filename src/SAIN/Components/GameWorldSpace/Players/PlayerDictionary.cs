@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace SAIN.Components.PlayerComponentSpace
+﻿namespace SAIN.Components.PlayerComponentSpace
 {
   public class PlayerDictionary : Dictionary<string, PlayerComponent>
   {
@@ -66,6 +63,6 @@ namespace SAIN.Components.PlayerComponentSpace
       }
     }
 
-    private readonly List<string> _ids = new();
+    private readonly List<string> _ids = [];
   }
 }

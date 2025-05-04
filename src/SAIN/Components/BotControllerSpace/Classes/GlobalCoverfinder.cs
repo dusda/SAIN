@@ -1,8 +1,7 @@
 ﻿using SAIN.Components;
-using SAIN.SAINComponent;
+using SAIN.Components.BotComponentSpace;
 using SAIN.SAINComponent.SubComponents.CoverFinder;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace SAIN.BotController.Classes
@@ -23,7 +22,7 @@ namespace SAIN.BotController.Classes
 
     private Coroutine _findCoverCoroutine;
 
-    private IEnumerator Main()
+    private static IEnumerator Main()
     {
       while (true)
       {
@@ -40,14 +39,14 @@ namespace SAIN.BotController.Classes
       }
     }
 
-    private readonly List<BotComponent> _localBotList = new();
-    public readonly Dictionary<int, CoverObject> ActiveCoverObjects = new();
+    private readonly List<BotComponent> _localBotList = [];
+    public readonly Dictionary<int, CoverObject> ActiveCoverObjects = [];
   }
 
   public class CoverObject
   {
     public int id;
-    public Collider collider;
-    public Dictionary<string, CoverPoint> BotCoverPointDictionary = new();
+    public Collider? collider;
+    public Dictionary<string, CoverPoint> BotCoverPointDictionary = [];
   }
 }

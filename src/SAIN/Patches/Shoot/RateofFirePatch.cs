@@ -12,7 +12,7 @@ namespace SAIN.Patches.Shoot.RateOfFire
 {
   public class FullAutoPatch : ModulePatch
   {
-    private static PropertyInfo _ShootData;
+    private static PropertyInfo? _ShootData;
 
     protected override MethodBase GetTargetMethod()
     {

@@ -1,7 +1,4 @@
 ﻿using EFT.UI.Ragfair;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Reflection.Emit;
@@ -481,7 +478,7 @@ namespace SAIN.Helpers
     /// <returns>A list of child transforms with the given value.</returns>
     public static List<Transform> GetChildsName(Transform transform, string name, bool onlyActive = true)
     {
-      List<Transform> list = new();
+      List<Transform> list = [];
       foreach (object obj in transform)
       {
         Transform transform2 = (Transform)obj;
@@ -785,7 +782,7 @@ namespace SAIN.Helpers
     /// </summary>
     public static void ClearTransformImmediate(this Transform t)
     {
-      List<Transform> list = new();
+      List<Transform> list = [];
       foreach (object obj in t)
       {
         Transform item = (Transform)obj;

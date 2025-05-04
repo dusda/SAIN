@@ -4,7 +4,6 @@ using SAIN.Helpers;
 using SAIN.Plugin;
 using SAIN.Preset;
 using SAIN.Preset.GlobalSettings.Categories;
-using System.Collections.Generic;
 using UnityEngine;
 using static SAIN.Editor.SAINLayout;
 
@@ -40,7 +39,7 @@ namespace SAIN.Editor.Util
       }
     }
 
-    public static void AddOrRemoveConfigOptions(SettingsContainer container, out bool wasEdited, string search = null)
+    public static void AddOrRemoveConfigOptions(SettingsContainer container, out bool wasEdited, string? search = null)
     {
       var dimensions = new GUILayoutOption[]
       {
@@ -158,7 +157,7 @@ namespace SAIN.Editor.Util
       }
     }
 
-    private static void AddOrRemove<T>(T value, List<T> list, out bool wasEdited, string name = null, string description = null, params GUILayoutOption[] options)
+    private static void AddOrRemove<T>(T value, List<T> list, out bool wasEdited, string? name = null, string? description = null, params GUILayoutOption[] options)
     {
       wasEdited = false;
       if (list != null)

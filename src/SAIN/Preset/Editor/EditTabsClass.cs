@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using static SAIN.Editor.RectLayout;
 using static SAIN.Editor.SAINLayout;
 
@@ -48,8 +47,8 @@ namespace SAIN.Editor
                 },
             };
 
-      List<string> names = new();
-      List<string> tooltips = new();
+      List<string> names = [];
+      List<string> tooltips = [];
       foreach (var tab in TabClasses)
       {
         names.Add(tab.Value.Name);
@@ -110,8 +109,8 @@ namespace SAIN.Editor
 
   public sealed class TabClass
   {
-    public string Name;
-    public string ToolTip;
+    public string? Name;
+    public string? ToolTip;
     public Vector2 Scroll = Vector2.zero;
   }
 

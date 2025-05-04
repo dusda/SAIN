@@ -1,11 +1,10 @@
 ﻿using SAIN.Helpers;
-using System;
 
 namespace SAIN.Attributes
 {
   public sealed class NameAndDescriptionAttribute : BaseAttribute
   {
-    public NameAndDescriptionAttribute(string name, string description = null)
+    public NameAndDescriptionAttribute(string name, string? description = null)
     {
       Name = name;
       Description = description;

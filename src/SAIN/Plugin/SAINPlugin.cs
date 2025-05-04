@@ -7,7 +7,6 @@ using SAIN.Plugin;
 using SAIN.Preset;
 using SAIN.Preset.GlobalSettings;
 using SPT.Reflection.Patching;
-using System.Collections.Generic;
 using UnityEngine;
 using static SAIN.AssemblyInfoClass;
 
@@ -65,11 +64,11 @@ namespace SAIN
       OpenEditorConfigEntry = Config.Bind(category, "Open Editor Shortcut", new KeyboardShortcut(KeyCode.F6), "The keyboard shortcut that toggles editor");
     }
 
-    public static ConfigEntry<bool> OpenEditorButton { get; private set; }
+    public static ConfigEntry<bool>? OpenEditorButton { get; private set; }
 
-    public static ConfigEntry<KeyboardShortcut> OpenEditorConfigEntry { get; private set; }
+    public static ConfigEntry<KeyboardShortcut>? OpenEditorConfigEntry { get; private set; }
 
-    private List<ModulePatch> SainPatches => [
+    private static List<ModulePatch> SainPatches => [
         new Patches.Generic.StopRefillMagsPatch(),
             new Patches.Generic.SetEnvironmentPatch(),
             new Patches.Generic.SetPanicPointPatch(),
@@ -193,17 +192,17 @@ namespace SAIN
 
     public static SAINPresetClass LoadedPreset => PresetHandler.LoadedPreset;
 
-    public void Update()
+    public static void Update()
     {
       ModDetection.Update();
       SAINEditor.Update();
     }
 
-    public void Start() => SAINEditor.Init();
+    public static void Start() => SAINEditor.Init();
 
-    public void LateUpdate() => SAINEditor.LateUpdate();
+    public static void LateUpdate() => SAINEditor.LateUpdate();
 
-    public void OnGUI() => SAINEditor.OnGUI();
+    public static void OnGUI() => SAINEditor.OnGUI();
 
     public static bool IsBotExluded(BotOwner botOwner) => SAINEnableClass.IsSAINDisabledForBot(botOwner);
   }

@@ -1,9 +1,9 @@
 ﻿using Comfort.Common;
 using EFT;
 using HarmonyLib;
+using SAIN.Components.BotComponentSpace;
 using SAIN.Preset.GlobalSettings;
 using System.Collections;
-using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 using UnityEngine.AI;
@@ -261,11 +261,11 @@ namespace SAIN.SAINComponent.Classes.Debug
     private float _nextVaultCheckTime;
     private bool DontUnstuckMe;
 
-    private static readonly List<WildSpawnType> DontUnstuckTheseTypes = new()
-        {
+    private static readonly List<WildSpawnType> DontUnstuckTheseTypes =
+        [
             WildSpawnType.marksman,
             WildSpawnType.shooterBTR,
-        };
+        ];
 
     private void checkResetPathFromVault()
     {
@@ -612,7 +612,7 @@ namespace SAIN.SAINComponent.Classes.Debug
     }
 
     private static NavMeshPath PathToPlayer;
-    private List<Player> HumanPlayers = new();
+    private List<Player> HumanPlayers = [];
 
     public void Dispose()
     {
@@ -634,7 +634,7 @@ namespace SAIN.SAINComponent.Classes.Debug
 
     public bool BotIsStuck { get; private set; }
 
-    private bool CanBeStuckDecisions(ECombatDecision decision)
+    private static bool CanBeStuckDecisions(ECombatDecision decision)
     {
       return decision == ECombatDecision.Search || decision == ECombatDecision.MoveToCover || decision == ECombatDecision.DogFight || decision == ECombatDecision.RunToCover || decision == ECombatDecision.RunAway;
     }

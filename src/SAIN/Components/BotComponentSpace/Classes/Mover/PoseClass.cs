@@ -1,4 +1,5 @@
 ﻿using EFT;
+using SAIN.Components.BotComponentSpace;
 using SAIN.Helpers;
 using SAIN.Preset.GlobalSettings;
 using SAIN.SAINComponent.Classes.EnemyClasses;
@@ -154,7 +155,7 @@ namespace SAIN.SAINComponent.Classes.Mover
       return 1f;
     }
 
-    private float FindCrouchHeight(float height)
+    private static float FindCrouchHeight(float height)
     {
       const float min = 0.5f;
       return height - min;

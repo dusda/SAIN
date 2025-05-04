@@ -1,5 +1,4 @@
-﻿using SAIN.SAINComponent;
-using System.Collections.Generic;
+﻿using SAIN.Components.BotComponentSpace;
 
 namespace SAIN.Components.BotController.PeacefulActions
 {
@@ -40,7 +39,7 @@ namespace SAIN.Components.BotController.PeacefulActions
       AllPeacefulBots.Remove(bot);
     }
 
-    public List<BotComponent> AllContainedBots { get; } = new List<BotComponent>();
-    public List<BotComponent> AllPeacefulBots { get; } = new List<BotComponent>();
+    public List<BotComponent> AllContainedBots { get; } = [];
+    public List<BotComponent> AllPeacefulBots { get; } = [];
   }
 }

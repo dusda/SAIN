@@ -1,7 +1,4 @@
 ﻿using HarmonyLib;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 
 namespace SAIN.Helpers
@@ -125,10 +122,10 @@ namespace SAIN.Helpers
     {
       if (Dictionary == null)
       {
-        Dictionary = new Dictionary<Type, Dictionary<KeyValuePair<FieldInfo, FieldInfo>, object>>();
+        Dictionary = [];
       }
 
-      Dictionary<KeyValuePair<FieldInfo, FieldInfo>, object> TypeDict = new();
+      Dictionary<KeyValuePair<FieldInfo, FieldInfo>, object> TypeDict = [];
 
       Dictionary<FieldInfo, FieldInfo> TypeList = GetReflectionDictionary(obj.GetType());
 
@@ -162,11 +159,11 @@ namespace SAIN.Helpers
       return (T)KeyPair.Value.GetValue(key);
     }
 
-    public static Dictionary<FieldInfo, FieldInfo> GetReflectionDictionary(Type type, Type[] ParentTypes = null, Type[] ChildTypes = null, BindingFlags flags = BindingFlags.Default)
+    public static Dictionary<FieldInfo, FieldInfo> GetReflectionDictionary(Type type, Type[]? ParentTypes = null, Type[]? ChildTypes = null, BindingFlags flags = BindingFlags.Default)
     {
       if (!ReflectionDictionary.ContainsKey(type))
       {
-        Dictionary<FieldInfo, FieldInfo> fieldDict = new();
+        Dictionary<FieldInfo, FieldInfo> fieldDict = [];
 
         foreach (FieldInfo Section in type.GetFields(flags))
         {
@@ -188,7 +185,7 @@ namespace SAIN.Helpers
     }
 
     static readonly Dictionary<Type, Dictionary<FieldInfo, FieldInfo>>
-        ReflectionDictionary = new();
+        ReflectionDictionary = [];
 
     public static readonly Type[] FloatBoolInt = [typeof(bool), typeof(float), typeof(int)];
 

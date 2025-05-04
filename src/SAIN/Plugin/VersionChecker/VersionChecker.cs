@@ -2,9 +2,7 @@
 using BepInEx.Bootstrap;
 using BepInEx.Configuration;
 using BepInEx.Logging;
-using System;
 using System.Diagnostics;
-using System.Linq;
 using System.Reflection;
 using UnityEngine;
 
@@ -40,7 +38,7 @@ namespace DrakiaXYZ.VersionChecker
     /// <param value="Info">The PluginInfo object for the plugin, used to get the plugin value and version</param>
     /// <param value="Config">A BepinEx ConfigFile object, if provided, a custom message will be added to the F12 menu</param>
     /// <returns></returns>
-    public static bool CheckEftVersion(ManualLogSource Logger, PluginInfo Info, ConfigFile Config = null)
+    public static bool CheckEftVersion(ManualLogSource Logger, PluginInfo Info, ConfigFile? Config = null)
     {
       int currentVersion = FileVersionInfo.GetVersionInfo(BepInEx.Paths.ExecutablePath).FilePrivatePart;
       int buildVersion = BuildVersion;
@@ -97,21 +95,21 @@ namespace DrakiaXYZ.VersionChecker
     internal sealed class ConfigurationManagerAttributes
     {
       public bool? ShowRangeAsPercent;
-      public System.Action<BepInEx.Configuration.ConfigEntryBase> CustomDrawer;
-      public CustomHotkeyDrawerFunc CustomHotkeyDrawer;
+      public System.Action<BepInEx.Configuration.ConfigEntryBase>? CustomDrawer;
+      public CustomHotkeyDrawerFunc? CustomHotkeyDrawer;
       public delegate void CustomHotkeyDrawerFunc(BepInEx.Configuration.ConfigEntryBase setting, ref bool isCurrentlyAcceptingInput);
       public bool? Browsable;
-      public string Category;
-      public object DefaultValue;
+      public string? Category;
+      public object? DefaultValue;
       public bool? HideDefaultButton;
       public bool? HideSettingName;
-      public string Description;
-      public string DispName;
+      public string? Description;
+      public string? DispName;
       public int? Order;
       public bool? ReadOnly;
       public bool? IsAdvanced;
-      public System.Func<object, string> ObjToStr;
-      public System.Func<string, object> StrToObj;
+      public System.Func<object, string>? ObjToStr;
+      public System.Func<string, object>? StrToObj;
     }
   }
 }

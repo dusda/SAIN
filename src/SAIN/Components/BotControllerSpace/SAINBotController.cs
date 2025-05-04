@@ -2,17 +2,14 @@ using Comfort.Common;
 using EFT;
 using EFT.EnvironmentEffect;
 using SAIN.BotController.Classes;
+using SAIN.Components.BotComponentSpace;
 using SAIN.Components.BotController;
 using SAIN.Components.BotController.PeacefulActions;
 using SAIN.Components.BotControllerSpace.Classes;
 using SAIN.Helpers;
-using SAIN.Layers;
 using SAIN.Models.Structs;
-using SAIN.SAINComponent;
 using SAIN.SAINComponent.Classes.EnemyClasses;
 using SAIN.SAINComponent.Classes.WeaponFunction;
-using System;
-using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 using UnityEngine.AI;
@@ -29,15 +26,15 @@ namespace SAIN.Components
     {
     }
 
-    public void Init()
+    public static void Init()
     {
     }
 
-    public void Update()
+    public static void Update()
     {
     }
 
-    public void Dispose()
+    public static void Dispose()
     {
     }
 
@@ -149,11 +146,11 @@ namespace SAIN.Components
 
   public class SAINBotController : MonoBehaviour
   {
-    public static SAINBotController Instance { get; private set; }
+    public static SAINBotController? Instance { get; private set; }
 
     public BotDictionary Bots => BotSpawnController.Bots;
     public GameWorld GameWorld => SAINGameWorld.GameWorld;
-    public IBotGame BotGame => Singleton<IBotGame>.Instance;
+    public static IBotGame BotGame => Singleton<IBotGame>.Instance;
 
     public BotEventHandler BotEventHandler
     {
@@ -171,10 +168,10 @@ namespace SAIN.Components
       }
     }
 
-    private BotEventHandler _eventHandler;
+    private BotEventHandler? _eventHandler;
 
-    public GameWorldComponent SAINGameWorld { get; private set; }
-    public BotsController DefaultController { get; set; }
+    public GameWorldComponent? SAINGameWorld { get; private set; }
+    public BotsController? DefaultController { get; set; }
 
     public BotSpawner BotSpawner
     {
@@ -189,20 +186,20 @@ namespace SAIN.Components
       }
     }
 
-    private BotSpawner _spawner;
-    public GrenadeController GrenadeController { get; private set; }
-    public BotJobsClass BotJobs { get; private set; }
-    public BotExtractManager BotExtractManager { get; private set; }
-    public TimeClass TimeVision { get; private set; }
-    public BotController.SAINWeatherClass WeatherVision { get; private set; }
-    public BotSpawnController BotSpawnController { get; private set; }
-    public BotSquads BotSquads { get; private set; }
-    public BotHearingClass BotHearing { get; private set; }
-    public BotPeacefulActionController PeacefulActions { get; private set; }
+    private BotSpawner? _spawner;
+    public GrenadeController? GrenadeController { get; private set; }
+    public BotJobsClass? BotJobs { get; private set; }
+    public BotExtractManager? BotExtractManager { get; private set; }
+    public TimeClass? TimeVision { get; private set; }
+    public BotController.SAINWeatherClass? WeatherVision { get; private set; }
+    public BotSpawnController? BotSpawnController { get; private set; }
+    public BotSquads? BotSquads { get; private set; }
+    public BotHearingClass? BotHearing { get; private set; }
+    public BotPeacefulActionController? PeacefulActions { get; private set; }
 
-    public Action<string, IFirearmHandsController> OnBotWeaponChange { get; set; }
+    public Action<string, IFirearmHandsController>? OnBotWeaponChange { get; set; }
 
-    public void BotChangedWeapon(BotOwner botOwner, IFirearmHandsController firearmController)
+    public static void BotChangedWeapon(BotOwner botOwner, IFirearmHandsController firearmController)
     {
       // if (botOwner != null)
       //     OnBotWeaponChange?.Invoke(botOwner.name, firearmController);
@@ -251,7 +248,7 @@ namespace SAIN.Components
       PeacefulActions.Update();
     }
 
-    private readonly Dictionary<BotComponent, GUIObject> _debugObjects = new();
+    private readonly Dictionary<BotComponent, GUIObject> _debugObjects = [];
 
     public void BotDeath(BotOwner bot)
     {
@@ -261,11 +258,11 @@ namespace SAIN.Components
       }
     }
 
-    public List<Player> DeadBots { get; private set; } = new List<Player>();
+    public List<Player> DeadBots { get; private set; } = [];
 
-    public List<BotDeathObject> DeathObstacles { get; private set; } = new List<BotDeathObject>();
+    public List<BotDeathObject> DeathObstacles { get; private set; } = [];
 
-    private readonly List<int> IndexToRemove = new();
+    private readonly List<int> IndexToRemove = [];
 
     public void AddNavObstacles()
     {
@@ -339,9 +336,9 @@ namespace SAIN.Components
       }
     }
 
-    public List<string> Groups = new();
+    public List<string> Groups = [];
 
-    public void OnDestroy()
+    public static void OnDestroy()
     {
     }
 

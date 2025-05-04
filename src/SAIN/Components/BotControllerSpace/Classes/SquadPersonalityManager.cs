@@ -1,6 +1,5 @@
-﻿using SAIN.Models.Enums;
-using SAIN.SAINComponent;
-using System.Collections.Generic;
+﻿using SAIN.Components.BotComponentSpace;
+using SAIN.Models.Enums;
 using System.Text;
 
 namespace SAIN.BotController.Classes
@@ -131,8 +130,8 @@ namespace SAIN.BotController.Classes
       return SquadSettings[squadPersonality];
     }
 
-    private static readonly List<EPersonality> MemberPersonalities = new();
-    private static readonly Dictionary<EPersonality, int> PersonalityCounts = new();
-    private static readonly Dictionary<ESquadPersonality, SquadPersonalitySettings> SquadSettings = new();
+    private static readonly List<EPersonality> MemberPersonalities = [];
+    private static readonly Dictionary<EPersonality, int> PersonalityCounts = [];
+    private static readonly Dictionary<ESquadPersonality, SquadPersonalitySettings> SquadSettings = [];
   }
 }

@@ -13,7 +13,7 @@ namespace SAIN.Layers.Combat.Solo
     {
       this.StartProfilingSample("Update");
       BotOwner.WeaponManager.Melee.RunToEnemyUpdate();
-      this.EndProfilingSample();
+      EndProfilingSample();
     }
 
     public override void Start()

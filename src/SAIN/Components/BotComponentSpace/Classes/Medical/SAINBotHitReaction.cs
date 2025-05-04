@@ -1,7 +1,6 @@
 ﻿using EFT;
 using EFT.HealthSystem;
 using SAIN.Models.Enums;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace SAIN.SAINComponent.Classes
@@ -92,11 +91,11 @@ namespace SAIN.SAINComponent.Classes
 
     private bool _isStunned;
 
-    private bool IsStunnedFromDamage(DamageInfoStruct DamageInfoStruct)
+    private static bool IsStunnedFromDamage(DamageInfoStruct DamageInfoStruct)
     {
       return false;
     }
 
-    public Dictionary<EBodyPart, BodyPartStatus> BodyParts = new();
+    public Dictionary<EBodyPart, BodyPartStatus> BodyParts = [];
   }
 }

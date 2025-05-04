@@ -11,7 +11,7 @@ namespace SAIN.Preset.GlobalSettings
   {
     [Hidden]
     [JsonIgnore]
-    public static GlobalSettingsClass Instance;
+    public static GlobalSettingsClass? Instance;
 
     public GlobalSettingsClass()
     {

@@ -1,11 +1,10 @@
-﻿using SAIN.SAINComponent;
-using System.Collections.Generic;
+﻿using SAIN.Components.BotComponentSpace;
 
 namespace SAIN.Components.BotController.PeacefulActions
 {
   public class PeacefulBotFinder : SAINControllerBase, IBotControllerClass
   {
-    public Dictionary<string, BotZoneData> ZoneDatas = new();
+    public Dictionary<string, BotZoneData> ZoneDatas = [];
 
     public PeacefulBotFinder(SAINBotController controller) : base(controller)
     {

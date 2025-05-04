@@ -1,5 +1,6 @@
 ﻿using EFT;
 using EFT.InventoryLogic;
+using SAIN.Components.BotComponentSpace;
 using SAIN.SAINComponent.Classes.EnemyClasses;
 using UnityEngine;
 
@@ -301,7 +302,7 @@ namespace SAIN.SAINComponent.Classes.Decision
       return false;
     }
 
-    private bool shallUseStimsCheckEnemy(Enemy enemy)
+    private static bool shallUseStimsCheckEnemy(Enemy enemy)
     {
       if (enemy == null)
       {
@@ -660,7 +661,7 @@ namespace SAIN.SAINComponent.Classes.Decision
       return enemy.TimeSinceSeen > 2f;
     }
 
-    private bool enemyNotSeenFor(Enemy enemy, float time)
+    private static bool enemyNotSeenFor(Enemy enemy, float time)
     {
       return enemy != null &&
           !enemy.IsVisible &&

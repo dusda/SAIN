@@ -1,9 +1,9 @@
 ﻿using EFT;
+using SAIN.Components.BotComponentSpace;
 using SAIN.Components.PlayerComponentSpace;
 using SAIN.Components.PlayerComponentSpace.PersonClasses;
 using SAIN.Preset;
 using SAIN.Preset.GlobalSettings;
-using System;
 
 namespace SAIN.SAINComponent
 {
@@ -16,19 +16,22 @@ namespace SAIN.SAINComponent
     public Player Player => Bot.Player;
     public IPlayer IPlayer => Bot.Person.IPlayer;
 
-    protected GlobalSettingsClass GlobalSettings => GlobalSettingsClass.Instance;
-    protected SAINPresetClass Preset => SAINPresetClass.Instance;
+    protected static GlobalSettingsClass GlobalSettings => GlobalSettingsClass.Instance;
+    protected static SAINPresetClass Preset => SAINPresetClass.Instance;
 
     public BotBase(BotComponent bot)
     {
       Bot = bot;
     }
 
-    protected virtual void SubscribeToPreset(Action<SAINPresetClass> func)
+    protected virtual void SubscribeToPreset(Action<SAINPresetClass>? func)
     {
       if (func != null)
       {
-        func.Invoke(SAINPresetClass.Instance);
+        if (SAINPresetClass.Instance != null)
+        {
+          func.Invoke(SAINPresetClass.Instance);
+        }
         _autoUpdater.Subscribe(func);
         Bot.OnDispose += this.UnSubscribeToPreset;
       }

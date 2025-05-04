@@ -1,11 +1,11 @@
 ﻿using EFT;
+using SAIN.Components.BotComponentSpace;
 using SAIN.Helpers;
 using SAIN.Models.Enums;
 using SAIN.Preset.GlobalSettings;
 using SAIN.Preset.GlobalSettings.Categories;
 using SAIN.SAINComponent.Classes.EnemyClasses;
 using SAIN.SAINComponent.Classes.Info;
-using System;
 using UnityEngine;
 
 namespace SAIN.SAINComponent.Classes.WeaponFunction

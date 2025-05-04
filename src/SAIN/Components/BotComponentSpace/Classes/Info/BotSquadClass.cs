@@ -1,7 +1,7 @@
 ﻿using EFT;
 using SAIN.BotController.Classes;
 using SAIN.Components;
-using System.Collections.Generic;
+using SAIN.Components.BotComponentSpace;
 using UnityEngine;
 
 namespace SAIN.SAINComponent.Classes.Info
@@ -33,7 +33,7 @@ namespace SAIN.SAINComponent.Classes.Info
 
     public float DistanceToSquadLeader { get; private set; }
 
-    public readonly List<BotComponent> VisibleMembers = new();
+    public readonly List<BotComponent> VisibleMembers = [];
 
     private float _updateMemberTime = 0f;
 

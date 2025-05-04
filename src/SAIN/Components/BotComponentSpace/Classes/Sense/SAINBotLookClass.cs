@@ -1,6 +1,6 @@
 ﻿using EFT;
+using SAIN.Components.BotComponentSpace;
 using SAIN.SAINComponent.Classes.EnemyClasses;
-using System.Collections.Generic;
 using UnityEngine;
 
 // Found in Botowner.Looksensor
@@ -28,7 +28,7 @@ namespace SAIN.SAINComponent.Classes
       _enemies = Bot.EnemyController.Enemies;
     }
 
-    public void Dispose()
+    public static void Dispose()
     {
     }
 
@@ -91,7 +91,7 @@ namespace SAIN.SAINComponent.Classes
       return updated;
     }
 
-    private readonly List<Enemy> _cachedList = new();
+    private readonly List<Enemy> _cachedList = [];
 
     private bool ShallCheckEnemy(Enemy enemy)
     {
@@ -156,7 +156,7 @@ namespace SAIN.SAINComponent.Classes
       return baseDelay * VISION_FREQ_ACTIVE_BOT_COEF;
     }
 
-    private float CalcBaseDelay(Enemy enemy)
+    private static float CalcBaseDelay(Enemy enemy)
     {
       if (enemy.IsCurrentEnemy)
       {

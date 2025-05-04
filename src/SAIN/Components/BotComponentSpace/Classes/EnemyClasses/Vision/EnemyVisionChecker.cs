@@ -1,9 +1,6 @@
 ﻿using SAIN.Components.PlayerComponentSpace.PersonClasses;
-using SAIN.Models.Enums;
-using SAIN.Models.Structs;
 using SAIN.Preset;
 using SAIN.Preset.GlobalSettings;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace SAIN.SAINComponent.Classes.EnemyClasses
@@ -129,7 +126,7 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
       }
     }
 
-    public void UpdatePresetSettings(SAINPresetClass preset)
+    public static void UpdatePresetSettings(SAINPresetClass preset)
     {
       var aiLimit = preset.GlobalSettings.General.AILimit;
       _farDistance = aiLimit.MaxVisionRanges[AILimitSetting.Far];

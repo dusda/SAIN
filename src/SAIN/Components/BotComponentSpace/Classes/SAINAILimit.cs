@@ -1,8 +1,8 @@
 ﻿using SAIN.Components;
+using SAIN.Components.BotComponentSpace;
 using SAIN.Helpers;
 using SAIN.Preset;
 using SAIN.Preset.GlobalSettings;
-using System;
 using UnityEngine;
 
 namespace SAIN.SAINComponent.Classes
@@ -56,7 +56,7 @@ namespace SAIN.SAINComponent.Classes
       }
     }
 
-    private AILimitSetting checkDistances(float closestPlayerSqrMag)
+    private static AILimitSetting checkDistances(float closestPlayerSqrMag)
     {
       if (closestPlayerSqrMag < _farDistance)
       {
@@ -75,7 +75,7 @@ namespace SAIN.SAINComponent.Classes
 
     private float _checkDistanceTime;
 
-    protected void UpdatePresetSettings(SAINPresetClass preset)
+    protected static void UpdatePresetSettings(SAINPresetClass preset)
     {
       var aiLimit = GlobalSettingsClass.Instance.General.AILimit;
       _frequency = aiLimit.AILimitUpdateFrequency;

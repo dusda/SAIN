@@ -17,7 +17,7 @@ namespace SAIN.Layers.Combat.Squad
     public override void Update(CustomLayer.ActionData data)
     {
       this.StartProfilingSample("Update");
-      this.EndProfilingSample();
+      EndProfilingSample();
     }
 
     public override void Start()

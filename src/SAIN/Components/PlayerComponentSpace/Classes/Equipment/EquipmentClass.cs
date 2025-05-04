@@ -1,12 +1,11 @@
 ﻿using EFT;
 using EFT.InventoryLogic;
 using HarmonyLib;
+using SAIN.Components.BotComponentSpace;
 using SAIN.SAINComponent;
 using SAIN.SAINComponent.Classes.Info;
 using SPT.Reflection.Patching;
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 
@@ -109,7 +108,7 @@ namespace SAIN.Components.PlayerComponentSpace.Classes.Equipment
       yield return null;
     }
 
-    private void findRelevantBots(List<BotComponent> botList, FiredBulletContainer bulletContainer)
+    private static void findRelevantBots(List<BotComponent> botList, FiredBulletContainer bulletContainer)
     {
       var botcontroller = SAINBotController.Instance;
       if (botcontroller == null)
@@ -137,12 +136,12 @@ namespace SAIN.Components.PlayerComponentSpace.Classes.Equipment
 
       public readonly EftBulletClass Bullet;
       public readonly WeaponInfo WeaponInfo;
-      public readonly List<BotBulletData> ActiveBots = new();
+      public readonly List<BotBulletData> ActiveBots = [];
     }
 
     public class BotBulletData
     {
-      public BotComponent Bot;
+      public BotComponent? Bot;
       public bool Active = true;
       public bool Reacted = false;
       public float DotProduct = -1;
@@ -269,7 +268,7 @@ namespace SAIN.Components.PlayerComponentSpace.Classes.Equipment
 
     private WeaponInfo _currentWeapon;
 
-    public Dictionary<EquipmentSlot, WeaponInfo> WeaponInfos { get; } = new Dictionary<EquipmentSlot, WeaponInfo>();
+    public Dictionary<EquipmentSlot, WeaponInfo> WeaponInfos { get; } = [];
 
     public class BulletCreatedPatch : ModulePatch
     {

@@ -1,8 +1,7 @@
 ﻿using EFT;
 using EFT.InventoryLogic;
 using HarmonyLib;
-using System;
-using System.Collections.Generic;
+using SAIN.Components.BotComponentSpace;
 using UnityEngine;
 using static EFT.Player;
 using HandEvent = GEventArgs1;
@@ -179,9 +178,9 @@ namespace SAIN.SAINComponent.Classes
       }
     }
 
-    private Dictionary<GEventArgs1, float> _OngoingEvents = new();
-    private List<HandEvent> _eventsToRemove = new();
-    private List<HandEvent> _events = new();
+    private Dictionary<GEventArgs1, float> _OngoingEvents = [];
+    private List<HandEvent> _eventsToRemove = [];
+    private List<HandEvent> _events = [];
 
     // Credit to Lacyway's "Hands are Not Busy" mod https://github.com/Lacyway/HandsAreNotBusy/blob/main/HANB_Component.cs
     private static void resetHandsController(Player player)

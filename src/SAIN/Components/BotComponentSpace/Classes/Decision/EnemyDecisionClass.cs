@@ -1,4 +1,5 @@
 ﻿using EFT;
+using SAIN.Components.BotComponentSpace;
 using SAIN.Models.Enums;
 using SAIN.Preset.GlobalSettings;
 using SAIN.SAINComponent.Classes.EnemyClasses;
@@ -612,7 +613,7 @@ namespace SAIN.SAINComponent.Classes.Decision
       return false;
     }
 
-    private CoverSettings CoverSettings => SAINPlugin.LoadedPreset.GlobalSettings.General.Cover;
+    private static CoverSettings CoverSettings => SAINPlugin.LoadedPreset.GlobalSettings.General.Cover;
     private float ShiftCoverChangeDecisionTime => CoverSettings.ShiftCoverChangeDecisionTime;
     private float ShiftCoverTimeSinceSeen => CoverSettings.ShiftCoverTimeSinceSeen;
     private float ShiftCoverTimeSinceEnemyCreated => CoverSettings.ShiftCoverTimeSinceEnemyCreated;

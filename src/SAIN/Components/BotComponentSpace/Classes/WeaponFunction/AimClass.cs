@@ -1,11 +1,9 @@
 ﻿using EFT;
-using HarmonyLib;
+using SAIN.Components.BotComponentSpace;
 using SAIN.Preset;
 using SAIN.Preset.BotSettings.SAINSettings.Categories;
 using SAIN.SAINComponent.Classes.EnemyClasses;
 using SAIN.SAINComponent.SubComponents.CoverFinder;
-using System;
-using System.Reflection;
 using System.Text;
 using UnityEngine;
 
@@ -242,7 +240,7 @@ namespace SAIN.SAINComponent.Classes.WeaponFunction
       checkLoseTarget();
     }
 
-    public void LateUpdate()
+    public static void LateUpdate()
     {
     }
 

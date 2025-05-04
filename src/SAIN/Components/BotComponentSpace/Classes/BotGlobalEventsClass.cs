@@ -1,4 +1,4 @@
-﻿using System;
+﻿using SAIN.Components.BotComponentSpace;
 
 namespace SAIN.SAINComponent.Classes
 {

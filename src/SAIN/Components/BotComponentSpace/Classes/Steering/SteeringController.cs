@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using SAIN.Components.BotComponentSpace;
 using UnityEngine;
 
 namespace SAIN.SAINComponent.Classes
@@ -50,7 +51,7 @@ namespace SAIN.SAINComponent.Classes
       }
     }
 
-    private IEnumerator controlSteeringLoop()
+    private static IEnumerator controlSteeringLoop()
     {
       while (true)
       {

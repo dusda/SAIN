@@ -1,7 +1,6 @@
-﻿using SAIN.Models.Enums;
-using SAIN.SAINComponent;
+﻿using SAIN.Components.BotComponentSpace;
+using SAIN.Models.Enums;
 using System.Collections;
-using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 
@@ -14,7 +13,7 @@ namespace SAIN.Components.BotController.PeacefulActions
     private const float MAX_GATHER_ENTER_DIST_SQR = MAX_GATHER_ENTER_DIST * MAX_GATHER_ENTER_DIST;
 
     public EPeacefulAction Action { get; }
-    public List<IPeacefulActionExecutor> ActiveActions { get; } = new List<IPeacefulActionExecutor>();
+    public List<IPeacefulActionExecutor> ActiveActions { get; } = [];
     public bool Active => Count > 0;
     public int Count => ActiveActions.Count;
 
@@ -41,7 +40,7 @@ namespace SAIN.Components.BotController.PeacefulActions
       }
     }
 
-    private void selectBotsForConvo(List<BotComponent> list, BotComponent bot)
+    private static void selectBotsForConvo(List<BotComponent> list, BotComponent bot)
     {
     }
 
@@ -62,7 +61,7 @@ namespace SAIN.Components.BotController.PeacefulActions
       yield return null;
     }
 
-    private bool recheckBots(params BotComponent[] bots)
+    private static bool recheckBots(params BotComponent[] bots)
     {
       foreach (BotComponent bot in bots)
         if (bot == null || bot.HasEnemy)
@@ -88,8 +87,8 @@ namespace SAIN.Components.BotController.PeacefulActions
       }
     }
 
-    private readonly List<BotComponent> _localList = new();
-    private readonly List<BotComponent> _selectedBots = new();
+    private readonly List<BotComponent> _localList = [];
+    private readonly List<BotComponent> _selectedBots = [];
     private float _nextCheckTime;
     private int _gatherings;
   }

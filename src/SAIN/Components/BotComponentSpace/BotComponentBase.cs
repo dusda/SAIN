@@ -1,7 +1,6 @@
 ﻿using EFT;
 using SAIN.Components.PlayerComponentSpace;
 using SAIN.Components.PlayerComponentSpace.PersonClasses;
-using System;
 using UnityEngine;
 
 namespace SAIN.Components
@@ -10,8 +9,8 @@ namespace SAIN.Components
   {
     public event Action OnDispose;
 
-    public string ProfileId { get; private set; }
-    public PersonClass Person { get; private set; }
+    public string? ProfileId { get; private set; }
+    public PersonClass? Person { get; private set; }
 
     public PlayerComponent PlayerComponent => Person.PlayerComponent;
     public BotOwner BotOwner => Person.AIInfo.BotOwner;

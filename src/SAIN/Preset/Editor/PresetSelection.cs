@@ -1,9 +1,6 @@
 ﻿using EFT.UI;
 using SAIN.Plugin;
 using SAIN.Preset;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text.RegularExpressions;
 using UnityEngine;
 using static SAIN.Editor.SAINLayout;

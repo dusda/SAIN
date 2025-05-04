@@ -3,7 +3,6 @@ using HarmonyLib;
 using SAIN.Components;
 using SAIN.SAINComponent.Classes.EnemyClasses;
 using SAIN.SAINComponent.SubComponents;
-using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -41,8 +40,8 @@ namespace SAIN.SAINComponent.Classes.WeaponFunction
       }
     }
 
-    private Rigidbody _rigidBody;
-    private Grenade _grenade;
+    private Rigidbody? _rigidBody;
+    private Grenade? _grenade;
 
     static GrenadeVelocityTracker()
     {
@@ -66,8 +65,8 @@ namespace SAIN.SAINComponent.Classes.WeaponFunction
   {
     public GrenadeTracker DangerGrenade { get; private set; }
     public Vector3? GrenadeDangerPoint => DangerGrenade?.DangerPoint;
-    public Dictionary<int, GrenadeTracker> EnemyGrenadesList { get; private set; } = new Dictionary<int, GrenadeTracker>();
-    public Dictionary<int, Grenade> FriendlyGrenadesList { get; private set; } = new Dictionary<int, Grenade>();
+    public Dictionary<int, GrenadeTracker> EnemyGrenadesList { get; private set; } = [];
+    public Dictionary<int, Grenade> FriendlyGrenadesList { get; private set; } = [];
 
     public GrenadeReactionClass(BotGrenadeManager ThrowWeapItemClass) : base(ThrowWeapItemClass)
     {

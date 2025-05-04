@@ -2,7 +2,6 @@
 using BepInEx.Bootstrap;
 using BepInEx.Configuration;
 using BepInEx.Logging;
-using System;
 using UnityEngine;
 
 namespace SAIN.Plugin
@@ -18,7 +17,7 @@ namespace SAIN.Plugin
     /// <param name="pluginType"></param>
     /// <param name="Config"></param>
     /// <returns></returns>
-    public static bool ValidateDependencies(ManualLogSource Logger, PluginInfo Info, Type pluginType, ConfigFile Config = null)
+    public static bool ValidateDependencies(ManualLogSource Logger, PluginInfo Info, Type pluginType, ConfigFile? Config = null)
     {
       var noVersion = new Version("0.0.0");
       var dependencies = pluginType.GetCustomAttributes(typeof(BepInDependency), true) as BepInDependency[];
@@ -93,21 +92,21 @@ namespace SAIN.Plugin
     internal sealed class ConfigurationManagerAttributes
     {
       public bool? ShowRangeAsPercent;
-      public System.Action<BepInEx.Configuration.ConfigEntryBase> CustomDrawer;
-      public CustomHotkeyDrawerFunc CustomHotkeyDrawer;
+      public System.Action<BepInEx.Configuration.ConfigEntryBase>? CustomDrawer;
+      public CustomHotkeyDrawerFunc? CustomHotkeyDrawer;
       public delegate void CustomHotkeyDrawerFunc(BepInEx.Configuration.ConfigEntryBase setting, ref bool isCurrentlyAcceptingInput);
       public bool? Browsable;
-      public string Category;
-      public object DefaultValue;
+      public string? Category;
+      public object? DefaultValue;
       public bool? HideDefaultButton;
       public bool? HideSettingName;
-      public string Description;
-      public string DispName;
+      public string? Description;
+      public string? DispName;
       public int? Order;
       public bool? ReadOnly;
       public bool? IsAdvanced;
-      public System.Func<object, string> ObjToStr;
-      public System.Func<string, object> StrToObj;
+      public System.Func<object, string>? ObjToStr;
+      public System.Func<string, object>? StrToObj;
     }
   }
 }

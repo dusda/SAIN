@@ -1,6 +1,6 @@
-﻿using SAIN.Helpers;
+﻿using SAIN.Components.BotComponentSpace;
+using SAIN.Helpers;
 using SAIN.SAINComponent.Classes.EnemyClasses;
-using System;
 using UnityEngine;
 
 namespace SAIN.SAINComponent.Classes
@@ -161,7 +161,7 @@ namespace SAIN.SAINComponent.Classes
       return null;
     }
 
-    private Vector3? getLastKnown(Enemy enemy)
+    private static Vector3? getLastKnown(Enemy enemy)
     {
       var places = enemy.KnownPlaces;
       return places.LastKnownPlace?.Position ?? places.LastSeenPlace?.Position ?? places.LastHeardPlace?.Position;

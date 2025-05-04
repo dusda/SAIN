@@ -27,7 +27,7 @@ namespace SAIN.Layers.Combat.Solo.Cover
       Bot.Steering.SteerByPriority();
       Shoot.CheckAimAndFire();
       checkPositionAdjustments();
-      this.EndProfilingSample();
+      EndProfilingSample();
     }
 
     private void checkPositionAdjustments()

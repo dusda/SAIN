@@ -2,7 +2,6 @@
 using SAIN.Attributes;
 using SAIN.Components;
 using SAIN.Helpers;
-using System.Collections.Generic;
 
 namespace SAIN.Preset.GlobalSettings
 {
@@ -48,7 +47,7 @@ namespace SAIN.Preset.GlobalSettings
     [Name("Location Specific Modifiers")]
     [Description("These modifiers only apply to bots on the location they are assigned to. Applies to all bots equally.")]
     [MinMax(0.01f, 5f, 100f)]
-    public Dictionary<ELocation, DifficultySettings> LocationSettings = new();
+    public Dictionary<ELocation, DifficultySettings> LocationSettings = [];
 
     public override void Init(List<ISAINSettings> list)
     {

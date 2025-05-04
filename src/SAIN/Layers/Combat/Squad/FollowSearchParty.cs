@@ -1,5 +1,6 @@
 ﻿using DrakiaXYZ.BigBrain.Brains;
 using EFT;
+using SAIN.Components.BotComponentSpace.Classes.Mover;
 using SAIN.SAINComponent.Classes.EnemyClasses;
 using UnityEngine;
 using UnityEngine.AI;
@@ -35,7 +36,7 @@ namespace SAIN.Layers.Combat.Squad
         MoveToLead(out float nextTime);
         _nextUpdatePosTime = Time.time + nextTime;
       }
-      this.EndProfilingSample();
+      EndProfilingSample();
     }
 
     private void MoveToLead(out float nextUpdateTime)
@@ -67,7 +68,7 @@ namespace SAIN.Layers.Combat.Squad
       }
 
       if (moveDistance > 20f * 20f &&
-          Bot.Mover.SprintController.RunToPoint(movePosition.Value, SAINComponent.Classes.Mover.ESprintUrgency.Middle, true))
+          Bot.Mover.SprintController.RunToPoint(movePosition.Value, ESprintUrgency.Middle, true))
       {
         nextUpdateTime = 2f;
         return;

@@ -1,8 +1,8 @@
 ﻿using EFT;
+using SAIN.Components.BotComponentSpace;
 using SAIN.Helpers;
 using SAIN.Models.Structs;
 using SAIN.SAINComponent.Classes.EnemyClasses;
-using System;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -237,7 +237,7 @@ namespace SAIN.SAINComponent.SubComponents.CoverFinder
       CoverData.TimeLastUpdated = Time.time;
     }
 
-    private CoverStatus checkStatus(float distance)
+    private static CoverStatus checkStatus(float distance)
     {
       if (distance <= DIST_COVER_INCOVER)
         return CoverStatus.InCover;
@@ -275,7 +275,7 @@ namespace SAIN.SAINComponent.SubComponents.CoverFinder
       return false;
     }
 
-    private int calcHitCount(DamageInfoStruct DamageInfoStruct)
+    private static int calcHitCount(DamageInfoStruct DamageInfoStruct)
     {
       float received = DamageInfoStruct.Damage;
       float max = HITINCOVER_MAX_DAMAGE;
@@ -297,7 +297,7 @@ namespace SAIN.SAINComponent.SubComponents.CoverFinder
       return Mathf.RoundToInt(result);
     }
 
-    private float calcMagnitudeDelay(float dist)
+    private static float calcMagnitudeDelay(float dist)
     {
       float maxDelay = CHECKDIST_MAX_DELAY;
       float maxDist = CHECKDIST_MAX_DIST;

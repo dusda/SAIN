@@ -1,8 +1,8 @@
 ﻿using DrakiaXYZ.BigBrain.Brains;
 using EFT;
 using SAIN.Components;
+using SAIN.Components.BotComponentSpace;
 using SAIN.Models.Enums;
-using SAIN.SAINComponent;
 using System.Text;
 
 namespace SAIN.Layers
@@ -41,7 +41,7 @@ namespace SAIN.Layers
 
     public override string GetName() => LayerName;
 
-    public SAINBotController BotController => SAINBotController.Instance;
+    public static SAINBotController BotController => SAINBotController.Instance;
 
     public BotComponent Bot
     {

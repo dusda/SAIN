@@ -7,7 +7,7 @@ namespace SAIN.Components.BotController.PeacefulActions
   public class BotPeacefulActionController : SAINControllerBase, IBotControllerClass
   {
     public PeacefulBotFinder PeacefulBotFinder { get; }
-    public PeacefulActionSet Actions { get; } = new PeacefulActionSet();
+    public PeacefulActionSet Actions { get; } = [];
 
     public BotPeacefulActionController(SAINBotController controller) : base(controller)
     {

@@ -1,4 +1,6 @@
-﻿namespace SAIN.SAINComponent.Classes.Mover
+﻿using SAIN.Components.BotComponentSpace;
+
+namespace SAIN.SAINComponent.Classes.Mover
 {
   public class SAINHeadSteering : BotBase, IBotClass
   {

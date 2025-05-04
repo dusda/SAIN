@@ -118,7 +118,7 @@ namespace SAIN.SAINComponent.Classes
       return allClear;
     }
 
-    private bool checkThisEnemy(Enemy enemy, float minPathDist, float minTimeSinceLastKnown)
+    private static bool checkThisEnemy(Enemy enemy, float minPathDist, float minTimeSinceLastKnown)
     {
       if (enemy?.EnemyPlayer?.HealthController.IsAlive == true
           && (enemy.Seen || enemy.Heard)

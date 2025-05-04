@@ -1,4 +1,5 @@
 ﻿using EFT;
+using SAIN.Components.BotComponentSpace;
 using UnityEngine;
 
 namespace SAIN.SAINComponent.Classes.Decision
@@ -145,7 +146,7 @@ namespace SAIN.SAINComponent.Classes.Decision
 
     private float _stimTimer;
 
-    private bool HaveStimsToHelp()
+    private static bool HaveStimsToHelp()
     {
       return false;
     }

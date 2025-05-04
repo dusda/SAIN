@@ -1,7 +1,6 @@
 ﻿using SAIN.Helpers;
 using SAIN.Plugin;
 using SAIN.Preset;
-using System.Collections.Generic;
 using static SAIN.Attributes.AttributesGUI;
 
 namespace SAIN.Editor.GUISections
@@ -44,8 +43,8 @@ namespace SAIN.Editor.GUISections
     private static EPersonality _selected = EPersonality.None;
     public static bool PersonalitiesWereEdited => ConfigEditingTracker.UnsavedChanges;
 
-    private static List<EPersonality> _options = new();
+    private static List<EPersonality> _options = [];
 
-    private static readonly Dictionary<string, bool> OpenPersMenus = new();
+    private static readonly Dictionary<string, bool> OpenPersMenus = [];
   }
 }

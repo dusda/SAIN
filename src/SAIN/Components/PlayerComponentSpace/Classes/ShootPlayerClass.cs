@@ -1,7 +1,6 @@
 ﻿using SAIN.Helpers;
 using SAIN.SAINComponent;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -14,7 +13,7 @@ namespace SAIN.Components.PlayerComponentSpace
 
     }
 
-    public readonly List<Vector3> PlacesToShootMe = new();
+    public readonly List<Vector3> PlacesToShootMe = [];
 
     public sealed class FindPlacesToShootParameters
     {
@@ -27,7 +26,7 @@ namespace SAIN.Components.PlayerComponentSpace
       public float downDirDist = 10f;
     }
 
-    public IEnumerator FindPlaceToShoot(FindPlacesToShootParameters parameters)
+    public static IEnumerator FindPlaceToShoot(FindPlacesToShootParameters parameters)
     {
       yield return null;
     }

@@ -1,6 +1,5 @@
 ﻿using SAIN.Editor.Util;
 using SAIN.Helpers;
-using System.Collections.Generic;
 using UnityEngine;
 using static SAIN.Editor.Util.ApplyToStyle;
 using Color = UnityEngine.Color;
@@ -17,7 +16,7 @@ namespace SAIN.Editor
       }
     }
 
-    private static readonly Dictionary<Style, GUIStyle> Styles = new();
+    private static readonly Dictionary<Style, GUIStyle> Styles = [];
 
     public static GUIStyle GetStyle(Style key)
     {
@@ -61,7 +60,7 @@ namespace SAIN.Editor
       return active ? dynamicStyle.Active : dynamicStyle.Normal;
     }
 
-    private static readonly Dictionary<Style, DynamicStyle> DynamicStyles = new();
+    private static readonly Dictionary<Style, DynamicStyle> DynamicStyles = [];
 
     private static void CreateStyles()
     {
@@ -435,8 +434,8 @@ namespace SAIN.Editor
 
     private sealed class DynamicStyle
     {
-      public GUIStyle Normal;
-      public GUIStyle Active;
+      public GUIStyle? Normal;
+      public GUIStyle? Active;
     }
   }
 }

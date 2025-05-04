@@ -1,5 +1,6 @@
 ﻿using Comfort.Common;
 using EFT;
+using SAIN.Components.BotComponentSpace;
 using SAIN.Helpers;
 using SAIN.Models.Structs;
 using SAIN.SAINComponent.Classes;
@@ -139,7 +140,7 @@ namespace SAIN.SAINComponent.SubComponents.CoverFinder
     private const float POSTIION_EDGE_SAMPLE_RANGE = 0.5f;
     private const float POSITION_SAMPLE_RANGE = 1f;
 
-    private bool checkFinalPositionDirection(ColliderData colliderDirs, SAINHardColliderData hardData, TargetData targetDirs, Vector3 place)
+    private static bool checkFinalPositionDirection(ColliderData colliderDirs, SAINHardColliderData hardData, TargetData targetDirs, Vector3 place)
     {
       Vector3 dirToPlace = place - hardData.Position;
       Vector3 dirToPlaceNormal = dirToPlace.normalized;
@@ -160,7 +161,7 @@ namespace SAIN.SAINComponent.SubComponents.CoverFinder
       return true;
     }
 
-    private Vector3 findEdge(Vector3 navMeshHit, ColliderData colliderDirs)
+    private static Vector3 findEdge(Vector3 navMeshHit, ColliderData colliderDirs)
     {
       if (NavMesh.FindClosestEdge(navMeshHit, out var edge, -1))
       {
@@ -178,7 +179,7 @@ namespace SAIN.SAINComponent.SubComponents.CoverFinder
       return navMeshHit;
     }
 
-    private bool checkColliderDirectionvsTargetDirection(ColliderData colliderDirs, TargetData targetDirs)
+    private static bool checkColliderDirectionvsTargetDirection(ColliderData colliderDirs, TargetData targetDirs)
     {
       float dot = Vector3.Dot(targetDirs.DirBotToTargetNormal, colliderDirs.dirBotToColliderNormal);
 
@@ -218,7 +219,7 @@ namespace SAIN.SAINComponent.SubComponents.CoverFinder
       {
         Vector3 coverPos = point.CoverPoint.Position;
         if (!point.IsValidAgain &&
-            point.TooClose(coverPos, position))
+            SpottedCoverPoint.TooClose(coverPos, position))
         {
           return true;
         }
@@ -381,7 +382,7 @@ namespace SAIN.SAINComponent.SubComponents.CoverFinder
 
     private static Collider[] _playerColliderArray = new Collider[5];
 
-    private bool isDistanceTooClose(CoverPoint point, Vector3 position)
+    private static bool isDistanceTooClose(CoverPoint point, Vector3 position)
     {
       const float DistanceToBotCoverThresh = 0.5f;
       const float distSqr = DistanceToBotCoverThresh * DistanceToBotCoverThresh;
@@ -442,7 +443,7 @@ namespace SAIN.SAINComponent.SubComponents.CoverFinder
 
     private Vector3 OriginPoint => CoverFinder.OriginPoint;
     private Vector3 TargetPoint => CoverFinder.TargetPoint;
-    private float CoverMinEnemyDistSqr => CoverFinderComponent.CoverMinEnemyDistSqr;
+    private static float CoverMinEnemyDistSqr => CoverFinderComponent.CoverMinEnemyDistSqr;
     private static bool DebugCoverFinder => CoverFinderComponent.DebugCoverFinder;
     private static float CoverMinHeight => CoverFinderComponent.CoverMinHeight;
   }

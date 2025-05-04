@@ -1,6 +1,5 @@
 ﻿using EFT;
 using SAIN.Helpers;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace SAIN.SAINComponent.Classes
@@ -55,7 +54,7 @@ namespace SAIN.SAINComponent.Classes
     public IPlayer IPlayer { get; private set; }
     public int Count => SoundList.Count;
     public Player Player { get; private set; }
-    public List<SAINSound> SoundList { get; private set; } = new List<SAINSound>();
+    public List<SAINSound> SoundList { get; private set; } = [];
     public float TimeCreated { get; private set; }
 
     public float TimeCleanedUp { get; private set; }
@@ -170,6 +169,6 @@ namespace SAIN.SAINComponent.Classes
       return reason;
     }
 
-    private readonly List<SAINSound> SoundsToRemove = new();
+    private readonly List<SAINSound> SoundsToRemove = [];
   }
 }

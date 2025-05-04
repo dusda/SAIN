@@ -1,5 +1,4 @@
 ﻿using SAIN.Preset.GlobalSettings;
-using System.Collections.Generic;
 
 namespace SAIN.Preset.Personalities
 {
@@ -10,6 +9,6 @@ namespace SAIN.Preset.Personalities
     List<ISAINSettings> SettingsList { get; }
     void InitList();
     void CreateDefaults();
-    void UpdateDefaults(ISettingsGroup replacementValues = null);
+    void UpdateDefaults(ISettingsGroup? replacementValues = null);
   }
 }

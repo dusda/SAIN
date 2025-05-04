@@ -3,7 +3,6 @@ using EFT;
 using SAIN.Helpers;
 using SAIN.SAINComponent;
 using SAIN.SAINComponent.Classes.EnemyClasses;
-using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -11,7 +10,7 @@ namespace SAIN.Components.PlayerComponentSpace
 {
   public class LightDetectionClass : PlayerComponentBase
   {
-    public List<FlashLightPoint> LightPoints { get; } = new List<FlashLightPoint>();
+    public List<FlashLightPoint> LightPoints { get; } = [];
 
     public LightDetectionClass(PlayerComponent component) : base(component)
     {
@@ -191,7 +190,7 @@ namespace SAIN.Components.PlayerComponentSpace
       _searchTime = Time.time + 1f;
     }
 
-    private bool validateEnemyIsHuman(Enemy enemy)
+    private static bool validateEnemyIsHuman(Enemy enemy)
     {
       if (enemy == null)
       {
@@ -212,7 +211,7 @@ namespace SAIN.Components.PlayerComponentSpace
       return true;
     }
 
-    private bool checkIsBeamVisible(FlashLightClass flashLight, bool usingNVGs)
+    private static bool checkIsBeamVisible(FlashLightClass flashLight, bool usingNVGs)
     {
       // If this isn't visible light, and the bot doesn't have night vision, ignore it
       if (!flashLight.WhiteLight &&
@@ -228,14 +227,14 @@ namespace SAIN.Components.PlayerComponentSpace
       return true;
     }
 
-    private bool isLightInRange(Vector3 botPos, Vector3 lightPos)
+    private static bool isLightInRange(Vector3 botPos, Vector3 lightPos)
     {
       return (botPos - lightPos).sqrMagnitude < _maxLightRange;
     }
 
     private const float _maxLightRange = 100f * 100f;
 
-    private bool raycastToLightPoint(Vector3 lightPointPos, Vector3 botPos)
+    private static bool raycastToLightPoint(Vector3 lightPointPos, Vector3 botPos)
     {
       Vector3 direction = (lightPointPos - botPos);
       LayerMask mask = LayerMaskClass.HighPolyWithTerrainMaskAI;
@@ -261,7 +260,7 @@ namespace SAIN.Components.PlayerComponentSpace
       }
     }
 
-    private Vector3 estimatePosition(Vector3 playerPos, Vector3 flashPos, Vector3 botPos, float dispersion)
+    private static Vector3 estimatePosition(Vector3 playerPos, Vector3 flashPos, Vector3 botPos, float dispersion)
     {
       Vector3 estimatedPosition = playerPos;
       // Vector3 estimatedPosition = Vector3.Lerp(playerPos, flashPos, Random.Range(0.0f, 0.25f));
@@ -280,6 +279,6 @@ namespace SAIN.Components.PlayerComponentSpace
 
     private float _searchTime;
     private float _nextUpdatebeamtime;
-    private readonly List<Vector3> _lightBeamDirections = new();
+    private readonly List<Vector3> _lightBeamDirections = [];
   }
 }

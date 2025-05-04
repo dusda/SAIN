@@ -240,7 +240,7 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
       return AreEnemiesSame(a?.EnemyIPlayer, b?.EnemyIPlayer);
     }
 
-    public bool AreEnemiesSame(IPlayer a, IPlayer b)
+    public static bool AreEnemiesSame(IPlayer a, IPlayer b)
     {
       return a != null
           && b != null

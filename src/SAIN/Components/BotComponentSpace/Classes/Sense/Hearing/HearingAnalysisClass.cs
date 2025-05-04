@@ -69,7 +69,7 @@ namespace SAIN.SAINComponent.Classes
 
     private static HearingSettings _settings => GlobalSettingsClass.Instance.Hearing;
 
-    private bool checkDistToPlayer(BotSound sound)
+    private static bool checkDistToPlayer(BotSound sound)
     {
       // The sound originated from somewhere far from the player's position, typically from a grenade explosion, which is handled elsewhere
       return (sound.Info.Position - sound.Info.SourcePlayer.Position).sqrMagnitude > 5f * 5f;
@@ -160,7 +160,7 @@ namespace SAIN.SAINComponent.Classes
       return EFTMath.RandomBool(chanceToHear);
     }
 
-    private float calcOcclusionMod(BotSound sound)
+    private static float calcOcclusionMod(BotSound sound)
     {
       if (sound.Enemy.InLineOfSight)
       {
@@ -245,7 +245,7 @@ namespace SAIN.SAINComponent.Classes
       return true;
     }
 
-    private float getMaxRange(AILimitSetting aiLimit)
+    private static float getMaxRange(AILimitSetting aiLimit)
     {
       switch (aiLimit)
       {

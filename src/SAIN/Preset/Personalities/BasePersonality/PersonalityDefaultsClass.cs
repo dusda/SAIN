@@ -1,5 +1,4 @@
 ﻿using EFT;
-using System.Collections.Generic;
 
 namespace SAIN.Preset.Personalities
 {

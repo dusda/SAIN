@@ -1,6 +1,4 @@
 ﻿using SAIN.Attributes;
-using System;
-using System.Collections.Generic;
 using System.Text;
 
 namespace SAIN.Plugin
@@ -89,6 +87,6 @@ namespace SAIN.Plugin
 
     public static bool UnsavedChanges => EditedConfigValues.Count > 0;
 
-    public static readonly Dictionary<string, object> EditedConfigValues = new();
+    public static readonly Dictionary<string, object> EditedConfigValues = [];
   }
 }

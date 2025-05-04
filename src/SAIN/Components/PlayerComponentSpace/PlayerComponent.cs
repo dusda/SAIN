@@ -1,14 +1,12 @@
 ﻿using EFT;
 using EFT.Ballistics;
 using EFT.Interactive;
+using SAIN.Components.BotComponentSpace;
 using SAIN.Components.PlayerComponentSpace.Classes;
 using SAIN.Components.PlayerComponentSpace.Classes.Equipment;
 using SAIN.Components.PlayerComponentSpace.PersonClasses;
 using SAIN.Helpers;
-using SAIN.SAINComponent;
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -16,8 +14,8 @@ namespace SAIN.Components.PlayerComponentSpace
 {
   public class PlayerComponent : MonoBehaviour
   {
-    public OtherPlayersData OtherPlayersData { get; private set; }
-    public BodyPartsClass BodyParts { get; private set; }
+    public OtherPlayersData? OtherPlayersData { get; private set; }
+    public BodyPartsClass? BodyParts { get; private set; }
 
     public void Update()
     {
@@ -138,11 +136,11 @@ namespace SAIN.Components.PlayerComponentSpace
       }
     }
 
-    private GUIObject _hitLabel;
+    private GUIObject? _hitLabel;
 
     private void testNavMeshNodes()
     {
-      List<Vector3> visibleNodes = new();
+      List<Vector3> visibleNodes = [];
       Vector3 origin = Transform.EyePosition;
       Vector3[] vertices = NavMesh.CalculateTriangulation().vertices;
       foreach (Vector3 vert in vertices)
@@ -223,7 +221,7 @@ namespace SAIN.Components.PlayerComponentSpace
       return speaker.Play(phrase, mask, true, null) != null;
     }
 
-    private readonly List<int> _aggroIndexes = new();
+    private readonly List<int> _aggroIndexes = [];
 
     private IEnumerator playPhrases(EPhraseTrigger trigger)
     {
@@ -291,9 +289,9 @@ namespace SAIN.Components.PlayerComponentSpace
       StopAllCoroutines();
     }
 
-    private Coroutine _gearCoroutine;
+    private Coroutine? _gearCoroutine;
 
-    public float DistanceToClosestHuman
+    public static float DistanceToClosestHuman
     {
       get
       {
@@ -332,11 +330,11 @@ namespace SAIN.Components.PlayerComponentSpace
       }
     }
 
-    public string ProfileId { get; private set; }
-    public FlashLightClass Flashlight { get; private set; }
-    public PersonClass Person { get; private set; }
-    public SAINAIData AIData { get; private set; }
-    public SAINEquipmentClass Equipment { get; private set; }
+    public string? ProfileId { get; private set; }
+    public FlashLightClass? Flashlight { get; private set; }
+    public PersonClass? Person { get; private set; }
+    public SAINAIData? AIData { get; private set; }
+    public SAINEquipmentClass? Equipment { get; private set; }
 
     public bool IsActive => Person.Active;
     public Vector3 Position => Person.Transform.Position;

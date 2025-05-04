@@ -18,7 +18,7 @@ namespace SAIN.SAINComponent.Classes.WeaponFunction
       base.SubscribeToPreset(UpdatePresetSettings);
     }
 
-    public void Update()
+    public static void Update()
     {
     }
 
@@ -258,7 +258,7 @@ namespace SAIN.SAINComponent.Classes.WeaponFunction
       return false;
     }
 
-    private float getThrowDispersion(Vector3 target, Vector3 targetDirectionNormal, float range)
+    private static float getThrowDispersion(Vector3 target, Vector3 targetDirectionNormal, float range)
     {
       float dispersionMin = MIN_THROW_DISPERSION;
       if (range <= MIN_THROW_DISTANCE_DISPERSION)
@@ -278,7 +278,7 @@ namespace SAIN.SAINComponent.Classes.WeaponFunction
       return result;
     }
 
-    private Vector3 randomize(Vector3 target, Vector3 targetDirectionNormal, float dispersion)
+    private static Vector3 randomize(Vector3 target, Vector3 targetDirectionNormal, float dispersion)
     {
       return target + (targetDirectionNormal * UnityEngine.Random.Range(-dispersion, dispersion));
     }

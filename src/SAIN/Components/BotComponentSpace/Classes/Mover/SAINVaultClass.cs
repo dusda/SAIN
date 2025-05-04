@@ -1,6 +1,6 @@
 ﻿using EFT;
+using SAIN.Components.BotComponentSpace;
 using SAIN.Helpers;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -12,7 +12,7 @@ namespace SAIN.SAINComponent.Classes.Mover
     {
     }
 
-    public static readonly List<SAINVaultPoint> GlobalVaultPoints = new();
+    public static readonly List<SAINVaultPoint> GlobalVaultPoints = [];
 
     public void Init()
     {
@@ -40,7 +40,7 @@ namespace SAIN.SAINComponent.Classes.Mover
     private static float DebugTimer = 0;
 
     public SAINVaultPoint CurrentVaultPoint;
-    public List<SAINVaultPoint> VaultPointHistory = new();
+    public List<SAINVaultPoint> VaultPointHistory = [];
 
     public bool FindVaultPoint(NavMeshPath path, out SAINVaultPoint vaultPoint)
     {

@@ -1,8 +1,8 @@
 using EFT;
+using SAIN.Components.BotComponentSpace;
 using SAIN.Models.Enums;
 using SAIN.Preset.GlobalSettings;
 using SAIN.SAINComponent.Classes.EnemyClasses;
-using System.Linq;
 using UnityEngine;
 
 namespace SAIN.SAINComponent.Classes.Mover
@@ -294,14 +294,14 @@ namespace SAIN.SAINComponent.Classes.Mover
       return LOS;
     }
 
-    private bool LineOfSight(Vector3 start, Vector3 target)
+    private static bool LineOfSight(Vector3 start, Vector3 target)
     {
       var direction = target - start;
       float distance = Mathf.Clamp(direction.magnitude, 0f, LEAN_MAX_RAYCAST_DIST);
       return !Physics.Raycast(start, direction, distance, LayerMaskClass.HighPolyWithTerrainMask);
     }
 
-    private Vector3 FindOffset(Vector3 start, Vector3 direction, float distance)
+    private static Vector3 FindOffset(Vector3 start, Vector3 direction, float distance)
     {
       if (Physics.Raycast(start, direction, out var hit, distance, LayerMaskClass.HighPolyWithTerrainMask))
       {

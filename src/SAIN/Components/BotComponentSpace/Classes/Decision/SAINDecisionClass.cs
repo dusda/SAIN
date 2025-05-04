@@ -1,4 +1,6 @@
 ﻿
+using SAIN.Components.BotComponentSpace;
+
 namespace SAIN.SAINComponent.Classes.Decision
 {
   public class SAINDecisionClass : BotBase, IBotClass

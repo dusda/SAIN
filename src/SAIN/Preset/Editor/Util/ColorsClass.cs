@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace SAIN.Editor.Util
 {
@@ -66,12 +65,12 @@ namespace SAIN.Editor.Util
 
     private static float Randomize => UnityEngine.Random.Range(0.81f, 1.21f);
 
-    private static readonly Dictionary<string, Color> RandomColors = new();
+    private static readonly Dictionary<string, Color> RandomColors = [];
 
-    public static readonly string SchemeName;
+    public static readonly string? SchemeName;
 
-    public static readonly Dictionary<ColorNames, Color> ColorSchemeDictionary = new();
-    public static readonly Dictionary<EGraynessLevel, Color> GrayColorScheme = new();
+    public static readonly Dictionary<ColorNames, Color> ColorSchemeDictionary = [];
+    public static readonly Dictionary<EGraynessLevel, Color> GrayColorScheme = [];
 
     public static Color GetColor(ColorNames name)
     {

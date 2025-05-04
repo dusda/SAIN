@@ -79,7 +79,7 @@ namespace SAIN.Editor.Util
   public static class MouseDragClass
   {
     private static Rect FullScreen = new(0, 0, Screen.width, Screen.height);
-    private static GUIStyle BlankStyle;
+    private static GUIStyle? BlankStyle;
 
     public static Rect DragRectangle = Rect.zero;
     private static Rect DrawPosition = new(193, 148, 249 - 193, 148 - 104);

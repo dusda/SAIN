@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace SAIN.Preset.GlobalSettings.Categories
+﻿namespace SAIN.Preset.GlobalSettings.Categories
 {
   public enum Brain
   {
@@ -37,26 +35,26 @@ namespace SAIN.Preset.GlobalSettings.Categories
 
   public static class AIBrains
   {
-    public static readonly List<Brain> Scavs = new()
-        {
+    public static readonly List<Brain> Scavs =
+        [
             Brain.CursAssault,
             Brain.Assault,
-        };
+        ];
 
-    public static readonly List<Brain> Goons = new()
-        {
+    public static readonly List<Brain> Goons =
+        [
             Brain.Knight,
             Brain.BirdEye,
             Brain.BigPipe,
-        };
+        ];
 
-    public static readonly List<Brain> Others = new()
-        {
+    public static readonly List<Brain> Others =
+        [
             Brain.Obdolbs,
-        };
+        ];
 
-    public static readonly List<Brain> Bosses = new()
-        {
+    public static readonly List<Brain> Bosses =
+        [
             Brain.BossBully,
             Brain.BossGluhar,
             Brain.BossKojaniy,
@@ -67,10 +65,10 @@ namespace SAIN.Preset.GlobalSettings.Categories
             Brain.Gifter,
             Brain.Killa,
             Brain.SectantPriest,
-        };
+        ];
 
-    public static readonly List<Brain> Followers = new()
-        {
+    public static readonly List<Brain> Followers =
+        [
             Brain.BossBully,
             Brain.FollowerBully,
             Brain.FollowerGluharAssault,
@@ -80,6 +78,6 @@ namespace SAIN.Preset.GlobalSettings.Categories
             Brain.FollowerSanitar,
             Brain.TagillaFollower,
             //Brain.Fl_Zraychiy,
-        };
+        ];
   }
 }

@@ -1,5 +1,5 @@
 ﻿using EFT;
-using SAIN.SAINComponent;
+using SAIN.Components.BotComponentSpace;
 
 namespace SAIN.Components.PlayerComponentSpace.PersonClasses
 {

@@ -1,5 +1,5 @@
 ﻿using EFT;
-using SAIN.SAINComponent;
+using SAIN.Components.BotComponentSpace;
 
 namespace SAIN.Components.PlayerComponentSpace.PersonClasses
 {
@@ -7,8 +7,8 @@ namespace SAIN.Components.PlayerComponentSpace.PersonClasses
   {
     public bool IsAI { get; private set; }
     public bool IsSAINBot { get; private set; }
-    public BotOwner BotOwner { get; private set; }
-    public BotComponent BotComponent { get; private set; }
+    public BotOwner? BotOwner { get; private set; }
+    public BotComponent? BotComponent { get; private set; }
 
     public void InitBot(BotOwner botOwner)
     {

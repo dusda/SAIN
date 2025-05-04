@@ -2,7 +2,6 @@
 using Newtonsoft.Json;
 using SAIN.Attributes;
 using SAIN.Preset.GlobalSettings;
-using System.Collections.Generic;
 
 namespace SAIN.Preset.Personalities
 {
@@ -67,6 +66,6 @@ namespace SAIN.Preset.Personalities
     [Name("Allowed Bot Types")]
     [Advanced]
     [Hidden]
-    public List<WildSpawnType> AllowedTypes = new();
+    public List<WildSpawnType> AllowedTypes = [];
   }
 }

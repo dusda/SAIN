@@ -14,7 +14,7 @@ namespace SAIN.Components
       _doorHandler = GameWorldComponent.Instance.Doors;
     }
 
-    public void Update()
+    public static void Update()
     {
     }
 
@@ -25,13 +25,13 @@ namespace SAIN.Components
       SphereCollider.transform.position = this.transform.position;
     }
 
-    private Door _door;
+    private Door? _door;
 
-    public void OnDestroy()
+    public static void OnDestroy()
     {
     }
 
-    public SphereCollider SphereCollider { get; private set; }
+    public SphereCollider? SphereCollider { get; private set; }
 
     public void OnTriggerEnter(Collider other)
     {
@@ -73,7 +73,7 @@ namespace SAIN.Components
       }
     }
 
-    private bool shallInvertDoorAngle(Door door, Vector3 colliderPosition)
+    private static bool shallInvertDoorAngle(Door door, Vector3 colliderPosition)
     {
       var interactionParameters = door.GetInteractionParameters(colliderPosition);
       if (interactionParameters.AnimationId == (door.DoorState is EDoorState.Locked ? (int)door.DoorKeyOpenInteraction : door.CalculateInteractionIndex(colliderPosition)))
@@ -83,6 +83,6 @@ namespace SAIN.Components
       return true;
     }
 
-    private DoorHandler _doorHandler;
+    private DoorHandler? _doorHandler;
   }
 }

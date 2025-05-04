@@ -1,5 +1,4 @@
-﻿using System;
-using System.Reflection;
+﻿using System.Reflection;
 using UnityEngine;
 
 namespace SAIN.Editor
@@ -67,8 +66,8 @@ namespace SAIN.Editor
       }
     }
 
-    private static PropertyInfo _curLockState;
-    private static PropertyInfo _curVisible;
+    private static PropertyInfo? _curLockState;
+    private static PropertyInfo? _curVisible;
     private static int _previousCursorLockState;
     private static bool _previousCursorVisible;
     private static bool _obsoleteCursor;

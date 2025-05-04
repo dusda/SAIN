@@ -1,9 +1,7 @@
-﻿using EFT;
-using SAIN.Helpers;
+﻿using SAIN.Helpers;
 using SAIN.Models.Enums;
 using SAIN.Models.Structs;
 using SAIN.SAINComponent.Classes.EnemyClasses;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -248,7 +246,7 @@ namespace SAIN.SAINComponent.Classes.Search
       return null;
     }
 
-    private float findHorizSignedAngle(Vector3 dirA, Vector3 dirB)
+    private static float findHorizSignedAngle(Vector3 dirA, Vector3 dirB)
     {
       dirA.y = 0;
       dirB.y = 0;

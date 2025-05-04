@@ -1,7 +1,6 @@
 ﻿using EFT;
 using Newtonsoft.Json;
 using SAIN.Attributes;
-using System.Collections.Generic;
 using System.ComponentModel;
 
 namespace SAIN.Preset.BotSettings.SAINSettings
@@ -50,6 +49,6 @@ namespace SAIN.Preset.BotSettings.SAINSettings
     public float DifficultyModifier = 0.5f;
 
     [JsonProperty]
-    public Dictionary<BotDifficulty, SAINSettingsClass> Settings = new();
+    public Dictionary<BotDifficulty, SAINSettingsClass> Settings = [];
   }
 }

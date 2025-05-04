@@ -1,6 +1,5 @@
 ﻿using SAIN.Models.Enums;
 using SAIN.Preset.GlobalSettings;
-using System.Collections.Generic;
 
 namespace SAIN.SAINComponent.Classes.WeaponFunction
 {

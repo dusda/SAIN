@@ -1,7 +1,5 @@
 ﻿using SAIN.Editor;
 using SAIN.Preset;
-using System;
-using System.Collections.Generic;
 using static SAIN.Helpers.JsonUtility;
 
 namespace SAIN.Plugin
@@ -16,11 +14,11 @@ namespace SAIN.Plugin
     public static event Action<SAINPresetClass> OnPresetUpdated;
     public static event Action<PresetEditorDefaults> OnEditorSettingsChanged;
 
-    public static readonly List<SAINPresetDefinition> CustomPresetOptions = new();
+    public static readonly List<SAINPresetDefinition> CustomPresetOptions = [];
 
-    public static SAINPresetClass LoadedPreset;
+    public static SAINPresetClass? LoadedPreset;
 
-    public static PresetEditorDefaults EditorDefaults;
+    public static PresetEditorDefaults? EditorDefaults;
 
     public static void LoadCustomPresetOptions()
     {

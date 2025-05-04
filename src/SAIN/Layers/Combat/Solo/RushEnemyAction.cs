@@ -1,5 +1,6 @@
 ﻿using DrakiaXYZ.BigBrain.Brains;
 using EFT;
+using SAIN.Components.BotComponentSpace.Classes.Mover;
 using SAIN.Helpers;
 using SAIN.Models.Enums;
 using SAIN.Preset.GlobalSettings;
@@ -21,7 +22,7 @@ namespace SAIN.Layers.Combat.Solo
       Bot.Mover.SetTargetPose(1f);
       Bot.Mover.SetTargetMoveSpeed(1f);
       updateRushBehavior();
-      this.EndProfilingSample();
+      EndProfilingSample();
     }
 
     private void updateRushBehavior()
@@ -168,7 +169,7 @@ namespace SAIN.Layers.Combat.Solo
         return true;
       }
       _lastMovePos = lastKnown.Value;
-      if (pathDistance > BotOwner.Settings.FileSettings.Move.RUN_TO_COVER_MIN && sprintController.RunToPointByWay(enemy.Path.PathToEnemy, SAINComponent.Classes.Mover.ESprintUrgency.High, true))
+      if (pathDistance > BotOwner.Settings.FileSettings.Move.RUN_TO_COVER_MIN && sprintController.RunToPointByWay(enemy.Path.PathToEnemy, ESprintUrgency.High, true))
       {
         return true;
       }

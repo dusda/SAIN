@@ -1,4 +1,5 @@
 ﻿using EFT;
+using SAIN.Components.BotComponentSpace;
 using SAIN.SAINComponent.Classes.EnemyClasses;
 using UnityEngine;
 
@@ -63,7 +64,7 @@ namespace SAIN.SAINComponent.Classes.WeaponFunction
 
     private bool wantLightOn;
 
-    public void ToggleLaser(bool value)
+    public static void ToggleLaser(bool value)
     {
 
     }

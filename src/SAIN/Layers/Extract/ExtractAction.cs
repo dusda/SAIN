@@ -114,7 +114,7 @@ namespace SAIN.Layers
 
       Bot.Steering.SteerByPriority();
       Shoot.CheckAimAndFire();
-      this.EndProfilingSample();
+      EndProfilingSample();
     }
 
     private void SetStatus(EExtractStatus status)

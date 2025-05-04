@@ -1,7 +1,5 @@
 ﻿using EFT;
 using SAIN.Helpers;
-using System.Collections.Generic;
-using System.Linq;
 using static SAIN.Helpers.EnumValues;
 using static SAIN.Helpers.JsonUtility;
 
@@ -15,8 +13,8 @@ namespace SAIN.Preset.GlobalSettings.Categories
       {
         var layerInfo = new LayerInfoClass();
 
-        Dictionary<Brain, int> usedByBrains = new();
-        List<WildSpawnType> usedByWST = new();
+        Dictionary<Brain, int> usedByBrains = [];
+        List<WildSpawnType> usedByWST = [];
         foreach (var brain in BrainInfos)
         {
           var usedLayers = brain.Value.Layers;
@@ -748,6 +746,6 @@ namespace SAIN.Preset.GlobalSettings.Categories
             },
         };
 
-    public static readonly Dictionary<Layer, LayerInfoClass> LayerInfos = new();
+    public static readonly Dictionary<Layer, LayerInfoClass> LayerInfos = [];
   }
 }

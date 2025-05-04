@@ -1,6 +1,5 @@
 ﻿using EFT;
 using SAIN.Components.PlayerComponentSpace;
-using System;
 using System.Collections;
 using UnityEngine;
 
@@ -45,7 +44,7 @@ namespace SAIN.Components.BotControllerSpace.Classes
       BotController?.StartCoroutine(playShootSoundCoroutine(profileId));
     }
 
-    private IEnumerator playShootSoundCoroutine(string profileId)
+    private static IEnumerator playShootSoundCoroutine(string profileId)
     {
       yield return null;
 
@@ -116,7 +115,7 @@ namespace SAIN.Components.BotControllerSpace.Classes
       BotController.BotEventHandler?.PlaySound(player, position, range, baseSoundType);
     }
 
-    private AISoundType getBaseSoundType(SAINSoundType soundType)
+    private static AISoundType getBaseSoundType(SAINSoundType soundType)
     {
       AISoundType baseSoundType;
       switch (soundType)

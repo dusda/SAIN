@@ -30,7 +30,7 @@ namespace SAIN.Layers.Combat.Solo.Cover
 
       if (Bot.Enemy == null)
       {
-        this.EndProfilingSample();
+        EndProfilingSample();
         return;
       }
 
@@ -38,7 +38,7 @@ namespace SAIN.Layers.Combat.Solo.Cover
       {
         Bot.Mover.DogFight.DogFightMove(true);
         EngageEnemy();
-        this.EndProfilingSample();
+        EndProfilingSample();
         return;
       }
 
@@ -56,7 +56,7 @@ namespace SAIN.Layers.Combat.Solo.Cover
       }
 
       EngageEnemy();
-      this.EndProfilingSample();
+      EndProfilingSample();
     }
 
     private void findCover()

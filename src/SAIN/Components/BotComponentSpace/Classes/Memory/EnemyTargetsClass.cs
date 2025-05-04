@@ -1,5 +1,4 @@
 ﻿using SAIN.SAINComponent.Classes.EnemyClasses;
-using System.Collections.Generic;
 
 namespace SAIN.SAINComponent.Classes.Memory
 {
@@ -52,9 +51,9 @@ namespace SAIN.SAINComponent.Classes.Memory
       }
     }
 
-    public Enemy LastPrimaryEnemy { get; private set; }
+    public Enemy? LastPrimaryEnemy { get; private set; }
 
-    public readonly Dictionary<EEnemyTargetType, EnemyTarget> EnemyTargets = new();
+    public readonly Dictionary<EEnemyTargetType, EnemyTarget> EnemyTargets = [];
 
     public bool IsHumanPlayerActiveEnemy => PrimaryEnemy?.IsAI == true;
   }

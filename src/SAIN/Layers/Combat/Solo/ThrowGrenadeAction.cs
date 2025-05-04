@@ -23,7 +23,7 @@ namespace SAIN.Layers.Combat.Solo
         Stopped = true;
         BotOwner.StopMove();
       }
-      this.EndProfilingSample();
+      EndProfilingSample();
     }
 
     private float StartTime = 0f;

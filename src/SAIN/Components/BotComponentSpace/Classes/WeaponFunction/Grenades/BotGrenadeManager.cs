@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using SAIN.Components.BotComponentSpace;
+using UnityEngine;
 
 namespace SAIN.SAINComponent.Classes.WeaponFunction
 {

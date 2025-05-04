@@ -2,8 +2,6 @@
 using EFT;
 using EFT.Interactive;
 using HarmonyLib;
-using System;
-using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 using UnityEngine.AI;
@@ -16,18 +14,18 @@ namespace SAIN.Plugin
     private static bool _SAINInteropInited = false;
 
     private static bool _IsSAINLoaded;
-    private static Type _SAINExternalType;
+    private static Type? _SAINExternalType;
 
-    private static MethodInfo _ExtractBotMethod;
-    private static MethodInfo _SetExfilForBotMethod;
-    private static MethodInfo _ResetDecisionsForBotMethod;
-    private static MethodInfo _IsPathTowardEnemyMethod;
-    private static MethodInfo _TimeSinceSenseEnemyMethod;
-    private static MethodInfo _CanBotQuestMethod;
-    private static MethodInfo _GetExtractedBotsMethod;
-    private static MethodInfo _GetExtractionInfosMethod;
-    private static MethodInfo _IgnoreHearingMethod;
-    private static MethodInfo _GetPersonalityMethod;
+    private static MethodInfo? _ExtractBotMethod;
+    private static MethodInfo? _SetExfilForBotMethod;
+    private static MethodInfo? _ResetDecisionsForBotMethod;
+    private static MethodInfo? _IsPathTowardEnemyMethod;
+    private static MethodInfo? _TimeSinceSenseEnemyMethod;
+    private static MethodInfo? _CanBotQuestMethod;
+    private static MethodInfo? _GetExtractedBotsMethod;
+    private static MethodInfo? _GetExtractionInfosMethod;
+    private static MethodInfo? _IgnoreHearingMethod;
+    private static MethodInfo? _GetPersonalityMethod;
 
     /**
      * Return true if SAIN is loaded in the client

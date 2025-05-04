@@ -1,4 +1,5 @@
-﻿using SAIN.Helpers;
+﻿using SAIN.Components.BotComponentSpace;
+using SAIN.Helpers;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -8,9 +9,9 @@ namespace SAIN.SAINComponent.Classes
   {
     public Vector3 FlankPoint;
     public Vector3 FlankPoint2;
-    public NavMeshPath FirstPath;
-    public NavMeshPath SecondPath;
-    public NavMeshPath ThirdPath;
+    public NavMeshPath? FirstPath;
+    public NavMeshPath? SecondPath;
+    public NavMeshPath? ThirdPath;
   }
 
   public class SAINBotSpaceAwareness : BotBase, IBotClass

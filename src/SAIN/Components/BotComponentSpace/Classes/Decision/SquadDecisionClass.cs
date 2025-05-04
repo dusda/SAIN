@@ -1,4 +1,5 @@
 ﻿using EFT;
+using SAIN.Components.BotComponentSpace;
 using SAIN.Models.Enums;
 using SAIN.SAINComponent.Classes.EnemyClasses;
 using SAIN.SAINComponent.Classes.Info;
@@ -184,7 +185,7 @@ namespace SAIN.SAINComponent.Classes.Decision
       return memberDistance <= SquadDecision_SuppressFriendlyDistStart && ammo >= 0.5f;
     }
 
-    private bool shallGroupSearch(BotComponent member)
+    private static bool shallGroupSearch(BotComponent member)
     {
       bool squadSearching = member.Decision.CurrentCombatDecision == ECombatDecision.Search || member.Decision.CurrentSquadDecision == ESquadDecision.Search;
       if (squadSearching)

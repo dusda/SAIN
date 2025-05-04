@@ -9,8 +9,8 @@ namespace SAIN.SAINComponent.Classes.Mover
     private float CarvingTime = 0.5f;
     private float CarvingMoveThreshold = 0.1f;
 
-    private NavMeshAgent Agent;
-    private NavMeshObstacle Obstacle;
+    private NavMeshAgent? Agent;
+    private NavMeshObstacle? Obstacle;
 
     private float LastMoveTime;
     private Vector3 LastPosition;

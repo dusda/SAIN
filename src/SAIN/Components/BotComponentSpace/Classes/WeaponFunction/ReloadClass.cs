@@ -1,8 +1,6 @@
 ﻿using EFT;
 using EFT.InventoryLogic;
 using SAIN.SAINComponent;
-using System;
-using System.Collections.Generic;
 using UnityEngine;
 using static EFT.InventoryLogic.Weapon;
 
@@ -134,7 +132,7 @@ namespace SAIN.Components.BotComponentSpace.Classes
     public EquipmentSlot ActiveEquipmentSlot => _weaponManager.Selector.EquipmentSlot;
     public Weapon CurrentWeapon => _weaponManager?.CurrentWeapon;
 
-    public readonly Dictionary<EquipmentSlot, BotMagazineWeapon> BotMagazineWeapons = new();
+    public readonly Dictionary<EquipmentSlot, BotMagazineWeapon> BotMagazineWeapons = [];
 
     public ReloadClass(BotComponent bot) : base(bot)
     {

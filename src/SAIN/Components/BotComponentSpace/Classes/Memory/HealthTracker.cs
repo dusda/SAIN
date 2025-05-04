@@ -1,5 +1,5 @@
 ﻿using EFT;
-using System;
+using SAIN.Components.BotComponentSpace;
 using UnityEngine;
 
 namespace SAIN.SAINComponent.Classes.Memory

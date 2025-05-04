@@ -8,8 +8,8 @@ namespace SAIN.Editor
   internal class Sounds
   {
     private static GUISounds GUISounds => Singleton<GUISounds>.Instance;
-    private static UISoundsWrapper _soundsWrapper;
-    private static AudioSource _audioSource;
+    private static UISoundsWrapper? _soundsWrapper;
+    private static AudioSource? _audioSource;
 
     private static void getWrapper()
     {

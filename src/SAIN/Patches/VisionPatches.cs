@@ -1,13 +1,12 @@
 ﻿using EFT;
 using HarmonyLib;
 using SAIN.Components;
+using SAIN.Components.BotComponentSpace;
 using SAIN.Components.PlayerComponentSpace;
 using SAIN.Helpers;
 using SAIN.Preset.GlobalSettings;
-using SAIN.SAINComponent;
 using SAIN.SAINComponent.Classes.EnemyClasses;
 using SPT.Reflection.Patching;
-using System;
 using System.Reflection;
 using UnityEngine;
 

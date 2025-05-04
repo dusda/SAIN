@@ -2,8 +2,6 @@
 using EFT.Interactive;
 using SAIN.Components;
 using SAIN.Helpers;
-using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace SAIN.SAINComponent.Classes.Mover
@@ -26,9 +24,9 @@ namespace SAIN.SAINComponent.Classes.Mover
 
     public event Action<List<DoorData>> OnNewCloseDoorsFound;
 
-    public List<DoorData> InteractionDoors { get; } = new List<DoorData>();
-    public List<DoorData> CloseDoors { get; } = new List<DoorData>();
-    public List<DoorData> AllDoors { get; } = new List<DoorData>();
+    public List<DoorData> InteractionDoors { get; } = [];
+    public List<DoorData> CloseDoors { get; } = [];
+    public List<DoorData> AllDoors { get; } = [];
     public NavGraphVoxelSimple CurrentVoxel { get; private set; }
 
     public DoorFinder(DoorOpener opener) : base(opener)

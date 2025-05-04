@@ -1,10 +1,7 @@
 ﻿using EFT;
 using SAIN.Components.PlayerComponentSpace.PersonClasses;
 using SAIN.Helpers;
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace SAIN.Components.PlayerComponentSpace
@@ -15,9 +12,9 @@ namespace SAIN.Components.PlayerComponentSpace
 
     public event Action<string, PlayerComponent> OnPlayerRemoved;
 
-    public readonly PlayerDictionary AlivePlayers = new();
+    public readonly PlayerDictionary AlivePlayers = [];
 
-    public readonly Dictionary<string, Player> DeadPlayers = new();
+    public readonly Dictionary<string, Player> DeadPlayers = [];
 
     public PlayerComponent GetPlayerComponent(string profileId) => AlivePlayers.GetPlayerComponent(profileId);
 
@@ -120,7 +117,7 @@ namespace SAIN.Components.PlayerComponentSpace
       }
     }
 
-    public Player GetPlayer(string profileId)
+    public static Player GetPlayer(string profileId)
     {
       if (!profileId.IsNullOrEmpty())
       {

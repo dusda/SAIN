@@ -2,14 +2,12 @@
 using SAIN.Components.PlayerComponentSpace;
 using SAIN.Models.Structs;
 using SAIN.SAINComponent;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace SAIN.Components
 {
   public class BodyPartsClass : PlayerComponentBase
   {
-    public PartDictionary Parts { get; } = new PartDictionary();
+    public PartDictionary Parts { get; } = [];
 
     public SAINBodyPart[] PartsArray { get; private set; }
 
@@ -37,7 +35,7 @@ namespace SAIN.Components
       //Logger.LogDebug(stringBuilder.ToString());
     }
 
-    private BifacialTransform getTransform(EBodyPart bodyPart, PlayerBones bones)
+    private static BifacialTransform getTransform(EBodyPart bodyPart, PlayerBones bones)
     {
       switch (bodyPart)
       {
@@ -79,7 +77,7 @@ namespace SAIN.Components
       return new SAINBodyPart(bodyPartType, transform, colliders);
     }
 
-    private List<BodyPartCollider> getColliders(PlayerBones playerBones, EBodyPartColliderType[] colliderTypes)
+    private static List<BodyPartCollider> getColliders(PlayerBones playerBones, EBodyPartColliderType[] colliderTypes)
     {
       var colliderList = new List<BodyPartCollider>();
       if (playerBones == null)

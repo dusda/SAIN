@@ -18,7 +18,7 @@ namespace SAIN.Preset.Personalities
       }
     }
 
-    public void UpdateDefaults(PersonalityManagerClass replacementClass = null)
+    public void UpdateDefaults(PersonalityManagerClass? replacementClass = null)
     {
       foreach (var settings in PersonalityDictionary)
       {
@@ -70,6 +70,6 @@ namespace SAIN.Preset.Personalities
       PersonalityDefaultsClass.InitDefaults(PersonalityDictionary, Preset);
     }
 
-    public PersonalityDictionary PersonalityDictionary = new();
+    public PersonalityDictionary PersonalityDictionary = [];
   }
 }

@@ -1,10 +1,9 @@
 ﻿using EFT;
 using HarmonyLib;
 using SAIN.Components;
-using SAIN.SAINComponent;
+using SAIN.Components.BotComponentSpace;
 using SAIN.SAINComponent.Classes;
 using SAIN.SAINComponent.Classes.EnemyClasses;
-using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 using UnityEngine.AI;

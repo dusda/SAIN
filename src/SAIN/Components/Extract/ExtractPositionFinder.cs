@@ -1,10 +1,7 @@
 ﻿using EFT.Interactive;
 using HarmonyLib;
 using SAIN.Helpers;
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using UnityEngine;
 
@@ -47,9 +44,9 @@ namespace SAIN.Components.Extract
     // The number of endpoints to use for checking if a complete path exists to the extract
     private static int maxPathEndpoints = 2;
 
-    private ExfiltrationPoint ex = null;
-    private readonly List<Vector3> pathEndpoints = new();
-    private readonly List<Vector3> sortedNavMeshPoints = new();
+    private ExfiltrationPoint? ex = null;
+    private readonly List<Vector3> pathEndpoints = [];
+    private readonly List<Vector3> sortedNavMeshPoints = [];
     private readonly Stack<Vector3> navMeshTestPoints = new();
 
     public IReadOnlyCollection<Vector3> PathEndpoints => pathEndpoints.AsReadOnly();
@@ -247,7 +244,7 @@ namespace SAIN.Components.Extract
     private IList<Vector3> GetColliderTestPointsOnNavMesh(IEnumerable<Vector3> colliderTestPoints, float searchRadius)
     {
       // For each point in the 3D mesh, try to find a point on the NavMesh within a certain radius
-      List<Vector3> navMeshPoints = new();
+      List<Vector3> navMeshPoints = [];
       foreach (Vector3 testPoint in colliderTestPoints)
       {
         Vector3? navMeshPoint = NavMeshHelpers.GetNearbyNavMeshPoint(testPoint, searchRadius);

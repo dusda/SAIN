@@ -2,7 +2,6 @@
 using SAIN.Components;
 using SAIN.Components.PlayerComponentSpace;
 using SAIN.Components.PlayerComponentSpace.PersonClasses;
-using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
 
@@ -10,7 +9,7 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
 {
   public class EnemyListController : BotSubClass<SAINEnemyController>, IBotClass
   {
-    public Dictionary<string, Enemy> Enemies { get; } = new Dictionary<string, Enemy>();
+    public Dictionary<string, Enemy> Enemies { get; } = [];
 
     public EnemyListController(SAINEnemyController controller) : base(controller)
     {
@@ -349,17 +348,17 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
     private float _nextCompareListsTime;
     private const float COMPARE_ENEMY_LIST_FREQ = 1;
 
-    private string getBotInfo(Player player)
+    private static string getBotInfo(Player player)
     {
       return $" [{player.Profile.Nickname}, {player.Profile.Info.Settings.Role}, {player.ProfileId}] ";
     }
 
-    private string getBotInfo(IPlayer player)
+    private static string getBotInfo(IPlayer player)
     {
       return $" [{player.Profile.Nickname}, {player.Profile.Info.Settings.Role}, {player.ProfileId}] ";
     }
 
-    private string findSourceDebug(string debugString)
+    private static string findSourceDebug(string debugString)
     {
       StackTrace stackTrace = new();
       debugString += $" StackTrace: [{stackTrace.ToString()}]";

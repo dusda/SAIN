@@ -1,4 +1,5 @@
 ﻿using EFT;
+using SAIN.Components.BotComponentSpace;
 using SAIN.SAINComponent.Classes.Info;
 using UnityEngine;
 using static EFT.InventoryLogic.Weapon;

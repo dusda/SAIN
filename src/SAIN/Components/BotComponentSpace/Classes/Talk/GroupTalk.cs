@@ -1,10 +1,10 @@
 using EFT;
 using SAIN.Components;
+using SAIN.Components.BotComponentSpace;
 using SAIN.Helpers;
 using SAIN.Preset;
 using SAIN.SAINComponent.Classes.EnemyClasses;
 using SAIN.SAINComponent.Classes.Info;
-using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -977,7 +977,7 @@ namespace SAIN.SAINComponent.Classes.Talk
       return false;
     }
 
-    private float AngleToRadians(float angle)
+    private static float AngleToRadians(float angle)
     {
       return (angle * (Mathf.PI)) / 180;
     }
@@ -1053,12 +1053,12 @@ namespace SAIN.SAINComponent.Classes.Talk
     }
 
     public SAINBotTalkClass LeaderComponent => Bot.Squad.LeaderComponent?.Talk;
-    private float Randomized => Random.Range(0.75f, 1.25f);
+    private static float Randomized => Random.Range(0.75f, 1.25f);
     private SAINSquadClass BotSquad => Bot.Squad;
 
     private float _groupTalkFreq = 0.5f;
-    private readonly List<EPhraseTrigger> LootPhrases = new() { EPhraseTrigger.LootBody, EPhraseTrigger.LootGeneric, EPhraseTrigger.OnLoot, EPhraseTrigger.CheckHim };
-    private readonly List<EPhraseTrigger> reloadPhrases = new() { EPhraseTrigger.OnWeaponReload, EPhraseTrigger.NeedAmmo, EPhraseTrigger.OnOutOfAmmo };
+    private readonly List<EPhraseTrigger> LootPhrases = [EPhraseTrigger.LootBody, EPhraseTrigger.LootGeneric, EPhraseTrigger.OnLoot, EPhraseTrigger.CheckHim];
+    private readonly List<EPhraseTrigger> reloadPhrases = [EPhraseTrigger.OnWeaponReload, EPhraseTrigger.NeedAmmo, EPhraseTrigger.OnOutOfAmmo];
     private float _nextReportReloadTime;
     private float _nextCheckEnemyHPTime;
     private bool _friendIsClose;

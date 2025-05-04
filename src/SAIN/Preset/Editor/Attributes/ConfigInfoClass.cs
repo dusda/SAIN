@@ -1,7 +1,6 @@
 ﻿using SAIN.Helpers;
 using SAIN.Plugin;
 using SAIN.Preset.GlobalSettings;
-using System;
 using System.Reflection;
 
 namespace SAIN.Attributes

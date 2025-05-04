@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace SAIN.SAINComponent.Classes.EnemyClasses
+﻿namespace SAIN.SAINComponent.Classes.EnemyClasses
 {
   public class EnemyList : List<Enemy>
   {

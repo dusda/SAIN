@@ -4,14 +4,13 @@ using SAIN.Preset.BotSettings.SAINSettings;
 using SAIN.Preset.GearStealthValues;
 using SAIN.Preset.GlobalSettings;
 using SAIN.Preset.Personalities;
-using System;
 using static SAIN.Helpers.JsonUtility;
 
 namespace SAIN.Preset
 {
   public class SAINPresetClass
   {
-    public static SAINPresetClass Instance { get; private set; }
+    public static SAINPresetClass? Instance { get; private set; }
     public SAINPresetDefinition Info { get; private set; }
     public GlobalSettingsClass GlobalSettings { get; private set; }
     public SAINBotSettingsClass BotSettings { get; private set; }
@@ -29,7 +28,7 @@ namespace SAIN.Preset
       CreateSettings(preset, preset.BaseSAINDifficulty);
     }
 
-    private void CopyPreset(SAINPresetDefinition preset)
+    private static void CopyPreset(SAINPresetDefinition preset)
     {
       if (Instance != null)
       {
@@ -74,7 +73,7 @@ namespace SAIN.Preset
       PersonalityManager.Init();
     }
 
-    public void UpdateDefaults(SAINPresetClass preset = null)
+    public void UpdateDefaults(SAINPresetClass? preset = null)
     {
       GlobalSettings.UpdateDefaults(preset?.GlobalSettings);
       BotSettings.UpdateDefaults(preset?.BotSettings);
@@ -186,7 +185,7 @@ namespace SAIN.Preset
       return success;
     }
 
-    public static bool Export(object obj, string presetName, string fileName, string subFolder = null)
+    public static bool Export(object obj, string presetName, string fileName, string? subFolder = null)
     {
       bool success = false;
       try
@@ -210,7 +209,7 @@ namespace SAIN.Preset
       return success;
     }
 
-    public static bool Import<T>(out T result, string presetName, string fileName, string subFolder = null)
+    public static bool Import<T>(out T result, string presetName, string fileName, string? subFolder = null)
     {
       string[] folders = Folders(presetName, subFolder);
       if (Load.LoadJsonFile(out string json, fileName, folders))
@@ -237,7 +236,7 @@ namespace SAIN.Preset
       return false;
     }
 
-    public static string[] Folders(string presetName, string subFolder = null)
+    public static string[] Folders(string presetName, string? subFolder = null)
     {
       string presets = "Presets";
       string[] result;

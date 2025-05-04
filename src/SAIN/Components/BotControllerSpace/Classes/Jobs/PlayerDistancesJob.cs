@@ -1,6 +1,5 @@
 ﻿using SAIN.Components.PlayerComponentSpace;
 using System.Collections;
-using System.Collections.Generic;
 using Unity.Collections;
 using Unity.Jobs;
 using UnityEngine;
@@ -53,7 +52,7 @@ namespace SAIN.Components.BotControllerSpace.Classes.Raycasts
     private CalcDistanceAndNormalJob _distanceJob;
     private JobHandle _partDistanceJobHandle;
     private CalcDistanceJob _partDistanceJob;
-    private readonly List<PlayerComponent> _players = new();
+    private readonly List<PlayerComponent> _players = [];
     private static readonly EBodyPart[] _bodyParts = [EBodyPart.Head, EBodyPart.Chest, EBodyPart.Stomach, EBodyPart.LeftArm, EBodyPart.RightArm, EBodyPart.LeftLeg, EBodyPart.RightLeg];
 
     public PlayerDistancesJob(SAINBotController botController) : base(botController)
@@ -79,7 +78,7 @@ namespace SAIN.Components.BotControllerSpace.Classes.Raycasts
           continue;
         }
 
-        if (BotController?.BotGame?.Status == EFT.GameStatus.Stopping)
+        if (SAINBotController.BotGame?.Status == EFT.GameStatus.Stopping)
         {
           yield return null;
           continue;

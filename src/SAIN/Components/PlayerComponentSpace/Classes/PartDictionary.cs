@@ -1,5 +1,4 @@
 ﻿using SAIN.Models.Structs;
-using System.Collections.Generic;
 
 namespace SAIN.Components
 {

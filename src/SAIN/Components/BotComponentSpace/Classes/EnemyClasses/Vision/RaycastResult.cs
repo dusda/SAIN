@@ -11,7 +11,7 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
     public float TimeSinceSuccess => Time.time - _lastSuccessTime;
 
     public RaycastHit LastRaycastHit { get; private set; }
-    public BodyPartCollider LastSuccessBodyPart { get; private set; }
+    public BodyPartCollider? LastSuccessBodyPart { get; private set; }
     public Vector3? LastSuccessPoint { get; private set; }
 
     public void Update(Vector3 castPoint, BodyPartCollider bodyPartCollider, RaycastHit raycastHit, float time)

@@ -44,8 +44,8 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
     private const float PARTS_VISIBLE_MAX_PARTS = 6;
     private const float PARTS_VISIBLE_MIN_PARTS = 2;
 
-    private float PARTS_VISIBLE_MAX_COEF => Settings.PartsVisibility.PARTS_VISIBLE_MAX_COEF;
-    private float PARTS_VISIBLE_MIN_COEF => Settings.PartsVisibility.PARTS_VISIBLE_MIN_COEF;
+    private static float PARTS_VISIBLE_MAX_COEF => Settings.PartsVisibility.PARTS_VISIBLE_MAX_COEF;
+    private static float PARTS_VISIBLE_MIN_COEF => Settings.PartsVisibility.PARTS_VISIBLE_MIN_COEF;
 
     private const float PARTS_VISIBLE_MAX_TIME_SINCE_CHECKED = 2f;
     private const float PARTS_VISIBLE_MAX_TIME_SINCE_VISIBLE = 1f;
@@ -53,13 +53,13 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
     private const float ELEVATION_LASTKNOWN_MAX_DIST = 1.5f;
     private const float ELEVATION_MIN_ANGLE = 5f;
 
-    private float THIRDPARTY_VISION_START_ANGLE => Settings.ThirdParty.THIRDPARTY_VISION_START_ANGLE;
-    private float THIRDPARTY_VISION_MAX_COEF => Settings.ThirdParty.THIRDPARTY_VISION_MAX_COEF;
+    private static float THIRDPARTY_VISION_START_ANGLE => Settings.ThirdParty.THIRDPARTY_VISION_START_ANGLE;
+    private static float THIRDPARTY_VISION_MAX_COEF => Settings.ThirdParty.THIRDPARTY_VISION_MAX_COEF;
 
     private const float THIRDPARTY_VISION_MAX_DIST_LASTKNOWN = 50f;
 
-    private float PERIPHERAL_VISION_START_ANGLE => Settings.Peripheral.PERIPHERAL_VISION_START_ANGLE;
-    private float PERIPHERAL_VISION_MAX_REDUCTION_COEF => Settings.Peripheral.PERIPHERAL_VISION_MAX_REDUCTION_COEF;
+    private static float PERIPHERAL_VISION_START_ANGLE => Settings.Peripheral.PERIPHERAL_VISION_START_ANGLE;
+    private static float PERIPHERAL_VISION_MAX_REDUCTION_COEF => Settings.Peripheral.PERIPHERAL_VISION_MAX_REDUCTION_COEF;
 
     private const float PERIPHERAL_VISION_SPEED_DIRECT_FRONT_ANGLE = 3f;
     private const float PERIPHERAL_VISION_SPEED_DIRECT_FRONT_MOD = 0.66f;
@@ -70,8 +70,8 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
     private const float PERIPHERAL_VISION_SPEED_ENEMY_VERYCLOSE_DIST = 5;
     private const float PERIPHERAL_VISION_SPEED_ENEMY_VERYCLOSE_MOD = 0.8f;
 
-    private float PRONE_VISION_SPEED_COEF => Settings.Pose.PRONE_VISION_SPEED_COEF;
-    private float DUCK_VISION_SPEED_COEF => Settings.Pose.DUCK_VISION_SPEED_COEF;
+    private static float PRONE_VISION_SPEED_COEF => Settings.Pose.PRONE_VISION_SPEED_COEF;
+    private static float DUCK_VISION_SPEED_COEF => Settings.Pose.DUCK_VISION_SPEED_COEF;
 
     private const float UNKNOWN_ENEMY_HAS_ENEMY_COEF = 1.5f;
 
@@ -190,7 +190,7 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
       Audio = 2,
     }
 
-    private float CalcVisionSpeedPositional(float distance, float minSpeedCoef, float minDist, float maxDist, SeenSpeedCheck check)
+    private static float CalcVisionSpeedPositional(float distance, float minSpeedCoef, float minDist, float maxDist, SeenSpeedCheck check)
     {
       if (distance <= minDist)
       {
@@ -347,7 +347,7 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
       return SAINBotController.Instance.WeatherVision.GainSightModifier;
     }
 
-    private float BaseTimeModifier(bool flareEnabled)
+    private static float BaseTimeModifier(bool flareEnabled)
     {
       if (flareEnabled)
       {

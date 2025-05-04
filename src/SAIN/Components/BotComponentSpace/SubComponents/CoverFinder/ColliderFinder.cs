@@ -1,7 +1,5 @@
 ﻿using SAIN.Helpers;
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace SAIN.SAINComponent.SubComponents.CoverFinder
@@ -75,13 +73,13 @@ namespace SAIN.SAINComponent.SubComponents.CoverFinder
 
     private static float _nextLogTime;
 
-    private static List<LayerMask> _layersToCheck = new()
-        {
+    private static List<LayerMask> _layersToCheck =
+        [
             //LayerMaskClass.HighPolyCollider,
             //LayerMaskClass.TerrainLayer,
             LayerMaskClass.HighPolyWithTerrainMask,
             LayerMaskClass.LowPolyColliderLayerMask,
-        };
+        ];
 
     private int getCollidersInBox(float x, float y, float z, Vector3 boxOrigin, Collider[] array, LayerMask colliderMask)
     {
@@ -103,9 +101,9 @@ namespace SAIN.SAINComponent.SubComponents.CoverFinder
 
     public int HitCount;
 
-    private List<GameObject> debugObjects = new();
+    private List<GameObject> debugObjects = [];
 
-    private void clearColliders(Collider[] array)
+    private static void clearColliders(Collider[] array)
     {
       for (int i = 0; i < array.Length; i++)
       {
@@ -187,8 +185,8 @@ namespace SAIN.SAINComponent.SubComponents.CoverFinder
       }
     }
 
-    private static Dictionary<Collider, GUIObject> debugGUIObjects = new();
-    private static Dictionary<Collider, GameObject> debugColliders = new();
+    private static Dictionary<Collider, GUIObject> debugGUIObjects = [];
+    private static Dictionary<Collider, GameObject> debugColliders = [];
 
     public int ColliderArrayBotDistComparer(Collider A, Collider B)
     {

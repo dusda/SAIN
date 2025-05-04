@@ -3,8 +3,6 @@ using SAIN.Attributes;
 using SAIN.Editor.Util;
 using SAIN.Helpers;
 using SAIN.Plugin;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using static SAIN.Editor.SAINLayout;
 
@@ -14,13 +12,13 @@ namespace SAIN.Editor
   {
     private static float ExpandMenuWidth => 250f;
 
-    public static string SearchBox(SettingsContainer container, float height = 30, SearchParams config = null)
+    public static string SearchBox(SettingsContainer container, float height = 30, SearchParams? config = null)
     {
       container.SearchPattern = SearchBox(container.SearchPattern, height, config);
       return container.SearchPattern;
     }
 
-    public static string SearchBox(string search, float height = 30, SearchParams config = null)
+    public static string SearchBox(string search, float height = 30, SearchParams? config = null)
     {
       config = config ?? new SearchParams { optionHeight = height };
       config.Start();
@@ -184,7 +182,7 @@ namespace SAIN.Editor
       return result;
     }
 
-    public static void Alert(string toolTip, string text = null, float height = 25, float width = 25, ColorNames? colorName = null)
+    public static void Alert(string toolTip, string? text = null, float height = 25, float width = 25, ColorNames? colorName = null)
     {
       if (toolTip.IsNullOrEmpty() && text.IsNullOrEmpty())
       {
@@ -203,7 +201,7 @@ namespace SAIN.Editor
       Box(content, style, Height(height), Width(width));
     }
 
-    public static void Alert(string toolTip, string text = null, float height = 25, ColorNames? colorName = null)
+    public static void Alert(string toolTip, string? text = null, float height = 25, ColorNames? colorName = null)
     {
       if (toolTip.IsNullOrEmpty() && text.IsNullOrEmpty())
       {
@@ -381,7 +379,7 @@ namespace SAIN.Editor
       return value;
     }
 
-    public static string SelectionGridExpandHeight(Rect menuRect, string[] options, string selectedOption, Rect[] optionRects, float min = 15f, float incPerFrame = 3f, float closeMulti = 0.66f, string[] toolTips = null)
+    public static string SelectionGridExpandHeight(Rect menuRect, string[] options, string selectedOption, Rect[] optionRects, float min = 15f, float incPerFrame = 3f, float closeMulti = 0.66f, string[]? toolTips = null)
     {
       BeginGroup(menuRect);
 
@@ -565,7 +563,7 @@ namespace SAIN.Editor
       return current;
     }
 
-    public static bool ExpandableMenu(string name, bool value, string description = null, float height = 20f)
+    public static bool ExpandableMenu(string name, bool value, string? description = null, float height = 20f)
     {
       BeginHorizontal();
       value = Toggle(value, new GUIContent(value ? "-" : "+", value ? "Collapse" : "Expand"), EUISoundType.MenuDropdown, Width(17.5f), Height(height));

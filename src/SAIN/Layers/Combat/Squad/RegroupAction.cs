@@ -33,7 +33,7 @@ namespace SAIN.Layers.Combat.Squad
         Shoot.CheckAimAndFire();
         Bot.Steering.SteerByPriority();
       }
-      this.EndProfilingSample();
+      EndProfilingSample();
     }
 
     public override void Start()

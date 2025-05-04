@@ -1,5 +1,4 @@
 ﻿using SAIN.Attributes;
-using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 
@@ -32,8 +31,8 @@ namespace SAIN.Editor
 
     public readonly ConfigInfoClass CategoryInfo;
 
-    public readonly List<ConfigInfoClass> FieldAttributesList = new();
-    public readonly List<ConfigInfoClass> SelectedList = new();
+    public readonly List<ConfigInfoClass> FieldAttributesList = [];
+    public readonly List<ConfigInfoClass> SelectedList = [];
 
     public bool Open = false;
     public Vector2 Scroll = Vector2.zero;

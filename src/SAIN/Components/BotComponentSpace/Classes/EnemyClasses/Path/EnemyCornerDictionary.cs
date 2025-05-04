@@ -1,7 +1,6 @@
 ﻿using EFT;
 using SAIN.Components.PlayerComponentSpace.PersonClasses;
 using SAIN.Models.Enums;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace SAIN.SAINComponent.Classes.EnemyClasses

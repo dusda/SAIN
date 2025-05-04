@@ -3,8 +3,6 @@ using EFT.Visual;
 using HarmonyLib;
 using SAIN.Components.PlayerComponentSpace;
 using SAIN.SAINComponent;
-using System;
-using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 
@@ -25,7 +23,7 @@ namespace SAIN.Components
     public bool WhiteLight => ActiveModes.Contains(DeviceMode.WhiteLight);
     public LightDetectionClass LightDetection { get; }
 
-    public readonly List<DeviceMode> ActiveModes = new();
+    public readonly List<DeviceMode> ActiveModes = [];
 
     public FlashLightClass(PlayerComponent component) : base(component)
     {

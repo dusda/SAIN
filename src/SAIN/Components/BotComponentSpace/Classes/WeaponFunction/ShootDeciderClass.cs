@@ -1,9 +1,9 @@
 ﻿using EFT;
 using EFT.InventoryLogic;
+using SAIN.Components.BotComponentSpace;
 using SAIN.Preset.GlobalSettings;
 using SAIN.SAINComponent.Classes.EnemyClasses;
 using SAIN.SAINComponent.Classes.Info;
-using System;
 using UnityEngine;
 
 namespace SAIN.SAINComponent.Classes
@@ -196,7 +196,7 @@ namespace SAIN.SAINComponent.Classes
       return optimalSlot;
     }
 
-    private bool isWeaponDurableEnough(WeaponInfo info, float min = 0.5f)
+    private static bool isWeaponDurableEnough(WeaponInfo info, float min = 0.5f)
     {
       return info != null &&
           info.Durability > min &&
@@ -286,7 +286,7 @@ namespace SAIN.SAINComponent.Classes
       return null;
     }
 
-    private Vector3? checkYValue(Vector3? centerMass, Vector3? partTarget)
+    private static Vector3? checkYValue(Vector3? centerMass, Vector3? partTarget)
     {
       if (centerMass != null &&
           partTarget != null &&
@@ -320,7 +320,7 @@ namespace SAIN.SAINComponent.Classes
       return enemy.CenterMass;
     }
 
-    private Vector3? getEnemyPartToShoot(EnemyInfo enemy)
+    private static Vector3? getEnemyPartToShoot(EnemyInfo enemy)
     {
       if (enemy != null)
       {

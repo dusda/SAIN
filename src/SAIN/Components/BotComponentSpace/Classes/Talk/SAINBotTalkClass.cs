@@ -1,7 +1,7 @@
 using EFT;
 using SAIN.Components;
+using SAIN.Components.BotComponentSpace;
 using SAIN.Helpers;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace SAIN.SAINComponent.Classes.Talk
@@ -332,7 +332,7 @@ namespace SAIN.SAINComponent.Classes.Talk
       return false;
     }
 
-    private BotTalkPackage? CheckPriority(BotTalkPackage? newTalk, BotTalkPackage? oldTalk)
+    private static BotTalkPackage? CheckPriority(BotTalkPackage? newTalk, BotTalkPackage? oldTalk)
     {
       if (oldTalk == null)
       {
@@ -351,7 +351,7 @@ namespace SAIN.SAINComponent.Classes.Talk
       return ChangeTalk ? newTalk : oldTalk;
     }
 
-    private BotTalkPackage? CheckPriority(BotTalkPackage? newTalk, BotTalkPackage? oldTalk, out bool ChangeTalk)
+    private static BotTalkPackage? CheckPriority(BotTalkPackage? newTalk, BotTalkPackage? oldTalk, out bool ChangeTalk)
     {
       if (oldTalk == null)
       {
@@ -463,7 +463,7 @@ namespace SAIN.SAINComponent.Classes.Talk
     private float _timeCanTalk;
     private float _talkDelayTimer = 0f;
 
-    private readonly Dictionary<EPhraseTrigger, PhraseInfo> _phraseDictionary = new();
+    private readonly Dictionary<EPhraseTrigger, PhraseInfo> _phraseDictionary = [];
   }
 
   public struct BotTalkPackage

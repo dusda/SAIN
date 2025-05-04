@@ -2,12 +2,12 @@
 using HarmonyLib;
 using RootMotion.FinalIK;
 using SAIN.Components;
+using SAIN.Components.BotComponentSpace;
 using SAIN.Helpers;
 using SAIN.Plugin;
 using SAIN.Preset;
 using SAIN.Preset.BotSettings.SAINSettings.Categories;
 using SAIN.Preset.GlobalSettings;
-using SAIN.SAINComponent;
 using SAIN.SAINComponent.Classes;
 using SAIN.SAINComponent.Classes.EnemyClasses;
 using SAIN.SAINComponent.SubComponents.CoverFinder;

@@ -1,13 +1,11 @@
 ﻿using SAIN.Helpers;
-using System;
-using System.Collections.Generic;
 
 namespace SAIN.Preset.GearStealthValues
 {
   public class GearStealthValuesClass
   {
-    public Dictionary<EEquipmentType, List<ItemStealthValue>> ItemStealthValues = new();
-    public readonly List<ItemStealthValue> Defaults = new();
+    public Dictionary<EEquipmentType, List<ItemStealthValue>> ItemStealthValues = [];
+    public readonly List<ItemStealthValue> Defaults = [];
 
     public GearStealthValuesClass(SAINPresetDefinition preset)
     {
@@ -88,7 +86,7 @@ namespace SAIN.Preset.GearStealthValues
     {
       if (!ItemStealthValues.TryGetValue(type, out var list))
       {
-        list = new List<ItemStealthValue>();
+        list = [];
         ItemStealthValues.Add(type, list);
       }
       return list;
@@ -112,7 +110,7 @@ namespace SAIN.Preset.GearStealthValues
       }
     }
 
-    private bool doesItemExist(string name, List<ItemStealthValue> list)
+    private static bool doesItemExist(string name, List<ItemStealthValue> list)
     {
       foreach (var item in list)
       {

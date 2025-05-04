@@ -1,8 +1,7 @@
+using SAIN.Components.BotComponentSpace;
 using SAIN.Components.BotControllerSpace.Classes.Raycasts;
 using SAIN.Plugin;
 using SAIN.Preset;
-using SAIN.SAINComponent;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace SAIN.Components
@@ -24,7 +23,7 @@ namespace SAIN.Components
       var bots = Bots;
       if (bots != null && bots.Count > 0)
       {
-        RaycastJobs.Update();
+        BotRaycastJobs.Update();
         UpdateVisionForBots();
       }
     }
@@ -65,7 +64,7 @@ namespace SAIN.Components
     }
 
     private static int maxBotsPerFrame = 5;
-    private readonly List<BotComponent> _localBotList = new();
+    private readonly List<BotComponent> _localBotList = [];
 
     static BotJobsClass()
     {

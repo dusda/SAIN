@@ -1,11 +1,10 @@
 ﻿using SAIN.SAINComponent;
-using System.Collections.Generic;
 
 namespace SAIN.Components.PlayerComponentSpace
 {
   public class OtherPlayersData : PlayerComponentBase
   {
-    public readonly Dictionary<string, OtherPlayerData> Datas = new();
+    public readonly Dictionary<string, OtherPlayerData> Datas = [];
 
     public OtherPlayersData(PlayerComponent playerComponent) : base(playerComponent)
     {
@@ -18,7 +17,7 @@ namespace SAIN.Components.PlayerComponentSpace
       createExistingPlayers();
     }
 
-    public void Update()
+    public static void Update()
     {
     }
 

@@ -1,11 +1,9 @@
 ﻿using Comfort.Common;
 using EFT;
 using EFT.Interactive;
+using SAIN.Components.BotComponentSpace;
 using SAIN.Helpers;
-using SAIN.SAINComponent;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace SAIN.Components.Extract
@@ -14,11 +12,11 @@ namespace SAIN.Components.Extract
   {
     public bool IsFindingExtracts { get; private set; } = false;
 
-    private ExfiltrationPoint[] AllExfils;
-    private ExfiltrationPoint[] AllScavExfils;
-    private Dictionary<ExfiltrationPoint, Vector3> ValidExfils = new();
-    private Dictionary<ExfiltrationPoint, Vector3> ValidScavExfils = new();
-    private Dictionary<ExfiltrationPoint, ExtractPositionFinder> extractPositionFinders = new();
+    private ExfiltrationPoint[]? AllExfils;
+    private ExfiltrationPoint[]? AllScavExfils;
+    private Dictionary<ExfiltrationPoint, Vector3> ValidExfils = [];
+    private Dictionary<ExfiltrationPoint, Vector3> ValidScavExfils = [];
+    private Dictionary<ExfiltrationPoint, ExtractPositionFinder> extractPositionFinders = [];
 
     private float CheckExtractDelay = 10f;
     private float NextCheckExtractTime = 0f;

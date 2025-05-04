@@ -1,5 +1,4 @@
 ﻿using SAIN.Helpers;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace SAIN.Models.Structs
@@ -19,12 +18,12 @@ namespace SAIN.Models.Structs
     public PeekPosition PeekEnd { get; private set; }
     public Vector3 DangerPoint { get; private set; }
 
-    private Vector3 MidPoint(Vector3 A, Vector3 B)
+    private static Vector3 MidPoint(Vector3 A, Vector3 B)
     {
       return Vector3.Lerp(A, B, 0.5f);
     }
 
-    private bool CheckIfLeanable(float signAngle, float limit = 1f)
+    private static bool CheckIfLeanable(float signAngle, float limit = 1f)
     {
       return Mathf.Abs(signAngle) > limit;
     }
@@ -50,12 +49,12 @@ namespace SAIN.Models.Structs
       }
       if (DebugVectorList == null)
       {
-        DebugVectorList = new List<Vector3>
-                {
+        DebugVectorList =
+                [
                     PeekStart.Point,
                     PeekEnd.Point,
                     DangerPoint,
-                };
+                ];
       }
       if (DebugGameObjectList == null)
       {

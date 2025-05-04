@@ -1,6 +1,5 @@
 ﻿using SAIN.Helpers;
 using SAIN.Models.Enums;
-using System.Collections.Generic;
 
 namespace SAIN.SAINComponent.Classes.EnemyClasses
 {
@@ -8,7 +7,7 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
   {
     public EnemyList KnownEnemies { get; private set; }
 
-    public readonly Dictionary<EEnemyListType, EnemyList> EnemyLists = new();
+    public readonly Dictionary<EEnemyListType, EnemyList> EnemyLists = [];
 
     public EnemyListsClass(SAINEnemyController controller) : base(controller)
     {
@@ -111,7 +110,7 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
       EnemyLists.Clear();
     }
 
-    private readonly List<Enemy> _enemiesToRemove = new();
+    private readonly List<Enemy> _enemiesToRemove = [];
 
     private void subOrUnSub(bool value, Enemy enemy)
     {

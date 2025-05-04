@@ -1,7 +1,7 @@
 ﻿using EFT.InventoryLogic;
 using HarmonyLib;
+using SAIN.Components.BotComponentSpace;
 using SAIN.Preset.GlobalSettings;
-using System.Collections.Generic;
 using FloatFunc = GClass828<float>;
 
 namespace SAIN.SAINComponent.Classes
@@ -47,7 +47,7 @@ namespace SAIN.SAINComponent.Classes
       return result;
     }
 
-    private readonly List<Slot> _slots = new();
+    private readonly List<Slot> _slots = [];
 
     public static readonly EquipmentSlot[] _botEquipmentSlots =
     [

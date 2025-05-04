@@ -1,8 +1,6 @@
 ﻿using EFT.InventoryLogic;
 using SAIN.Preset.GearStealthValues;
 using SAIN.SAINComponent.Classes.Info;
-using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace SAIN.Components.PlayerComponentSpace.Classes.Equipment
@@ -123,7 +121,7 @@ namespace SAIN.Components.PlayerComponentSpace.Classes.Equipment
       return result;
     }
 
-    private float calcEffect(string id, List<ItemStealthValue> values)
+    private static float calcEffect(string id, List<ItemStealthValue> values)
     {
       foreach (var value in values)
       {

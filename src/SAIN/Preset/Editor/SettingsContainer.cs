@@ -1,6 +1,4 @@
 ﻿using SAIN.Attributes;
-using System;
-using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 
@@ -8,7 +6,7 @@ namespace SAIN.Editor
 {
   public sealed class SettingsContainer
   {
-    public SettingsContainer(Type settingsType, string name = null)
+    public SettingsContainer(Type settingsType, string? name = null)
     {
       Name = name ?? settingsType.Name;
       foreach (FieldInfo field in settingsType.GetFields(BindingFlags.Public | BindingFlags.Instance))
@@ -28,8 +26,8 @@ namespace SAIN.Editor
 
     public readonly string Name;
 
-    public readonly List<Category> Categories = new();
-    public readonly List<Category> SelectedCategories = new();
+    public readonly List<Category> Categories = [];
+    public readonly List<Category> SelectedCategories = [];
 
     public string SearchPattern = string.Empty;
 

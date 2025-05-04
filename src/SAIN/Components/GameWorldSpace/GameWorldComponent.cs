@@ -3,24 +3,21 @@ using EFT;
 using EFT.Game.Spawning;
 using SAIN.Components.PlayerComponentSpace;
 using SAIN.Helpers;
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace SAIN.Components
 {
   public class GameWorldComponent : MonoBehaviour
   {
-    public static GameWorldComponent Instance { get; private set; }
-    public GameWorld GameWorld { get; private set; }
-    public PlayerSpawnTracker PlayerTracker { get; private set; }
-    public SAINBotController SAINBotController { get; private set; }
-    public Extract.ExtractFinderComponent ExtractFinder { get; private set; }
-    public DoorHandler Doors { get; private set; }
-    public LocationClass Location { get; private set; }
-    public SpawnPointMarker[] SpawnPointMarkers { get; private set; }
+    public static GameWorldComponent? Instance { get; private set; }
+    public GameWorld? GameWorld { get; private set; }
+    public PlayerSpawnTracker? PlayerTracker { get; private set; }
+    public SAINBotController? SAINBotController { get; private set; }
+    public Extract.ExtractFinderComponent? ExtractFinder { get; private set; }
+    public DoorHandler? Doors { get; private set; }
+    public LocationClass? Location { get; private set; }
+    public SpawnPointMarker[]? SpawnPointMarkers { get; private set; }
 
     public void Update()
     {
@@ -49,7 +46,7 @@ namespace SAIN.Components
         return Enumerable.Empty<Vector3>();
       }
 
-      List<Vector3> spawnPointPositions = new();
+      List<Vector3> spawnPointPositions = [];
       foreach (SpawnPointMarker spawnPointMarker in SpawnPointMarkers)
       {
         // Try to find a point on the NavMesh nearby the spawn point

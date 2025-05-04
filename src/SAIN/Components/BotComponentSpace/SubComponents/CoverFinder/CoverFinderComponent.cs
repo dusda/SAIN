@@ -1,14 +1,13 @@
 ﻿using EFT;
 using SAIN.Components;
+using SAIN.Components.BotComponentSpace;
 using SAIN.Helpers;
 using SAIN.Models.Enums;
 using SAIN.Plugin;
 using SAIN.Preset;
 using SAIN.SAINComponent.Classes.EnemyClasses;
 using System.Collections;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -111,13 +110,13 @@ namespace SAIN.SAINComponent.SubComponents.CoverFinder
       }
     }
 
-    public BotComponent Bot { get; private set; }
-    public List<CoverPoint> CoverPoints { get; } = new List<CoverPoint>();
-    private CoverAnalyzer CoverAnalyzer { get; set; }
-    private ColliderFinder ColliderFinder { get; set; }
+    public BotComponent? Bot { get; private set; }
+    public List<CoverPoint> CoverPoints { get; } = [];
+    private CoverAnalyzer? CoverAnalyzer { get; set; }
+    private ColliderFinder? ColliderFinder { get; set; }
     public bool ProcessingLimited { get; private set; }
-    public CoverPoint FallBackPoint { get; private set; }
-    public List<SpottedCoverPoint> SpottedCoverPoints { get; private set; } = new List<SpottedCoverPoint>();
+    public CoverPoint? FallBackPoint { get; private set; }
+    public List<SpottedCoverPoint> SpottedCoverPoints { get; private set; } = [];
 
     public void Init(BotComponent bot)
     {
@@ -209,7 +208,7 @@ namespace SAIN.SAINComponent.SubComponents.CoverFinder
       TargetData.Update(target, botPosition);
     }
 
-    private int targetCoverCount(TargetData targetData)
+    private static int targetCoverCount(TargetData targetData)
     {
       int targetCount;
       bool isAI = targetData.TargetEnemy.IsAI;
@@ -394,7 +393,7 @@ namespace SAIN.SAINComponent.SubComponents.CoverFinder
       return false;
     }
 
-    private bool filterColliderByName(Collider collider)
+    private static bool filterColliderByName(Collider collider)
     {
       return collider != null &&
           _excludedColliderNames.Contains(collider.transform?.parent?.name);
@@ -586,7 +585,7 @@ namespace SAIN.SAINComponent.SubComponents.CoverFinder
       return data != null && data.TargetEnemy.WasValid;
     }
 
-    private void endStopWatch(Stopwatch debugStopWatch)
+    private static void endStopWatch(Stopwatch debugStopWatch)
     {
       if (debugStopWatch?.IsRunning == true)
       {
@@ -604,7 +603,7 @@ namespace SAIN.SAINComponent.SubComponents.CoverFinder
       points.Sort((x, y) => x.PathData.RoundedPathLength.CompareTo(y.PathData.RoundedPathLength));
     }
 
-    private CoverPoint FindFallbackPoint(List<CoverPoint> points)
+    private static CoverPoint FindFallbackPoint(List<CoverPoint> points)
     {
       points.Sort((x, y) => x.HardData.Height.CompareTo(y.HardData.Height));
       return points.Last();
@@ -669,7 +668,7 @@ namespace SAIN.SAINComponent.SubComponents.CoverFinder
       foreach (var spottedPoint in SpottedCoverPoints)
       {
         Vector3 spottedPointPos = spottedPoint.CoverPoint.Position;
-        if (spottedPoint.TooClose(spottedPointPos, point.Position))
+        if (SpottedCoverPoint.TooClose(spottedPointPos, point.Position))
         {
           return true;
         }
@@ -693,7 +692,7 @@ namespace SAIN.SAINComponent.SubComponents.CoverFinder
     }
 
     private readonly WaitForSeconds _recheckWait = new(RECHECK_COVER_WAIT_FOREACH_FREQ);
-    private TargetData _targetData;
+    private TargetData? _targetData;
     private float _updateTargetTime;
     private readonly Collider[] _colliderArray = new Collider[COLLIDER_ARRAY_SIZE];
     private Vector3 _lastPositionChecked = Vector3.zero;
@@ -702,9 +701,9 @@ namespace SAIN.SAINComponent.SubComponents.CoverFinder
     private int _totalChecked;
     private float _debugLogTimer = 0f;
     private float _nextClearSpottedTime;
-    private Coroutine _findCoverPointsCoroutine;
-    private Coroutine _recheckCoverPointsCoroutine;
-    private readonly List<CoverPoint> _tempRecheckList = new();
+    private Coroutine? _findCoverPointsCoroutine;
+    private Coroutine? _recheckCoverPointsCoroutine;
+    private readonly List<CoverPoint> _tempRecheckList = [];
 
     public static bool PerformanceMode { get; private set; } = false;
     public static float CoverMinHeight { get; private set; } = 0.5f;
@@ -716,8 +715,8 @@ namespace SAIN.SAINComponent.SubComponents.CoverFinder
     private static float _debugTimer;
     private static float _debugTimer2;
 
-    private static readonly List<string> _excludedColliderNames = new()
-        {
+    private static readonly List<string> _excludedColliderNames =
+        [
             "metall_fence_2",
             "metallstolb",
             "stolb",
@@ -733,7 +732,7 @@ namespace SAIN.SAINComponent.SubComponents.CoverFinder
             "sign17_lod",
             "ograda1",
             "ladder_metal"
-        };
+        ];
 
     static CoverFinderComponent()
     {

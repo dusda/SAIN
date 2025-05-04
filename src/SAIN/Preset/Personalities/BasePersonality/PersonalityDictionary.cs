@@ -2,7 +2,6 @@
 using SAIN.Helpers;
 using SAIN.Preset.GlobalSettings;
 using SAIN.SAINComponent.Classes.Info;
-using System.Collections.Generic;
 using UnityEngine;
 using JsonUtility = SAIN.Helpers.JsonUtility;
 
@@ -87,7 +86,7 @@ namespace SAIN.Preset.Personalities
       return null;
     }
 
-    private bool checkForcePersonality(out EPersonality personality)
+    private static bool checkForcePersonality(out EPersonality personality)
     {
       foreach (var item in SAINPlugin.LoadedPreset.GlobalSettings.Mind.ForcePersonality)
       {
@@ -101,9 +100,9 @@ namespace SAIN.Preset.Personalities
       return false;
     }
 
-    public Dictionary<EPersonality, List<string>> Nickname_Personalities = new();
+    public Dictionary<EPersonality, List<string>> Nickname_Personalities = [];
 
-    private EPersonality setNicknamePersonality(string nickname)
+    private static EPersonality setNicknamePersonality(string nickname)
     {
       if (nickname.IsNullOrEmpty())
       {
@@ -120,7 +119,7 @@ namespace SAIN.Preset.Personalities
       return EPersonality.Normal;
     }
 
-    private EPersonality setBossPersonality(WildSpawnType wildSpawnType)
+    private static EPersonality setBossPersonality(WildSpawnType wildSpawnType)
     {
       if (GlobalSettingsClass.Instance.Mind.PERS_BOSSES.TryGetValue(wildSpawnType, out EPersonality bossPersonality))
       {
@@ -155,12 +154,12 @@ namespace SAIN.Preset.Personalities
       return false;
     }
 
-    private bool checkRandomAssignment(PersonalitySettingsClass settings)
+    private static bool checkRandomAssignment(PersonalitySettingsClass settings)
     {
       return settings.Assignment.CanBeRandomlyAssigned && EFTMath.RandomBool(settings.Assignment.RandomlyAssignedChance);
     }
 
-    private bool meetsRequirements(SAINBotInfoClass infoClass, PersonalitySettingsClass settings)
+    private static bool meetsRequirements(SAINBotInfoClass infoClass, PersonalitySettingsClass settings)
     {
       var assignment = settings.Assignment;
       return assignment.AllowedTypes.Contains(infoClass.Profile.WildSpawnType)
@@ -170,7 +169,7 @@ namespace SAIN.Preset.Personalities
           && infoClass.Profile.PlayerLevel > assignment.MinLevel;
     }
 
-    private float getChance(float powerLevel, PersonalitySettingsClass settings)
+    private static float getChance(float powerLevel, PersonalitySettingsClass settings)
     {
       var assignment = settings.Assignment;
       powerLevel = Mathf.Clamp(powerLevel, 0, 1000);

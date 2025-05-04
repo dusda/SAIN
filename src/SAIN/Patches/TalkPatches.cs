@@ -1,7 +1,7 @@
 ﻿using EFT;
 using HarmonyLib;
 using SAIN.Components;
-using SAIN.SAINComponent;
+using SAIN.Components.BotComponentSpace;
 using SPT.Reflection.Patching;
 using System.Reflection;
 

@@ -1,4 +1,5 @@
-﻿using SAIN.Helpers;
+﻿using SAIN.Components.BotComponentSpace;
+using SAIN.Helpers;
 using SAIN.Preset;
 using SAIN.Preset.GlobalSettings;
 
@@ -87,7 +88,7 @@ namespace SAIN.SAINComponent.Classes
       mods.HearingDistCoef = globalSettings.HearingDistanceCoef;
     }
 
-    private void apply(DifficultySettings settings, TemporaryStatModifiers mods)
+    private static void apply(DifficultySettings settings, TemporaryStatModifiers mods)
     {
       mods.Modifiers.AccuratySpeedCoef = settings.AccuracySpeedCoef;
       mods.Modifiers.PrecicingSpeedCoef = settings.PrecisionSpeedCoef;

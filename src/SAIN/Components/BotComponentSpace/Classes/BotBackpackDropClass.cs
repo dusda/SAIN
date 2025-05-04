@@ -1,5 +1,6 @@
 ﻿using EFT;
 using EFT.InventoryLogic;
+using SAIN.Components.BotComponentSpace;
 using SAIN.Models.Enums;
 using System.Collections;
 using UnityEngine;
@@ -40,7 +41,7 @@ namespace SAIN.SAINComponent.Classes
     {
     }
 
-    public bool DropBackpack()
+    public static bool DropBackpack()
     {
       //Item backpack = _currentBackpack;
       //if (DroppedBackpack == null && backpack == null)
@@ -98,7 +99,7 @@ namespace SAIN.SAINComponent.Classes
 
     private Item _currentBackpack => Bot.PlayerComponent.Equipment.GearInfo.GetItem(EquipmentSlot.Backpack);
 
-    public bool RetreiveBackpack()
+    public static bool RetreiveBackpack()
     {
       return false;
     }

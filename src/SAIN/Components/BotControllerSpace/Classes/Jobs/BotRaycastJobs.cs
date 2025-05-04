@@ -3,7 +3,6 @@ using SAIN.Models.Enums;
 using SAIN.Models.Structs;
 using SAIN.SAINComponent.Classes.EnemyClasses;
 using System.Collections;
-using System.Collections.Generic;
 using Unity.Collections;
 using Unity.Jobs;
 using UnityEngine;
@@ -19,7 +18,7 @@ namespace SAIN.Components
       VisionJob = new VisionRaycastJob(botController);
     }
 
-    public void Update()
+    public static void Update()
     {
     }
 
@@ -55,7 +54,7 @@ namespace SAIN.Components
           continue;
         }
 
-        if (BotController.BotGame?.Status == EFT.GameStatus.Stopping)
+        if (SAINBotController.BotGame?.Status == EFT.GameStatus.Stopping)
         {
           yield return null;
           continue;
@@ -191,8 +190,8 @@ namespace SAIN.Components
     private readonly LayerMask _VisionMask = LayerMaskClass.AI;
     private readonly LayerMask _ShootMask = LayerMaskClass.HighPolyWithTerrainMask;
     private int _partCount = -1;
-    private readonly List<EBodyPartColliderType> _colliderTypes = new();
-    private readonly List<Vector3> _castPoints = new();
+    private readonly List<EBodyPartColliderType> _colliderTypes = [];
+    private readonly List<Vector3> _castPoints = [];
 
     private static void FindEnemies(BotDictionary bots, List<Enemy> result)
     {
@@ -232,6 +231,6 @@ namespace SAIN.Components
       }
     }
 
-    private readonly List<Enemy> _enemies = new();
+    private readonly List<Enemy> _enemies = [];
   }
 }

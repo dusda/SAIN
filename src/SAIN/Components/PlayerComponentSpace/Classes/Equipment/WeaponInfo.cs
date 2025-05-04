@@ -2,7 +2,6 @@
 using SAIN.Helpers;
 using SAIN.Plugin;
 using SAIN.Preset;
-using System;
 using UnityEngine;
 
 namespace SAIN.SAINComponent.Classes.Info
@@ -321,8 +320,8 @@ namespace SAIN.SAINComponent.Classes.Info
 
   public class OpticAIConfig
   {
-    public string Name;
-    public string TypeId;
+    public string? Name;
+    public string? TypeId;
     public float FarDistanceScaleStart;
     public float FarDistanceScaleEnd;
     public float FarMultiplier;

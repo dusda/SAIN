@@ -1,7 +1,6 @@
-﻿using SAIN.Models.Enums;
-using SAIN.SAINComponent;
+﻿using SAIN.Components.BotComponentSpace;
+using SAIN.Models.Enums;
 using System.Collections;
-using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 
@@ -14,7 +13,7 @@ namespace SAIN.Components.BotController.PeacefulActions
     private const float MAX_START_CONVO_RANGE_SQR = MAX_START_CONVO_RANGE * MAX_START_CONVO_RANGE;
 
     public EPeacefulAction Action { get; }
-    public List<IPeacefulActionExecutor> ActiveActions { get; } = new List<IPeacefulActionExecutor>();
+    public List<IPeacefulActionExecutor> ActiveActions { get; } = [];
     public bool Active => Count > 0;
     public int Count => ActiveActions.Count;
 
@@ -55,7 +54,7 @@ namespace SAIN.Components.BotController.PeacefulActions
       }
     }
 
-    private bool recheckBots(params BotComponent[] bots)
+    private static bool recheckBots(params BotComponent[] bots)
     {
       foreach (BotComponent bot in bots)
         if (bot == null || bot.HasEnemy)
@@ -82,8 +81,8 @@ namespace SAIN.Components.BotController.PeacefulActions
     }
 
     private int _conversations;
-    private readonly List<BotComponent> _selectedBots = new();
-    private readonly List<BotComponent> _localList = new();
+    private readonly List<BotComponent> _selectedBots = [];
+    private readonly List<BotComponent> _localList = [];
     private float _nextCheckTime;
   }
 }

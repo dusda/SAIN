@@ -4,8 +4,6 @@ using SAIN.Editor.Util;
 using SAIN.Plugin;
 using SAIN.Preset;
 using SAIN.Preset.BotSettings.SAINSettings;
-using System;
-using System.Collections.Generic;
 using UnityEngine;
 using static SAIN.Editor.SAINLayout;
 
@@ -15,7 +13,7 @@ namespace SAIN.Editor
   {
     static BotSelectionClass()
     {
-      List<string> sections = new();
+      List<string> sections = [];
       foreach (var type in BotTypeDefinitions.BotTypes.Values)
       {
         if (!sections.Contains(type.Section))
@@ -93,10 +91,10 @@ namespace SAIN.Editor
 
     public static readonly string[] Sections;
 
-    private static readonly List<BotType> SelectedBotTypes = new();
+    private static readonly List<BotType> SelectedBotTypes = [];
 
     public static readonly BotDifficulty[] BotDifficultyOptions = [BotDifficulty.easy, BotDifficulty.normal, BotDifficulty.hard, BotDifficulty.impossible];
-    public static readonly List<BotDifficulty> SelectedDifficulties = new();
+    public static readonly List<BotDifficulty> SelectedDifficulties = [];
 
     public static bool BotSettingsWereEdited;
 

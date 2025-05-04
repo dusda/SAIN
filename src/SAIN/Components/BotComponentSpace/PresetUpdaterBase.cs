@@ -1,6 +1,5 @@
 ﻿using SAIN.Plugin;
 using SAIN.Preset;
-using System;
 
 namespace SAIN.SAINComponent
 {
@@ -26,7 +25,7 @@ namespace SAIN.SAINComponent
     }
 
     protected bool subscribed;
-    private Action<SAINPresetClass> _func;
+    private Action<SAINPresetClass>? _func;
   }
 
   // this purely exists to avoid rewriting code 100 times
@@ -53,6 +52,6 @@ namespace SAIN.SAINComponent
 
     public bool Subscribed { get; private set; }
 
-    private Action<SAINPresetClass> _func;
+    private Action<SAINPresetClass>? _func;
   }
 }

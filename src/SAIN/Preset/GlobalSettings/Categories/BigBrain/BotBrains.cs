@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace SAIN.Preset.GlobalSettings.Categories
+﻿namespace SAIN.Preset.GlobalSettings.Categories
 {
   public class BotBrains
   {

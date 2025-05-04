@@ -26,7 +26,7 @@ namespace SAIN.Layers.Combat.Solo
       if (enemy != null)
       {
       }
-      this.EndProfilingSample();
+      EndProfilingSample();
     }
 
     private FlankRoute FindFlankRoute()
@@ -103,7 +103,7 @@ namespace SAIN.Layers.Combat.Solo
       return null;
     }
 
-    private bool ArePathsDifferent(NavMeshPath path1, NavMeshPath path2, float minRatio = 0.25f)
+    private static bool ArePathsDifferent(NavMeshPath path1, NavMeshPath path2, float minRatio = 0.25f)
     {
       int sameCount = 0;
       int differentCount = 0;
@@ -134,7 +134,7 @@ namespace SAIN.Layers.Combat.Solo
       return sameCount / path1.corners.Length <= minRatio;
     }
 
-    private bool SamplePointAndCheckPath(Vector3 point, Vector3 origin, out NavMeshPath path)
+    private static bool SamplePointAndCheckPath(Vector3 point, Vector3 origin, out NavMeshPath path)
     {
       if (NavMesh.SamplePosition(point, out NavMeshHit hit, 10f, NavMesh.AllAreas))
       {
@@ -145,7 +145,7 @@ namespace SAIN.Layers.Combat.Solo
       return false;
     }
 
-    private Vector3? FindMiddlePoint(NavMeshPath path, float pathLength, out int index)
+    private static Vector3? FindMiddlePoint(NavMeshPath path, float pathLength, out int index)
     {
       float currentLength = 0f;
       for (int i = 0; i < path.corners.Length - 1; i++)

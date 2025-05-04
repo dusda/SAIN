@@ -1,10 +1,9 @@
 ﻿using EFT;
 using HarmonyLib;
 using SAIN.Components;
-using SAIN.Components.BotController;
+using SAIN.Components.BotControllerSpace.Classes;
 using SAIN.Helpers;
 using SPT.Reflection.Patching;
-using System;
 using System.Reflection;
 using UnityEngine;
 using EFTSettingsLoadClass = GClass598;

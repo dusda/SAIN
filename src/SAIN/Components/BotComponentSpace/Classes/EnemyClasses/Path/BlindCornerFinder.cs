@@ -1,7 +1,6 @@
 ﻿using SAIN.Helpers;
 using SAIN.Models.Enums;
 using System.Collections;
-using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
 
@@ -14,7 +13,7 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
       //createDebug();
     }
 
-    public void Init()
+    public static void Init()
     {
       //_blindCornerLoop = Bot.StartCoroutine(blindCornerLoop());
       //SubscribeToDispose(Dispose);
@@ -134,7 +133,7 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
       }
     }
 
-    private readonly List<Vector3> _castPoints = new();
+    private readonly List<Vector3> _castPoints = [];
 
     public IEnumerator FindBlindCorner2(Vector3[] corners, Vector3 enemyPosition)
     {
@@ -231,7 +230,7 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
     private Vector3 HEIGHT_OFFSET = Vector3.up * HEIGHT;
     private Vector3 HEIGHT_OFFSET_HALF = Vector3.up * HEIGHT_HALF;
 
-    private void findSegmentsBetweenCorner(Vector3 corner, Vector3 nextCorner, List<Vector3> segmentsList)
+    private static void findSegmentsBetweenCorner(Vector3 corner, Vector3 nextCorner, List<Vector3> segmentsList)
     {
       segmentsList.Add(corner);
       Vector3 cornerDirection = (nextCorner - corner);
@@ -256,7 +255,7 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
       }
     }
 
-    private readonly List<Vector3> _segments = new();
+    private readonly List<Vector3> _segments = [];
     private const float SEGMENT_LENGTH = 0.5f;
     private const float SEGMENT_LENGTH_SQR = SEGMENT_LENGTH * SEGMENT_LENGTH;
 
@@ -446,7 +445,7 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
 
     private float _nextLogTime;
 
-    private void drawDebug(Vector3 corner, Vector3 lookPoint, bool hit)
+    private static void drawDebug(Vector3 corner, Vector3 lookPoint, bool hit)
     {
       if (SAINPlugin.DebugMode && SAINPlugin.DebugSettings.Gizmos.DebugDrawBlindCorner)
       {
@@ -480,7 +479,7 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
       return midPoint;
     }
 
-    private bool rayCastToCorner(Vector3 corner, Vector3 lookPoint, float heightOffset)
+    private static bool rayCastToCorner(Vector3 corner, Vector3 lookPoint, float heightOffset)
     {
       corner.y += heightOffset;
       Vector3 direction = corner - lookPoint;
@@ -488,6 +487,6 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
     }
 
     private static readonly LayerMask _mask = LayerMaskClass.HighPolyWithTerrainMask;
-    private readonly List<Vector3> _corners = new();
+    private readonly List<Vector3> _corners = [];
   }
 }

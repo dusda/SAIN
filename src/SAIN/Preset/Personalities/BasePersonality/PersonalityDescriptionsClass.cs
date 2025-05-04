@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace SAIN.Preset.Personalities
+﻿namespace SAIN.Preset.Personalities
 {
   public static class PersonalityDescriptionsClass
   {

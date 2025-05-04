@@ -1,10 +1,10 @@
 using EFT.InventoryLogic;
+using SAIN.Components.BotComponentSpace;
 using SAIN.Components.BotComponentSpace.Classes;
 using SAIN.Helpers;
 using SAIN.Preset;
 using SAIN.Preset.GlobalSettings;
 using SAIN.SAINComponent.Classes.WeaponFunction;
-using System.Linq;
 using UnityEngine;
 using static EFT.InventoryLogic.Weapon;
 

@@ -1,8 +1,6 @@
 ﻿using Comfort.Common;
 using EFT.Interactive;
 using SAIN.Preset.GlobalSettings;
-using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace SAIN.Components
@@ -130,8 +128,8 @@ namespace SAIN.Components
     }
 
     private bool _doorsDisabled;
-    private readonly Dictionary<string, Door> _disabledDoors = new();
-    private readonly Dictionary<int, GameObject> _doorsWithTriggers = new();
+    private readonly Dictionary<string, Door> _disabledDoors = [];
+    private readonly Dictionary<int, GameObject> _doorsWithTriggers = [];
 
     private bool _doorsDisabledByHost;
   }

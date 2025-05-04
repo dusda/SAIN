@@ -1,5 +1,4 @@
-﻿using SAIN.SAINComponent;
-using System.Collections.Generic;
+﻿using SAIN.Components.BotComponentSpace;
 
 namespace SAIN.Components.BotController
 {

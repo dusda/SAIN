@@ -1,6 +1,6 @@
 ﻿using EFT;
 using EFT.Interactive;
-using SAIN.SAINComponent;
+using SAIN.Components.BotComponentSpace;
 using UnityEngine;
 
 namespace SAIN.Layers
@@ -84,13 +84,13 @@ namespace SAIN.Layers
     private float UpdateInfoTimer;
 
     private float randomizationFactor = 0;
-    private float MinLootValPMC => SAINPlugin.LoadedPreset.GlobalSettings.General.LootingBots.MinLootValPMC;
-    private float MinLootValSCAV => SAINPlugin.LoadedPreset.GlobalSettings.General.LootingBots.MinLootValSCAV;
-    private float MinLootValOther => SAINPlugin.LoadedPreset.GlobalSettings.General.LootingBots.MinLootValOther;
-    private float MinLootValException => SAINPlugin.LoadedPreset.GlobalSettings.General.LootingBots.MinLootValException;
+    private static float MinLootValPMC => SAINPlugin.LoadedPreset.GlobalSettings.General.LootingBots.MinLootValPMC;
+    private static float MinLootValSCAV => SAINPlugin.LoadedPreset.GlobalSettings.General.LootingBots.MinLootValSCAV;
+    private static float MinLootValOther => SAINPlugin.LoadedPreset.GlobalSettings.General.LootingBots.MinLootValOther;
+    private static float MinLootValException => SAINPlugin.LoadedPreset.GlobalSettings.General.LootingBots.MinLootValException;
 
 
-    private int GetItemPrice(LootItem item)
+    private static int GetItemPrice(LootItem item)
     {
       float price = LootingBots.LootingBotsInterop.GetItemPrice(item);
       return Mathf.RoundToInt(price);

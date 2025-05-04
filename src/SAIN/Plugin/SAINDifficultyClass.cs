@@ -1,7 +1,6 @@
 ﻿using EFT;
 using SAIN.Helpers;
 using SAIN.Preset;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace SAIN.Plugin
@@ -16,7 +15,7 @@ namespace SAIN.Plugin
     private const string PresetNameVeryHard = "I Like Pain";
     private const string PresetNameImpossible = "Death Wish";
 
-    public static readonly Dictionary<SAINDifficulty, SAINPresetDefinition> DefaultPresetDefinitions = new();
+    public static readonly Dictionary<SAINDifficulty, SAINPresetDefinition> DefaultPresetDefinitions = [];
 
     static SAINDifficultyClass()
     {

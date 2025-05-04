@@ -22,7 +22,7 @@ namespace SAIN.SAINComponent.Classes
     private bool DAMAGE_USE_HIT_OFFSET_DIR => _settings.USE_HIT_POINT_DIRECTION;
     private float DAMAGE_HIT_OFFSET_BASE_DIST => _settings.HIT_POINT_DIRECTION_BASE_DISTANCE;
 
-    private HitEffectSettings _settings => GlobalSettingsClass.Instance.Aiming.HitEffects;
+    private static HitEffectSettings _settings => GlobalSettingsClass.Instance.Aiming.HitEffects;
 
     public AimHitEffectClass(SAINBotMedicalClass medical) : base(medical)
     {

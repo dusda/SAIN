@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using SAIN.Components.BotComponentSpace;
 
 namespace SAIN.SAINComponent.Classes.EnemyClasses
 {
@@ -119,7 +119,7 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
     }
 
     private Dictionary<string, Enemy> Enemies;
-    private readonly List<string> _allyIdsToRemove = new();
-    private readonly List<string> _invalidIdsToRemove = new();
+    private readonly List<string> _allyIdsToRemove = [];
+    private readonly List<string> _invalidIdsToRemove = [];
   }
 }

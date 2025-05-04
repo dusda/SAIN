@@ -1,7 +1,7 @@
 ﻿using DrakiaXYZ.BigBrain.Brains;
 using EFT;
 using SAIN.Components;
-using SAIN.SAINComponent;
+using SAIN.Components.BotComponentSpace;
 using System.Text;
 
 namespace SAIN.Layers
@@ -59,7 +59,7 @@ namespace SAIN.Layers
       }
     }
 
-    protected void EndProfilingSample()
+    protected static void EndProfilingSample()
     {
       if (SAINPlugin.ProfilingMode)
       {

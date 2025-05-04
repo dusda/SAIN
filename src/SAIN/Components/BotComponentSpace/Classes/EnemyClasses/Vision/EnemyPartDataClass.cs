@@ -1,14 +1,13 @@
 ﻿using EFT;
 using SAIN.Models.Enums;
 using SAIN.Models.Structs;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace SAIN.SAINComponent.Classes.EnemyClasses
 {
   public class EnemyPartDataClass
   {
-    public readonly Dictionary<ERaycastCheck, RaycastResult> RaycastResults = new();
+    public readonly Dictionary<ERaycastCheck, RaycastResult> RaycastResults = [];
 
     public float TimeSeen { get; private set; }
     public float TimeSinceSeen => IsVisible ? Time.time - TimeSeen : -1f;
@@ -51,7 +50,7 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
       RaycastResults.Add(ERaycastCheck.Vision, new RaycastResult());
     }
 
-    private readonly Dictionary<EBodyPartColliderType, BodyPartCollider> _colliderDictionary = new();
+    private readonly Dictionary<EBodyPartColliderType, BodyPartCollider> _colliderDictionary = [];
 
     public void SetLineOfSight(Vector3 castPoint, EBodyPartColliderType colliderType, RaycastHit raycastHit, ERaycastCheck type, float time)
     {
@@ -106,7 +105,7 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
       return result;
     }
 
-    private float getColliderMinSize(BodyPartCollider collider)
+    private static float getColliderMinSize(BodyPartCollider collider)
     {
       if (collider.Collider == null)
       {

@@ -1,8 +1,8 @@
 ﻿using DrakiaXYZ.BigBrain.Brains;
 using EFT;
+using SAIN.Components.BotComponentSpace.Classes.Mover;
 using SAIN.Helpers;
 using SAIN.Preset.GlobalSettings;
-using SAIN.SAINComponent.Classes.Mover;
 using SAIN.SAINComponent.SubComponents.CoverFinder;
 using System.Text;
 using UnityEngine;
@@ -30,7 +30,7 @@ namespace SAIN.Layers.Combat.Solo.Cover
       checkJumpToCover();
       tryRun();
       checkRunFailed();
-      this.EndProfilingSample();
+      EndProfilingSample();
     }
 
     private void checkRunFailed()

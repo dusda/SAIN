@@ -4,7 +4,6 @@ using Newtonsoft.Json;
 using SAIN.Attributes;
 using SAIN.Components.PlayerComponentSpace;
 using SAIN.SAINComponent.Classes.Info;
-using System.Collections.Generic;
 
 namespace SAIN.Preset.GlobalSettings
 {
@@ -304,7 +303,7 @@ namespace SAIN.Preset.GlobalSettings
       return result;
     }
 
-    private float FindHighestArmorClass(List<ArmorComponent> armorComponents)
+    private static float FindHighestArmorClass(List<ArmorComponent> armorComponents)
     {
       float result = 0f;
       foreach (var armorComponent in armorComponents)
@@ -332,23 +331,23 @@ namespace SAIN.Preset.GlobalSettings
     }
 
     [JsonIgnore]
-    private static readonly List<ArmorComponent> armorComponents = new();
+    private static readonly List<ArmorComponent> armorComponents = [];
 
     [JsonIgnore]
-    private static readonly List<WildSpawnType> _PMCS = new()
-        {
+    private static readonly List<WildSpawnType> _PMCS =
+        [
             WildSpawnType.pmcUSEC,
             WildSpawnType.pmcBEAR
-        };
+        ];
 
     [JsonIgnore]
-    private static readonly List<WildSpawnType> _SCAVS = new()
-        {
+    private static readonly List<WildSpawnType> _SCAVS =
+        [
             WildSpawnType.assault,
             WildSpawnType.cursedAssault,
             WildSpawnType.assaultGroup,
             WildSpawnType.crazyAssaultEvent,
             WildSpawnType.marksman
-        };
+        ];
   }
 }

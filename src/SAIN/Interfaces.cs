@@ -1,5 +1,5 @@
-﻿using SAIN.Preset;
-using SAIN.SAINComponent;
+﻿using SAIN.Components.BotComponentSpace;
+using SAIN.Preset;
 using SAIN.SAINComponent.Classes.EnemyClasses;
 
 namespace SAIN

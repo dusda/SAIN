@@ -44,7 +44,7 @@ namespace SAIN.SAINComponent.Classes
       return result;
     }
 
-    private float getBaseDispersion(float enemyDistance, SAINSoundType soundType)
+    private static float getBaseDispersion(float enemyDistance, SAINSoundType soundType)
     {
       HearingSettings hearingSettings = GlobalSettingsClass.Instance.Hearing;
       if (hearingSettings.HEAR_DISPERSION_VALUES.TryGetValue(soundType, out float dispersionValue) == false)
@@ -67,7 +67,7 @@ namespace SAIN.SAINComponent.Classes
       return dispersionModifier;
     }
 
-    private Vector3 getRandomizedDirection(float dispersion, float min = 0.5f)
+    private static Vector3 getRandomizedDirection(float dispersion, float min = 0.5f)
     {
       float randomX = UnityEngine.Random.Range(-dispersion, dispersion);
       float randomZ = UnityEngine.Random.Range(-dispersion, dispersion);
@@ -79,7 +79,7 @@ namespace SAIN.SAINComponent.Classes
       return randomdirection;
     }
 
-    public Vector3 GetEstimatedPoint(Vector3 source, float distance)
+    public static Vector3 GetEstimatedPoint(Vector3 source, float distance)
     {
       Vector3 randomPoint = UnityEngine.Random.onUnitSphere;
       randomPoint.y = 0;

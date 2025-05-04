@@ -26,7 +26,7 @@ namespace SAIN.Layers.Combat.Solo
         Bot.Mover.Pose.SetPoseToCover();
       }
       Shoot.CheckAimAndFire();
-      this.EndProfilingSample();
+      EndProfilingSample();
     }
 
     private bool shallMoveShoot = false;

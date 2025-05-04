@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json;
 using SAIN.Attributes;
 using SAIN.Preset.GlobalSettings;
-using System.Collections.Generic;
 
 namespace SAIN.Preset.Personalities
 {
@@ -9,7 +8,7 @@ namespace SAIN.Preset.Personalities
   {
     [JsonIgnore]
     [Hidden]
-    public List<ISAINSettings> SettingsList { get; } = new List<ISAINSettings>();
+    public List<ISAINSettings> SettingsList { get; } = [];
 
     public virtual void InitList()
     {
@@ -44,7 +43,7 @@ namespace SAIN.Preset.Personalities
       }
     }
 
-    public void UpdateDefaults(ISettingsGroup replacementGroup = null)
+    public void UpdateDefaults(ISettingsGroup? replacementGroup = null)
     {
       if (replacementGroup == null)
       {

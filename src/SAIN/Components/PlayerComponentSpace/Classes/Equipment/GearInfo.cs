@@ -1,7 +1,6 @@
 ﻿using EFT.InventoryLogic;
 using SAIN.Components.PlayerComponentSpace.Classes.Equipment;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace SAIN.SAINComponent.Classes.Info
@@ -31,7 +30,7 @@ namespace SAIN.SAINComponent.Classes.Info
       Equipment = equipment;
     }
 
-    public void Update()
+    public static void Update()
     {
     }
 
@@ -143,7 +142,7 @@ namespace SAIN.SAINComponent.Classes.Info
       return findMaxAC(item);
     }
 
-    private readonly List<FaceShieldComponent> _faceShieldComponents = new();
-    private readonly List<ArmorComponent> _armorList = new();
+    private readonly List<FaceShieldComponent> _faceShieldComponents = [];
+    private readonly List<ArmorComponent> _armorList = [];
   }
 }

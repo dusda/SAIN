@@ -23,7 +23,7 @@ namespace SAIN.Layers.Combat.Solo
         Bot.Steering.LookToLastKnownEnemyPosition(Bot.Enemy);
       }
       Shoot.CheckAimAndFire();
-      this.EndProfilingSample();
+      EndProfilingSample();
     }
 
     public override void Start()

@@ -4,7 +4,6 @@ using SAIN.Editor;
 using SAIN.Editor.Util;
 using SAIN.Plugin;
 using System.Collections;
-using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 using UnityEngine.AI;
@@ -17,8 +16,8 @@ namespace SAIN.Helpers
   public sealed class GUIObject
   {
     public Vector3 WorldPos;
-    public string Text;
-    public GUIStyle Style;
+    public string? Text;
+    public GUIStyle? Style;
     public float Scale = 1;
     public StringBuilder StringBuilder = new();
     public bool Enabled = true;
@@ -86,13 +85,13 @@ namespace SAIN.Helpers
       }
     }
 
-    private static readonly List<GameObject> DrawnGizmos = new();
+    private static readonly List<GameObject> DrawnGizmos = [];
 
     public static bool DrawGizmos => SAINPlugin.DrawDebugGizmos;
 
     private static GUIStyle DefaultStyle;
 
-    public static GUIObject CreateLabel(Vector3 worldPos, string text, GUIStyle guiStyle = null, float scale = 1f, bool debug = true)
+    public static GUIObject CreateLabel(Vector3 worldPos, string text, GUIStyle? guiStyle = null, float scale = 1f, bool debug = true)
     {
       GUIObject obj = new() { WorldPos = worldPos, Text = text, Style = guiStyle, Scale = scale };
       AddGUIObject(obj, debug);
@@ -121,7 +120,7 @@ namespace SAIN.Helpers
       GameLabels.Remove(obj);
     }
 
-    public static void OnGUIDrawLabel(Vector3 worldPos, string text, GUIStyle guiStyle = null, float scale = 1f)
+    public static void OnGUIDrawLabel(Vector3 worldPos, string text, GUIStyle? guiStyle = null, float scale = 1f)
     {
       if (Camera.main == null)
       {
@@ -164,8 +163,8 @@ namespace SAIN.Helpers
       guiStyle.fontSize = origFontSize;
     }
 
-    private static readonly List<GUIObject> DebugLabels = new();
-    private static readonly List<GUIObject> GameLabels = new();
+    private static readonly List<GUIObject> DebugLabels = [];
+    private static readonly List<GUIObject> GameLabels = [];
 
     private static float GetScreenScale()
     {
@@ -341,7 +340,7 @@ namespace SAIN.Helpers
       {
         return null;
       }
-      List<GameObject> list = new();
+      List<GameObject> list = [];
       DrawLinesToPoint(list, origin, color, lineSize, expireTime, raisePoints, points);
       return list;
     }
@@ -367,7 +366,7 @@ namespace SAIN.Helpers
       {
         return null;
       }
-      List<GameObject> list = new();
+      List<GameObject> list = [];
       DrawSpheresAtPoints(list, color, size, expireTime, raisePoints, points);
       return list;
     }
@@ -379,7 +378,7 @@ namespace SAIN.Helpers
         return null;
       }
 
-      List<GameObject> list = new();
+      List<GameObject> list = [];
       for (int i = 0; i < points.Length; i++)
       {
         Vector3 pointA = points[i];
@@ -403,7 +402,7 @@ namespace SAIN.Helpers
         return null;
       }
 
-      List<GameObject> list = new();
+      List<GameObject> list = [];
       for (int i = 0; i < points.Length; i++)
       {
         Vector3 pointA = points[i];
@@ -423,7 +422,7 @@ namespace SAIN.Helpers
 
     public class DrawLists
     {
-      private static ManualLogSource Logger;
+      private static ManualLogSource? Logger;
       private Color ColorA;
       private Color ColorB;
 
@@ -511,7 +510,7 @@ namespace SAIN.Helpers
 
       private GameObject[] Create(List<Vector3> list, float size = 0.1f, bool rays = false, float rayLength = 0.35f)
       {
-        List<GameObject> debugObjects = new();
+        List<GameObject> debugObjects = [];
         foreach (var point in list)
         {
           if (rays)
@@ -533,7 +532,7 @@ namespace SAIN.Helpers
 
       private GameObject[] Create(Vector3[] array, float size = 0.1f, bool rays = false, float rayLength = 0.35f)
       {
-        List<GameObject> debugObjects = new();
+        List<GameObject> debugObjects = [];
         foreach (var point in array)
         {
           if (rays)
@@ -604,9 +603,9 @@ namespace SAIN.Helpers
 
       public class FollowLineScript : MonoBehaviour
       {
-        public GameObject startObject;
-        public GameObject endObject;
-        public LineRenderer lineRenderer;
+        public GameObject? startObject;
+        public GameObject? endObject;
+        public LineRenderer? lineRenderer;
         public float yOffset = 1f;
 
         public void Update()

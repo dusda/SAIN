@@ -4,7 +4,6 @@ using EFT;
 using EFT.Interactive;
 
 using HarmonyLib;
-using System;
 using System.Reflection;
 
 namespace LootingBots
@@ -15,12 +14,12 @@ namespace LootingBots
     private static bool _LootingBotsInteropInited = false;
 
     private static bool _IsLootingBotsLoaded;
-    private static Type _LootingBotsExternalType;
-    private static MethodInfo _ForceBotToScanLootMethod;
-    private static MethodInfo _PreventBotFromLootingMethod;
-    private static MethodInfo _CheckIfInventoryFullMethod;
-    private static MethodInfo _GetNetLootValueMethod;
-    private static MethodInfo _GetItemPriceMethod;
+    private static Type? _LootingBotsExternalType;
+    private static MethodInfo? _ForceBotToScanLootMethod;
+    private static MethodInfo? _PreventBotFromLootingMethod;
+    private static MethodInfo? _CheckIfInventoryFullMethod;
+    private static MethodInfo? _GetNetLootValueMethod;
+    private static MethodInfo? _GetItemPriceMethod;
 
     /**
      * Return true if Looting Bots is loaded in the client

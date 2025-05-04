@@ -1,9 +1,8 @@
 ﻿using EFT;
 using SAIN.Components;
-using SAIN.Components.BotController;
+using SAIN.Components.BotComponentSpace;
+using SAIN.Components.BotControllerSpace.Classes;
 using SAIN.Preset.GlobalSettings;
-using SAIN.SAINComponent;
-using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using static SAIN.Helpers.EnumValues;
 
@@ -51,9 +50,9 @@ namespace SAIN
       return false;
     }
 
-    private static readonly List<string> _excludedBots = new();
+    private static readonly List<string> _excludedBots = [];
 
-    private static readonly List<string> _enabledBots = new();
+    private static readonly List<string> _enabledBots = [];
 
     private static void Clear()
     {

@@ -1,7 +1,5 @@
 ﻿using EFT;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 using EFTCore = GClass598;
 using EFTStatModifiersClass = GClass595;
 
@@ -106,7 +104,7 @@ namespace SAIN.Helpers
       EFTCore.Core.ARMOR_CLASS_COEF = coef;
     }
 
-    public EFTCore Core;
+    public EFTCore? Core;
   }
 
   public class EFTBotSettings
@@ -126,12 +124,12 @@ namespace SAIN.Helpers
     }
 
     [JsonProperty]
-    public string Name;
+    public string Name = string.Empty;
 
     [JsonProperty]
     public WildSpawnType WildSpawnType;
 
     [JsonProperty]
-    public Dictionary<BotDifficulty, BotSettingsComponents> Settings = new();
+    public Dictionary<BotDifficulty, BotSettingsComponents> Settings = [];
   }
 }

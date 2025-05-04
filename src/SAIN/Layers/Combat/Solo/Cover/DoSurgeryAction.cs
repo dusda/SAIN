@@ -21,7 +21,7 @@ namespace SAIN.Layers.Combat.Solo.Cover
       this.StartProfilingSample("Update");
       checkDoSurgery();
       handleSteering();
-      this.EndProfilingSample();
+      EndProfilingSample();
     }
 
     private void checkDoSurgery()

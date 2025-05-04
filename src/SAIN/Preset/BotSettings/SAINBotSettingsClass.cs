@@ -1,11 +1,9 @@
 ﻿using EFT;
 using HarmonyLib;
 using SAIN.Attributes;
-using SAIN.Components.BotController;
+using SAIN.Components.BotControllerSpace.Classes;
 using SAIN.Helpers;
 using SAIN.Preset.BotSettings.SAINSettings;
-using System;
-using System.Collections.Generic;
 using System.Reflection;
 using static SAIN.Helpers.JsonUtility;
 
@@ -103,7 +101,7 @@ namespace SAIN.Preset.BotSettings
       }
     }
 
-    private void CopyValuesAtoB(object A, object B, Func<FieldInfo, bool> shouldCopyFieldFunc = null)
+    private static void CopyValuesAtoB(object A, object B, Func<FieldInfo, bool>? shouldCopyFieldFunc = null)
     {
       // Get the names of the fields in EFT group
       List<string> ACatNames = AccessTools.GetFieldNames(A);
@@ -151,7 +149,7 @@ namespace SAIN.Preset.BotSettings
       }
     }
 
-    private bool ShallUseEFTBotDefault(FieldInfo field) => AttributesGUI.GetAttributeInfo(field)?.CopyValue == true;
+    private static bool ShallUseEFTBotDefault(FieldInfo field) => AttributesGUI.GetAttributeInfo(field)?.CopyValue == true;
 
     public void LoadEFTSettings()
     {
@@ -203,7 +201,7 @@ namespace SAIN.Preset.BotSettings
       }
     }
 
-    private static List<WildSpawnType> _enemyTypeList = new();
+    private static List<WildSpawnType> _enemyTypeList = [];
 
     public SAINSettingsClass GetSAINSettings(WildSpawnType type, BotDifficulty difficulty)
     {
@@ -247,8 +245,8 @@ namespace SAIN.Preset.BotSettings
       return EFTSettings[WildSpawnType.pmcUSEC].Settings[BotDifficulty.normal];
     }
 
-    public Dictionary<WildSpawnType, SAINSettingsGroupClass> SAINSettings = new();
-    public Dictionary<WildSpawnType, EFTBotSettings> EFTSettings = new();
+    public Dictionary<WildSpawnType, SAINSettingsGroupClass> SAINSettings = [];
+    public Dictionary<WildSpawnType, EFTBotSettings> EFTSettings = [];
 
     static SAINBotSettingsClass()
     {

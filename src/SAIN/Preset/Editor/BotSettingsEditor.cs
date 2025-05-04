@@ -1,7 +1,6 @@
 ﻿using EFT.UI;
 using SAIN.Attributes;
 using SAIN.Plugin;
-using System.Collections.Generic;
 using System.Text;
 using static SAIN.Editor.SAINLayout;
 
@@ -86,7 +85,7 @@ namespace SAIN.Editor.GUISections
 
     public static bool WasEdited;
 
-    private static void CategoryOpenable(List<Category> categories, object settingsObject, out bool wasEdited, string search = null)
+    private static void CategoryOpenable(List<Category> categories, object settingsObject, out bool wasEdited, string? search = null)
     {
       wasEdited = false;
       foreach (var categoryClass in categories)
@@ -105,7 +104,7 @@ namespace SAIN.Editor.GUISections
         if (string.IsNullOrEmpty(search))
         {
           categoryClass.Open = BuilderClass.ExpandableMenu(
-              attributes.Name, categoryClass.Open, attributes.Description, EntryConfig.EntryHeight);
+              attributes.Name, categoryClass.Open, attributes.Description, GUIEntryConfig.EntryHeight);
           open = categoryClass.Open;
         }
         else

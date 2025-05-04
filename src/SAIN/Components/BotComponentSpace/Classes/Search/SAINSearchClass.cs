@@ -1,4 +1,6 @@
 ﻿using EFT;
+using SAIN.Components.BotComponentSpace;
+using SAIN.Components.BotComponentSpace.Classes.Mover;
 using SAIN.Models.Enums;
 using SAIN.Models.Structs;
 using SAIN.Preset.Personalities;
@@ -83,7 +85,7 @@ namespace SAIN.SAINComponent.Classes.Search
     {
       var sprint = Bot.Mover.SprintController;
       if (shallSprint &&
-          sprint.RunToPoint(destination, Mover.ESprintUrgency.Middle, true))
+          sprint.RunToPoint(destination, ESprintUrgency.Middle, true))
       {
         return true;
       }

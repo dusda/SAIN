@@ -27,7 +27,7 @@ namespace SAIN.Layers.Combat.Squad
         {
           Bot.Mover.StopMove();
           Shoot.CheckAimAndFire();
-          this.EndProfilingSample();
+          EndProfilingSample();
           return;
         }
 
@@ -53,7 +53,7 @@ namespace SAIN.Layers.Combat.Squad
             float waitTime = hasMachineGun ? 0.1f : 0.5f;
             _nextShotTime = Time.time + (waitTime * Random.Range(0.75f, 1.25f));
           }
-          this.EndProfilingSample();
+          EndProfilingSample();
           return;
         }
 
@@ -69,7 +69,7 @@ namespace SAIN.Layers.Combat.Squad
       {
         Bot.Steering.LookToLastKnownEnemyPosition(enemy);
       }
-      this.EndProfilingSample();
+      EndProfilingSample();
     }
 
     private void ResetManualShoot()

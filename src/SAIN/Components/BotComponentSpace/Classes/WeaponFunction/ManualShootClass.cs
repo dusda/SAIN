@@ -1,4 +1,5 @@
 ﻿using EFT;
+using SAIN.Components.BotComponentSpace;
 using SAIN.Models.Enums;
 using SAIN.SAINComponent.Classes.EnemyClasses;
 using UnityEngine;
@@ -45,7 +46,7 @@ namespace SAIN.SAINComponent.Classes.WeaponFunction
       }
     }
 
-    private bool isEnemyVisibleForShoot(Enemy enemy)
+    private static bool isEnemyVisibleForShoot(Enemy enemy)
     {
       if (enemy != null && !enemy.IsVisible && enemy.TimeSinceSeen > 0.25f)
       {

@@ -1,7 +1,6 @@
 ﻿using BepInEx.Logging;
 using EFT.Communications;
 using EFT.UI;
-using System;
 using System.Diagnostics;
 using System.Reflection;
 using UnityEngine;
@@ -151,6 +150,6 @@ namespace SAIN
       }
     }
 
-    private static ManualLogSource SAINLogger;
+    private static ManualLogSource? SAINLogger;
   }
 }

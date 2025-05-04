@@ -9,6 +9,6 @@ namespace SAIN.Components.BotComponentSpace.Classes
       return this.magazineSlot.CanAccept(mag);
     }
 
-    public Slot magazineSlot;
+    public Slot? magazineSlot;
   }
 }

@@ -1,5 +1,5 @@
-﻿using SAIN.Models.Structs;
-using System;
+﻿using SAIN.Components.BotComponentSpace;
+using SAIN.Models.Structs;
 using UnityEngine;
 
 namespace SAIN.SAINComponent.Classes.EnemyClasses

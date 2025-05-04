@@ -1,7 +1,7 @@
 ﻿using EFT;
 using SAIN.Components;
+using SAIN.Components.BotComponentSpace;
 using SAIN.SAINComponent.Classes.Sense;
-using System;
 using UnityEngine;
 
 namespace SAIN.SAINComponent.Classes
@@ -34,7 +34,7 @@ namespace SAIN.SAINComponent.Classes
 
     public void Dispose()
     {
-      BotLook.Dispose();
+      SAINBotLookClass.Dispose();
     }
 
     private void UpdateVisionDistance()

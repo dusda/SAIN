@@ -1,11 +1,8 @@
 ﻿using Comfort.Common;
 using EFT;
 using EFT.Interactive;
+using SAIN.Components.BotComponentSpace;
 using SAIN.Plugin;
-using SAIN.SAINComponent;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -40,10 +37,10 @@ namespace SAIN.Components.BotController
       ExtractedBots.Add(bot.GetPlayer.ProfileId);
     }
 
-    public readonly List<string> ExtractedBots = new();
-    public readonly List<ExtractionInfo> BotExtractionInfos = new();
+    public readonly List<string> ExtractedBots = [];
+    public readonly List<ExtractionInfo> BotExtractionInfos = [];
 
-    private Dictionary<ExfiltrationPoint, float> exfilActivationTimes = new();
+    private Dictionary<ExfiltrationPoint, float> exfilActivationTimes = [];
 
     public bool HasExfilBeenActivated(ExfiltrationPoint exfil)
     {
@@ -102,7 +99,7 @@ namespace SAIN.Components.BotController
     }
 
     private float exfilSearchRetryDelay = 10;
-    private Dictionary<BotComponent, float> botExfilSearchRetryTime = new();
+    private Dictionary<BotComponent, float> botExfilSearchRetryTime = [];
 
     public void ResetExfilSearchTime(BotComponent bot)
     {

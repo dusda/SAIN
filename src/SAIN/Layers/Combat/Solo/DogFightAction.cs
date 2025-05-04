@@ -17,7 +17,7 @@ namespace SAIN.Layers.Combat.Solo
       Bot.Steering.SteerByPriority();
       Bot.Mover.DogFight.DogFightMove(true);
       Shoot.CheckAimAndFire();
-      this.EndProfilingSample();
+      EndProfilingSample();
     }
 
     public override void Start()

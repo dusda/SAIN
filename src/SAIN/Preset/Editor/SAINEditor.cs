@@ -4,7 +4,6 @@ using EFT.UI;
 using SAIN.Editor.Util;
 using SAIN.Plugin;
 using SAIN.Preset;
-using System;
 using UnityEngine;
 using static SAIN.Editor.RectLayout;
 using static SAIN.Editor.SAINLayout;

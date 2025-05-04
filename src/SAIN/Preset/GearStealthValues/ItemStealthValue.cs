@@ -6,9 +6,9 @@
     //public ItemStealthValue()
     //{
     //}
-    public string Name;
+    public string? Name;
     public EEquipmentType EquipmentType;
-    public string ItemID;
+    public string? ItemID;
     public float StealthValue;
   }
 }

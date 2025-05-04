@@ -80,7 +80,7 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
     public void Init()
     {
       Enemy.Events.OnEnemyKnownChanged.OnToggle += OnEnemyKnownChanged;
-      _blindCornerFinder.Init();
+      BlindCornerFinder.Init();
     }
 
     public void OnEnemyKnownChanged(bool known, Enemy enemy)
@@ -305,7 +305,7 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
       return true;
     }
 
-    public float CalculatePathLength(Vector3[] corners)
+    public static float CalculatePathLength(Vector3[] corners)
     {
       if (corners == null)
       {
@@ -355,7 +355,7 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
       return new EnemyCorner(firstCorner, signedAngle, 1);
     }
 
-    private EnemyCorner createLastKnownCorner(Vector3 enemyPosition, int index)
+    private static EnemyCorner createLastKnownCorner(Vector3 enemyPosition, int index)
     {
       return new EnemyCorner(enemyPosition, 0f, index);
     }

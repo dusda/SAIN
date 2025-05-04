@@ -138,11 +138,11 @@ namespace SAIN.Components.BotComponentSpace.Classes.EnemyClasses
 
     private float _nextReportHeardTime;
 
-    public void OnEnemyKnownChanged(Enemy enemy, bool known)
+    public static void OnEnemyKnownChanged(Enemy enemy, bool known)
     {
     }
 
-    public float DispersionModifier
+    public static float DispersionModifier
     {
       get
       {
@@ -150,22 +150,22 @@ namespace SAIN.Components.BotComponentSpace.Classes.EnemyClasses
       }
     }
 
-    private float angleModifier()
+    private static float angleModifier()
     {
       return 1f;
     }
 
-    private float distanceModifier()
+    private static float distanceModifier()
     {
       return 1f;
     }
 
-    private float soundTypeModifier(SAINSoundType soundType)
+    private static float soundTypeModifier(SAINSoundType soundType)
     {
       return 1f;
     }
 
-    private float weaponTypeModifier()
+    private static float weaponTypeModifier()
     {
       return 1f;
     }

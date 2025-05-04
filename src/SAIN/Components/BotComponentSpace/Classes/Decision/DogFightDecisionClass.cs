@@ -1,5 +1,5 @@
-﻿using SAIN.SAINComponent.Classes.EnemyClasses;
-using System.Collections.Generic;
+﻿using SAIN.Components.BotComponentSpace;
+using SAIN.SAINComponent.Classes.EnemyClasses;
 using UnityEngine;
 
 namespace SAIN.SAINComponent.Classes.Decision
@@ -161,7 +161,7 @@ namespace SAIN.SAINComponent.Classes.Decision
       return null;
     }
 
-    private readonly List<Enemy> _dogFightTargets = new();
+    private readonly List<Enemy> _dogFightTargets = [];
 
     public Enemy DogFightTarget { get; set; }
 

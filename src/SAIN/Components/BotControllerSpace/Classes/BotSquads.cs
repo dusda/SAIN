@@ -1,6 +1,5 @@
 ﻿using EFT;
 using SAIN.Components;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace SAIN.BotController.Classes
@@ -44,7 +43,7 @@ namespace SAIN.BotController.Classes
 
     private float DebugTimer = 0f;
 
-    public readonly Dictionary<string, Squad> Squads = new();
+    public readonly Dictionary<string, Squad> Squads = [];
 
     public Squad GetSquad(BotOwner botOwner)
     {

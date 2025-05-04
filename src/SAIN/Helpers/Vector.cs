@@ -1,8 +1,6 @@
 ﻿using EFT;
-using SAIN.SAINComponent;
-using System;
+using SAIN.Components.BotComponentSpace;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
@@ -606,7 +604,7 @@ namespace SAIN.Helpers
       public Vector3 b;
     }
 
-    private static readonly Dictionary<Vector3, Vector3[]> dictionary_0 = new();
+    private static readonly Dictionary<Vector3, Vector3[]> dictionary_0 = [];
   }
 
   public enum SideTurn

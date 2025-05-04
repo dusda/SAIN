@@ -1,4 +1,5 @@
 ﻿using EFT;
+using SAIN.Components.BotComponentSpace;
 using SAIN.Helpers;
 using SAIN.SAINComponent.Classes.EnemyClasses;
 using UnityEngine;
@@ -178,7 +179,7 @@ namespace SAIN.SAINComponent.Classes.Mover
       return false;
     }
 
-    private bool CheckLength(NavMeshPath path, float straighDist)
+    private static bool CheckLength(NavMeshPath path, float straighDist)
     {
       return path.CalculatePathLength() < straighDist * 1.5f;
     }

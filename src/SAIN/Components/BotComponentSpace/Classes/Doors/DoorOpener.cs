@@ -1,10 +1,9 @@
 ﻿using EFT;
 using EFT.Interactive;
 using SAIN.Components;
+using SAIN.Components.BotComponentSpace;
 using SAIN.Helpers;
 using SAIN.Preset.GlobalSettings;
-using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace SAIN.SAINComponent.Classes.Mover
@@ -113,7 +112,7 @@ namespace SAIN.SAINComponent.Classes.Mover
       return this._interactingWithDoor;
     }
 
-    private void drawLink(NavMeshDoorLink link)
+    private static void drawLink(NavMeshDoorLink link)
     {
       if (_debugMode &&
           SAINPlugin.DebugSettings.Gizmos.DrawDebugGizmos &&
@@ -216,7 +215,7 @@ namespace SAIN.SAINComponent.Classes.Mover
       }
     }
 
-    private DoorData checkWantToOpenAnyDoors(List<DoorData> doors)
+    private static DoorData checkWantToOpenAnyDoors(List<DoorData> doors)
     {
       float highestDot = -1f;
       DoorData selectedDoor = null;
@@ -244,7 +243,7 @@ namespace SAIN.SAINComponent.Classes.Mover
       return null;
     }
 
-    private DoorData checkWantToCloseAnyDoors(List<DoorData> doors)
+    private static DoorData checkWantToCloseAnyDoors(List<DoorData> doors)
     {
       //float lowestDot = 0f;
       DoorData selectedDoor = null;
@@ -326,7 +325,7 @@ namespace SAIN.SAINComponent.Classes.Mover
       }
     }
 
-    private readonly List<DoorData> _possibleInteractDoors = new();
+    private readonly List<DoorData> _possibleInteractDoors = [];
 
     private void checkIfLastDoorExpire()
     {
@@ -542,7 +541,7 @@ namespace SAIN.SAINComponent.Classes.Mover
     }
 
     // Token: 0x060010AF RID: 4271 RVA: 0x0004CED4 File Offset: 0x0004B0D4
-    public bool CheckWantToInteract(DoorData data, Vector3 botPosition)
+    public static bool CheckWantToInteract(DoorData data, Vector3 botPosition)
     {
       NavMeshDoorLink link = data.Link;
       botPosition += Vector3.up;
@@ -564,7 +563,7 @@ namespace SAIN.SAINComponent.Classes.Mover
       }
     }
 
-    private bool checkCrossPoint(Vector3 goTo, Vector3 botPosition, DoorData data)
+    private static bool checkCrossPoint(Vector3 goTo, Vector3 botPosition, DoorData data)
     {
       NavMeshDoorLink link = data.Link;
       GClass355 gclass;
@@ -600,9 +599,9 @@ namespace SAIN.SAINComponent.Classes.Mover
     }
 
     private static bool _debugMode => SAINPlugin.DebugSettings.Gizmos.DrawDoorLinks;
-    private readonly List<NavMeshDoorLink> _doorsOnPath = new();
+    private readonly List<NavMeshDoorLink> _doorsOnPath = [];
     private DoorData _lastInteractedInfo;
-    private static readonly Dictionary<NavMeshDoorLink, linkObjects> _debugObjects = new();
+    private static readonly Dictionary<NavMeshDoorLink, linkObjects> _debugObjects = [];
     public bool _interactingWithDoor;
     private float _nextPosibleDoorInteractTime;
     private float _traversingEnd;

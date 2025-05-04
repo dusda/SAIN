@@ -1,10 +1,8 @@
 ﻿using EFT;
 using HarmonyLib;
+using SAIN.Components.BotComponentSpace;
 using SAIN.Preset.GlobalSettings;
-using SAIN.SAINComponent;
 using SAIN.SAINComponent.Classes.EnemyClasses;
-using System;
-using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 
@@ -46,10 +44,10 @@ namespace SAIN.Components
     private static readonly PropertyInfo IsVisibleProp;
     private static readonly MethodInfo CanShootByState;
 
-    private BotOwner BotOwner;
-    private BotComponent SAIN;
+    private BotOwner? BotOwner;
+    private BotComponent? SAIN;
 
-    public void Init(BotOwner botOwner, BotComponent sain = null)
+    public void Init(BotOwner botOwner, BotComponent? sain = null)
     {
       if (NoBushMask == 0)
       {
@@ -191,6 +189,6 @@ namespace SAIN.Components
     }
 
     private static LayerMask NoBushMask = 0;
-    private static readonly List<string> ExclusionList = new() { "filbert", "fibert", "tree", "pine", "plant", "birch", "collider", "timber", "spruce", "bush", "metal", "wood", "grass" };
+    private static readonly List<string> ExclusionList = ["filbert", "fibert", "tree", "pine", "plant", "birch", "collider", "timber", "spruce", "bush", "metal", "wood", "grass"];
   }
 }

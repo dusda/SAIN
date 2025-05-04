@@ -73,7 +73,7 @@ namespace SAIN.Components
       }
     }
 
-    public void OnDestroy()
+    public static void OnDestroy()
     {
     }
 

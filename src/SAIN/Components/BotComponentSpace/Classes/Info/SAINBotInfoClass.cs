@@ -1,9 +1,9 @@
 ﻿using EFT;
+using SAIN.Components.BotComponentSpace;
 using SAIN.Helpers;
 using SAIN.Preset;
 using SAIN.Preset.BotSettings.SAINSettings;
 using SAIN.Preset.Personalities;
-using System.Collections.Generic;
 using System.Reflection;
 using Random = UnityEngine.Random;
 
@@ -219,10 +219,10 @@ namespace SAIN.SAINComponent.Classes.Info
 
     private SAINSettingsClass _fileSettings;
 
-    private static FieldInfo[] EFTSettingsCategories;
-    private static FieldInfo[] SAINSettingsCategories;
+    private static FieldInfo[]? EFTSettingsCategories;
+    private static FieldInfo[]? SAINSettingsCategories;
 
-    private static readonly Dictionary<FieldInfo, FieldInfo[]> EFTSettingsFields = new();
-    private static readonly Dictionary<FieldInfo, FieldInfo[]> SAINSettingsFields = new();
+    private static readonly Dictionary<FieldInfo, FieldInfo[]> EFTSettingsFields = [];
+    private static readonly Dictionary<FieldInfo, FieldInfo[]> SAINSettingsFields = [];
   }
 }

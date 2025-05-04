@@ -1,5 +1,6 @@
 ﻿using EFT;
 using EFT.InventoryLogic;
+using SAIN.Components.BotComponentSpace;
 using SAIN.Helpers;
 using SAIN.Preset.GlobalSettings;
 using System.Text;
@@ -108,12 +109,12 @@ namespace SAIN.SAINComponent.Classes.WeaponFunction
         $"Modifiers [ Add: [{addRecoil}] Multi: [{recoilMod}] Weapon RecoilTotal [{recoilTotal}]] Shoot Modifier: [{Bot.Info.WeaponInfo.FinalModifier}]");
     }
 
-    private float randomSign()
+    private static float randomSign()
     {
       return EFTMath.RandomBool() ? -1 : 1;
     }
 
-    private float calcModFromInjury(EInjurySeverity severity)
+    private static float calcModFromInjury(EInjurySeverity severity)
     {
       switch (severity)
       {
@@ -178,6 +179,6 @@ namespace SAIN.SAINComponent.Classes.WeaponFunction
     }
 
     private float _shootModifier => Bot.Info.WeaponInfo.FinalModifier;
-    private ShootSettings _shootSettings => GlobalSettingsClass.Instance.Shoot;
+    private static ShootSettings _shootSettings => GlobalSettingsClass.Instance.Shoot;
   }
 }

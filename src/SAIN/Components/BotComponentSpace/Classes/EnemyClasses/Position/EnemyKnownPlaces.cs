@@ -1,7 +1,6 @@
 ﻿using EFT;
 using SAIN.Helpers;
 using SAIN.Models.Structs;
-using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 
@@ -93,7 +92,7 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
       SearchedAllKnownLocations = allSearched;
     }
 
-    public List<EnemyPlace> AllEnemyPlaces { get; } = new List<EnemyPlace>();
+    public List<EnemyPlace> AllEnemyPlaces { get; } = [];
 
     public EnemyKnownPlaces(Enemy enemy) : base(enemy)
     {
@@ -394,6 +393,6 @@ namespace SAIN.SAINComponent.Classes.EnemyClasses
     private float _nextCheckSearchTime;
     private float _nextSortPlacesTime;
     private GUIObject debugLastKnown;
-    private readonly Dictionary<EnemyPlace, GUIObject> _guiObjects = new();
+    private readonly Dictionary<EnemyPlace, GUIObject> _guiObjects = [];
   }
 }

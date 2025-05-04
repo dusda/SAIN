@@ -39,7 +39,7 @@ namespace SAIN.Layers.Combat.Run
       {
         BotOwner.Mover.GoToByWay([Bot.Position, unstuckDestination.Value], -1f);
       }
-      this.EndProfilingSample();
+      EndProfilingSample();
     }
 
     public override void Start()

@@ -46,7 +46,7 @@ namespace SAIN.Layers.Combat.Solo
       this.StartProfilingSample("Update");
       setTargetEnemy();
       updateSearch();
-      this.EndProfilingSample();
+      EndProfilingSample();
     }
 
     private void updateSearch()

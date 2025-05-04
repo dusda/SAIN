@@ -29,7 +29,7 @@ namespace SAIN.Layers.Combat.Solo
       this.StartProfilingSample("Update");
       Bot.Steering.SteerByPriority();
       Shoot.CheckAimAndFire();
-      this.EndProfilingSample();
+      EndProfilingSample();
     }
   }
 }

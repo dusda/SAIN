@@ -306,8 +306,8 @@ namespace SAIN.Patches.Hearing
 
   public class SoundClipNameCheckerPatch : ModulePatch
   {
-    private static MethodInfo _Player;
-    private static FieldInfo _PlayerBridge;
+    private static MethodInfo? _Player;
+    private static FieldInfo? _PlayerBridge;
 
     protected override MethodBase GetTargetMethod()
     {

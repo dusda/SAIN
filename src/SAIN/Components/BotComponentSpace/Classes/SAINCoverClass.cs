@@ -1,10 +1,9 @@
 ﻿using EFT;
 using JetBrains.Annotations;
+using SAIN.Components.BotComponentSpace;
 using SAIN.Helpers;
 using SAIN.Preset.GlobalSettings;
 using SAIN.SAINComponent.SubComponents.CoverFinder;
-using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace SAIN.SAINComponent.Classes
@@ -154,7 +153,7 @@ namespace SAIN.SAINComponent.Classes
       return true;
     }
 
-    private bool isMovingTo(CoverPoint point, CoverStatus status)
+    private static bool isMovingTo(CoverPoint point, CoverStatus status)
     {
       switch (status)
       {
@@ -311,7 +310,7 @@ namespace SAIN.SAINComponent.Classes
       return Physics.Raycast(position, direction, dist, LayerMaskClass.HighPolyWithTerrainMask);
     }
 
-    public bool BotIsAtCoverPoint(CoverPoint coverPoint)
+    public static bool BotIsAtCoverPoint(CoverPoint coverPoint)
     {
       return coverPoint?.BotInThisCover == true;
     }

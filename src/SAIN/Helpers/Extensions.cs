@@ -3,9 +3,6 @@ using EFT.UI;
 using JetBrains.Annotations;
 using SAIN.Editor;
 using SAIN.SAINComponent.Classes.EnemyClasses;
-using System;
-using System.Collections.Generic;
-using System.Threading;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -422,7 +419,7 @@ namespace SAIN.Helpers
   // Code used from https://stackoverflow.com/questions/273313/randomize-a-listt
   public static class ThreadSafeRandom
   {
-    [ThreadStatic] private static System.Random Local;
+    [ThreadStatic] private static System.Random? Local;
 
     public static System.Random ThisThreadsRandom
     {

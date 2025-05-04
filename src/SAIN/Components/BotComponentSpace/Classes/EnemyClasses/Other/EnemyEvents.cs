@@ -1,6 +1,5 @@
 ﻿using SAIN.Helpers.Events;
 using SAIN.Models.Enums;
-using System;
 using UnityEngine.AI;
 
 namespace SAIN.SAINComponent.Classes.EnemyClasses

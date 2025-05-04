@@ -1,14 +1,12 @@
 ﻿using EFT;
+using SAIN.Components.BotComponentSpace;
 using SAIN.Helpers;
 using SAIN.Models.Enums;
 using SAIN.Models.Structs;
 using SAIN.Plugin;
 using SAIN.Preset;
-using SAIN.SAINComponent;
 using SAIN.SAINComponent.Classes;
 using SAIN.SAINComponent.Classes.EnemyClasses;
-using System;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -28,8 +26,8 @@ namespace SAIN.BotController.Classes
 
     public event Action<BotComponent, float> NewLeaderFound;
 
-    public Dictionary<string, BotComponent> Members { get; } = new Dictionary<string, BotComponent>();
-    public Dictionary<string, MemberInfo> MemberInfos { get; } = new Dictionary<string, MemberInfo>();
+    public Dictionary<string, BotComponent> Members { get; } = [];
+    public Dictionary<string, MemberInfo> MemberInfos { get; } = [];
     public string Id { get; private set; } = string.Empty;
     public string GUID { get; } = Guid.NewGuid().ToString("N");
     public bool SquadReady { get; private set; }
@@ -41,8 +39,8 @@ namespace SAIN.BotController.Classes
     public bool LeaderIsDeadorNull => LeaderComponent?.Player == null || LeaderComponent?.Player?.HealthController.IsAlive == false;
     public float TimeThatLeaderDied { get; private set; }
     public List<PlaceForCheck> GroupPlacesForCheck => BotsGroup?.PlacesForCheck;
-    public Dictionary<ESquadRole, BotComponent> Roles { get; } = new Dictionary<ESquadRole, BotComponent>();
-    public Dictionary<string, PlaceForCheck> PlayerPlaceChecks { get; } = new Dictionary<string, PlaceForCheck>();
+    public Dictionary<ESquadRole, BotComponent> Roles { get; } = [];
+    public Dictionary<string, PlaceForCheck> PlayerPlaceChecks { get; } = [];
 
     public bool MemberIsFallingBack
     {
@@ -168,7 +166,7 @@ namespace SAIN.BotController.Classes
       addPlaceForCheck(sound.Results.EstimatedPosition, sound.Info.SoundType, sain, enemy, true, isDanger);
     }
 
-    private bool checkSoundIsDanger(BotSound sound)
+    private static bool checkSoundIsDanger(BotSound sound)
     {
       if (sound.Results.VisibleSource)
       {
@@ -270,7 +268,7 @@ namespace SAIN.BotController.Classes
       return null;
     }
 
-    private bool findNavMesh(Vector3 position, out Vector3 hitPosition, float navSampleDist = 2f)
+    private static bool findNavMesh(Vector3 position, out Vector3 hitPosition, float navSampleDist = 2f)
     {
       if (NavMesh.SamplePosition(position, out NavMeshHit hit, navSampleDist, -1))
       {
@@ -281,14 +279,14 @@ namespace SAIN.BotController.Classes
       return false;
     }
 
-    private NavMeshPathStatus canPathToPoint(Vector3 point, BotOwner botOwner)
+    private static NavMeshPathStatus canPathToPoint(Vector3 point, BotOwner botOwner)
     {
       NavMeshPath path = new();
       NavMesh.CalculatePath(botOwner.Position, point, -1, path);
       return path.status;
     }
 
-    private void calcGoalForBot(BotOwner botOwner)
+    private static void calcGoalForBot(BotOwner botOwner)
     {
       try
       {

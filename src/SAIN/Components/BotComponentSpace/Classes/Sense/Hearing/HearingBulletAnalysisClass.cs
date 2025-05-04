@@ -84,7 +84,7 @@ namespace SAIN.SAINComponent.Classes
       return true;
     }
 
-    private Vector3 calcProjectionPoint(PlayerComponent playerComponent, float realDistance)
+    private static Vector3 calcProjectionPoint(PlayerComponent playerComponent, float realDistance)
     {
       Vector3 weaponPointDir = playerComponent.Transform.WeaponPointDirection;
       Vector3 shotPos = playerComponent.Transform.WeaponFirePort;

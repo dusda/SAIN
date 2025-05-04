@@ -1,4 +1,5 @@
 ﻿using EFT;
+using SAIN.Components.BotComponentSpace;
 using SAIN.Helpers;
 using SAIN.Models.Enums;
 using SAIN.Preset;
@@ -12,13 +13,13 @@ namespace SAIN.SAINComponent.Classes.Mover
   public class SAINSteeringClass : BotBase, IBotClass
   {
     private static SteeringSettings _steerSettings => GlobalSettingsClass.Instance.Steering;
-    private float STEER_LASTSEEN_TO_LASTKNOWN_DISTANCE_SQR => _steerSettings.STEER_LASTSEEN_TO_LASTKNOWN_DISTANCE.Sqr();
+    private static float STEER_LASTSEEN_TO_LASTKNOWN_DISTANCE_SQR => _steerSettings.STEER_LASTSEEN_TO_LASTKNOWN_DISTANCE.Sqr();
     public ESteerPriority CurrentSteerPriority => _steerPriorityClass.CurrentSteerPriority;
     public ESteerPriority LastSteerPriority => _steerPriorityClass.LastSteerPriority;
     public EEnemySteerDir EnemySteerDir { get; private set; }
     public Vector3 WeaponRootOffset => BotOwner.WeaponRoot.position - Bot.Position + (Vector3.down * 0.1f);
 
-    public bool SteerByPriority(Enemy enemy = null, bool lookRandom = true, bool ignoreRunningPath = false)
+    public bool SteerByPriority(Enemy? enemy = null, bool lookRandom = true, bool ignoreRunningPath = false)
     {
       if (enemy == null)
         enemy = Bot.Enemy;
@@ -302,7 +303,7 @@ namespace SAIN.SAINComponent.Classes.Mover
 
     private Vector3 _lookDirection => Bot.LookDirection;
 
-    protected void UpdatePresetSettings(SAINPresetClass preset)
+    protected static void UpdatePresetSettings(SAINPresetClass preset)
     {
     }
   }

@@ -16,7 +16,7 @@ namespace SAIN.Components.BotController
     public float RainSoundModifierOutdoor { get; private set; } = 1f;
     public float RainSoundModifierIndoor { get; private set; } = 1f;
 
-    public static SAINWeatherClass Instance { get; private set; }
+    public static SAINWeatherClass? Instance { get; private set; }
 
     public SAINWeatherClass(SAINBotController botController) : base(botController)
     {
@@ -124,7 +124,7 @@ namespace SAIN.Components.BotController
       return Mathf.Lerp(1f, minScale, cloudsScaled);
     }
 
-    private TimeSettings _timeSettings => GlobalSettingsClass.Instance.Look.Time;
+    private static TimeSettings _timeSettings => GlobalSettingsClass.Instance.Look.Time;
     private float _rainCheckTime;
     private float _weatherCheckTime;
   }

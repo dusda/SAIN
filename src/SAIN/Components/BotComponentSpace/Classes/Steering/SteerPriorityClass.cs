@@ -1,10 +1,7 @@
 ﻿using EFT;
-using HarmonyLib;
 using SAIN.Models.Enums;
 using SAIN.SAINComponent.Classes.EnemyClasses;
-using System.Reflection;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace SAIN.SAINComponent.Classes.Mover
 {
@@ -218,7 +215,7 @@ namespace SAIN.SAINComponent.Classes.Mover
       return canSeeAndShoot(Bot.Enemy) || canSeeAndShoot(Bot.LastEnemy) || canSeeAndShoot(Bot.Shoot.LastShotEnemy);
     }
 
-    private bool canSeeAndShoot(Enemy enemy)
+    private static bool canSeeAndShoot(Enemy enemy)
     {
       return enemy != null && enemy.IsVisible && enemy.CanShoot;
     }

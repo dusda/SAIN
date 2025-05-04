@@ -69,7 +69,7 @@ namespace SAIN.SAINComponent.Classes.Memory
       }
     }
 
-    private bool areEnemiesSame(Enemy a, Enemy b)
+    private static bool areEnemiesSame(Enemy a, Enemy b)
     {
       return
           a != null &&

@@ -1,6 +1,7 @@
 using Comfort.Common;
 using EFT;
 using SAIN.Components;
+using SAIN.Components.BotComponentSpace;
 using SAIN.Helpers;
 using SAIN.Models.Enums;
 using SAIN.Models.Structs;
@@ -525,7 +526,7 @@ namespace SAIN.SAINComponent.Classes.Talk
       }
     }
 
-    private Vector3 randomizePos(Vector3 position, float distance, float dispersionFactor = 20f)
+    private static Vector3 randomizePos(Vector3 position, float distance, float dispersionFactor = 20f)
     {
       float disp = distance / dispersionFactor;
       Vector3 random = UnityEngine.Random.insideUnitSphere * disp;

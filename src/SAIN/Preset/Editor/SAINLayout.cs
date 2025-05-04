@@ -60,7 +60,7 @@ namespace SAIN.Editor
       GUILayout.Label(content, style, options);
     }
 
-    public static void Label(Rect rect, GUIContent content, GUIStyle style = null)
+    public static void Label(Rect rect, GUIContent content, GUIStyle? style = null)
     {
       if (style == null)
       {
@@ -69,7 +69,7 @@ namespace SAIN.Editor
       GUI.Label(rect, content, style);
     }
 
-    public static void Label(Rect rect, string text, GUIStyle style = null)
+    public static void Label(Rect rect, string text, GUIStyle? style = null)
     {
       if (style == null)
       {
