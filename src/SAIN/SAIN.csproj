@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BepInEx.Core" Version="5.*" />
+    <PackageReference Include="UnityEngine.Modules" Version="2022.3.43" IncludeAssets="compile" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="AnimationSystem.Types" HintPath="..\..\lib\AnimationSystem.Types.dll" Private="false" />
+    <Reference Include="Assembly-CSharp" HintPath="..\..\lib\hollowed.dll" Private="false" />
+    <Reference Include="bsg.console.core" HintPath="..\..\lib\bsg.console.core.dll" Private="false" />
+    <Reference Include="Comfort" HintPath="..\..\lib\Comfort.dll" Private="false" />
+    <Reference Include="Comfort.Unity" HintPath="..\..\lib\Comfort.Unity.dll" Private="false" />
+    <Reference Include="CommonExtensions" HintPath="..\..\lib\CommonExtensions.dll" Private="false" />
+    <Reference Include="DissonanceVoip" HintPath="..\..\lib\DissonanceVoip.dll" Private="false" />
+    <Reference Include="DrakiaXYZ-BigBrain" HintPath="..\..\lib\DrakiaXYZ-BigBrain.dll" Private="false" />
+    <Reference Include="ItemComponent.Types" HintPath="..\..\lib\ItemComponent.Types.dll" Private="false" />
+    <Reference Include="Newtonsoft.Json" HintPath="..\..\lib\Newtonsoft.Json.dll" Private="false" />
+    <Reference Include="Sirenix.Serialization" HintPath="..\..\lib\Sirenix.Serialization.dll" Private="false" />
+    <Reference Include="spt-common" HintPath="..\..\lib\spt-common.dll" Private="false" />
+    <Reference Include="spt-core" HintPath="..\..\lib\spt-core.dll" Private="false" />
+    <Reference Include="spt-custom" HintPath="..\..\lib\spt-custom.dll" Private="false" />
+    <Reference Include="spt-debugging" HintPath="..\..\lib\spt-debugging.dll" Private="false" />
+    <Reference Include="spt-reflection" HintPath="..\..\lib\spt-reflection.dll" Private="false" />
+    <Reference Include="spt-singleplayer" HintPath="..\..\lib\spt-singleplayer.dll" Private="false" />
+    <Reference Include="Unity.Postprocessing.Runtime" HintPath="..\..\lib\Unity.Postprocessing.Runtime.dll" Private="false" />
+    <Reference Include="Unity.TextMeshPro" HintPath="..\..\lib\Unity.TextMeshPro.dll" Private="false" />
+  </ItemGroup>
+
+</Project>
